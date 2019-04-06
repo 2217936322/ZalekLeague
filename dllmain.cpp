@@ -26,15 +26,16 @@ HRESULT WINAPI Hooked_Present(DWORD Device, CONST RECT* pSrcRect, CONST RECT* pD
 			Console.print("ZalekLeague Initialized\n");
 			bInit = true;
 		}
-
+		//FIXME: me->IsAlive() crashes
 		//if (me->IsAlive()) {
-		//	auto color = createRGB(0, 255, 0);
-		//	Functions.DrawCircle(&me->GetPos(), me->GetAttackRange() + me->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
+		//Console.print("You are Alive\n");
+		auto color = createRGB(0, 255, 0);
+		Functions.DrawCircle(&me->GetPos(), me->GetAttackRange() + me->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
 
-		//	if (lastmove == NULL || clock() - lastmove > 30.0f) {
-		//		lastmove = clock();
-		//		Engine::MoveTo(&Engine::GetMouseWorldPosition());
-		//	}
+		if (lastmove == NULL || clock() - lastmove > 30.0f) {
+			lastmove = clock();
+			Engine::MoveTo(&Engine::GetMouseWorldPosition());
+		}
 		//}
 	}
 
@@ -80,31 +81,31 @@ DWORD GetDeviceAddress(int VTableIndex)
 
 void __stdcall Start() {
 	Console.startConsoleWin(80, 25, NULL);
-	//Console.startConsoleWin(80, 25, "ZConsole");
+	Console.startConsoleWin(80, 25, "ZConsole");
 
-	//while (Engine::GetGameTime() < 1.0f || !me)
-	//	Sleep(1);
+	while (Engine::GetGameTime() < 1.0f || !me)
+		Sleep(1);
 
-	//ObjManager = (CObjectManager*)(baseAddr + oObjManager);
+	ObjManager = (CObjectManager*)(baseAddr + oObjManager);
 
 	//Functions.PrintChat = (Typedefs::fnPrintChat)(baseAddr + oPrintChat);
-	//Functions.IsTargetable = (Typedefs::fnIsTargetable)(baseAddr + oIsTargetable);
+	Functions.IsTargetable = (Typedefs::fnIsTargetable)(baseAddr + oIsTargetable);
 	//Functions.IsAlive = (Typedefs::fnIsAlive)(baseAddr + oIsAlive);
 
-	//Functions.IsMinion = (Typedefs::fnIsMinion)(baseAddr + oIsMinion);
+	Functions.IsMinion = (Typedefs::fnIsMinion)(baseAddr + oIsMinion);
 	//Functions.IsTurret = (Typedefs::fnIsTurret)(baseAddr + oIsTurret);
-	//Functions.IsHero = (Typedefs::fnIsHero)(baseAddr + oIsHero);
-	//Functions.IsMissile = (Typedefs::fnIsMissile)(baseAddr + oIsMissile);
+	Functions.IsHero = (Typedefs::fnIsHero)(baseAddr + oIsHero);
+	Functions.IsMissile = (Typedefs::fnIsMissile)(baseAddr + oIsMissile);
 	//Functions.IsNexus = (Typedefs::fnIsNexus)(baseAddr + oIsNexus);
 	//Functions.IsInhibitor = (Typedefs::fnIsInhibitor)(baseAddr + oIsInhib);
 	//Functions.IsTroyEnt = (Typedefs::fnIsTroyEnt)(baseAddr + oIsTroy);
 
 	//Functions.CastSpell = (Typedefs::fnCastSpell)((DWORD)GetModuleHandle(NULL) + oCastSpell);
-	//Functions.IssueOrder = (Typedefs::fnIssueOrder)((DWORD)GetModuleHandle(NULL) + oIssueOrder);
-	//Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD)GetModuleHandle(NULL) + oDrawCircle);
+	Functions.IssueOrder = (Typedefs::fnIssueOrder)((DWORD)GetModuleHandle(NULL) + oIssueOrder);
+	Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD)GetModuleHandle(NULL) + oDrawCircle);
 
-	//Functions.GetAttackCastDelay = (Typedefs::fnGetAttackCastDelay)((DWORD)GetModuleHandle(NULL) + oGetAttackCastDelay);
-	//Functions.GetAttackDelay = (Typedefs::fnGetAttackDelay)((DWORD)GetModuleHandle(NULL) + oGetAttackDelay);
+	Functions.GetAttackCastDelay = (Typedefs::fnGetAttackCastDelay)((DWORD)GetModuleHandle(NULL) + oGetAttackCastDelay);
+	Functions.GetAttackDelay = (Typedefs::fnGetAttackDelay)((DWORD)GetModuleHandle(NULL) + oGetAttackDelay);
 
 	Original_Present = (Prototype_Present)DetourFunction((PBYTE)GetDeviceAddress(17), (PBYTE)Hooked_Present);
 }

@@ -75,8 +75,13 @@ public:
 
 	float GetBoundingRadius() {
 		typedef float(__thiscall * OriginalFn)(PVOID);
-		return CallVirtual<OriginalFn>(this, 37)(this);
+		return CallVirtual<OriginalFn>(this, 36)(this);
 	}
+
+	//float GetBoundingRadius() {
+	//	typedef float(__thiscall * OriginalFn)(PVOID);
+	//	return CallVirtual<OriginalFn>(this, 37)(this);
+	//}
 
 	bool IsEnemyTo(CObject * Obj) {
 		if (Obj->GetTeam() == 100 && this->GetTeam() == 200)
