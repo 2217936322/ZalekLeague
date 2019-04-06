@@ -18,7 +18,9 @@ Prototype_Present Original_Present;
 
 HRESULT WINAPI Hooked_Present(DWORD Device, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion) {
 
+	if (!bInit) { Console.print("Waiting for League to load..."); }
 	//Console.print("Hello from ZalekLeague");
+
 	if (me) {
 		if (!bInit) {
 			Console.print("My Player Found\n");
@@ -34,7 +36,7 @@ HRESULT WINAPI Hooked_Present(DWORD Device, CONST RECT* pSrcRect, CONST RECT* pD
 
 		if (lastmove == NULL || clock() - lastmove > 30.0f) {
 			lastmove = clock();
-			Engine::MoveTo(&Engine::GetMouseWorldPosition());
+			//Engine::MoveTo(&Engine::GetMouseWorldPosition());
 		}
 		//}
 	}
