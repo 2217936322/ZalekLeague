@@ -1,4 +1,4 @@
-#define BUILD_NUM "4"
+#define ZBUILD "0.1"
 #include <time.h>
 #include "stdafx.h"
 #include "Console.h"
@@ -25,8 +25,14 @@ clock_t lastmove = NULL;
 
 bool b_init = false;
 bool b_last_hit = false;
+
+extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+//typedef LRESULT(CALLBACK* WNDPROC)(HWND, UINT, WPARAM, LPARAM);
 typedef HRESULT(WINAPI* Prototype_Present)(LPDIRECT3DDEVICE9, CONST RECT*, CONST RECT*, HWND, CONST RGNDATA*);
+
 Prototype_Present Original_Present;
+WNDPROC oWndProc;
 
 static void MenuInit(HWND Chwnd, IDirect3DDevice9* CDevice)
 {
@@ -40,6 +46,18 @@ static void MenuInit(HWND Chwnd, IDirect3DDevice9* CDevice)
 	ImGui_ImplWin32_Init(hwnd);
 	ImGui_ImplDX9_Init(Device);
 	Console.print("init()\n");
+
+}
+
+LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+
+	if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
+		return true;
+
+	//if (true) // If we want input to imgui return true // replace with a bool // if league locks up then go back to https://youtu.be/b_1a3Wmi76U?t=1198
+	//	return ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam);
+
+	return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
 }
 
 static bool show_demo_window = false;
@@ -51,13 +69,13 @@ static void MenuRender() {
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 
-	Console.print("render()\n");
+	//Console.print("render()\n");
 
 	{
 		static float f = 0.0f;
 		static int counter = 0;
 
-		ImGui::Begin("Hello, world!");                          // Create a window called "Hello, world!" and append into it.
+		ImGui::Begin("Zalek League");                          // Create a window called "Hello, world!" and append into it.
 
 		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
 		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
@@ -82,13 +100,16 @@ static void MenuRender() {
 
 HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion)
 {
+	//HWND window = FindWindow(NULL, "League of Legends");
+	//oWndProc = (WNDPROC)SetWindowLongPtr(FindWindowA(0, "League of Legends (TM) Client"), GWL_WNDPROC, (LONG_PTR)WndProc);
+
 	if (me)
 	{
 		if (!b_init)
 		{
 			system("CLS");
 			Console.print("-------------------------------------------------------------------------------------\n");
-			Console.print(" ZalekLeague Initialized build # %s\n * Current Version = %s\n", BUILD_NUM, TARGET_GAMEVERSION);
+			Console.print(" ZalekLeague Initialized build # %s\n * Current Version = %s\n", ZBUILD, TARGET_GAMEVERSION);
 			Console.print(" * Summoner Name = %s\n * Champion Name = %s\n", me->GetName(), me->GetChampionName());
 			Console.print("-------------------------------------------------------------------------------------");
 			//Functions.PrintChat(oChatClient, "Hello from Zalek", 1);
@@ -105,6 +126,7 @@ HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, C
 			//ImGui_ImplWin32_Init(hDestWindow);
 			//ImGui_ImplDX9_Init(Device)
 			HWND hwnd = FindWindow(NULL, "League of Legends (TM) Client");
+			oWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)WndProc);
 			MenuInit(hwnd, Device);
 			b_init = true;
 		}
@@ -241,6 +263,7 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	DWORD ul_reason_for_call,
 	LPVOID lpReserved)
 {
+
 	if (ul_reason_for_call == DLL_PROCESS_ATTACH)
 	{
 		CreateThread(0, 0, (LPTHREAD_START_ROUTINE)Start, 0, 0, 0);
