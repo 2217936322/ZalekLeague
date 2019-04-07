@@ -17,9 +17,9 @@ public:
 	bool IsTroyEnt();
 	bool IsTargetable();
 
-	//short GetIndex() {
-	//	return *(short*)((DWORD)this + oObjIndex);
-	//}
+	short GetIndex() {
+		return *(short*)((DWORD)this + oObjIndex);
+	}
 
 	short GetTargetIndex() {
 		return *(short*)((DWORD)this + oObjTargetID);

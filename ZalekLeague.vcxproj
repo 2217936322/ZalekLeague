@@ -100,9 +100,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CObject.cpp" />
-    <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="guicon.cpp" />
-    <ClCompile Include="LoL base.cpp" />
+    <ClCompile Include="ZalekLeague.cpp" />
+    <ClCompile Include="Console.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -110,7 +109,7 @@
     <ClInclude Include="CObjectManager.h" />
     <ClInclude Include="detours.h" />
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="guicon.h" />
+    <ClInclude Include="Console.h" />
     <ClInclude Include="Hooks.h" />
     <ClInclude Include="Offsets.h" />
     <ClInclude Include="stdafx.h" />

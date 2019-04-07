@@ -4,7 +4,7 @@
 #include <io.h>
 #include <iostream>
 #include <fstream>
-#include "guicon.h"
+#include "Console.h"
 
 using namespace std;
 
@@ -21,7 +21,7 @@ HANDLE __hStdOut = NULL;
 void CConsole::startConsoleWin(int width, int height, char* fname)
 {
 	AllocConsole();
-	SetConsoleTitle("Debug Window");
+	SetConsoleTitle("Zalek League Console");
 	__hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	COORD co = { width,height };
 	SetConsoleScreenBufferSize(__hStdOut, co);
@@ -29,7 +29,7 @@ void CConsole::startConsoleWin(int width, int height, char* fname)
 		__fStdOut = fopen(fname, "w");
 }
 // Use print like TRACE0, TRACE1, ... (The arguments are the same as print)
-int CConsole::print(char *fmt, ...)
+int CConsole::print(char* fmt, ...)
 {
 	char s[3000];
 	va_list argptr;

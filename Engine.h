@@ -23,9 +23,9 @@ public:
 		return Vector{ X, Y, Z };
 	}
 
-	//static char* GetGameVersion() {
-	//	return (char*)(baseAddr + oGameVersion);
-	//}
+	static char* GetGameVersion() {
+		return (char*)(baseAddr + oGameVersion);
+	}
 
 	static float GetGameTime() {
 		return *(float*)(baseAddr + oGameTime);
@@ -45,6 +45,10 @@ public:
 			return ObjManager->objectArray[ID];
 		}
 		return NULL;
+	}
+
+	static void Attack(CObject * obj) {
+		Functions.IssueOrder(me, 3, &obj->GetPos(), obj, true, false, false);
 	}
 
 	static void MoveTo(Vector * pos) {
