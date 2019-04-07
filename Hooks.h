@@ -1,10 +1,11 @@
 #pragma once
 #include "CObject.h"
 
-class Typedefs {
+class Typedefs
+{
 public:
 	typedef void(__thiscall* tPrintChat)(DWORD ChatClient, const char* Message, int Color);
-	typedef int*(__thiscall* fnIssueOrder)(void *thisPtr, int Order, Vector *Loc, CObject *Target, bool IsAttackMove, bool IsMinion, DWORD Unknown);
+	typedef int* (__thiscall* fnIssueOrder)(void* thisPtr, int Order, Vector* Loc, CObject* Target, bool IsAttackMove, bool IsMinion, DWORD Unknown);
 	typedef float(__cdecl* fnGetAttackCastDelay)(CObject* pObj);
 	typedef float(__cdecl* fnGetAttackDelay)(CObject* pObj);
 	typedef void(__cdecl* fnDrawCircle)(Vector* position, float range, int* color, int a4, float a5, int a6, float alpha);
@@ -23,7 +24,8 @@ public:
 	typedef bool(__thiscall* fnIsTargetable)(CObject* pObj);
 };
 
-class CFunctions {
+class CFunctions
+{
 public:
 	Typedefs::fnIsTurret IsTurret;
 	Typedefs::fnIsMinion IsMinion;

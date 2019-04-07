@@ -7,9 +7,11 @@
 
 #define me Engine::GetLocalObject()
 
-class Engine {
+class Engine
+{
 public:
-	static Vector GetMouseWorldPosition() {
+	static Vector GetMouseWorldPosition()
+	{
 		DWORD MousePtr = (DWORD)GetModuleHandle(NULL) + oHudInstance;
 		auto aux1 = *(DWORD*)MousePtr;
 		aux1 += 0x14;
@@ -23,15 +25,18 @@ public:
 		return Vector{ X, Y, Z };
 	}
 
-	static char* GetGameVersion() {
+	static char* GetGameVersion()
+	{
 		return (char*)(baseAddr + oGameVersion);
 	}
 
-	static float GetGameTime() {
+	static float GetGameTime()
+	{
 		return *(float*)(baseAddr + oGameTime);
 	}
 
-	static CObject* GetLocalObject() {
+	static CObject* GetLocalObject()
+	{
 		auto retaddr = *(DWORD*)(baseAddr + oLocalPlayer);
 		if (retaddr == NULL)
 			return NULL;
@@ -41,17 +46,20 @@ public:
 
 	static CObject * GetObjectByID(int ID)
 	{
-		if (ObjManager != NULL && ID >= 0 && ID <= 10000) {
+		if (ObjManager != NULL && ID >= 0 && ID <= 10000)
+		{
 			return ObjManager->objectArray[ID];
 		}
 		return NULL;
 	}
 
-	static void Attack(CObject * obj) {
+	static void Attack(CObject * obj)
+	{
 		Functions.IssueOrder(me, 3, &obj->GetPos(), obj, true, false, false);
 	}
 
-	static void MoveTo(Vector * pos) {
+	static void MoveTo(Vector * pos)
+	{
 		Functions.IssueOrder(GetLocalObject(), 2, pos, NULL, false, false, false);
 	}
 };

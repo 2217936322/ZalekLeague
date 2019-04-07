@@ -9,50 +9,52 @@ struct Vector
 	inline Vector(void) {}
 	inline Vector(const float x, const float y, const float z)
 	{
-		X = x; Y = y; Z = z;
+		X = x;
+		Y = y;
+		Z = z;
 	}
 
-	inline Vector operator + (const Vector& A) const
+	inline Vector operator+(const Vector& A) const
 	{
 		return Vector(X + A.X, Y + A.Y, Z + A.Z);
 	}
 
-	inline Vector operator + (const float A) const
+	inline Vector operator+(const float A) const
 	{
 		return Vector(X + A, Y + A, Z + A);
 	}
 
-	inline Vector operator * (const float A) const
+	inline Vector operator*(const float A) const
 	{
-		return Vector(A*X, A*Y, A*Z);
+		return Vector(A * X, A * Y, A * Z);
 	}
 
-	inline Vector operator * (const Vector& A) const
+	inline Vector operator*(const Vector & A) const
 	{
-		return Vector(A.X*X, A.Y*Y, A.Z*Z);
+		return Vector(A.X * X, A.Y * Y, A.Z * Z);
 	}
 
-	inline Vector operator - (const float A) const
+	inline Vector operator-(const float A) const
 	{
-		return Vector(A*X, A*Y, A*Z);
+		return Vector(A * X, A * Y, A * Z);
 	}
 
-	inline Vector operator - (const Vector& A) const
+	inline Vector operator-(const Vector & A) const
 	{
 		return Vector(A.X - X, A.Y - Y, A.Z - Z);
 	}
 
-	inline Vector operator / (const float A) const
+	inline Vector operator/(const float A) const
 	{
 		return Vector(A / X, A / Y, A / Z);
 	}
 
-	inline Vector operator / (const Vector& A) const
+	inline Vector operator/(const Vector & A) const
 	{
 		return Vector(A.X / X, A.Y / Y, A.Z / Z);
 	}
 
-	float dot(const Vector &vec) const
+	float dot(const Vector & vec) const
 	{
 		return X * vec.X + Y * vec.Y + Z * vec.Z;
 	}
@@ -85,7 +87,8 @@ struct Vector
 		return Vector(X, Y, Z);
 	}
 
-	inline float DistTo(const Vector& A) {
+	inline float DistTo(const Vector & A)
+	{
 		float out = sqrtf(powf(X - A.X, 2) + powf(Y - A.Y, 2) + powf(Z - A.Z, 2));
 		return out < 0 ? out * -1 : out;
 	}

@@ -4,7 +4,8 @@
 #include "Vector.h"
 #include "Utils.h"
 
-class CObject {
+class CObject
+{
 public:
 	bool IsTurret();
 	bool IsMinion();
@@ -17,63 +18,78 @@ public:
 	bool IsTroyEnt();
 	bool IsTargetable();
 
-	short GetIndex() {
+	short GetIndex()
+	{
 		return *(short*)((DWORD)this + oObjIndex);
 	}
 
-	short GetTargetIndex() {
+	short GetTargetIndex()
+	{
 		return *(short*)((DWORD)this + oObjTargetID);
 	}
 
-	short GetSourceIndex() {
+	short GetSourceIndex()
+	{
 		return *(short*)((DWORD)this + oObjSourceIndex);
 	}
 
-	DWORD GetNetworkID() {
+	DWORD GetNetworkID()
+	{
 		return *(DWORD*)((DWORD)this + oObjNetworkID);
 	}
 
-	Vector GetPos() {
+	Vector GetPos()
+	{
 		return *(Vector*)((DWORD)this + oObjPos);
 	}
 
-	int GetLevel() {
+	int GetLevel()
+	{
 		return *(int*)((DWORD)this + oObjLevel);
 	}
 
-	float GetHealth() {
+	float GetHealth()
+	{
 		return *(float*)((DWORD)this + oObjHealth);
 	}
 
-	float GetBaseAttackDamage() {
+	float GetBaseAttackDamage()
+	{
 		return *(float*)((DWORD)this + oObjBaseAtk);
 	}
 
-	float GetBonusAttackDamage() {
+	float GetBonusAttackDamage()
+	{
 		return *(float*)((DWORD)this + oObjBonusAtk);
 	}
 
-	float GetTotalAttackDamage() {
+	float GetTotalAttackDamage()
+	{
 		return this->GetBonusAttackDamage() + this->GetBaseAttackDamage();
 	}
 
-	float GetArmor() {
+	float GetArmor()
+	{
 		return *(float*)((DWORD)this + oObjArmor);
 	}
 
-	float GetMaxHealth() {
+	float GetMaxHealth()
+	{
 		return *(float*)((DWORD)this + oObjHealth + 0x10);
 	}
 
-	float GetAttackRange() {
+	float GetAttackRange()
+	{
 		return *(float*)((DWORD)this + oObjAtkRange);
 	}
 
-	bool IsVisible() {
+	bool IsVisible()
+	{
 		return *(bool*)((DWORD)this + oObjVisibility);
 	}
 
-	float GetBoundingRadius() {
+	float GetBoundingRadius()
+	{
 		typedef float(__thiscall * OriginalFn)(PVOID);
 		return CallVirtual<OriginalFn>(this, 36)(this);
 	}
@@ -83,7 +99,8 @@ public:
 	//	return CallVirtual<OriginalFn>(this, 37)(this);
 	//}
 
-	bool IsEnemyTo(CObject * Obj) {
+	bool IsEnemyTo(CObject * Obj)
+	{
 		if (Obj->GetTeam() == 100 && this->GetTeam() == 200)
 			return true;
 
@@ -93,15 +110,18 @@ public:
 		return false;
 	}
 
-	char* GetName() {
+	char* GetName()
+	{
 		return GetStr((DWORD)this + oObjName);
 	}
 
-	char* GetChampionName() {
+	char* GetChampionName()
+	{
 		return GetStr((DWORD)this + oObjChampionName);
 	}
 
-	int GetTeam() {
+	int GetTeam()
+	{
 		return *(int*)((DWORD)this + oObjTeam);
 	}
 };

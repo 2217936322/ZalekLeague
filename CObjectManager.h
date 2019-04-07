@@ -2,7 +2,8 @@
 #include "Utils.h"
 #include "CObject.h"
 
-class CObjectManager {
+class CObjectManager
+{
 public:
 	union {
 		DEFINE_MEMBER_0(void* base, 0x0);

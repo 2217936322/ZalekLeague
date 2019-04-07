@@ -4,7 +4,7 @@
 #include "Engine.h"
 #include "Hooks.h"
 #include "detours.h"
-#include <string> 
+#include <string>
 #pragma comment(lib, "detours.lib")
 
 CObjectManager* ObjManager;
@@ -26,7 +26,7 @@ HRESULT WINAPI Hooked_Present(DWORD Device, CONST RECT* pSrcRect, CONST RECT* pD
 		{
 			system("CLS");
 			Console.print("-------------------------------------------------------------------------------------\n");
-			Console.print(" ZalekLeague Initialized build # 1\n * Current Version = %s\n", TARGET_GAMEVERSION);
+			Console.print(" ZalekLeague Initialized build # 2\n * Current Version = %s\n", TARGET_GAMEVERSION);
 			Console.print(" * Summoner Name = %s\n * Champion Name = %s\n", me->GetName(), me->GetChampionName());
 			Console.print("-------------------------------------------------------------------------------------");
 			//Functions.PrintChat(oChatClient, "Hello from Zalek", 1);
@@ -41,11 +41,12 @@ HRESULT WINAPI Hooked_Present(DWORD Device, CONST RECT* pSrcRect, CONST RECT* pD
 			b_init = true;
 		}
 
-
-		if (GetKeyState(VK_SPACE) & 0x8000) {
+		if (GetKeyState(VK_SPACE) & 0x8000)
+		{
 			auto color = createRGB(0, 128, 0);
 			Functions.DrawCircle(&me->GetPos(), me->GetAttackRange() + me->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
-			if (lastmove == NULL || clock() - lastmove > 30.0f) {
+			if (lastmove == NULL || clock() - lastmove > 30.0f)
+			{
 				lastmove = clock();
 				Engine::MoveTo(&Engine::GetMouseWorldPosition());
 			}
@@ -76,7 +77,6 @@ HRESULT WINAPI Hooked_Present(DWORD Device, CONST RECT* pSrcRect, CONST RECT* pD
 		//					Functions.DrawCircle(&obj->GetPos(), obj->GetAttackRange() + obj->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
 		//				}
 		//			}
-
 
 		//			//? Last Hit Marker
 		//			if (obj->IsMinion())
