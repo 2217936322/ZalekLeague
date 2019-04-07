@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{8E3DF2F8-01F5-4C09-8101-48DC12DB7B34}</ProjectGuid>
+    <ProjectGuid>{B81A127F-4125-4234-A492-EA889EB3BACB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -100,16 +100,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CObject.cpp" />
-    <ClCompile Include="ZalekLeague.cpp" />
     <ClCompile Include="Console.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="ZalekLeague.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CObjectManager.h" />
+    <ClInclude Include="Console.h" />
     <ClInclude Include="detours.h" />
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="Console.h" />
     <ClInclude Include="Hooks.h" />
     <ClInclude Include="Offsets.h" />
     <ClInclude Include="stdafx.h" />

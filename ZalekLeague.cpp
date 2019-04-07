@@ -12,8 +12,9 @@ CConsole Console;
 CFunctions Functions;
 
 clock_t lastmove = NULL;
-bool bInit = false;
-bool bLastHit = false;
+
+bool b_init = false;
+bool b_last_hit = false;
 typedef HRESULT(WINAPI* Prototype_Present)(DWORD, CONST RECT*, CONST RECT*, HWND, CONST RGNDATA*);
 Prototype_Present Original_Present;
 
@@ -21,19 +22,23 @@ HRESULT WINAPI Hooked_Present(DWORD Device, CONST RECT* pSrcRect, CONST RECT* pD
 {
 	if (me)
 	{
-		if (!bInit)
+		if (!b_init)
 		{
-			Console.print("My Player Found\n");
-			Console.print("Local player's name: %s | Champion: %s | HP: %f\n", me->GetName(), me->GetChampionName(), me->GetHealth());
-			Console.print("ZalekLeague Initialized\n");
+			system("CLS");
+			Console.print("-------------------------------------------------------------------------------------\n");
+			Console.print(" ZalekLeague Initialized build # 1\n * Current Version = %s\n", TARGET_GAMEVERSION);
+			Console.print(" * Summoner Name = %s\n * Champion Name = %s\n", me->GetName(), me->GetChampionName());
+			Console.print("-------------------------------------------------------------------------------------");
+			//Functions.PrintChat(oChatClient, "Hello from Zalek", 1);
+			//Console.print(GetStr((DWORD)+oGameTime));
 
-			long number = 322323l;
-			char buffer[128];
-			int ret = snprintf(buffer, sizeof(buffer), "%ld", number);
-			char* num_string = buffer; //String terminator is added by snprintf
-			Console.print(num_string);
+			//long number = 322323l;
+			//char buffer[128];
+			//int ret = snprintf(buffer, sizeof(buffer), "%ld", number);
+			//char* num_string = buffer; //String terminator is added by snprintf
+			//Console.print(num_string);
 
-			bInit = true;
+			b_init = true;
 		}
 
 
@@ -46,54 +51,54 @@ HRESULT WINAPI Hooked_Present(DWORD Device, CONST RECT* pSrcRect, CONST RECT* pD
 			}
 		}
 
-		// 0x58 = X Key
-		if (GetKeyState(0x58) & 0x8000) {
-			//auto color = createRGB(128, 128, 128);
-			//Functions.DrawCircle(&me->GetPos(), me->GetAttackRange() + me->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
-			bLastHit = true;
-		}
-		else {
-			bLastHit = false;
-		}
+		//// 0x58 = X Key
+		//if (GetKeyState(0x58) & 0x8000) {
+		//	//auto color = createRGB(128, 128, 128);
+		//	//Functions.DrawCircle(&me->GetPos(), me->GetAttackRange() + me->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
+		//	bLastHit = true;
+		//}
+		//else {
+		//	bLastHit = false;
+		//}
 
-		if (ObjManager)
-		{
-			for (int i = 0; i < 10000; i++)
-			{
-				CObject* obj = Engine::GetObjectByID(i);
-				if (obj)
-				{
-					if (obj->IsHero())
-					{
-						if (obj->IsAlive() && obj->IsVisible() && obj->GetTeam() != me->GetTeam())
-						{
-							auto color = createRGB(255, 0, 0);
-							Functions.DrawCircle(&obj->GetPos(), obj->GetAttackRange() + obj->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
-						}
-					}
+		//if (ObjManager)
+		//{
+		//	for (int i = 0; i < 10000; i++)
+		//	{
+		//		CObject* obj = Engine::GetObjectByID(i);
+		//		if (obj)
+		//		{
+		//			if (obj->IsHero())
+		//			{
+		//				if (obj->IsAlive() && obj->IsVisible() && obj->GetTeam() != me->GetTeam())
+		//				{
+		//					auto color = createRGB(255, 0, 0);
+		//					Functions.DrawCircle(&obj->GetPos(), obj->GetAttackRange() + obj->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
+		//				}
+		//			}
 
 
-					//? Last Hit Marker
-					if (obj->IsMinion())
-					{
-						if (obj->IsAlive()
-							&& obj->GetTeam() != me->GetTeam() // Ignore friendly creeps
-							&& obj->IsEnemyTo(me) // Prevent usage on jungle camps.
-							&& obj->GetHealth() <= me->GetTotalAttackDamage() + 15 // Last hit range with a 15 damage buffer.
-							&& obj->IsTargetable() // Prevent attacking things like zyra plant seeds.
-							&& me->GetPos().DistTo(obj->GetPos()) <= // Ensure that we are already within aa range.
-							(me->GetAttackRange() + me->GetBoundingRadius()))
-						{
-							auto color = createRGB(255, 233, 0);
-							Functions.DrawCircle(&obj->GetPos(), me->GetAttackRange() + me->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
+		//			//? Last Hit Marker
+		//			if (obj->IsMinion())
+		//			{
+		//				if (obj->IsAlive()
+		//					&& obj->GetTeam() != me->GetTeam() // Ignore friendly creeps
+		//					&& obj->IsEnemyTo(me) // Prevent usage on jungle camps.
+		//					&& obj->GetHealth() <= me->GetTotalAttackDamage() + 15 // Last hit range with a 15 damage buffer.
+		//					&& obj->IsTargetable() // Prevent attacking things like zyra plant seeds.
+		//					&& me->GetPos().DistTo(obj->GetPos()) <= // Ensure that we are already within aa range.
+		//					(me->GetAttackRange() + me->GetBoundingRadius()))
+		//				{
+		//					auto color = createRGB(255, 233, 0);
+		//					Functions.DrawCircle(&obj->GetPos(), me->GetAttackRange() + me->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
 
-							if (bLastHit)
-								Console.print("Last Hit Creep.\n");
-						}
-					}
-				}
-			}
-		}
+		//					if (bLastHit)
+		//						Console.print("Last Hit Creep.\n");
+		//				}
+		//			}
+		//		}
+		//	}
+		//}
 	}
 
 	return Original_Present(Device, pSrcRect, pDestRect, hDestWindow, pDirtyRegion);
@@ -130,13 +135,12 @@ void __stdcall Start()
 	{
 		const char* v = Engine::GetGameVersion();
 		std::string vstr = v;
-
-		Console.print("Current Game Version: ");
-		Console.print(TARGET_GAMEVERSION);
-		Console.print("\nWaiting for League to load...\n");
-
-
-		Sleep(1000);
+		for (int i = 0; i < 10; i++)
+		{
+			Console.print("ZalekLeague is updated for %s Waiting for League to load...\n", TARGET_GAMEVERSION);
+			Sleep(100);
+		}
+		system("CLS");
 	}
 
 	ObjManager = (CObjectManager*)(baseAddr + oObjManager);
