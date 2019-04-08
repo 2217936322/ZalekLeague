@@ -71,6 +71,10 @@ public:
 		Functions.IssueOrder(GetLocalObject(), 2, pos, NULL, false, false, false);
 	}
 
+	static void LastHit(CObject * obj) {
+		Functions.IssueOrder(ME, 3, &obj->GetPos(), obj, true, true, false);
+	}
+
 	static void MoveClick()
 	{
 		INPUT Input = { 0 };

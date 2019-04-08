@@ -2,10 +2,10 @@
 #define TARGET_GAMEVERSION "Version 9.7.269.6900 [PUBLIC]"
 
 #define oCastSpell 0x59F3B0             // 9.7 Unconfirmed
-#define oChatClient 0x1685054           // 9.7 Unconfirmed
-#define oDrawCircle 0x596D40            // 9.7 Unconfirmed
+#define oChatClient 0x1685054           // 9.7
+#define oDrawCircle 0x596D40            // 9.7 
 #define oFuncSetModel 0x21D870          // 9.6 Unconfirmed (Same in 9.7?)
-#define oGameTime 0x2F22148             // 9.7 Unconfirmed
+#define oGameTime 0x2F22148             // 9.7 
 #define oGameVersion 0x2F4DD50          // 9.6 Unconfirmed (Same in 9.7?)
 #define oGetAttackCastDelay 0x5A5FE0    // 9.7 Unconfirmed
 #define oGetAttackDelay 0x5A60C0        // 9.7 Unconfirmed
@@ -13,17 +13,17 @@
 #define oGetCharacterInfo 0x29E850      // 9.6 Unconfirmed (Same in 9.7?)
 #define oGetSpellState 0x5A4EE0         // 9.6 Unconfirmed (Same in 9.7?)
 #define oHudInstance 0x168773C          // 9.7 Unconfirmed
-#define oIsAlive 0x1E2C30               // 9.7 Unconfirmed
+#define oIsAlive 0x1E2C30               // 9.7 
 #define oIsBaron 0x215C70               // 9.7 Unconfirmed
 #define oIsDragon 0x2150C0              // 9.7 Unconfirmed
 #define oIsHero 0x226EC0                // 9.7 Unconfirmed
 #define oIsInhib 0x226D40               // 9.7 Unconfirmed
-#define oIsMinion 0x226F00              // 9.7 Unconfirmed
+#define oIsMinion 0x226F00              // 9.7 
 #define oIsMissile 0x226F20             // 9.7 Unconfirmed
 #define oIsNexus 0x227130               // 9.7 Unconfirmed
 #define oIsNotWall 0x748840             // 9.7 Unconfirmed
-#define oIssueOrder 0x1BE660            // 9.7 Unconfirmed
-#define oIsTargetable 0x21FB80          // 9.7 Unconfirmed
+#define oIssueOrder 0x1BE660            // 9.7 
+#define oIsTargetable 0x21FB80          // 9.7 
 #define oIsTroy 0x2271A0                // 9.7 Unconfirmed
 #define oIsTurret 0x2270B0              // 9.7 Unconfirmed
 #define oIsWall 0x748840                // 9.7 Unconfirmed

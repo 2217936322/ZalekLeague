@@ -1,3 +1,5 @@
+static bool bConsole = true;
+
 #include <windows.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -9,7 +11,6 @@
 using namespace std;
 
 // maximum mumber of lines the output console should have
-
 static const WORD MAX_CONSOLE_LINES = 500;
 
 FILE* __fStdOut = NULL;
@@ -20,27 +21,32 @@ HANDLE __hStdOut = NULL;
 
 void CConsole::startConsoleWin(int width, int height, char* fname)
 {
-	AllocConsole();
-	SetConsoleTitle("Zalek League Console");
-	__hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	COORD co = { width, height };
-	SetConsoleScreenBufferSize(__hStdOut, co);
-	if (fname)
-		__fStdOut = fopen(fname, "w");
+	if (bConsole) {
+		AllocConsole();
+		SetConsoleTitle("Zalek League Console");
+		__hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+		COORD co = { width, height };
+		SetConsoleScreenBufferSize(__hStdOut, co);
+		if (fname)
+			__fStdOut = fopen(fname, "w");
+	}
 }
 // Use print like TRACE0, TRACE1, ... (The arguments are the same as print)
 int CConsole::print(char* fmt, ...)
 {
-	char s[3000];
-	va_list argptr;
-	int cnt;
-	va_start(argptr, fmt);
-	cnt = vsprintf(s, fmt, argptr);
-	va_end(argptr);
-	DWORD cCharsWritten;
-	if (__hStdOut)
-		WriteConsole(__hStdOut, s, strlen(s), &cCharsWritten, NULL);
-	if (__fStdOut)
-		fprintf(__fStdOut, s);
-	return (cnt);
+	if (bConsole) {
+
+		char s[3000];
+		va_list argptr;
+		int cnt;
+		va_start(argptr, fmt);
+		cnt = vsprintf(s, fmt, argptr);
+		va_end(argptr);
+		DWORD cCharsWritten;
+		if (__hStdOut)
+			WriteConsole(__hStdOut, s, strlen(s), &cCharsWritten, NULL);
+		if (__fStdOut)
+			fprintf(__fStdOut, s);
+		return (cnt);
+	}
 }
