@@ -13,6 +13,7 @@
 #include "ImGui/imgui_impl_dx9.h"
 #include "ImGui/imgui_impl_win32.h"
 #include "d3d9helper.h"
+#include "Menu.h"
 //#include "..//ImGui//imgui_impl_dx9.h"
 //#include "..//ImGui//imgui_impl_win32.h"
 
@@ -34,21 +35,6 @@ typedef HRESULT(WINAPI* Prototype_Present)(LPDIRECT3DDEVICE9, CONST RECT*, CONST
 Prototype_Present Original_Present;
 WNDPROC oWndProc;
 
-static void MenuInit(HWND Chwnd, IDirect3DDevice9* CDevice)
-{
-	HWND hwnd = Chwnd;
-	IDirect3DDevice9* Device = CDevice;
-	IMGUI_CHECKVERSION();
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO();
-	(void)io;
-	ImGui::StyleColorsDark();
-	ImGui_ImplWin32_Init(hwnd);
-	ImGui_ImplDX9_Init(Device);
-	Console.print("init()\n");
-
-}
-
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
 
 	if (ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
@@ -60,71 +46,25 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	return CallWindowProc(oWndProc, hWnd, uMsg, wParam, lParam);
 }
 
-static bool show_demo_window = false;
-static bool show_another_window = false;
-static ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-
-static void MenuRender() {
-	ImGui_ImplDX9_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-
-	//Console.print("render()\n");
-
-	{
-		static float f = 0.0f;
-		static int counter = 0;
-
-		ImGui::Begin("Zalek League");                          // Create a window called "Hello, world!" and append into it.
-
-		ImGui::Text("This is some useful text.");               // Display some text (you can use a format strings too)
-		ImGui::Checkbox("Demo Window", &show_demo_window);      // Edit bools storing our window open/close state
-		ImGui::Checkbox("Another Window", &show_another_window);
-
-		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-		ImGui::ColorEdit3("clear color", (float*)& clear_color); // Edit 3 floats representing a color
-
-		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-			counter++;
-		ImGui::SameLine();
-		ImGui::Text("counter = %d", counter);
-
-		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		ImGui::End();
-	}
-
-	ImGui::EndFrame();
-	ImGui::Render();
-	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-}
+//static bool show_demo_window = false;
+//static bool show_another_window = false;
+//static ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 
 HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion)
 {
 	//HWND window = FindWindow(NULL, "League of Legends");
 	//oWndProc = (WNDPROC)SetWindowLongPtr(FindWindowA(0, "League of Legends (TM) Client"), GWL_WNDPROC, (LONG_PTR)WndProc);
 
-	if (me)
+	if (ME)
 	{
 		if (!b_init)
 		{
 			system("CLS");
-			Console.print("-------------------------------------------------------------------------------------\n");
-			Console.print(" ZalekLeague Initialized build # %s\n * Current Version = %s\n", ZBUILD, TARGET_GAMEVERSION);
-			Console.print(" * Summoner Name = %s\n * Champion Name = %s\n", me->GetName(), me->GetChampionName());
-			Console.print("-------------------------------------------------------------------------------------");
-			//Functions.PrintChat(oChatClient, "Hello from Zalek", 1);
-			//Console.print(GetStr((DWORD)+oGameTime));
-
-			//long number = 322323l;
-			//char buffer[128];
-			//int ret = snprintf(buffer, sizeof(buffer), "%ld", number);
-			//char* num_string = buffer; //String terminator is added by snprintf
-			//Console.print(num_string);
-			//ImGui::CreateContext();
-			//ImGuiIO& io = ImGui::GetIO();
-
-			//ImGui_ImplWin32_Init(hDestWindow);
-			//ImGui_ImplDX9_Init(Device)
+			//Console.print("-------------------------------------------------------------------------------------\n");
+			//Console.print(" ZalekLeague Initialized build # %s\n * Current Version = %s\n", ZBUILD, TARGET_GAMEVERSION);
+			//Console.print(" * Summoner Name = %s\n * Champion Name = %s\n", ME->GetName(), ME->GetChampionName());
+			//Console.print("-------------------------------------------------------------------------------------");
+			Functions.PrintChat(*(DWORD*)(baseAddr + oChatClient), "<font color='#40c1ff'>[Zalek]:</font><font color='#C1FFAF'> Initialized</font>", 1);
 			HWND hwnd = FindWindow(NULL, "League of Legends (TM) Client");
 			oWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)WndProc);
 			MenuInit(hwnd, Device);
@@ -134,13 +74,19 @@ HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, C
 		if (GetKeyState(VK_SPACE) & 0x8000)
 		{
 			auto color = createRGB(0, 128, 0);
-			Functions.DrawCircle(&me->GetPos(), me->GetAttackRange() + me->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
-			if (lastmove == NULL || clock() - lastmove > 30.0f)
+			Functions.DrawCircle(&ME->GetPos(), ME->GetAttackRange() + ME->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
+			if (lastmove != NULL)
+				Console.print("%f\n", lastmove);
+			if (lastmove == NULL || clock() - lastmove > 300.0f);
 			{
 				lastmove = clock();
 				Engine::MoveTo(&Engine::GetMouseWorldPosition());
+				//Engine::MoveClick();
 			}
 		}
+
+		//if (GetKeyState(VK_ADD) & 0x8000)
+		//	exit(0);
 
 		//// 0x58 = X Key
 		//if (GetKeyState(0x58) & 0x8000) {
@@ -220,18 +166,19 @@ DWORD GetDeviceAddress(int VTableIndex)
 
 void __stdcall Start()
 {
-	Console.startConsoleWin(60, 10, NULL);
+	//Console.startConsoleWin(60, 10, NULL);
 
-	while (Engine::GetGameTime() < 1.0f || !me)
+	while (Engine::GetGameTime() < 1.0f || !ME)
 	{
-		const char* v = Engine::GetGameVersion();
-		std::string vstr = v;
-		for (int i = 0; i < 10; i++)
-		{
-			Console.print("ZalekLeague is updated for %s Waiting for League to load...\n", TARGET_GAMEVERSION);
-			Sleep(10);
-		}
-		system("CLS");
+		//const char* v = Engine::GetGameVersion();
+		//std::string vstr = v;
+		//for (int i = 0; i < 3; i++)
+		//{
+		//	Console.print("ZalekLeague is updated for %s Waiting for League to load...\n", TARGET_GAMEVERSION);
+		//  Sleep(333);
+		//}
+		//system("CLS");
+		Sleep(1);
 	}
 
 	ObjManager = (CObjectManager*)(baseAddr + oObjManager);
