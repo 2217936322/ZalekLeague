@@ -3,6 +3,8 @@
 #include "ImGui/imgui_impl_dx9.h"
 #include "ImGui/imgui_impl_win32.h"
 
+static bool gMenuTest = false;
+
 static void MenuInit(HWND Chwnd, IDirect3DDevice9* CDevice)
 {
 	HWND hwnd = Chwnd;
@@ -29,6 +31,11 @@ static void MenuRender() {
 		static int counter = 0;
 
 		ImGui::Begin("Zalek League");
+		if (ImGui::Button("Crash League"))
+			exit(0);
+		if (gMenuTest) {
+			ImGui::Text("gMenuTest");
+		}
 
 		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
 		if (ImGui::TreeNode("Engine")) {
@@ -38,7 +45,7 @@ static void MenuRender() {
 			ImGui::TreePop();
 		}
 
-		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+		//ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
 		if (ImGui::TreeNode("Object Manager")) {
 			if (ObjManager)
 			{
@@ -54,14 +61,12 @@ static void MenuRender() {
 			ImGui::TreePop();
 		}
 
-		if (ImGui::Button("Button"))
+		if (ImGui::Button("Button")) {
 			counter++;
+		}
 
 		ImGui::SameLine();
 		ImGui::Text("counter = %d", counter);
-
-		if (ImGui::Button("Crash League"))
-			exit(0);
 
 		ImGui::End();
 	}

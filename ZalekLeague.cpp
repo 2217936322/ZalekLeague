@@ -1,4 +1,4 @@
-#define ZBUILD "0.1"
+#define ZBUILD "0.16"
 #include <time.h>
 #include "stdafx.h"
 #include "Console.h"
@@ -14,6 +14,7 @@
 #include "ImGui/imgui_impl_win32.h"
 #include "d3d9helper.h"
 #include "Menu.h"
+#include "Minions.h"
 //#include "..//ImGui//imgui_impl_dx9.h"
 //#include "..//ImGui//imgui_impl_win32.h"
 
@@ -60,11 +61,11 @@ HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, C
 		if (!b_init)
 		{
 			system("CLS");
-			//Console.print("-------------------------------------------------------------------------------------\n");
-			//Console.print(" ZalekLeague Initialized build # %s\n * Current Version = %s\n", ZBUILD, TARGET_GAMEVERSION);
-			//Console.print(" * Summoner Name = %s\n * Champion Name = %s\n", ME->GetName(), ME->GetChampionName());
-			//Console.print("-------------------------------------------------------------------------------------");
-			Functions.PrintChat(*(DWORD*)(baseAddr + oChatClient), "<font color='#40c1ff'>[Zalek]:</font><font color='#C1FFAF'> Initialized</font>", 1);
+			Console.print("-------------------------------------------------------------------------------------\n");
+			Console.print(" ZalekLeague Initialized build # %s\n * Current Version = %s\n", ZBUILD, TARGET_GAMEVERSION);
+			Console.print(" * Summoner Name = %s\n * Champion Name = %s\n", ME->GetName(), ME->GetChampionName());
+			Console.print("-------------------------------------------------------------------------------------");
+			/*Functions.PrintChat(*(DWORD*)(baseAddr + oChatClient), "<font color='#40c1ff'>[Zalek]:</font><font color='#C1FFAF'> Initialized</font>", 1);*/
 			HWND hwnd = FindWindow(NULL, "League of Legends (TM) Client");
 			oWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR)WndProc);
 			MenuInit(hwnd, Device);
@@ -75,8 +76,8 @@ HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, C
 		{
 			auto color = createRGB(0, 128, 0);
 			Functions.DrawCircle(&ME->GetPos(), ME->GetAttackRange() + ME->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
-			if (lastmove != NULL)
-				Console.print("%f\n", lastmove);
+			//if (lastmove != NULL)
+			//	Console.print("%f\n", lastmove);
 			if (lastmove == NULL || clock() - lastmove > 300.0f);
 			{
 				lastmove = clock();
@@ -84,6 +85,15 @@ HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, C
 				//Engine::MoveClick();
 			}
 		}
+
+		if (GetKeyState(0x5A) & 0x8000) // Z Key
+			GetEnemyMinions();
+
+		if (GetKeyState(0x58) & 0x8000) // X Key
+			GetLastHitMinion();
+
+		if (GetKeyState(VK_INSERT) & 0x8000)
+			Functions.PrintChat(*(DWORD*)(baseAddr + oChatClient), "<font color='#FF0000'>[Riot Games]:</font><font color='#00CED1'> Austin is a faggot.</font>", 1);
 
 		//if (GetKeyState(VK_ADD) & 0x8000)
 		//	exit(0);
@@ -136,6 +146,8 @@ HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, C
 		//	}
 		//}
 	}
+
+
 	MenuRender();
 
 	return Original_Present(Device, pSrcRect, pDestRect, hDestWindow, pDirtyRegion);
@@ -166,18 +178,18 @@ DWORD GetDeviceAddress(int VTableIndex)
 
 void __stdcall Start()
 {
-	//Console.startConsoleWin(60, 10, NULL);
+	Console.startConsoleWin(60, 10, NULL);
 
 	while (Engine::GetGameTime() < 1.0f || !ME)
 	{
 		//const char* v = Engine::GetGameVersion();
 		//std::string vstr = v;
-		//for (int i = 0; i < 3; i++)
-		//{
-		//	Console.print("ZalekLeague is updated for %s Waiting for League to load...\n", TARGET_GAMEVERSION);
-		//  Sleep(333);
-		//}
-		//system("CLS");
+		for (int i = 0; i < 3; i++)
+		{
+			Console.print("ZalekLeague v %s is updated for %s Waiting for League to load...\n", ZBUILD, TARGET_GAMEVERSION);
+			Sleep(333);
+		}
+		system("CLS");
 		Sleep(1);
 	}
 
