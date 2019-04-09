@@ -10,8 +10,9 @@
 #include "Menu.h"
 #include "Minions.h"
 #include "ZInputHandler.h"
-#include "Globals.h"
 #include "WndProc.h"
+
+bool do_init = true;
 
 CObjectManager* ObjManager;
 CConsole Console;
@@ -30,12 +31,12 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion) {
 	if(ME) {
-		if(!b_init) {
+		if(do_init) {
 			/*Functions.PrintChat(*(DWORD*)(baseAddr + oChatClient), "<font color='#40c1ff'>[Zalek]:</font><font color='#C1FFAF'> Initialized</font>", 1);*/
 			HWND hwnd = FindWindow(NULL, "League of Legends (TM) Client");
 			oWndProc = (WNDPROC) SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR) WndProc);
 			MenuInit(hwnd, Device);
-			b_init = true;
+			do_init = false;
 		}
 	}
 
@@ -65,15 +66,15 @@ DWORD GetDeviceAddress(int VTableIndex) {
 }
 
 void __stdcall Start() {
-	Console.startConsoleWin(60, 10, NULL);
+	//Console.startConsoleWin(60, 10, NULL);
 
 	while(Engine::GetGameTime() < 1.0f || !ME) {
-		for(int i = 0; i < 3; i++) {
-			Console.print("ZalekLeague Compiled at %s %s\n", __DATE__, __TIME__);
-			Console.print("updated for %s Waiting for League to load...\n", TARGET_GAMEVERSION);
-			Sleep(333);
-		}
-		system("CLS");
+		/*	for(int i = 0; i < 3; i++) {
+				Console.print("ZalekLeague Compiled at %s %s\n", __DATE__, __TIME__);
+				Console.print("updated for %s Waiting for League to load...\n", TARGET_GAMEVERSION);
+				Sleep(333);
+			}
+			system("CLS");*/
 		Sleep(1);
 	}
 

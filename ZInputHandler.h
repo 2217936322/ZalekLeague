@@ -19,6 +19,8 @@ void handleInput() {
 	//if (GetKeyState(0x58) & 0x8000) // X Key
 	//	Engine::LastHit(GetLastHitMinion());
 
-	if(GetKeyState(VK_INSERT) & 0x8000)
+	if(GetAsyncKeyState(VK_INSERT) & 1) {
+		draw_menu = !draw_menu;
 		Functions.PrintChat(*(DWORD*) (baseAddr + oChatClient), "<font color='#FF0000'>[Riot Games]:</font><font color='#00CED1'> Austin is a faggot.</font>", 1);
+	}
 }
