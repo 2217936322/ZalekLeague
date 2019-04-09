@@ -116,6 +116,7 @@
     <ClInclude Include="Console.h" />
     <ClInclude Include="detours.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="Globals.h" />
     <ClInclude Include="Hooks.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
@@ -132,6 +133,8 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="WndProc.h" />
+    <ClInclude Include="ZInputHandler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

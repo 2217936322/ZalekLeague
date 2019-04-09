@@ -50,3 +50,4 @@ int CConsole::print(char* fmt, ...)
 		return (cnt);
 	}
 }
+
