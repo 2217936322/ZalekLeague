@@ -18,78 +18,63 @@ public:
 	bool IsTroyEnt();
 	bool IsTargetable();
 
-	short GetIndex()
-	{
-		return *(short*)((DWORD)this + oObjIndex);
+	short GetIndex() {
+		return *(short*) ((DWORD) this + oObjIndex);
 	}
 
-	short GetTargetIndex()
-	{
-		return *(short*)((DWORD)this + oObjTargetID);
+	short GetTargetIndex() {
+		return *(short*) ((DWORD) this + oObjTargetID);
 	}
 
-	short GetSourceIndex()
-	{
-		return *(short*)((DWORD)this + oObjSourceIndex);
+	short GetSourceIndex() {
+		return *(short*) ((DWORD) this + oObjSourceIndex);
 	}
 
-	DWORD GetNetworkID()
-	{
-		return *(DWORD*)((DWORD)this + oObjNetworkID);
+	DWORD GetNetworkID() {
+		return *(DWORD*) ((DWORD) this + oObjNetworkID);
 	}
 
-	Vector GetPos()
-	{
-		return *(Vector*)((DWORD)this + oObjPos);
+	Vector GetPos() {
+		return *(Vector*) ((DWORD) this + oObjPos);
 	}
 
-	int GetLevel()
-	{
-		return *(int*)((DWORD)this + oObjLevel);
+	int GetLevel() {
+		return *(int*) ((DWORD) this + oObjLevel);
 	}
 
-	float GetHealth()
-	{
-		return *(float*)((DWORD)this + oObjHealth);
+	float GetHealth() {
+		return *(float*) ((DWORD) this + oObjHealth);
 	}
 
-	float GetBaseAttackDamage()
-	{
-		return *(float*)((DWORD)this + oObjBaseAtk);
+	float GetBaseAttackDamage() {
+		return *(float*) ((DWORD) this + oObjBaseAtk);
 	}
 
-	float GetBonusAttackDamage()
-	{
-		return *(float*)((DWORD)this + oObjBonusAtk);
+	float GetBonusAttackDamage() {
+		return *(float*) ((DWORD) this + oObjBonusAtk);
 	}
 
-	float GetTotalAttackDamage()
-	{
+	float GetTotalAttackDamage() {
 		return this->GetBonusAttackDamage() + this->GetBaseAttackDamage();
 	}
 
-	float GetArmor()
-	{
-		return *(float*)((DWORD)this + oObjArmor);
+	float GetArmor() {
+		return *(float*) ((DWORD) this + oObjArmor);
 	}
 
-	float GetMaxHealth()
-	{
-		return *(float*)((DWORD)this + oObjHealth + 0x10);
+	float GetMaxHealth() {
+		return *(float*) ((DWORD) this + oObjHealth + 0x10);
 	}
 
-	float GetAttackRange()
-	{
-		return *(float*)((DWORD)this + oObjAtkRange);
+	float GetAttackRange() {
+		return *(float*) ((DWORD) this + oObjAtkRange);
 	}
 
-	bool IsVisible()
-	{
-		return *(bool*)((DWORD)this + oObjVisibility);
+	bool IsVisible() {
+		return *(bool*) ((DWORD) this + oObjVisibility);
 	}
 
-	float GetBoundingRadius()
-	{
+	float GetBoundingRadius() {
 		typedef float(__thiscall * OriginalFn)(PVOID);
 		return CallVirtual<OriginalFn>(this, 36)(this);
 	}
@@ -99,29 +84,25 @@ public:
 	//	return CallVirtual<OriginalFn>(this, 37)(this);
 	//}
 
-	bool IsEnemyTo(CObject * Obj)
-	{
-		if (Obj->GetTeam() == 100 && this->GetTeam() == 200)
+	bool IsEnemyTo(CObject * Obj) {
+		if(Obj->GetTeam() == 100 && this->GetTeam() == 200)
 			return true;
 
-		else if (Obj->GetTeam() == 200 && this->GetTeam() == 100)
+		else if(Obj->GetTeam() == 200 && this->GetTeam() == 100)
 			return true;
 
 		return false;
 	}
 
-	char* GetName()
-	{
-		return GetStr((DWORD)this + oObjName);
+	char* GetName() {
+		return GetStr((DWORD) this + oObjName);
 	}
 
-	char* GetChampionName()
-	{
-		return GetStr((DWORD)this + oObjChampionName);
+	char* GetChampionName() {
+		return GetStr((DWORD) this + oObjChampionName);
 	}
 
-	int GetTeam()
-	{
-		return *(int*)((DWORD)this + oObjTeam);
+	int GetTeam() {
+		return *(int*) ((DWORD) this + oObjTeam);
 	}
 };

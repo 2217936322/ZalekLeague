@@ -46,15 +46,14 @@ static bool                 g_HasGamepad = false;
 static bool                 g_WantUpdateHasGamepad = true;
 
 // Functions
-bool    ImGui_ImplWin32_Init(void* hwnd)
-{
-	if (!::QueryPerformanceFrequency((LARGE_INTEGER*)& g_TicksPerSecond))
+bool    ImGui_ImplWin32_Init(void* hwnd) {
+	if(!::QueryPerformanceFrequency((LARGE_INTEGER*) & g_TicksPerSecond))
 		return false;
-	if (!::QueryPerformanceCounter((LARGE_INTEGER*)& g_Time))
+	if(!::QueryPerformanceCounter((LARGE_INTEGER*) & g_Time))
 		return false;
 
 	// Setup back-end capabilities flags
-	g_hWnd = (HWND)hwnd;
+	g_hWnd = (HWND) hwnd;
 	ImGuiIO& io = ImGui::GetIO();
 	io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;         // We can honor GetMouseCursor() values (optional)
 	io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;          // We can honor io.WantSetMousePos requests (optional, rarely used)
@@ -87,51 +86,43 @@ bool    ImGui_ImplWin32_Init(void* hwnd)
 	return true;
 }
 
-void    ImGui_ImplWin32_Shutdown()
-{
-	g_hWnd = (HWND)0;
+void    ImGui_ImplWin32_Shutdown() {
+	g_hWnd = (HWND) 0;
 }
 
-static bool ImGui_ImplWin32_UpdateMouseCursor()
-{
+static bool ImGui_ImplWin32_UpdateMouseCursor() {
 	ImGuiIO& io = ImGui::GetIO();
-	if (io.ConfigFlags & ImGuiConfigFlags_NoMouseCursorChange)
+	if(io.ConfigFlags & ImGuiConfigFlags_NoMouseCursorChange)
 		return false;
 
 	ImGuiMouseCursor imgui_cursor = ImGui::GetMouseCursor();
-	if (imgui_cursor == ImGuiMouseCursor_None || io.MouseDrawCursor)
-	{
+	if(imgui_cursor == ImGuiMouseCursor_None || io.MouseDrawCursor) {
 		// Hide OS mouse cursor if imgui is drawing it or if it wants no cursor
 		::SetCursor(NULL);
-	}
-	else
-	{
+	} else {
 		// Show OS mouse cursor
 		LPTSTR win32_cursor = IDC_ARROW;
-		switch (imgui_cursor)
-		{
-		case ImGuiMouseCursor_Arrow:        win32_cursor = IDC_ARROW; break;
-		case ImGuiMouseCursor_TextInput:    win32_cursor = IDC_IBEAM; break;
-		case ImGuiMouseCursor_ResizeAll:    win32_cursor = IDC_SIZEALL; break;
-		case ImGuiMouseCursor_ResizeEW:     win32_cursor = IDC_SIZEWE; break;
-		case ImGuiMouseCursor_ResizeNS:     win32_cursor = IDC_SIZENS; break;
-		case ImGuiMouseCursor_ResizeNESW:   win32_cursor = IDC_SIZENESW; break;
-		case ImGuiMouseCursor_ResizeNWSE:   win32_cursor = IDC_SIZENWSE; break;
-		case ImGuiMouseCursor_Hand:         win32_cursor = IDC_HAND; break;
+		switch(imgui_cursor) {
+			case ImGuiMouseCursor_Arrow:        win32_cursor = IDC_ARROW; break;
+			case ImGuiMouseCursor_TextInput:    win32_cursor = IDC_IBEAM; break;
+			case ImGuiMouseCursor_ResizeAll:    win32_cursor = IDC_SIZEALL; break;
+			case ImGuiMouseCursor_ResizeEW:     win32_cursor = IDC_SIZEWE; break;
+			case ImGuiMouseCursor_ResizeNS:     win32_cursor = IDC_SIZENS; break;
+			case ImGuiMouseCursor_ResizeNESW:   win32_cursor = IDC_SIZENESW; break;
+			case ImGuiMouseCursor_ResizeNWSE:   win32_cursor = IDC_SIZENWSE; break;
+			case ImGuiMouseCursor_Hand:         win32_cursor = IDC_HAND; break;
 		}
 		::SetCursor(::LoadCursor(NULL, win32_cursor));
 	}
 	return true;
 }
 
-static void ImGui_ImplWin32_UpdateMousePos()
-{
+static void ImGui_ImplWin32_UpdateMousePos() {
 	ImGuiIO& io = ImGui::GetIO();
 
 	// Set OS mouse position if requested (rarely used, only when ImGuiConfigFlags_NavEnableSetMousePos is enabled by user)
-	if (io.WantSetMousePos)
-	{
-		POINT pos = { (int)io.MousePos.x, (int)io.MousePos.y };
+	if(io.WantSetMousePos) {
+		POINT pos = {(int) io.MousePos.x, (int) io.MousePos.y};
 		::ClientToScreen(g_hWnd, &pos);
 		::SetCursorPos(pos.x, pos.y);
 	}
@@ -139,10 +130,10 @@ static void ImGui_ImplWin32_UpdateMousePos()
 	// Set mouse position
 	io.MousePos = ImVec2(-FLT_MAX, -FLT_MAX);
 	POINT pos;
-	if (HWND active_window = ::GetForegroundWindow())
-		if (active_window == g_hWnd || ::IsChild(active_window, g_hWnd))
-			if (::GetCursorPos(&pos) && ::ScreenToClient(g_hWnd, &pos))
-				io.MousePos = ImVec2((float)pos.x, (float)pos.y);
+	if(HWND active_window = ::GetForegroundWindow())
+		if(active_window == g_hWnd || ::IsChild(active_window, g_hWnd))
+			if(::GetCursorPos(&pos) && ::ScreenToClient(g_hWnd, &pos))
+				io.MousePos = ImVec2((float) pos.x, (float) pos.y);
 }
 
 #ifdef _MSC_VER
@@ -150,17 +141,15 @@ static void ImGui_ImplWin32_UpdateMousePos()
 #endif
 
 // Gamepad navigation mapping
-static void ImGui_ImplWin32_UpdateGamepads()
-{
+static void ImGui_ImplWin32_UpdateGamepads() {
 	ImGuiIO& io = ImGui::GetIO();
 	memset(io.NavInputs, 0, sizeof(io.NavInputs));
-	if ((io.ConfigFlags & ImGuiConfigFlags_NavEnableGamepad) == 0)
+	if((io.ConfigFlags & ImGuiConfigFlags_NavEnableGamepad) == 0)
 		return;
 
 	// Calling XInputGetState() every frame on disconnected gamepads is unfortunately too slow.
 	// Instead we refresh gamepad availability by calling XInputGetCapabilities() _only_ after receiving WM_DEVICECHANGE.
-	if (g_WantUpdateHasGamepad)
-	{
+	if(g_WantUpdateHasGamepad) {
 		XINPUT_CAPABILITIES caps;
 		g_HasGamepad = (XInputGetCapabilities(0, XINPUT_FLAG_GAMEPAD, &caps) == ERROR_SUCCESS);
 		g_WantUpdateHasGamepad = false;
@@ -168,8 +157,7 @@ static void ImGui_ImplWin32_UpdateGamepads()
 
 	XINPUT_STATE xinput_state;
 	io.BackendFlags &= ~ImGuiBackendFlags_HasGamepad;
-	if (g_HasGamepad && XInputGetState(0, &xinput_state) == ERROR_SUCCESS)
-	{
+	if(g_HasGamepad && XInputGetState(0, &xinput_state) == ERROR_SUCCESS) {
 		const XINPUT_GAMEPAD& gamepad = xinput_state.Gamepad;
 		io.BackendFlags |= ImGuiBackendFlags_HasGamepad;
 
@@ -196,20 +184,19 @@ static void ImGui_ImplWin32_UpdateGamepads()
 	}
 }
 
-void    ImGui_ImplWin32_NewFrame()
-{
+void    ImGui_ImplWin32_NewFrame() {
 	ImGuiIO& io = ImGui::GetIO();
 	IM_ASSERT(io.Fonts->IsBuilt() && "Font atlas not built! It is generally built by the renderer back-end. Missing call to renderer _NewFrame() function? e.g. ImGui_ImplOpenGL3_NewFrame().");
 
 	// Setup display size (every frame to accommodate for window resizing)
 	RECT rect;
 	::GetClientRect(g_hWnd, &rect);
-	io.DisplaySize = ImVec2((float)(rect.right - rect.left), (float)(rect.bottom - rect.top));
+	io.DisplaySize = ImVec2((float) (rect.right - rect.left), (float) (rect.bottom - rect.top));
 
 	// Setup time step
 	INT64 current_time;
-	::QueryPerformanceCounter((LARGE_INTEGER*)& current_time);
-	io.DeltaTime = (float)(current_time - g_Time) / g_TicksPerSecond;
+	::QueryPerformanceCounter((LARGE_INTEGER*) & current_time);
+	io.DeltaTime = (float) (current_time - g_Time) / g_TicksPerSecond;
 	g_Time = current_time;
 
 	// Read keyboard modifiers inputs
@@ -224,8 +211,7 @@ void    ImGui_ImplWin32_NewFrame()
 
 	// Update OS mouse cursor with the cursor requested by imgui
 	ImGuiMouseCursor mouse_cursor = io.MouseDrawCursor ? ImGuiMouseCursor_None : ImGui::GetMouseCursor();
-	if (g_LastMouseCursor != mouse_cursor)
-	{
+	if(g_LastMouseCursor != mouse_cursor) {
 		g_LastMouseCursor = mouse_cursor;
 		ImGui_ImplWin32_UpdateMouseCursor();
 	}
@@ -249,73 +235,71 @@ void    ImGui_ImplWin32_NewFrame()
 // Generally you may always pass all inputs to dear imgui, and hide them from your application based on those two flags.
 // PS: In this Win32 handler, we use the capture API (GetCapture/SetCapture/ReleaseCapture) to be able to read mouse coordinates when dragging mouse outside of our window bounds.
 // PS: We treat DBLCLK messages as regular mouse down messages, so this code will work on windows classes that have the CS_DBLCLKS flag set. Our own example app code doesn't set this flag.
-IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
-{
-	if (ImGui::GetCurrentContext() == NULL)
+IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	if(ImGui::GetCurrentContext() == NULL)
 		return 0;
 
 	ImGuiIO & io = ImGui::GetIO();
-	switch (msg)
-	{
-	case WM_LBUTTONDOWN: case WM_LBUTTONDBLCLK:
-	case WM_RBUTTONDOWN: case WM_RBUTTONDBLCLK:
-	case WM_MBUTTONDOWN: case WM_MBUTTONDBLCLK:
-	case WM_XBUTTONDOWN: case WM_XBUTTONDBLCLK:
-	{
-		int button = 0;
-		if (msg == WM_LBUTTONDOWN || msg == WM_LBUTTONDBLCLK) { button = 0; }
-		if (msg == WM_RBUTTONDOWN || msg == WM_RBUTTONDBLCLK) { button = 1; }
-		if (msg == WM_MBUTTONDOWN || msg == WM_MBUTTONDBLCLK) { button = 2; }
-		if (msg == WM_XBUTTONDOWN || msg == WM_XBUTTONDBLCLK) { button = (GET_XBUTTON_WPARAM(wParam) == XBUTTON1) ? 3 : 4; }
-		if (!ImGui::IsAnyMouseDown() && ::GetCapture() == NULL)
-			::SetCapture(hwnd);
-		io.MouseDown[button] = true;
-		return 0;
-	}
-	case WM_LBUTTONUP:
-	case WM_RBUTTONUP:
-	case WM_MBUTTONUP:
-	case WM_XBUTTONUP:
-	{
-		int button = 0;
-		if (msg == WM_LBUTTONUP) { button = 0; }
-		if (msg == WM_RBUTTONUP) { button = 1; }
-		if (msg == WM_MBUTTONUP) { button = 2; }
-		if (msg == WM_XBUTTONUP) { button = (GET_XBUTTON_WPARAM(wParam) == XBUTTON1) ? 3 : 4; }
-		io.MouseDown[button] = false;
-		if (!ImGui::IsAnyMouseDown() && ::GetCapture() == hwnd)
-			::ReleaseCapture();
-		return 0;
-	}
-	case WM_MOUSEWHEEL:
-		io.MouseWheel += (float)GET_WHEEL_DELTA_WPARAM(wParam) / (float)WHEEL_DELTA;
-		return 0;
-	case WM_MOUSEHWHEEL:
-		io.MouseWheelH += (float)GET_WHEEL_DELTA_WPARAM(wParam) / (float)WHEEL_DELTA;
-		return 0;
-	case WM_KEYDOWN:
-	case WM_SYSKEYDOWN:
-		if (wParam < 256)
-			io.KeysDown[wParam] = 1;
-		return 0;
-	case WM_KEYUP:
-	case WM_SYSKEYUP:
-		if (wParam < 256)
-			io.KeysDown[wParam] = 0;
-		return 0;
-	case WM_CHAR:
-		// You can also use ToAscii()+GetKeyboardState() to retrieve characters.
-		if (wParam > 0 && wParam < 0x10000)
-			io.AddInputCharacter((unsigned short)wParam);
-		return 0;
-	case WM_SETCURSOR:
-		if (LOWORD(lParam) == HTCLIENT && ImGui_ImplWin32_UpdateMouseCursor())
-			return 1;
-		return 0;
-	case WM_DEVICECHANGE:
-		if ((UINT)wParam == DBT_DEVNODES_CHANGED)
-			g_WantUpdateHasGamepad = true;
-		return 0;
+	switch(msg) {
+		case WM_LBUTTONDOWN: case WM_LBUTTONDBLCLK:
+		case WM_RBUTTONDOWN: case WM_RBUTTONDBLCLK:
+		case WM_MBUTTONDOWN: case WM_MBUTTONDBLCLK:
+		case WM_XBUTTONDOWN: case WM_XBUTTONDBLCLK:
+		{
+			int button = 0;
+			if(msg == WM_LBUTTONDOWN || msg == WM_LBUTTONDBLCLK) { button = 0; }
+			if(msg == WM_RBUTTONDOWN || msg == WM_RBUTTONDBLCLK) { button = 1; }
+			if(msg == WM_MBUTTONDOWN || msg == WM_MBUTTONDBLCLK) { button = 2; }
+			if(msg == WM_XBUTTONDOWN || msg == WM_XBUTTONDBLCLK) { button = (GET_XBUTTON_WPARAM(wParam) == XBUTTON1) ? 3 : 4; }
+			if(!ImGui::IsAnyMouseDown() && ::GetCapture() == NULL)
+				::SetCapture(hwnd);
+			io.MouseDown[button] = true;
+			return 0;
+		}
+		case WM_LBUTTONUP:
+		case WM_RBUTTONUP:
+		case WM_MBUTTONUP:
+		case WM_XBUTTONUP:
+		{
+			int button = 0;
+			if(msg == WM_LBUTTONUP) { button = 0; }
+			if(msg == WM_RBUTTONUP) { button = 1; }
+			if(msg == WM_MBUTTONUP) { button = 2; }
+			if(msg == WM_XBUTTONUP) { button = (GET_XBUTTON_WPARAM(wParam) == XBUTTON1) ? 3 : 4; }
+			io.MouseDown[button] = false;
+			if(!ImGui::IsAnyMouseDown() && ::GetCapture() == hwnd)
+				::ReleaseCapture();
+			return 0;
+		}
+		case WM_MOUSEWHEEL:
+			io.MouseWheel += (float) GET_WHEEL_DELTA_WPARAM(wParam) / (float) WHEEL_DELTA;
+			return 0;
+		case WM_MOUSEHWHEEL:
+			io.MouseWheelH += (float) GET_WHEEL_DELTA_WPARAM(wParam) / (float) WHEEL_DELTA;
+			return 0;
+		case WM_KEYDOWN:
+		case WM_SYSKEYDOWN:
+			if(wParam < 256)
+				io.KeysDown[wParam] = 1;
+			return 0;
+		case WM_KEYUP:
+		case WM_SYSKEYUP:
+			if(wParam < 256)
+				io.KeysDown[wParam] = 0;
+			return 0;
+		case WM_CHAR:
+			// You can also use ToAscii()+GetKeyboardState() to retrieve characters.
+			if(wParam > 0 && wParam < 0x10000)
+				io.AddInputCharacter((unsigned short) wParam);
+			return 0;
+		case WM_SETCURSOR:
+			if(LOWORD(lParam) == HTCLIENT && ImGui_ImplWin32_UpdateMouseCursor())
+				return 1;
+			return 0;
+		case WM_DEVICECHANGE:
+			if((UINT) wParam == DBT_DEVNODES_CHANGED)
+				g_WantUpdateHasGamepad = true;
+			return 0;
 	}
 	return 0;
 }

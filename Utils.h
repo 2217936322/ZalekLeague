@@ -20,29 +20,25 @@
 #define OBJ_MISSILE 3
 
 template <typename Function>
-Function CallVirtual(PVOID Base, DWORD Index)
-{
-	PDWORD* VTablePointer = (PDWORD*)Base;
+Function CallVirtual(PVOID Base, DWORD Index) {
+	PDWORD* VTablePointer = (PDWORD*) Base;
 	PDWORD VTableFunctionBase = *VTablePointer;
 	DWORD dwAddress = VTableFunctionBase[Index];
 
-	return (Function)(dwAddress);
+	return (Function) (dwAddress);
 }
 
-inline char* GetStr(DWORD offset)
-{
-	if (*(int*)(offset + 0x10) > 15)
-		return (char*)(*(DWORD*)offset);
+inline char* GetStr(DWORD offset) {
+	if(*(int*) (offset + 0x10) > 15)
+		return (char*) (*(DWORD*) offset);
 	else
-		return (char*)offset;
+		return (char*) offset;
 }
 
-inline float GetEffectiveHP(float Armor, float HP)
-{
+inline float GetEffectiveHP(float Armor, float HP) {
 	return HP * (100.0f + Armor) / 100.0f;
 }
 
-inline int createRGB(int r, int g, int b)
-{
+inline int createRGB(int r, int g, int b) {
 	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
 }

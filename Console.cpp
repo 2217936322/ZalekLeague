@@ -19,22 +19,20 @@ HANDLE __hStdOut = NULL;
 // the output will also be writton to thisPtr file. The file pointer is automatically closed
 // when you close the app
 
-void CConsole::startConsoleWin(int width, int height, char* fname)
-{
-	if (bConsole) {
+void CConsole::startConsoleWin(int width, int height, char* fname) {
+	if(bConsole) {
 		AllocConsole();
 		SetConsoleTitle("Zalek League Console");
 		__hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
-		COORD co = { width, height };
+		COORD co = {width, height};
 		SetConsoleScreenBufferSize(__hStdOut, co);
-		if (fname)
+		if(fname)
 			__fStdOut = fopen(fname, "w");
 	}
 }
 // Use print like TRACE0, TRACE1, ... (The arguments are the same as print)
-int CConsole::print(char* fmt, ...)
-{
-	if (bConsole) {
+int CConsole::print(char* fmt, ...) {
+	if(bConsole) {
 
 		char s[3000];
 		va_list argptr;
@@ -43,9 +41,9 @@ int CConsole::print(char* fmt, ...)
 		cnt = vsprintf(s, fmt, argptr);
 		va_end(argptr);
 		DWORD cCharsWritten;
-		if (__hStdOut)
+		if(__hStdOut)
 			WriteConsole(__hStdOut, s, strlen(s), &cCharsWritten, NULL);
-		if (__fStdOut)
+		if(__fStdOut)
 			fprintf(__fStdOut, s);
 		return (cnt);
 	}

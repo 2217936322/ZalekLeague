@@ -4,14 +4,11 @@
 
 //static CObject EnemyMinions[];
 
-static CObject* GetEnemyMinions()
-{
-	if (ObjManager)
-	{
-		for (int i = 0; i < ObjManager->HighestObjectID; i++)
-		{
+static CObject* GetEnemyMinions() {
+	if(ObjManager) {
+		for(int i = 0; i < ObjManager->HighestObjectID; i++) {
 			CObject* obj = Engine::GetObjectByID(i);
-			if (obj
+			if(obj
 				&& obj->IsMinion()
 				&& obj->IsEnemyTo(ME)
 				&& obj->IsAlive()
@@ -25,14 +22,11 @@ static CObject* GetEnemyMinions()
 	return NULL;
 }
 
-static CObject* GetLastHitMinion()
-{
-	if (ObjManager)
-	{
-		for (int i = 0; i < ObjManager->HighestObjectID; i++)
-		{
+static CObject* GetLastHitMinion() {
+	if(ObjManager) {
+		for(int i = 0; i < ObjManager->HighestObjectID; i++) {
 			CObject* obj = Engine::GetObjectByID(i);
-			if (obj
+			if(obj
 				&& obj->IsMinion()
 				&& obj->IsEnemyTo(ME)
 				&& obj->IsAlive()
