@@ -13,6 +13,25 @@
 
 bool do_init = true;
 
+void init(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
+	if(do_init) {
+		/*Functions.PrintChat(*(DWORD*)(baseAddr + oChatClient), "<font color='#40c1ff'>[Zalek]:</font><font color='#C1FFAF'> Initialized</font>", 1);*/
+		oWndProc = (WNDPROC) SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR) WndProc);
+		MenuInit(hwnd, Device);
+		do_init = false;
+	}
+}
+
+int main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
+	init(hwnd, Device);
+	PopulateMinionVectors();
+	handleInput();
+	MenuRender();
+	return 0;
+}
+
+
+
 GameObjectManager* ObjManager;
 CConsole Console;
 CFunctions Functions;
@@ -29,20 +48,7 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 }
 
 HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion) {
-	if(ME) {
-		if(do_init) {
-			/*Functions.PrintChat(*(DWORD*)(baseAddr + oChatClient), "<font color='#40c1ff'>[Zalek]:</font><font color='#C1FFAF'> Initialized</font>", 1);*/
-			HWND hwnd = FindWindow(NULL, "League of Legends (TM) Client");
-			oWndProc = (WNDPROC) SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR) WndProc);
-			MenuInit(hwnd, Device);
-			do_init = false;
-		}
-	}
-
-	GetLastHitMinions();
-	handleInput();
-	MenuRender();
-
+	if(ME) { main(FindWindow(NULL, "League of Legends (TM) Client"), Device); }
 	return Original_Present(Device, pSrcRect, pDestRect, hDestWindow, pDirtyRegion);
 }
 

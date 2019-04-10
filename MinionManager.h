@@ -7,7 +7,7 @@ std::vector<GameObject*> gMinions;
 std::vector<GameObject*> gEnemyMinions;
 std::vector<GameObject*> gLastHitMinions;
 
-std::vector<GameObject*> PopulateGlobalMinionsVector() {
+std::vector<GameObject*> GetMinions() {
 	gMinions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -65,4 +65,9 @@ std::vector<GameObject*> GetLastHitMinions() {
 	}
 	gLastHitMinions.shrink_to_fit();
 	return gLastHitMinions;
+}
+
+void PopulateMinionVectors() {
+	GetMinions();
+	GetEnemyMinions();
 }
