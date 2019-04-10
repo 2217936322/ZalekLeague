@@ -39,9 +39,6 @@
     <ClCompile Include="ZalekLeague.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CObject.cpp">
-      <Filter>Source Files\GameObjects</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files\Backend</Filter>
     </ClCompile>
@@ -66,14 +63,11 @@
     <ClCompile Include="Console.cpp">
       <Filter>Source Files\Backend</Filter>
     </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CObject.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="CObjectManager.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="detours.h">
       <Filter>Header Files\Backend</Filter>
     </ClInclude>
@@ -119,9 +113,6 @@
     <ClInclude Include="ImGui\imstb_truetype.h">
       <Filter>Header Files\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Minions.h">
-      <Filter>Header Files\GameObjects</Filter>
-    </ClInclude>
     <ClInclude Include="Console.h">
       <Filter>Header Files\Backend</Filter>
     </ClInclude>
@@ -136,6 +127,15 @@
     </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">
       <Filter>Header Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectManager.h">
+      <Filter>Header Files\GameObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="MinionManager.h">
+      <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

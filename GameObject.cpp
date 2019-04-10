@@ -1,39 +1,39 @@
-#include "CObject.h"
+#include "GameObject.h"
 #include "Hooks.h"
 #include "Engine.h"
 
-bool CObject::IsAlive() {
+bool GameObject::IsAlive() {
 	return Functions.IsAlive(this) && this->GetHealth() > 0.0f;
 }
 
-bool CObject::IsMinion() {
+bool GameObject::IsMinion() {
 	return Functions.IsMinion(this);
 }
 
-bool CObject::IsTurret() {
+bool GameObject::IsTurret() {
 	return Functions.IsTurret(this);
 }
 
-bool CObject::IsHero() {
+bool GameObject::IsHero() {
 	return Functions.IsHero(this);
 }
 
-bool CObject::IsMissile() {
+bool GameObject::IsMissile() {
 	return Functions.IsMissile(this);
 }
 
-bool CObject::IsTargetable() {
+bool GameObject::IsTargetable() {
 	return Functions.IsTargetable(this);
 }
 
-bool CObject::IsNexus() {
+bool GameObject::IsNexus() {
 	return Functions.IsNexus(this);
 }
 
-bool CObject::IsInhibitor() {
+bool GameObject::IsInhibitor() {
 	return Functions.IsInhibitor(this);
 }
 
-bool CObject::IsTroyEnt() {
+bool GameObject::IsTroyEnt() {
 	return Functions.IsTroyEnt(this);
 }

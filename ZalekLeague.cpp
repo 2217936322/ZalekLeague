@@ -8,13 +8,12 @@
 #pragma comment(lib, "detours.lib")
 
 #include "Menu.h"
-#include "Minions.h"
 #include "ZInputHandler.h"
 #include "WndProc.h"
 
 bool do_init = true;
 
-CObjectManager* ObjManager;
+GameObjectManager* ObjManager;
 CConsole Console;
 CFunctions Functions;
 
@@ -78,7 +77,7 @@ void __stdcall Start() {
 		Sleep(1);
 	}
 
-	ObjManager = (CObjectManager*) (baseAddr + oObjManager);
+	ObjManager = (GameObjectManager*) (baseAddr + oObjManager);
 
 	Functions.PrintChat = (Typedefs::fnPrintChat)(baseAddr + oPrintChat);
 

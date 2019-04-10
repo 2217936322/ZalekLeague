@@ -3,7 +3,7 @@
 #include "Utils.h"
 #include "Vector.h"
 #include "Hooks.h"
-#include "CObjectManager.h"
+#include "GameObjectManager.h"
 
 #define ME Engine::GetLocalObject()
 constexpr auto HOLDPOSITION = 1;
@@ -40,22 +40,22 @@ public:
 		return *(float*) (baseAddr + oGameTime);
 	}
 
-	static CObject* GetLocalObject() {
+	static GameObject* GetLocalObject() {
 		auto retaddr = *(DWORD*) (baseAddr + oLocalPlayer);
 		if(retaddr == NULL)
 			return NULL;
 
-		return (CObject*) retaddr;
+		return (GameObject*) retaddr;
 	}
 
-	static CObject * GetObjectByID(int ID) {
-		if(ObjManager != NULL && ID >= 0 && ID <= ObjManager->HighestObjectID) {
+	static GameObject * GetObjectByID(int ID) {
+		if(ObjManager != NULL && ID >= 0 && ID <= 25000) {
 			return ObjManager->objectArray[ID];
 		}
 		return NULL;
 	}
 
-	static void Attack(CObject * obj) {
+	static void Attack(GameObject * obj) {
 		Functions.IssueOrder(ME, 3, &obj->GetPos(), obj, true, false, false);
 	}
 
@@ -63,7 +63,7 @@ public:
 		Functions.IssueOrder(GetLocalObject(), 2, pos, NULL, false, false, false);
 	}
 
-	static void LastHit(CObject * obj) {
+	static void LastHit(GameObject * obj) {
 		Functions.IssueOrder(ME, 3, &obj->GetPos(), obj, true, true, false);
 	}
 

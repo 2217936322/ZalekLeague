@@ -1,7 +1,6 @@
 #include <Windows.h>
 #include "Utils.h"
 #include "Engine.h"
-#include "Minions.h"
 #pragma once
 
 
@@ -12,12 +11,6 @@ void handleInput() {
 		Engine::MoveTo(&Engine::GetMouseWorldPosition());
 
 	}
-
-	if(GetKeyState(0x5A) & 0x8000) // Z Key
-		GetEnemyMinions();
-
-	//if (GetKeyState(0x58) & 0x8000) // X Key
-	//	Engine::LastHit(GetLastHitMinion());
 
 	if(GetAsyncKeyState(VK_INSERT) & 1) {
 		draw_menu = !draw_menu;
