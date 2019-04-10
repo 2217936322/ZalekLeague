@@ -69,28 +69,45 @@ static void MenuRender() {
 
 				if(ImGui::TreeNode((void*) (intptr_t) i, "%s : %d", (*Minion)->GetChampionName(), i)) {
 
-					ImGui::Text("GetArmor() => %f", (*Minion)->GetArmor());
-					ImGui::Text("GetAttackRange() => %f", (*Minion)->GetAttackRange());
-					ImGui::Text("GetBaseAttackDamage() => %f", (*Minion)->GetBaseAttackDamage());
-					ImGui::Text("GetBonusAttackDamage() => %f", (*Minion)->GetBonusAttackDamage());
-					ImGui::Text("GetBoundingRadius() => %f", (*Minion)->GetBoundingRadius());
-					ImGui::Text("GetChampionName() => %s", (*Minion)->GetChampionName());
-					ImGui::Text("GetHealth() => %f", (*Minion)->GetHealth());
-					ImGui::Text("GetIndex() => %hu", (*Minion)->GetIndex());
-					ImGui::Text("GetLevel() => %hu", (*Minion)->GetLevel());
-					ImGui::Text("GetMaxHealth() => %f", (*Minion)->GetMaxHealth());
-					ImGui::Text("GetName() => %s", (*Minion)->GetName());
-					ImGui::Text("GetNetworkID() => %lu", (*Minion)->GetNetworkID());
-					ImGui::Text("GetPos() => (%f, %f, %f)", (*Minion)->GetPos().X, (*Minion)->GetPos().Y, (*Minion)->GetPos().Z);
-					ImGui::Text("GetSourceIndex() => %hu", (*Minion)->GetSourceIndex());
-					ImGui::Text("GetTargetIndex() => %hu", (*Minion)->GetTargetIndex());
-					ImGui::Text("GetTotalAttackDamage() => %f", (*Minion)->GetTotalAttackDamage());
-					ImGui::Text("IsAlive() => %d", (*Minion)->IsAlive());
-					ImGui::Text("IsCannon() => %d", endsWith((std::string)(*Minion)->GetChampionName(), "Siege"));
-					ImGui::Text("IsMelee() => %d", endsWith((std::string)(*Minion)->GetChampionName(), "Melee"));
-					ImGui::Text("IsRanged() => %d", endsWith((std::string)(*Minion)->GetChampionName(), "Ranged"));
-					ImGui::Text("IsEnemyTo(ME) => %d", (*Minion)->IsEnemyTo(ME));
-					ImGui::Text("IsTargetable() => %d", (*Minion)->IsTargetable());
+					ImGui::Text("bool");
+					ImGui::BulletText("IsAlive() => %d", (*Minion)->IsAlive());
+					ImGui::BulletText("IsEnemy() => %d", (*Minion)->IsEnemy());
+					ImGui::BulletText("IsTargetable() => %d", (*Minion)->IsTargetable());
+					//TODO: Implement Minion Type in GameObject.cpp and h
+					ImGui::BulletText("IsCannon() => %d", endsWith((std::string)(*Minion)->GetChampionName(), "Siege"));
+					ImGui::BulletText("IsMelee() => %d", endsWith((std::string)(*Minion)->GetChampionName(), "Melee"));
+					ImGui::BulletText("IsRanged() => %d", endsWith((std::string)(*Minion)->GetChampionName(), "Ranged"));
+
+					ImGui::Text("char*");
+					ImGui::BulletText("GetChampionName() => %s", (*Minion)->GetChampionName());
+					ImGui::BulletText("GetName() => %s", (*Minion)->GetName());
+
+					ImGui::Text("DWORD");
+					ImGui::BulletText("GetNetworkID() => %lu", (*Minion)->GetNetworkID());
+
+					ImGui::Text("float");
+					ImGui::BulletText("GetArmor() => %f", (*Minion)->GetArmor());
+					ImGui::BulletText("GetAttackRange() => %f", (*Minion)->GetAttackRange());
+					ImGui::BulletText("GetBaseAttackDamage() => %f", (*Minion)->GetBaseAttackDamage());
+					ImGui::BulletText("GetBonusAttackDamage() => %f", (*Minion)->GetBonusAttackDamage());
+					ImGui::BulletText("GetTotalAttackDamage() => %f", (*Minion)->GetTotalAttackDamage());
+					ImGui::BulletText("GetBoundingRadius() => %f", (*Minion)->GetBoundingRadius());
+					ImGui::BulletText("GetHealth() => %f", (*Minion)->GetHealth());
+					ImGui::BulletText("GetMaxHealth() => %f", (*Minion)->GetMaxHealth());
+
+					ImGui::Text("int");
+					ImGui::BulletText("GetLevel() => %hu", (*Minion)->GetLevel());
+					ImGui::BulletText("GetTeam() => %d", (*Minion)->GetTeam());
+
+					ImGui::Text("short");
+					ImGui::BulletText("GetIndex() => %hu", (*Minion)->GetIndex());
+					ImGui::BulletText("GetSourceIndex() => %hu", (*Minion)->GetSourceIndex());
+					ImGui::BulletText("GetTargetIndex() => %hu", (*Minion)->GetTargetIndex());
+
+					ImGui::Text("Vector");
+					ImGui::BulletText("GetPos() => (%f, %f, %f)", (*Minion)->GetPos().X, (*Minion)->GetPos().Y, (*Minion)->GetPos().Z);
+					//ImGui::Text("IsEnemyTo(ME) => %d", (*Minion)->IsEnemyTo(ME));
+
 					ImGui::TreePop();
 				}
 				i++;
