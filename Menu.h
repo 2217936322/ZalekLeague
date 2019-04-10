@@ -5,7 +5,9 @@
 #include "d3d9helper.h"
 #include "MinionManager.h"
 
+
 static bool draw_menu = true;
+static bool draw_attack_range = true;
 
 static void MenuInit(HWND Chwnd, IDirect3DDevice9* CDevice) {
 	HWND hwnd = Chwnd;
@@ -90,7 +92,24 @@ static void MenuRender() {
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 	if(draw_menu) {
-		ImGui::Begin("Zalek League", &draw_menu, ImGuiWindowFlags_AlwaysAutoResize);
+		ImGui::Begin("Zalek League", &draw_menu, ImGuiWindowFlags_AlwaysAutoResize + ImGuiWindowFlags_MenuBar);
+
+		if(ImGui::BeginMenuBar()) {
+			if(ImGui::BeginMenu("Drawing")) {
+				ImGui::Checkbox("Draw Auto Attack Range Always", &draw_attack_range);
+				ImGui::EndMenu();
+			}
+			if(ImGui::BeginMenu("Zalek's Utilities")) {
+				if(ImGui::MenuItem("Crash League"))
+					exit(0);
+				// TODO: Debug Menu checkbox.
+				//ImGui::Checkbox("Debug Menu", &draw_attack_range);
+				ImGui::EndMenu();
+			}
+			ImGui::EndMenuBar();
+		}
+
+
 
 		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
 		if(ImGui::TreeNode("Debug & Development")) {

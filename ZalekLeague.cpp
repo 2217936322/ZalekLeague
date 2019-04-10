@@ -10,6 +10,7 @@
 #include "Menu.h"
 #include "ZInputHandler.h"
 #include "WndProc.h"
+#include "RenderManager.h"
 
 bool do_init = true;
 
@@ -27,6 +28,7 @@ int main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 	PopulateMinionVectors();
 	handleInput();
 	MenuRender();
+	RenderManager();
 	return 0;
 }
 
