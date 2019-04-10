@@ -39,6 +39,7 @@ HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, C
 		}
 	}
 
+	GetLastHitMinions();
 	handleInput();
 	MenuRender();
 
