@@ -3,11 +3,11 @@
 #include <vector>
 #pragma once
 
-std::vector<GameObject*> gMinions;
-std::vector<GameObject*> gEnemyMinions;
-std::vector<GameObject*> gLastHitMinions;
+static std::vector<GameObject*> gMinions;
+static std::vector<GameObject*> gEnemyMinions;
+static std::vector<GameObject*> gLastHitMinions;
 
-std::vector<GameObject*> GetMinions() {
+static std::vector<GameObject*> GetMinions() {
 	gMinions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -25,7 +25,7 @@ std::vector<GameObject*> GetMinions() {
 	return gMinions;
 }
 
-std::vector<GameObject*> GetEnemyMinions() {
+static std::vector<GameObject*> GetEnemyMinions() {
 	gEnemyMinions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -44,7 +44,7 @@ std::vector<GameObject*> GetEnemyMinions() {
 	return gEnemyMinions;
 }
 
-std::vector<GameObject*> GetLastHitMinions() {
+static std::vector<GameObject*> GetLastHitMinions() {
 	gLastHitMinions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -67,7 +67,7 @@ std::vector<GameObject*> GetLastHitMinions() {
 	return gLastHitMinions;
 }
 
-void PopulateMinionVectors() {
+static void PopulateMinionVectors() {
 	GetMinions();
 	GetEnemyMinions();
 }

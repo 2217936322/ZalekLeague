@@ -34,6 +34,9 @@
     <Filter Include="Header Files\GUI">
       <UniqueIdentifier>{8ca04459-2bda-43b9-86b3-f98e20baacec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Managers">
+      <UniqueIdentifier>{7cc45fdb-5c81-493f-b70e-635295c29de0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ZalekLeague.cpp">
@@ -122,9 +125,6 @@
     <ClInclude Include="WndProc.h">
       <Filter>Header Files\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="ZInputHandler.h">
-      <Filter>Header Files\GUI</Filter>
-    </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">
       <Filter>Header Files\ImGui</Filter>
     </ClInclude>
@@ -135,10 +135,16 @@
       <Filter>Header Files\GameObjects</Filter>
     </ClInclude>
     <ClInclude Include="MinionManager.h">
-      <Filter>Header Files\GameObjects</Filter>
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="RenderManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ChampionManager.h">
+      <Filter>Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

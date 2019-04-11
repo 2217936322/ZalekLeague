@@ -8,15 +8,15 @@
 #pragma comment(lib, "detours.lib")
 
 #include "Menu.h"
-#include "ZInputHandler.h"
 #include "WndProc.h"
 #include "RenderManager.h"
+#include "ChampionManager.h"
+#include "InputManager.h"
 
 bool do_init = true;
 
 void init(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 	if(do_init) {
-		/*Functions.PrintChat(*(DWORD*)(baseAddr + oChatClient), "<font color='#40c1ff'>[Zalek]:</font><font color='#C1FFAF'> Initialized</font>", 1);*/
 		oWndProc = (WNDPROC) SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR) WndProc);
 		MenuInit(hwnd, Device);
 		do_init = false;
@@ -25,14 +25,13 @@ void init(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 
 int main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 	init(hwnd, Device);
+	PopulateChampionVectors();
 	PopulateMinionVectors();
 	handleInput();
 	MenuRender();
 	RenderManager();
 	return 0;
 }
-
-
 
 GameObjectManager* ObjManager;
 CConsole Console;

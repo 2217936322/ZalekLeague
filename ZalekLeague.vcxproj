@@ -111,6 +111,7 @@
     <ClCompile Include="ZalekLeague.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChampionManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="Console.h" />
@@ -134,7 +135,7 @@
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="WndProc.h" />
-    <ClInclude Include="ZInputHandler.h" />
+    <ClInclude Include="InputManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

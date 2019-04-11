@@ -3,11 +3,16 @@
 #include "ImGui/imgui_impl_dx9.h"
 #include "ImGui/imgui_impl_win32.h"
 #include "d3d9helper.h"
+#include "ChampionManager.h"
 #include "MinionManager.h"
-
 
 static bool draw_menu = true;
 static bool draw_attack_range = true;
+static float gAttackTime = 0.0f;
+static float gLastAttackTime = 0.0f;
+static float gMoveTime = 0.0f;
+static float gLastMoveTime = 0.0f;
+
 
 static void MenuInit(HWND Chwnd, IDirect3DDevice9* CDevice) {
 	HWND hwnd = Chwnd;
@@ -82,7 +87,7 @@ void DrawObjectVectorText(std::vector<GameObject*> obj_vector) {
 
 void DrawObjectVectorTree(char* label, std::vector<GameObject*> obj_vector) {
 	if(ImGui::TreeNode(label)) {
-		DrawObjectVectorText(gMinions);
+		DrawObjectVectorText(obj_vector);
 		ImGui::TreePop();
 	}
 }
@@ -99,11 +104,10 @@ static void MenuRender() {
 				ImGui::Checkbox("Draw Auto Attack Range Always", &draw_attack_range);
 				ImGui::EndMenu();
 			}
+
 			if(ImGui::BeginMenu("Zalek's Utilities")) {
 				if(ImGui::MenuItem("Crash League"))
 					exit(0);
-				// TODO: Debug Menu checkbox.
-				//ImGui::Checkbox("Debug Menu", &draw_attack_range);
 				ImGui::EndMenu();
 			}
 			ImGui::EndMenuBar();
@@ -114,6 +118,14 @@ static void MenuRender() {
 		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
 		if(ImGui::TreeNode("Debug & Development")) {
 			ImGui::Text("ZalekLeague Compiled at %s %s\n", __DATE__, __TIME__);
+			ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+			if(ImGui::TreeNode("Globals")) {
+				ImGui::Text("gAttackTime => %f", gAttackTime);
+				ImGui::Text("gLastAttackTime => %f", gLastAttackTime);
+				ImGui::Text("gMoveTime => %f", gMoveTime);
+				ImGui::Text("gLastMoveToTime => %f", gLastMoveTime);
+				ImGui::TreePop();
+			}
 
 			if(ImGui::Button("Crash League"))
 				exit(0);
@@ -125,118 +137,13 @@ static void MenuRender() {
 				ImGui::TreePop();
 			}
 
-			if(ImGui::TreeNode("Minion Manager")) {
-
-				DrawObjectVectorTree("All Minions", gMinions);
-
-				//if(ImGui::TreeNode("Enemy Minions")) {
-				//	std::vector<GameObject*> EnemyMinions = GetEnemyMinions();
-				//	int i = 0;
-				//	for(std::vector<GameObject*>::iterator Minion = EnemyMinions.begin(); Minion != EnemyMinions.end(); Minion++) {
-				//		if(ImGui::TreeNode((void*) (intptr_t) i, "%s : %d", (*Minion)->GetChampionName(), i)) {
-				//			ImGui::Text("bool");
-				//			ImGui::BulletText("IsAlive() => %d", (*Minion)->IsAlive());
-				//			ImGui::BulletText("IsEnemy() => %d", (*Minion)->IsEnemy());
-				//			ImGui::BulletText("IsTargetable() => %d", (*Minion)->IsTargetable());
-				//			//TODO: Implement Minion Type in GameObject.cpp and h
-				//			ImGui::BulletText("IsCannon() => %d", endsWith((std::string)(*Minion)->GetChampionName(), "Siege"));
-				//			ImGui::BulletText("IsMelee() => %d", endsWith((std::string)(*Minion)->GetChampionName(), "Melee"));
-				//			ImGui::BulletText("IsRanged() => %d", endsWith((std::string)(*Minion)->GetChampionName(), "Ranged"));
-
-				//			ImGui::Text("char*");
-				//			ImGui::BulletText("GetChampionName() => %s", (*Minion)->GetChampionName());
-				//			ImGui::BulletText("GetName() => %s", (*Minion)->GetName());
-
-				//			ImGui::Text("DWORD");
-				//			ImGui::BulletText("GetNetworkID() => %lu", (*Minion)->GetNetworkID());
-
-				//			ImGui::Text("float");
-				//			ImGui::BulletText("DistTo() => %f", (*Minion)->GetPos().DistTo(ME->GetPos()));
-				//			ImGui::BulletText("GetArmor() => %f", (*Minion)->GetArmor());
-				//			ImGui::BulletText("GetAttackRange() => %f", (*Minion)->GetAttackRange());
-				//			ImGui::BulletText("GetBaseAttackDamage() => %f", (*Minion)->GetBaseAttackDamage());
-				//			ImGui::BulletText("GetBonusAttackDamage() => %f", (*Minion)->GetBonusAttackDamage());
-				//			ImGui::BulletText("GetTotalAttackDamage() => %f", (*Minion)->GetTotalAttackDamage());
-				//			ImGui::BulletText("GetBoundingRadius() => %f", (*Minion)->GetBoundingRadius());
-				//			ImGui::BulletText("GetHealth() => %f", (*Minion)->GetHealth());
-				//			ImGui::BulletText("GetMaxHealth() => %f", (*Minion)->GetMaxHealth());
-
-				//			ImGui::Text("int");
-				//			ImGui::BulletText("GetLevel() => %hu", (*Minion)->GetLevel());
-				//			ImGui::BulletText("GetTeam() => %d", (*Minion)->GetTeam());
-
-				//			ImGui::Text("short");
-				//			ImGui::BulletText("GetIndex() => %hu", (*Minion)->GetIndex());
-				//			ImGui::BulletText("GetSourceIndex() => %hu", (*Minion)->GetSourceIndex());
-				//			ImGui::BulletText("GetTargetIndex() => %hu", (*Minion)->GetTargetIndex());
-
-				//			ImGui::Text("Vector");
-				//			ImGui::BulletText("GetPos() => (%f, %f, %f)", (*Minion)->GetPos().X, (*Minion)->GetPos().Y, (*Minion)->GetPos().Z);
-				//			//ImGui::Text("IsEnemyTo(ME) => %d", (*Minion)->IsEnemyTo(ME));
-
-				//			ImGui::TreePop();
-				//		}
-				//		i++;
-				//	}
-
-				//	ImGui::TreePop();
-				//}
-
-				//if(ImGui::TreeNode("Last Hit Minions")) {
-				//	std::vector<GameObject*> EnemyMinions = GetLastHitMinions();
-				//	int i = 0;
-				//	for(std::vector<GameObject*>::iterator Minion = EnemyMinions.begin(); Minion != EnemyMinions.end(); Minion++) {
-				//		if(ImGui::TreeNode((void*) (intptr_t) i, "%s : %d", (*Minion)->GetChampionName(), i)) {
-				//			ImGui::Text("bool");
-				//			ImGui::BulletText("IsAlive() => %d", (*Minion)->IsAlive());
-				//			ImGui::BulletText("IsEnemy() => %d", (*Minion)->IsEnemy());
-				//			ImGui::BulletText("IsTargetable() => %d", (*Minion)->IsTargetable());
-				//			//TODO: Implement Minion Type in GameObject.cpp and h
-				//			ImGui::BulletText("IsCannon() => %d", endsWith((std::string)(*Minion)->GetChampionName(), "Siege"));
-				//			ImGui::BulletText("IsMelee() => %d", endsWith((std::string)(*Minion)->GetChampionName(), "Melee"));
-				//			ImGui::BulletText("IsRanged() => %d", endsWith((std::string)(*Minion)->GetChampionName(), "Ranged"));
-
-				//			ImGui::Text("char*");
-				//			ImGui::BulletText("GetChampionName() => %s", (*Minion)->GetChampionName());
-				//			ImGui::BulletText("GetName() => %s", (*Minion)->GetName());
-
-				//			ImGui::Text("DWORD");
-				//			ImGui::BulletText("GetNetworkID() => %lu", (*Minion)->GetNetworkID());
-
-				//			ImGui::Text("float");
-				//			ImGui::BulletText("DistTo() => %f", (*Minion)->GetPos().DistTo(ME->GetPos()));
-				//			ImGui::BulletText("GetArmor() => %f", (*Minion)->GetArmor());
-				//			ImGui::BulletText("GetAttackRange() => %f", (*Minion)->GetAttackRange());
-				//			ImGui::BulletText("GetBaseAttackDamage() => %f", (*Minion)->GetBaseAttackDamage());
-				//			ImGui::BulletText("GetBonusAttackDamage() => %f", (*Minion)->GetBonusAttackDamage());
-				//			ImGui::BulletText("GetTotalAttackDamage() => %f", (*Minion)->GetTotalAttackDamage());
-				//			ImGui::BulletText("GetBoundingRadius() => %f", (*Minion)->GetBoundingRadius());
-				//			ImGui::BulletText("GetHealth() => %f", (*Minion)->GetHealth());
-				//			ImGui::BulletText("GetMaxHealth() => %f", (*Minion)->GetMaxHealth());
-
-				//			ImGui::Text("int");
-				//			ImGui::BulletText("GetLevel() => %hu", (*Minion)->GetLevel());
-				//			ImGui::BulletText("GetTeam() => %d", (*Minion)->GetTeam());
-
-				//			ImGui::Text("short");
-				//			ImGui::BulletText("GetIndex() => %hu", (*Minion)->GetIndex());
-				//			ImGui::BulletText("GetSourceIndex() => %hu", (*Minion)->GetSourceIndex());
-				//			ImGui::BulletText("GetTargetIndex() => %hu", (*Minion)->GetTargetIndex());
-
-				//			ImGui::Text("Vector");
-				//			ImGui::BulletText("GetPos() => (%f, %f, %f)", (*Minion)->GetPos().X, (*Minion)->GetPos().Y, (*Minion)->GetPos().Z);
-				//			//ImGui::Text("IsEnemyTo(ME) => %d", (*Minion)->IsEnemyTo(ME));
-
-				//			ImGui::TreePop();
-				//		}
-				//		i++;
-				//	}
-
-				//	ImGui::TreePop();
-				//}
-
-				ImGui::TreePop();
-			}
+			DrawObjectVectorTree("All Champions", gChampions);
+			DrawObjectVectorTree("Enemy Champions", gEnemyChampions);
+			DrawObjectVectorTree("Friendly Champions", gFriendlyChampions);
+			DrawObjectVectorTree("All Minions", gMinions);
+			DrawObjectVectorTree("Enemy Minions", gEnemyMinions);
+			DrawObjectVectorTree("Enemy Minions (Last Hit)", gLastHitMinions);
+			//DrawObjectVectorTree("Friendly Minions", gMinions);
 			ImGui::TreePop();
 		}
 		ImGui::End();
