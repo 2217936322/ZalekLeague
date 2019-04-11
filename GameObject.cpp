@@ -2,7 +2,7 @@
 #include "Hooks.h"
 #include "Engine.h"
 
-bool GameObject::IsAttackable() { return this->GetDistToMe() <= ME->GetAttackRange() && this->IsTargetable(); }
+bool GameObject::IsAttackable() { return this->GetDistToMe() <= ME->GetAttackRange() + (this->GetBoundingRadius() * 2.0f) && this->IsTargetable(); }
 bool GameObject::IsAlive() { return Functions.IsAlive(this) && this->GetHealth() > 0.0f; }
 bool GameObject::IsEnemy() { return (ME->GetTeam() == 100 && this->GetTeam() == 200 || ME->GetTeam() == 200 && this->GetTeam() == 100); }
 bool GameObject::IsHero() { return Functions.IsHero(this); }

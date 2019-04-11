@@ -60,7 +60,7 @@ public:
 	}
 
 	static void MoveTo(Vector * pos) {
-		Functions.IssueOrder(GetLocalObject(), 2, pos, NULL, false, false, false);
+		Functions.IssueOrder(ME, 2, pos, NULL, false, false, false);
 	}
 
 	static void LastHit(GameObject * obj) {

@@ -111,6 +111,7 @@
     <ClCompile Include="ZalekLeague.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BehaviorManager.h" />
     <ClInclude Include="ChampionManager.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameObjectManager.h" />

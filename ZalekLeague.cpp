@@ -26,8 +26,10 @@ void init(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 int main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 	init(hwnd, Device);
 	PopulateChampionVectors();
-	PopulateMinionVectors();
+	SetMinionData();
 	handleInput();
+	LastHitManager();
+	//MovementManager();
 	MenuRender();
 	RenderManager();
 	return 0;

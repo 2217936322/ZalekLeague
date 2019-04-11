@@ -1,16 +1,21 @@
 #include "GameObject.h"
 #include "Engine.h"
 #include <vector>
+#include "RenderManager.h"
 #pragma once
 
+// Vectors for Minion Data
 static std::vector<GameObject*> gMinions;
 static std::vector<GameObject*> gEnemyMinions;
 static std::vector<GameObject*> gLastHitMinions;
+
+// Getters for Minion Data
 static std::vector<GameObject*> GetMinions() { return gMinions; }
 static std::vector<GameObject*> GetEnemyMinions() { return gEnemyMinions; }
 static std::vector<GameObject*> GetLastHitMinions() { return gLastHitMinions; }
 
-static std::vector<GameObject*> SetMinions() {
+// Setter for static std::vector<GameObject*> gMinions;
+void SetMinions() {
 	gMinions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -25,9 +30,11 @@ static std::vector<GameObject*> SetMinions() {
 		}
 	}
 	gMinions.shrink_to_fit();
+	return;
 }
 
-static std::vector<GameObject*> SetEnemyMinions() {
+// Setter for static std::vector<GameObject*> gEnemyMinions;
+void SetEnemyMinions() {
 	gEnemyMinions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -43,33 +50,39 @@ static std::vector<GameObject*> SetEnemyMinions() {
 		}
 	}
 	gEnemyMinions.shrink_to_fit();
-	return gEnemyMinions;
+	return;
 }
 
-static std::vector<GameObject*> SetLastHitMinions() {
+// Setter for static std::vector<GameObject*> gLastHitMinions;
+void SetLastHitMinions() {
 	gLastHitMinions.clear();
 	if(ObjManager) {
+		//FIXME: Push cannons>melee>ranged to end and change last hit logic to last hit last vector element.
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj
 				&& obj->IsMinion()
 				&& obj->IsAlive()
+				&& obj->IsAttackable()
 				&& obj->IsEnemy()
-				&& obj->IsTargetable()
 				&& obj->IsVisible()
 				&& obj->GetHealth() <= ME->GetTotalAttackDamage()) {
-				auto color = createRGB(255, 255, 255);
-				Functions.DrawCircle(&obj->GetPos(), obj->GetBoundingRadius(), &color, 0, 0.0f, 0, 1.0f);
-				gEnemyMinions.push_back(obj);
+				if(gRenderLastHit) {
+					auto color = createRGB(255, 255, 255);
+					Functions.DrawCircle(&obj->GetPos(), obj->GetBoundingRadius(), &color, 0, 0.0f, 0, 1.0f);
+				}
+				gLastHitMinions.push_back(obj);
 			}
 		}
 	}
 	gLastHitMinions.shrink_to_fit();
+	return;
 }
 
-
-static void PopulateMinionVectors() {
+// Call all minion setters.
+void SetMinionData() {
 	SetMinions();
 	SetEnemyMinions();
 	SetLastHitMinions();
+	return;
 }

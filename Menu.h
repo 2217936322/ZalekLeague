@@ -1,18 +1,13 @@
-#pragma once
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_dx9.h"
 #include "ImGui/imgui_impl_win32.h"
 #include "d3d9helper.h"
+#include "BehaviorManager.h"
 #include "ChampionManager.h"
 #include "MinionManager.h"
-
+#include "RenderManager.h"
+#pragma once
 static bool draw_menu = true;
-static bool draw_attack_range = true;
-static float gAttackTime = 0.0f;
-static float gLastAttackTime = 0.0f;
-static float gMoveTime = 0.0f;
-static float gLastMoveTime = 0.0f;
-
 
 static void MenuInit(HWND Chwnd, IDirect3DDevice9* CDevice) {
 	HWND hwnd = Chwnd;
@@ -35,10 +30,10 @@ bool endsWith(const std::string& mainStr, const std::string& toMatch) {
 		return false;
 }
 
-void DrawObjectVectorText(std::vector<GameObject*> obj_vector) {
+void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 	int i = 0;
 	for(std::vector<GameObject*>::iterator obj = obj_vector.begin(); obj != obj_vector.end(); obj++) {
-		if(ImGui::TreeNode((void*) (intptr_t) i, "%s : %d", (*obj)->GetChampionName(), i)) {
+		if(ImGui::TreeNode((void*) (intptr_t) i, "%s : %d | Dist = %f", (*obj)->GetChampionName(), i, (*obj)->GetDistToMe())) {
 			ImGui::Text("bool");
 			ImGui::BulletText("IsAttackable() => %d", (*obj)->IsAttackable());
 			ImGui::BulletText("IsAlive() => %d", (*obj)->IsAlive());
@@ -85,9 +80,9 @@ void DrawObjectVectorText(std::vector<GameObject*> obj_vector) {
 	}
 }
 
-void DrawObjectVectorTree(char* label, std::vector<GameObject*> obj_vector) {
+void DrawGameObjectTree(char* label, std::vector<GameObject*> obj_vector) {
 	if(ImGui::TreeNode(label)) {
-		DrawObjectVectorText(obj_vector);
+		DrawGameObjectText(obj_vector);
 		ImGui::TreePop();
 	}
 }
@@ -101,7 +96,8 @@ static void MenuRender() {
 
 		if(ImGui::BeginMenuBar()) {
 			if(ImGui::BeginMenu("Drawing")) {
-				ImGui::Checkbox("Draw Auto Attack Range Always", &draw_attack_range);
+				ImGui::Checkbox("Draw Auto Attack Range Always", &gRenderAttackRange);
+				ImGui::Checkbox("Draw Last Hittable Minions In Attack Range", &gRenderLastHit);
 				ImGui::EndMenu();
 			}
 
@@ -119,16 +115,19 @@ static void MenuRender() {
 		if(ImGui::TreeNode("Debug & Development")) {
 			ImGui::Text("ZalekLeague Compiled at %s %s\n", __DATE__, __TIME__);
 			ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+
 			if(ImGui::TreeNode("Globals")) {
 				ImGui::Text("gAttackTime => %f", gAttackTime);
 				ImGui::Text("gLastAttackTime => %f", gLastAttackTime);
 				ImGui::Text("gMoveTime => %f", gMoveTime);
+				ImGui::Text("gMoveThreshold => %f", gMoveThreshold);
 				ImGui::Text("gLastMoveToTime => %f", gLastMoveTime);
 				ImGui::TreePop();
 			}
 
 			if(ImGui::Button("Crash League"))
 				exit(0);
+
 			ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
 			if(ImGui::TreeNode("Engine")) {
 				ImGui::Text("Engine::GetMouseWorldPosition() => { x = %f, y = %f, z = %f }", Engine::GetMouseWorldPosition().X, Engine::GetMouseWorldPosition().Y, Engine::GetMouseWorldPosition().Z);
@@ -137,13 +136,19 @@ static void MenuRender() {
 				ImGui::TreePop();
 			}
 
-			DrawObjectVectorTree("All Champions", gChampions);
-			DrawObjectVectorTree("Attackable Champions", gAttackableChampions);
-			DrawObjectVectorTree("Enemy Champions", gEnemyChampions);
-			DrawObjectVectorTree("Friendly Champions", gFriendlyChampions);
-			DrawObjectVectorTree("All Minions", gMinions);
-			DrawObjectVectorTree("Enemy Minions", gEnemyMinions);
-			DrawObjectVectorTree("Enemy Minions (Last Hit)", gLastHitMinions);
+			ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+			if(ImGui::TreeNode("Functions")) {
+				ImGui::Text("Functions.GetAttackCastDelay(ME) => %f", Functions.GetAttackCastDelay(ME));
+				ImGui::Text("Functions.GetAttackDelay(ME) => %f", Functions.GetAttackDelay(ME));
+			}
+
+			DrawGameObjectTree("All Champions", GetChampions());
+			DrawGameObjectTree("Attackable Champions", GetAttackableChampions());
+			DrawGameObjectTree("Enemy Champions", GetEnemyChampions());
+			DrawGameObjectTree("Friendly Champions", GetFriendlyChampions());
+			DrawGameObjectTree("All Minions", GetMinions());
+			DrawGameObjectTree("Enemy Minions", GetEnemyMinions());
+			DrawGameObjectTree("Enemy Minions (Last Hit)", GetLastHitMinions());
 			//DrawObjectVectorTree("Friendly Minions", gMinions);
 			ImGui::TreePop();
 		}
