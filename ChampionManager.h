@@ -5,10 +5,16 @@
 #pragma once
 
 static std::vector<GameObject*> gChampions;
+static std::vector<GameObject*> gAttackableChampions;
 static std::vector<GameObject*> gEnemyChampions;
 static std::vector<GameObject*> gFriendlyChampions;
 
-static std::vector<GameObject*> GetChampions() {
+static std::vector<GameObject*> GetChampions() { return gChampions; }
+static std::vector<GameObject*> GetAttackableChampions() { return gAttackableChampions; }
+static std::vector<GameObject*> GetEnemyChampions() { return gEnemyChampions; }
+static std::vector<GameObject*> GetFriendlyChampions() { return gFriendlyChampions; }
+
+static std::vector<GameObject*> SetChampions() {
 	gChampions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -19,10 +25,9 @@ static std::vector<GameObject*> GetChampions() {
 		}
 	}
 	gChampions.shrink_to_fit();
-	return gChampions;
 }
 
-static std::vector<GameObject*> GetEnemyChampions() {
+static std::vector<GameObject*> SetEnemyChampions() {
 	gEnemyChampions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -33,25 +38,37 @@ static std::vector<GameObject*> GetEnemyChampions() {
 		}
 	}
 	gEnemyChampions.shrink_to_fit();
-	return gEnemyChampions;
 }
 
-static std::vector<GameObject*> GetFriendlyChampions() {
+static std::vector<GameObject*> SetAttackableChampions() {
+	gEnemyChampions.clear();
+	if(ObjManager) {
+		for(int i = 0; i < TRYFOROBJMAX; i++) {
+			GameObject* obj = Engine::GetObjectByID(i);
+			if(obj && obj->IsHero() && obj->IsAttackable()) {
+				gEnemyChampions.push_back(obj);
+			}
+		}
+	}
+	gEnemyChampions.shrink_to_fit();
+}
+
+static std::vector<GameObject*> SetFriendlyChampions() {
 	gFriendlyChampions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
-			if(obj && obj->IsHero() && obj->IsEnemy()) {
+			if(obj && obj->IsHero() && !obj->IsEnemy()) {
 				gFriendlyChampions.push_back(obj);
 			}
 		}
 	}
 	gFriendlyChampions.shrink_to_fit();
-	return gFriendlyChampions;
 }
 
 static void PopulateChampionVectors() {
-	GetChampions();
-	GetEnemyChampions();
-	GetFriendlyChampions();
+	SetChampions();
+	SetAttackableChampions();
+	SetEnemyChampions();
+	SetFriendlyChampions();
 }

@@ -6,8 +6,11 @@
 static std::vector<GameObject*> gMinions;
 static std::vector<GameObject*> gEnemyMinions;
 static std::vector<GameObject*> gLastHitMinions;
+static std::vector<GameObject*> GetMinions() { return gMinions; }
+static std::vector<GameObject*> GetEnemyMinions() { return gEnemyMinions; }
+static std::vector<GameObject*> GetLastHitMinions() { return gLastHitMinions; }
 
-static std::vector<GameObject*> GetMinions() {
+static std::vector<GameObject*> SetMinions() {
 	gMinions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -22,10 +25,9 @@ static std::vector<GameObject*> GetMinions() {
 		}
 	}
 	gMinions.shrink_to_fit();
-	return gMinions;
 }
 
-static std::vector<GameObject*> GetEnemyMinions() {
+static std::vector<GameObject*> SetEnemyMinions() {
 	gEnemyMinions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -44,7 +46,7 @@ static std::vector<GameObject*> GetEnemyMinions() {
 	return gEnemyMinions;
 }
 
-static std::vector<GameObject*> GetLastHitMinions() {
+static std::vector<GameObject*> SetLastHitMinions() {
 	gLastHitMinions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -55,7 +57,6 @@ static std::vector<GameObject*> GetLastHitMinions() {
 				&& obj->IsEnemy()
 				&& obj->IsTargetable()
 				&& obj->IsVisible()
-				&& obj->GetPos().DistTo(ME->GetPos()) <= ME->GetAttackRange()
 				&& obj->GetHealth() <= ME->GetTotalAttackDamage()) {
 				auto color = createRGB(255, 255, 255);
 				Functions.DrawCircle(&obj->GetPos(), obj->GetBoundingRadius(), &color, 0, 0.0f, 0, 1.0f);
@@ -64,10 +65,11 @@ static std::vector<GameObject*> GetLastHitMinions() {
 		}
 	}
 	gLastHitMinions.shrink_to_fit();
-	return gLastHitMinions;
 }
 
+
 static void PopulateMinionVectors() {
-	GetMinions();
-	GetEnemyMinions();
+	SetMinions();
+	SetEnemyMinions();
+	SetLastHitMinions();
 }

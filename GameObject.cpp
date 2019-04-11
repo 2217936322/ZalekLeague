@@ -2,6 +2,7 @@
 #include "Hooks.h"
 #include "Engine.h"
 
+bool GameObject::IsAttackable() { return this->GetDistToMe() <= ME->GetAttackRange() && this->IsTargetable(); }
 bool GameObject::IsAlive() { return Functions.IsAlive(this) && this->GetHealth() > 0.0f; }
 bool GameObject::IsEnemy() { return (ME->GetTeam() == 100 && this->GetTeam() == 200 || ME->GetTeam() == 200 && this->GetTeam() == 100); }
 bool GameObject::IsHero() { return Functions.IsHero(this); }
@@ -24,6 +25,7 @@ float GameObject::GetAttackRange() { return *(float*) ((DWORD) this + oObjAtkRan
 float GameObject::GetBaseAttackDamage() { return *(float*) ((DWORD) this + oObjBaseAtk); }
 float GameObject::GetBonusAttackDamage() { return *(float*) ((DWORD) this + oObjBonusAtk); }
 float GameObject::GetBoundingRadius() { typedef float(__thiscall * OriginalFn)(PVOID); return CallVirtual<OriginalFn>(this, 36)(this); }
+float GameObject::GetDistToMe() { return this->GetPos().DistTo(ME->GetPos()); }
 float GameObject::GetHealth() { return *(float*) ((DWORD) this + oObjHealth); }
 float GameObject::GetMaxHealth() { return *(float*) ((DWORD) this + oObjHealth + 0x10); }
 float GameObject::GetTotalAttackDamage() { return this->GetBonusAttackDamage() + this->GetBaseAttackDamage(); }

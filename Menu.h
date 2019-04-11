@@ -40,6 +40,7 @@ void DrawObjectVectorText(std::vector<GameObject*> obj_vector) {
 	for(std::vector<GameObject*>::iterator obj = obj_vector.begin(); obj != obj_vector.end(); obj++) {
 		if(ImGui::TreeNode((void*) (intptr_t) i, "%s : %d", (*obj)->GetChampionName(), i)) {
 			ImGui::Text("bool");
+			ImGui::BulletText("IsAttackable() => %d", (*obj)->IsAttackable());
 			ImGui::BulletText("IsAlive() => %d", (*obj)->IsAlive());
 			ImGui::BulletText("IsEnemy() => %d", (*obj)->IsEnemy());
 			ImGui::BulletText("IsTargetable() => %d", (*obj)->IsTargetable());
@@ -56,11 +57,11 @@ void DrawObjectVectorText(std::vector<GameObject*> obj_vector) {
 			ImGui::BulletText("GetNetworkID() => %lu", (*obj)->GetNetworkID());
 
 			ImGui::Text("float");
-			ImGui::BulletText("DistTo() => %f", (*obj)->GetPos().DistTo(ME->GetPos()));
 			ImGui::BulletText("GetArmor() => %f", (*obj)->GetArmor());
 			ImGui::BulletText("GetAttackRange() => %f", (*obj)->GetAttackRange());
 			ImGui::BulletText("GetBaseAttackDamage() => %f", (*obj)->GetBaseAttackDamage());
 			ImGui::BulletText("GetBonusAttackDamage() => %f", (*obj)->GetBonusAttackDamage());
+			ImGui::BulletText("GetDistToMe() => %f", (*obj)->GetDistToMe());
 			ImGui::BulletText("GetTotalAttackDamage() => %f", (*obj)->GetTotalAttackDamage());
 			ImGui::BulletText("GetBoundingRadius() => %f", (*obj)->GetBoundingRadius());
 			ImGui::BulletText("GetHealth() => %f", (*obj)->GetHealth());
@@ -77,8 +78,7 @@ void DrawObjectVectorText(std::vector<GameObject*> obj_vector) {
 
 			ImGui::Text("Vector");
 			ImGui::BulletText("GetPos() => (%f, %f, %f)", (*obj)->GetPos().X, (*obj)->GetPos().Y, (*obj)->GetPos().Z);
-			//ImGui::Text("IsEnemyTo(ME) => %d", (*Minion)->IsEnemyTo(ME));
-
+			// TODO: Prediction position.
 			ImGui::TreePop();
 		}
 		i++;
@@ -138,6 +138,7 @@ static void MenuRender() {
 			}
 
 			DrawObjectVectorTree("All Champions", gChampions);
+			DrawObjectVectorTree("Attackable Champions", gAttackableChampions);
 			DrawObjectVectorTree("Enemy Champions", gEnemyChampions);
 			DrawObjectVectorTree("Friendly Champions", gFriendlyChampions);
 			DrawObjectVectorTree("All Minions", gMinions);

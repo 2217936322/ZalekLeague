@@ -7,6 +7,7 @@
 class GameObject
 {
 public:
+	bool IsAttackable();
 	bool IsAlive();
 	bool IsEnemy();
 	bool IsHero();
@@ -29,6 +30,7 @@ public:
 	float GetBaseAttackDamage();
 	float GetBonusAttackDamage();
 	float GetBoundingRadius();
+	float GetDistToMe();
 	float GetHealth();
 	float GetMaxHealth();
 	float GetTotalAttackDamage();
