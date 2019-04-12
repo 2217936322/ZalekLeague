@@ -4,71 +4,54 @@
 #include <vector>
 #pragma once
 
-static std::vector<GameObject*> gChampions;
-static std::vector<GameObject*> gAttackableChampions;
-static std::vector<GameObject*> gEnemyChampions;
-static std::vector<GameObject*> gFriendlyChampions;
-
-static std::vector<GameObject*> GetChampions() { return gChampions; }
-static std::vector<GameObject*> GetAttackableChampions() { return gAttackableChampions; }
-static std::vector<GameObject*> GetEnemyChampions() { return gEnemyChampions; }
-static std::vector<GameObject*> GetFriendlyChampions() { return gFriendlyChampions; }
-
-void SetChampions() {
-	gChampions.clear();
+std::vector<GameObject*> GetChampions() {
+	std::vector<GameObject*> Champions;
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj && obj->IsHero()) {
-				gChampions.push_back(obj);
+				Champions.push_back(obj);
 			}
 		}
 	}
-	gChampions.shrink_to_fit();
+	return Champions;
 }
 
-void SetEnemyChampions() {
-	gEnemyChampions.clear();
+std::vector<GameObject*> GetEnemyChampions() {
+	std::vector<GameObject*> EChampions;
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj && obj->IsHero() && obj->IsEnemy()) {
-				gEnemyChampions.push_back(obj);
+				EChampions.push_back(obj);
 			}
 		}
 	}
-	gEnemyChampions.shrink_to_fit();
+	return EChampions;
 }
 
-void SetAttackableChampions() {
-	gEnemyChampions.clear();
+std::vector<GameObject*> GetAttackableChampions() {
+	std::vector<GameObject*> AChampions;
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj && obj->IsHero() && obj->IsAttackable()) {
-				gEnemyChampions.push_back(obj);
+				AChampions.push_back(obj);
 			}
 		}
 	}
-	gEnemyChampions.shrink_to_fit();
+	return AChampions;
 }
 
-void SetFriendlyChampions() {
-	gFriendlyChampions.clear();
+std::vector<GameObject*> GetFriendlyChampions() {
+	std::vector<GameObject*> FChampions;
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj && obj->IsHero() && !obj->IsEnemy()) {
-				gFriendlyChampions.push_back(obj);
+				FChampions.push_back(obj);
 			}
 		}
 	}
-	gFriendlyChampions.shrink_to_fit();
-}
-
-static void PopulateChampionVectors() {
-	SetChampions();
-	SetAttackableChampions();
-	SetEnemyChampions();
-	SetFriendlyChampions();
+	return FChampions;
 }

@@ -17,7 +17,7 @@ bool MovementManager() {
 		Functions.DrawCircle(&ME->GetPos(), ME->GetAttackRange() + ME->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
 	}
 	gLastMoveTime = Engine::GetGameTime() - gMoveTime;
-	srand(time(NULL) * (rand() * 29) / (rand() * 7)); //? Crash source?
+	srand(rand() * (rand() * 11)); // 5th prime
 	float random = ((float) rand()) / (float) RAND_MAX;
 	float min = 0.15f;
 	float max = 0.30f;
@@ -33,11 +33,11 @@ bool MovementManager() {
 }
 
 void LastHitManager() {
-	// FIXME: Figure out how to get rid of the crash from holding x for too long. Probably need to rework the globals / static funcs.
+	// TODO: Last hit with spells.
 	gLastAttackTime = Engine::GetGameTime() - gAttackTime;
 	if(GetKeyState(0x58) & 0x8000) { // x key
 		gLastAttackTime = Engine::GetGameTime() - gAttackTime;
-		srand(time(NULL) * (rand() * 29) / (rand() * 7)); //? Crash source?
+		srand(rand() * (rand() * 23)); // 4th prime from 5th prime (9th prime)
 		float random = ((float) rand()) / (float) RAND_MAX;
 		float min = 0.05f;
 		float max = 0.1f;
@@ -50,7 +50,7 @@ void LastHitManager() {
 			return;
 		}
 
-		srand(time(NULL) * (rand() * 29) / (rand() * 7)); //? Crash source?
+		srand(rand() * (rand() * 37)); // 3rd prime from 4th prime from 5th prime (12th prime)
 		random = ((float) rand()) / (float) RAND_MAX;
 		min = 1.25f;
 		max = 1.5f;

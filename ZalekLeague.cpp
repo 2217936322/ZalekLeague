@@ -1,6 +1,6 @@
 #include <time.h>
 #include "stdafx.h"
-#include "Console.h"
+//#include "Console.h"
 #include "Engine.h"
 #include "Hooks.h"
 #include "detours.h"
@@ -25,18 +25,15 @@ void init(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 
 int main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 	init(hwnd, Device);
-	PopulateChampionVectors();
-	SetMinionData();
 	handleInput();
 	LastHitManager();
-	//MovementManager();
 	MenuRender();
 	RenderManager();
 	return 0;
 }
 
 GameObjectManager* ObjManager;
-CConsole Console;
+//CConsole Console;
 CFunctions Functions;
 
 typedef HRESULT(WINAPI* Prototype_Present)(LPDIRECT3DDEVICE9, CONST RECT*, CONST RECT*, HWND, CONST RGNDATA*);

@@ -4,19 +4,8 @@
 #include "RenderManager.h"
 #pragma once
 
-// Vectors for Minion Data
-static std::vector<GameObject*> gMinions;
-static std::vector<GameObject*> gEnemyMinions;
-static std::vector<GameObject*> gLastHitMinions;
-
-// Getters for Minion Data
-static std::vector<GameObject*> GetMinions() { return gMinions; }
-static std::vector<GameObject*> GetEnemyMinions() { return gEnemyMinions; }
-static std::vector<GameObject*> GetLastHitMinions() { return gLastHitMinions; }
-
-// Setter for static std::vector<GameObject*> gMinions;
-void SetMinions() {
-	gMinions.clear();
+std::vector<GameObject*> GetMinions() {
+	std::vector<GameObject*> Minions;
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
@@ -25,17 +14,15 @@ void SetMinions() {
 				&& obj->IsAlive()
 				&& obj->IsTargetable()
 				&& obj->IsVisible()) {
-				gMinions.push_back(obj);
+				Minions.push_back(obj);
 			}
 		}
 	}
-	gMinions.shrink_to_fit();
-	return;
+	return Minions;
 }
 
-// Setter for static std::vector<GameObject*> gEnemyMinions;
-void SetEnemyMinions() {
-	gEnemyMinions.clear();
+std::vector<GameObject*> GetEnemyMinions() {
+	std::vector<GameObject*> EMinions;
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
@@ -45,19 +32,18 @@ void SetEnemyMinions() {
 				&& obj->IsEnemy()
 				&& obj->IsTargetable()
 				&& obj->IsVisible()) {
-				gEnemyMinions.push_back(obj);
+				EMinions.push_back(obj);
 			}
 		}
 	}
-	gEnemyMinions.shrink_to_fit();
-	return;
+	return EMinions;
 }
 
-// Setter for static std::vector<GameObject*> gLastHitMinions;
-void SetLastHitMinions() {
-	gLastHitMinions.clear();
+std::vector<GameObject*> GetLastHitMinions() {
+	// TODO: Calculate Incoming Minion Damage
+	// TODO: Order Minions by Gold earned. (Cannon > Melee > Ranged);
+	std::vector<GameObject*> LHMinions;
 	if(ObjManager) {
-		//FIXME: Push cannons>melee>ranged to end and change last hit logic to last hit last vector element.
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj
@@ -71,18 +57,9 @@ void SetLastHitMinions() {
 					auto color = createRGB(255, 255, 255);
 					Functions.DrawCircle(&obj->GetPos(), obj->GetBoundingRadius(), &color, 0, 0.0f, 0, 1.0f);
 				}
-				gLastHitMinions.push_back(obj);
+				LHMinions.push_back(obj);
 			}
 		}
 	}
-	gLastHitMinions.shrink_to_fit();
-	return;
-}
-
-// Call all minion setters.
-void SetMinionData() {
-	SetMinions();
-	SetEnemyMinions();
-	SetLastHitMinions();
-	return;
+	return LHMinions;
 }
