@@ -19,7 +19,7 @@ class Engine
 {
 public:
 	static Vector GetMouseWorldPosition() {
-		DWORD MousePtr = (DWORD) GetModuleHandle(NULL) + oHudInstance;
+		DWORD MousePtr = (DWORD) GetModuleHandle(NULL) + DWORD_HUD_INSTANCE;
 		auto aux1 = *(DWORD*) MousePtr;
 		aux1 += 0x14;
 		auto aux2 = *(DWORD*) aux1;
@@ -37,11 +37,11 @@ public:
 	//}
 
 	static float GetGameTime() {
-		return *(float*) (baseAddr + ptr_GameTime);
+		return *(float*) (baseAddr + DWORD_GAME_TIME);
 	}
 
 	static GameObject* GetLocalObject() {
-		auto retaddr = *(DWORD*) (baseAddr + oLocalPlayer);
+		auto retaddr = *(DWORD*) (baseAddr + DWORD_LOCAL_PLAYER);
 		if(retaddr == NULL)
 			return NULL;
 

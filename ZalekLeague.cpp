@@ -91,27 +91,27 @@ void __stdcall Start() {
 		Sleep(1);
 	}
 
-	ObjManager = (GameObjectManager*) (baseAddr + oObjManager);
+	ObjManager = (GameObjectManager*) (baseAddr + DWORD_OBJECT_MANAGER);
 
-	Functions.PrintChat = (Typedefs::fnPrintChat)(baseAddr + oPrintChat);
+	Functions.PrintChat = (Typedefs::fnPrintChat)(baseAddr + FN_PRINT_CHAT);
 
-	Functions.IsTargetable = (Typedefs::fnIsTargetable)(baseAddr + oIsTargetable);
-	Functions.IsAlive = (Typedefs::fnIsAlive)(baseAddr + oIsAlive);
+	Functions.IsTargetable = (Typedefs::fnIsTargetable)(baseAddr + FN_IS_TARGETABLE);
+	Functions.IsAlive = (Typedefs::fnIsAlive)(baseAddr + FN_IS_ALIVE);
 
-	Functions.IsMinion = (Typedefs::fnIsMinion)(baseAddr + oIsMinion);
-	Functions.IsTurret = (Typedefs::fnIsTurret)(baseAddr + oIsTurret);
-	Functions.IsHero = (Typedefs::fnIsHero)(baseAddr + oIsHero);
-	Functions.IsMissile = (Typedefs::fnIsMissile)(baseAddr + oIsMissile);
-	Functions.IsNexus = (Typedefs::fnIsNexus)(baseAddr + oIsNexus);
-	Functions.IsInhibitor = (Typedefs::fnIsInhibitor)(baseAddr + oIsInhib);
-	Functions.IsTroyEnt = (Typedefs::fnIsTroyEnt)(baseAddr + oIsTroy);
+	Functions.IsMinion = (Typedefs::fnIsMinion)(baseAddr + FN_IS_MINION);
+	//Functions.IsTurret = (Typedefs::fnIsTurret)(baseAddr + oIsTurret);
+	Functions.IsHero = (Typedefs::fnIsHero)(baseAddr + FN_IS_HERO);
+	Functions.IsMissile = (Typedefs::fnIsMissile)(baseAddr + FN_IS_MISSILE);
+	//Functions.IsNexus = (Typedefs::fnIsNexus)(baseAddr + oIsNexus);
+	//Functions.IsInhibitor = (Typedefs::fnIsInhibitor)(baseAddr + oIsInhib);
+	//Functions.IsTroyEnt = (Typedefs::fnIsTroyEnt)(baseAddr + oIsTroy);
 
 	//Functions.CastSpell = (Typedefs::fnCastSpell)((DWORD)GetModuleHandle(NULL) + oCastSpell);
-	Functions.IssueOrder = (Typedefs::fnIssueOrder)((DWORD) GetModuleHandle(NULL) + oIssueOrder);
-	Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD) GetModuleHandle(NULL) + fn_oDrawCircle);
+	Functions.IssueOrder = (Typedefs::fnIssueOrder)((DWORD) GetModuleHandle(NULL) + FN_ISSUE_ORDER);
+	Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD) GetModuleHandle(NULL) + FN_DRAW_CIRCLE);
 
-	Functions.GetAttackCastDelay = (Typedefs::fnGetAttackCastDelay)((DWORD) GetModuleHandle(NULL) + oGetAttackCastDelay);
-	Functions.GetAttackDelay = (Typedefs::fnGetAttackDelay)((DWORD) GetModuleHandle(NULL) + oGetAttackDelay);
+	Functions.GetAttackCastDelay = (Typedefs::fnGetAttackCastDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_CAST_DELAY);
+	Functions.GetAttackDelay = (Typedefs::fnGetAttackDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_DELAY);
 	//DetourFunction((PBYTE) dwFunc, (PBYTE) orgFunc);
 
 	Original_Present = (Prototype_Present) DetourFunction((PBYTE) GetDeviceAddress(17), (PBYTE) Hooked_Present);
