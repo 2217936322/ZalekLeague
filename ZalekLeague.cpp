@@ -50,8 +50,12 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion) {
 	if(ME) { main(FindWindow(NULL, "League of Legends (TM) Client"), Device); }
-	if(GetAsyncKeyState(VK_END) & 1)
+	if(GetAsyncKeyState(VK_END) & 1) {
+		ImGui_ImplDX9_Shutdown();
+		ImGui_ImplWin32_Shutdown();
+		ImGui::DestroyContext();
 		DetourRemove((PBYTE) Original_Present, (PBYTE) Hooked_Present);
+	}
 	return Original_Present(Device, pSrcRect, pDestRect, hDestWindow, pDirtyRegion);
 }
 
@@ -123,14 +127,6 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	}
 
 	else if(ul_reason_for_call == DLL_PROCESS_DETACH) {
-		//BOOL FreeLibrary(
-			//HMODULE hLibModule
-		//);
-		//TerminateThread()
-		//void ExitThread(
-		//	DWORD dwExitCode
-		//);
-		ImGui::DestroyContext();
 		return TRUE;
 	}
 	return FALSE;
