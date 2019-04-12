@@ -8,11 +8,10 @@
 #include "RenderManager.h"
 #pragma once
 static bool draw_menu = true;
-
 static void MenuInit(HWND Chwnd, IDirect3DDevice9* CDevice) {
 	HWND hwnd = Chwnd;
 	IDirect3DDevice9* Device = CDevice;
-	IMGUI_CHECKVERSION();
+	//IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
 	(void) io;
@@ -20,6 +19,7 @@ static void MenuInit(HWND Chwnd, IDirect3DDevice9* CDevice) {
 	ImGui::StyleColorsDark();
 	ImGui_ImplWin32_Init(hwnd);
 	ImGui_ImplDX9_Init(Device);
+
 }
 
 bool endsWith(const std::string& mainStr, const std::string& toMatch) {
@@ -87,7 +87,7 @@ void DrawGameObjectTree(char* label, std::vector<GameObject*> obj_vector) {
 	}
 }
 
-static void MenuRender() {
+void MenuRender() {
 	ImGui_ImplDX9_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
@@ -140,6 +140,7 @@ static void MenuRender() {
 			if(ImGui::TreeNode("Functions")) {
 				ImGui::Text("Functions.GetAttackCastDelay(ME) => %f", Functions.GetAttackCastDelay(ME));
 				ImGui::Text("Functions.GetAttackDelay(ME) => %f", Functions.GetAttackDelay(ME));
+				ImGui::TreePop();
 			}
 
 			DrawGameObjectTree("All Champions", GetChampions());

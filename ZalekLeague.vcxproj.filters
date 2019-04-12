@@ -150,4 +150,7 @@
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="detours.pdb" />
+  </ItemGroup>
 </Project>

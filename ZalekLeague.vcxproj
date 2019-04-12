@@ -138,6 +138,9 @@
     <ClInclude Include="WndProc.h" />
     <ClInclude Include="InputManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="detours.pdb" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

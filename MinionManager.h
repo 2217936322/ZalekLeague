@@ -66,7 +66,7 @@ void SetLastHitMinions() {
 				&& obj->IsAttackable()
 				&& obj->IsEnemy()
 				&& obj->IsVisible()
-				&& obj->GetHealth() <= ME->GetTotalAttackDamage()) {
+				&& obj->GetHealth() <= ME->GetTotalAttackDamage() + 5.0f) {
 				if(gRenderLastHit) {
 					auto color = createRGB(255, 255, 255);
 					Functions.DrawCircle(&obj->GetPos(), obj->GetBoundingRadius(), &color, 0, 0.0f, 0, 1.0f);

@@ -14,7 +14,7 @@ static std::vector<GameObject*> GetAttackableChampions() { return gAttackableCha
 static std::vector<GameObject*> GetEnemyChampions() { return gEnemyChampions; }
 static std::vector<GameObject*> GetFriendlyChampions() { return gFriendlyChampions; }
 
-static std::vector<GameObject*> SetChampions() {
+void SetChampions() {
 	gChampions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -27,7 +27,7 @@ static std::vector<GameObject*> SetChampions() {
 	gChampions.shrink_to_fit();
 }
 
-static std::vector<GameObject*> SetEnemyChampions() {
+void SetEnemyChampions() {
 	gEnemyChampions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -40,7 +40,7 @@ static std::vector<GameObject*> SetEnemyChampions() {
 	gEnemyChampions.shrink_to_fit();
 }
 
-static std::vector<GameObject*> SetAttackableChampions() {
+void SetAttackableChampions() {
 	gEnemyChampions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
@@ -53,7 +53,7 @@ static std::vector<GameObject*> SetAttackableChampions() {
 	gEnemyChampions.shrink_to_fit();
 }
 
-static std::vector<GameObject*> SetFriendlyChampions() {
+void SetFriendlyChampions() {
 	gFriendlyChampions.clear();
 	if(ObjManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
