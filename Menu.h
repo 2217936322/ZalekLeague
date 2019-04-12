@@ -131,7 +131,7 @@ void MenuRender() {
 			ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
 			if(ImGui::TreeNode("Engine")) {
 				ImGui::Text("Engine::GetMouseWorldPosition() => { x = %f, y = %f, z = %f }", Engine::GetMouseWorldPosition().X, Engine::GetMouseWorldPosition().Y, Engine::GetMouseWorldPosition().Z);
-				ImGui::Text("Engine::GetGameVersion() => %s", Engine::GetGameVersion());
+				//ImGui::Text("Engine::GetGameVersion() => %s", Engine::GetGameVersion());
 				ImGui::Text("Engine::GetGameTime() => %f", Engine::GetGameTime());
 				ImGui::TreePop();
 			}

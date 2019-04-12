@@ -1,23 +1,11 @@
 ﻿#pragma once
+
 #define TARGET_GAMEVERSION "Version 9.7.269.6900 [PUBLIC]"
+#define fn_oDrawCircle 0x596D40			// 9.7 || E8 ? ? ? ? 83 C4 1C 8B 44 24 18 
 
-#define oCastSpell 0x59F3B0             // 9.7 Unconfirmed
-
-/*
-	Search for string "DisplayChatMessage"
-	goto DATA XREF: .data:off_213F308↓o under aDisplaychatmes db 'DisplayChatMessage',0
-	goto DATA XREF: sub_F541C0↑r under dd offset aDisplaychatmes
-	subroutine under your current 4 instruction sub it should be fairly long.
-	loc at the bottom first mov dword
-	ex.) loc_F54217: ; CODE XREF: sub_F541D0+43↑j
-.		 mov ecx, oChatClient ; oChatClient = dword_2495054
-*/
-#define oChatClient 0x1685054           // 9.7
-
-#define oDrawCircle 0x596D40            // 9.7 Unconfirmed
-#define oFuncSetModel 0x21D870          // 9.6 Unconfirmed (Same in 9.7?)
-#define oGameTime 0x2F22148             // 9.7 Unconfirmed
-#define oGameVersion 0x2F4DD50          // 9.6 Unconfirmed (Same in 9.7?)
+//#define oCastSpell 0x59F3B0           // 9.7 Unconfirmed
+#define ptr_ChatClient 0x1685054		// 9.7 || 8B 0D ? ? ? ? 6A 00 50 E8 ? ? ? ? 33 
+#define ptr_GameTime 0x2F22148          // 9.7 || F3 0F 5C 0D ? ? ? ? 0F 2F C1 F3 
 #define oGetAttackCastDelay 0x5A5FE0    // 9.7 Unconfirmed
 #define oGetAttackDelay 0x5A60C0        // 9.7 Unconfirmed
 #define oGetBasicAttack 0x1B39C0        // 9.7 Unconfirmed
@@ -27,28 +15,20 @@
 #define oIsAlive 0x1E2C30               // 9.7 Unconfirmed
 #define oIsBaron 0x215C70               // 9.7 Unconfirmed
 #define oIsDragon 0x2150C0              // 9.7 Unconfirmed
-#define oIsHero 0x226EC0                // 9.7 Unconfirmed
+#define oIsHero 0x226EC0                // 9.7
 #define oIsInhib 0x226D40               // 9.7 Unconfirmed
-#define oIsMinion 0x226F00              // 9.7 Unconfirmed
+#define oIsMinion 0x226F00              // 9.7 
 #define oIsMissile 0x226F20             // 9.7 Unconfirmed
 #define oIsNexus 0x227130               // 9.7 Unconfirmed
 #define oIsNotWall 0x748840             // 9.7 Unconfirmed
-#define oIssueOrder 0x1BE660            // 9.7 Unconfirmed
-#define oIsTargetable 0x21FB80          // 9.7 Unconfirmed
+#define oIssueOrder 0x1BE660            // 9.7
+#define oIsTargetable 0x21FB80          // 9.7
 #define oIsTroy 0x2271A0                // 9.7 Unconfirmed
 #define oIsTurret 0x2270B0              // 9.7 Unconfirmed
 #define oIsWall 0x748840                // 9.7 Unconfirmed
-
-/*
-	Search for string "hero"
-	goto ; DATA XREF: sub_10DCCB0+2D↑o
-	goto ; CODE XREF: sub_10DCCB0+15↑j
-	cmp esi, oLocalPlayer ; oLocalPlayer = dword_3D36120;
-*/
-#define oLocalPlayer 0x2F26120 //  9.7
-
+#define oLocalPlayer 0x2F26120			// 9.7
 #define oObjAmmo 0x0458                 // 9.7 Unconfirmed
-#define oObjArmor 0x1288                // 9.7 Unconfirmed
+#define oObjArmor 0x1288                // 9.7
 #define oObjAtkRange 0x12A8             // 9.7 Unconfirmed
 #define oObjBaseAtk 0x1260              // 9.7 Unconfirmed
 #define oObjBonusAP 0x11F0              // 9.7 Unconfirmed
@@ -80,9 +60,10 @@
 #define oObjTargetID 0x298              // 9.7 Unconfirmed
 #define oObjTeam 0x0044                 // 9.7 Unconfirmed
 #define oObjVisibility 0x39C            // 9.7 Unconfirmed
-#define oPrintChat 0x5D7C10             // 9.7 Unconfirmed
+#define oPrintChat 0x5D7C10             // 9.7
 #define oRenderer 0x2F43C1C             // 9.7 Unconfirmed
 #define oUnderMouseObject 0x22E8CEC     // 9.6 Unconfirmed (Same in 9.7?)
 #define oUpdateChargeableSpell 0x5A1B10 // 9.7 Unconfirmed
 #define oWorld2Screen 0x7D59E0          // 9.7 Unconfirmed
 #define oZoomClass 0x2F3F5B8            // 9.6 Unconfirmed (Same in 9.7?)
+#define oUnderMouseObject = 0x22D7F4C   // 9.7 Unconfirmed || C7 05 ? ? ? ? ? ? ? ? E8 ? ? ? ? 83 C4 04 FF B4

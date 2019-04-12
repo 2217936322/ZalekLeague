@@ -12,6 +12,7 @@
 #include "RenderManager.h"
 #include "ChampionManager.h"
 #include "InputManager.h"
+#pragma once
 
 bool do_init = true;
 
@@ -49,6 +50,8 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 
 HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion) {
 	if(ME) { main(FindWindow(NULL, "League of Legends (TM) Client"), Device); }
+	if(GetAsyncKeyState(VK_END) & 1)
+		DetourRemove((PBYTE) Original_Present, (PBYTE) Hooked_Present);
 	return Original_Present(Device, pSrcRect, pDestRect, hDestWindow, pDirtyRegion);
 }
 
@@ -73,7 +76,7 @@ DWORD GetDeviceAddress(int VTableIndex) {
 
 void __stdcall Start() {
 	//Console.startConsoleWin(60, 10, NULL);
-
+	Beep(1000, 100);
 	while(Engine::GetGameTime() < 1.0f || !ME) {
 		/*	for(int i = 0; i < 3; i++) {
 				Console.print("ZalekLeague Compiled at %s %s\n", __DATE__, __TIME__);
@@ -101,10 +104,11 @@ void __stdcall Start() {
 
 	//Functions.CastSpell = (Typedefs::fnCastSpell)((DWORD)GetModuleHandle(NULL) + oCastSpell);
 	Functions.IssueOrder = (Typedefs::fnIssueOrder)((DWORD) GetModuleHandle(NULL) + oIssueOrder);
-	Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD) GetModuleHandle(NULL) + oDrawCircle);
+	Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD) GetModuleHandle(NULL) + fn_oDrawCircle);
 
 	Functions.GetAttackCastDelay = (Typedefs::fnGetAttackCastDelay)((DWORD) GetModuleHandle(NULL) + oGetAttackCastDelay);
 	Functions.GetAttackDelay = (Typedefs::fnGetAttackDelay)((DWORD) GetModuleHandle(NULL) + oGetAttackDelay);
+	//DetourFunction((PBYTE) dwFunc, (PBYTE) orgFunc);
 
 	Original_Present = (Prototype_Present) DetourFunction((PBYTE) GetDeviceAddress(17), (PBYTE) Hooked_Present);
 }
@@ -119,6 +123,13 @@ BOOL APIENTRY DllMain(HMODULE hModule,
 	}
 
 	else if(ul_reason_for_call == DLL_PROCESS_DETACH) {
+		//BOOL FreeLibrary(
+			//HMODULE hLibModule
+		//);
+		//TerminateThread()
+		//void ExitThread(
+		//	DWORD dwExitCode
+		//);
 		ImGui::DestroyContext();
 		return TRUE;
 	}

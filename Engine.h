@@ -32,12 +32,12 @@ public:
 		return Vector{X, Y, Z};
 	}
 
-	static char* GetGameVersion() {
-		return (char*) (baseAddr + oGameVersion);
-	}
+	//static char* GetGameVersion() {
+	//	return (char*) (baseAddr + oGameVersion);
+	//}
 
 	static float GetGameTime() {
-		return *(float*) (baseAddr + oGameTime);
+		return *(float*) (baseAddr + ptr_GameTime);
 	}
 
 	static GameObject* GetLocalObject() {
