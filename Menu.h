@@ -88,23 +88,32 @@ void DrawGameObjectTree(char* label, std::vector<GameObject*> obj_vector) {
 	}
 }
 
+//void TextTest() {
+//	ImGui_ImplDX9_NewFrame();
+//	ImGui_ImplWin32_NewFrame();
+//	ImGui::NewFrame();
+//	////NoTitleBar | NoResize | NoMove | NoScrollbar | NoSavedSettings | NoInputs
+//	ImGui::SetNextWindowPos(ImVec2(Engine::GetMouseWorldPosition().X, Engine::GetMouseWorldPosition().Y));
+//	ImGui::Begin("test", false, ImGuiWindowFlags_NoTitleBar + ImGuiWindowFlags_NoResize + ImGuiWindowFlags_NoMove + ImGuiWindowFlags_NoScrollbar + ImGuiWindowFlags_NoSavedSettings + ImGuiWindowFlags_NoInputs);
+//	//ImGui::GetWindowDrawList()->AddText(ImGui::GetFont(), ImGui::GetFontSize(), ImVec2(100.f, 100.f), ImColor(255, 255, 0, 255), "Hello World", 0, 0.0f, 0);
+//	ImGui::End();
+//	ImGui::EndFrame();
+//	ImGui::Render();
+//	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+//}
+
 void MenuRender() {
 	ImGui_ImplDX9_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 	if(draw_menu) {
+		//ImGui::SetNextWindowPos(ImGui::GetMousePos());
 		ImGui::Begin("Zalek League", &draw_menu, ImGuiWindowFlags_AlwaysAutoResize + ImGuiWindowFlags_MenuBar);
 
 		if(ImGui::BeginMenuBar()) {
 			if(ImGui::BeginMenu("Drawing")) {
 				ImGui::Checkbox("Draw Auto Attack Range Always", &gRenderAttackRange);
 				ImGui::Checkbox("Draw Last Hittable Minions In Attack Range", &gRenderLastHit);
-				ImGui::EndMenu();
-			}
-
-			if(ImGui::BeginMenu("Zalek's Utilities")) {
-				if(ImGui::MenuItem("Crash League"))
-					exit(0);
 				ImGui::EndMenu();
 			}
 			ImGui::EndMenuBar();
@@ -126,8 +135,8 @@ void MenuRender() {
 				ImGui::TreePop();
 			}
 
-			if(ImGui::Button("Crash League"))
-				exit(0);
+			//if(ImGui::Button("Text Test"))
+			//	TextTest();
 
 			ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
 			if(ImGui::TreeNode("Engine")) {
@@ -194,4 +203,24 @@ void MenuRender() {
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+}
+
+void OverlayTest(ImVec2 screen_pos, char* text) {
+	ImGui_ImplDX9_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+	ImGui::Begin("Overlay Test", false, ImGuiWindowFlags_NoTitleBar + ImGuiWindowFlags_NoResize + ImGuiWindowFlags_NoMove + ImGuiWindowFlags_NoScrollbar);
+	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
+	ImGui::SetWindowPos(
+		ImVec2(
+		(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
+			(screen_pos.y - ImGui::GetWindowSize().y / -.5))
+
+	);
+	ImGui::Text(text);
+	ImGui::End();
+	ImGui::EndFrame();
+	ImGui::Render();
+	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+
 }

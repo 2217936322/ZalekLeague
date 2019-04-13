@@ -30,8 +30,11 @@ int main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 	LastHitManager();
 	GetFriendlyMissiles();
 	GetEnemyMissiles();
-	MenuRender();
 	RenderManager();
+
+	MenuRender();
+	if(!draw_menu)
+		OverlayTest(ImGui::GetMousePos(), "Overlay Test");
 	return 0;
 }
 
@@ -106,7 +109,9 @@ void __stdcall Start() {
 	Functions.IsTroyEnt = (Typedefs::fnIsTroyEnt)(baseAddr + FN_IS_TROY);
 	Functions.CastSpell = (Typedefs::fnCastSpell)((DWORD) GetModuleHandle(NULL) + FN_CAST_SPELL);
 	Functions.IssueOrder = (Typedefs::fnIssueOrder)((DWORD) GetModuleHandle(NULL) + FN_ISSUE_ORDER);
-	Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD) GetModuleHandle(NULL) + FN_DRAW_CIRCLE);
+
+	Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD) GetModuleHandle(NULL) + FNPTR_DRAW_CIRCLE);
+	//Functions.DrawFloatText = (Typedefs::fnDrawFloatText)((DWORD) GetModuleHandle(NULL) + FN_DRAW_FLOAT_TEXT);
 
 	Functions.GetAttackCastDelay = (Typedefs::fnGetAttackCastDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_CAST_DELAY);
 	Functions.GetAttackDelay = (Typedefs::fnGetAttackDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_DELAY);

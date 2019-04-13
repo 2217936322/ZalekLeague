@@ -5,6 +5,8 @@
 // Use Binary Search in IDA with the patterns provided.
 // If you are getting the wrong value then try checking Find all occurences. 
 // Most if not all should be accurate though.
+
+
 #define FN_GET_BASIC_ATTACK		   0x1B39C0 // 9.7 || E8 ? ? ? ? 8B 8B ? ? ? ? 8B E8 8B 
 #define FN_ISSUE_ORDER			   0x1BE660 // 9.7 || E8 ? ? ? ? 8B 84 24 ? ? ? ? 8B CF F3 
 #define FN_IS_ALIVE				   0x1E2C30 // 9.7 || E8 ? ? ? ? 84 C0 74 3B 8B 
@@ -18,8 +20,8 @@
 #define FN_IS_TURRET			   0x2270B0 // 9.7 || E8 ? ? ? ? 83 C4 04 84 C0 74 10 32 
 #define FN_IS_NEXUS				   0x227130 // 9.7 || E8 ? ? ? ? 83 C4 04 85 C0 74 13 F3 
 #define FN_IS_TROY				   0x2271A0 // 9.7 || E8 ? ? ? ? 8B F8 83 C4 04 85 FF 74 58 
+#define FN_DRAW_FLOAT_TEXT		   0x248500 // 9.7 || E8 ? ? ? ? 8B CB C7 00 ? ? ? ? 8D 44 24 2C 
 #define FN_GET_CHARACTER_INFO      0x29E850 // 9.7 || E8 ? ? ? ? 83 C6 24 8B
-#define FN_DRAW_CIRCLE			   0x596D40 // 9.7 || E8 ? ? ? ? 83 C4 1C 8B 44 24 18 
 #define FN_CAST_SPELL			   0x59F3B0 // 9.7 || E8 ? ? ? ? 8B 7C 24 10 5D 
 #define FN_UPDATE_CHARGEABLE_SPELL 0x5A1B10 // 9.7 || E8 ? ? ? ? 5E 5F B0 01 5B 83 C4 10  
 #define FN_GET_SPELL_STATE         0x5A4EE0 // 9.7 || 57 8B 7C 24 0C 83 7F 04
@@ -28,6 +30,13 @@
 #define FN_PRINT_CHAT			   0x5D7C10 // 9.7 || E8 ? ? ? ? 33 C0 5F C2 
 #define FN_IS_WALL				   0x748840 // 9.7 || E8 ? ? ? ? 83 C4 08 84 C0 75 46 33 
 #define FN_WORLD_TO_SCREEN		   0x7D59E0 // 9.7 || E8 ? ? ? ? F3 0F 10 44 24 ? 83 C4 10 F3 0F 5C
+
+#define FNPTR_DRAW_CIRCLE			  0x596D40 // 9.7 || E8 ? ? ? ? 83 C4 1C 8B 44 24 18 
+#define FNPTR_DRAW_ELLIPSE			  0x5973E0 // 9.7 || E8 ? ? ? ? 83 C4 14 83 7E 10 00 8D 
+#define FNPTR_DRAW_PATH				  0x597670 // 9.7 || E8 ? ? ? ? 83 C4 0C 8B 0D ? ? ? ? 8D 
+#define FNPTR_DRAW_RECT				  0x5976C0 // 9.7 || E8 ? ? ? ? 83 C4 14 E9 ? ? ? ? F3 0F 7E 
+#define FNPTR_DRAW_ROUND_RECT		  0x5977B0 // 9.7 || E8 ? ? ? ? F3 0F 10 44 24 ? 8D 44 24 30 83 C4 
+#define FNPTR_DRAW_ROUND_RECT_COMPLEX 0x597DD0 // 9.7 || E8 ? ? ? ? 83 C4 18 5F 5E 83 C4 1C 
 
 #define DWORD_OBJECT_MANAGER	 0x16466F8 // 9.7 || B9 ? ? ? ? E8 ? ? ? ? 8B 4F 0E 
 #define DWORD_CHAT_CLIENT		 0x1685054 // 9.7 || 8B 0D ? ? ? ? 6A 00 50 E8 ? ? ? ? 33 

@@ -9,7 +9,10 @@ public:
 	typedef float(__cdecl* fnGetAttackCastDelay)(GameObject* pObj);
 	typedef float(__cdecl* fnGetAttackDelay)(GameObject* pObj);
 	//typedef float(__cdecl* fnGetBasicAttack)(GameObject* pObj);
+
 	typedef void(__cdecl* fnDrawCircle)(Vector* position, float range, int* color, int a4, float a5, int a6, float alpha);
+	//typedef void(__cdecl* fnDrawFloatText)(GameObject* startpos, char* text);
+
 	typedef int* (__thiscall* fnCastSpell)(DWORD spellbook_addr, int* spellslot, int SlotID, Vector* targetpos, Vector* startpos, DWORD NetworkID);
 	typedef void(__thiscall* fnPrintChat)(DWORD ChatClient, const char* Message, int Color);
 
@@ -44,6 +47,7 @@ public:
 	Typedefs::fnGetAttackDelay GetAttackDelay;
 	//Typedefs::fnGetBasicAttack GetBasicAttack;
 	Typedefs::fnDrawCircle DrawCircle;
+	//Typedefs::fnDrawFloatText DrawFloatText;
 	Typedefs::fnCastSpell CastSpell;
 	Typedefs::fnPrintChat PrintChat;
 };
