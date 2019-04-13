@@ -13,144 +13,121 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="Header Files\GameObjects">
-      <UniqueIdentifier>{1ce34c55-6ad4-457e-a25f-9a49d3993ed2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Backend">
-      <UniqueIdentifier>{b08f55ea-5cda-40e9-8af0-b7994c57e40b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObjects">
-      <UniqueIdentifier>{750b326b-2675-467b-bd86-acf4efb28e0e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Backend">
-      <UniqueIdentifier>{d49bd258-d266-4f9a-b91a-11a182304a5a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\ImGui">
+    <Filter Include="Resource Files\ImGui">
       <UniqueIdentifier>{98816ad0-758a-4e01-ac5c-72e304c67572}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\ImGui">
-      <UniqueIdentifier>{a97aeea6-e9b9-4772-a385-5a9dd3a02bda}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GUI">
-      <UniqueIdentifier>{8ca04459-2bda-43b9-86b3-f98e20baacec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Managers">
-      <UniqueIdentifier>{7cc45fdb-5c81-493f-b70e-635295c29de0}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ZalekLeague.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files\Backend</Filter>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>Resource Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui.cpp">
-      <Filter>Source Files\ImGui</Filter>
+      <Filter>Resource Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_demo.cpp">
-      <Filter>Source Files\ImGui</Filter>
+      <Filter>Resource Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_draw.cpp">
-      <Filter>Source Files\ImGui</Filter>
+      <Filter>Resource Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_impl_dx9.cpp">
-      <Filter>Source Files\ImGui</Filter>
+      <Filter>Resource Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_impl_win32.cpp">
-      <Filter>Source Files\ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="ImGui\imgui_widgets.cpp">
-      <Filter>Source Files\ImGui</Filter>
+      <Filter>Resource Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\GameObjects</Filter>
+      <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="detours.h">
-      <Filter>Header Files\Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine.h">
-      <Filter>Header Files\Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="Hooks.h">
-      <Filter>Header Files\Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="Offsets.h">
-      <Filter>Header Files\Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>Header Files\Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Header Files\Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>Header Files\Backend</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Header Files\Backend</Filter>
-    </ClInclude>
     <ClInclude Include="ImGui\imgui.h">
-      <Filter>Header Files\ImGui</Filter>
+      <Filter>Resource Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imgui_impl_dx9.h">
-      <Filter>Header Files\ImGui</Filter>
+      <Filter>Resource Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imgui_impl_win32.h">
-      <Filter>Header Files\ImGui</Filter>
+      <Filter>Resource Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imgui_internal.h">
-      <Filter>Header Files\ImGui</Filter>
+      <Filter>Resource Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imstb_rectpack.h">
-      <Filter>Header Files\ImGui</Filter>
+      <Filter>Resource Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imstb_textedit.h">
-      <Filter>Header Files\ImGui</Filter>
+      <Filter>Resource Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imstb_truetype.h">
-      <Filter>Header Files\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files\GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="WndProc.h">
-      <Filter>Header Files\GUI</Filter>
+      <Filter>Resource Files\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">
-      <Filter>Header Files\ImGui</Filter>
+      <Filter>Resource Files\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="detours.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hooks.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Offsets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Header Files\GameObjects</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObjectManager.h">
-      <Filter>Header Files\GameObjects</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MinionManager.h">
-      <Filter>Header Files\Managers</Filter>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RenderManager.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files\Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="ChampionManager.h">
-      <Filter>Header Files\Managers</Filter>
+    <ClInclude Include="WndProc.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BehaviorManager.h">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SpellManager.h">
-      <Filter>Header Files\Managers</Filter>
+    <ClInclude Include="ChampionManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MinionManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MissileManager.h">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="detours.pdb" />
+    <None Include="detours.pdb">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="detours.lib">
+      <Filter>Resource Files</Filter>
+    </Library>
   </ItemGroup>
 </Project>
