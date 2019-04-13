@@ -3,8 +3,8 @@
 #define TARGET_GAMEVERSION "Version 9.7.269.6900 [PUBLIC]"
 
 #define FN_ISSUE_ORDER			   0x1BE660 // 9.7 || E8 ? ? ? ? 8B 84 24 ? ? ? ? 8B CF F3 
-#define FN_IS_ALIVE				   0x1E2C30 // 9.7 || 56 8B F1 8B 06 8B 80 ? ? ? ? FF D0 84 C0 74 19 
-#define FN_IS_TARGETABLE		   0x21FB80 // 9.7 || 56 8B F1 E8 ? ? ? ? 84 C0 74 2E 
+#define FN_IS_ALIVE				   0x1E2C30 // 9.7 || E8 ? ? ? ? 84 C0 74 3B 8B 
+#define FN_IS_TARGETABLE		   0x21FB80 // 9.7 || E8 ? ? ? ? 84 C0 74 2E 
 #define FN_IS_HERO				   0x226EC0 // 9.7 || E8 ? ? ? ? 84 C0 C7 44 24 ? ? ? ? ? 8D 44 24 30 
 #define FN_IS_MINION			   0x226F00 // 9.7 || E8 ? ? ? ? 83 C4 04 84 C0 74 16 8B 0F 
 #define FN_IS_MISSILE			   0x226F20 // 9.7 || E8 ? ? ? ? 83 C4 04 84 C0 74 1C FF
