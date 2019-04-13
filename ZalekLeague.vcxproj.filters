@@ -74,9 +74,6 @@
     <ClInclude Include="Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Hooks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Offsets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -119,15 +116,18 @@
     <ClInclude Include="SpellManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="detours.pdb">
-      <Filter>Resource Files</Filter>
-    </None>
+    <ClInclude Include="LFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="detours.lib">
       <Filter>Resource Files</Filter>
     </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="detours.pdb">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

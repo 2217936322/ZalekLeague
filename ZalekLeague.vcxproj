@@ -115,7 +115,7 @@
     <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="detours.h" />
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="Hooks.h" />
+    <ClInclude Include="LFunctions.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
     <ClInclude Include="ImGui\imgui_impl_dx9.h" />
@@ -136,10 +136,10 @@
     <ClInclude Include="InputManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="detours.pdb" />
+    <Library Include="detours.lib" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="detours.lib" />
+    <None Include="detours.pdb" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -28,7 +28,7 @@ public:
 	typedef bool(__thiscall* fnIsTargetable)(GameObject* pObj);
 };
 
-class CFunctions
+class LFunctions
 {
 public:
 	Typedefs::fnIsTurret IsTurret;
@@ -52,4 +52,4 @@ public:
 	Typedefs::fnPrintChat PrintChat;
 };
 
-extern CFunctions Functions;
+extern LFunctions Functions;

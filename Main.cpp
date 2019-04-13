@@ -1,15 +1,10 @@
-//#define WIN32_LEAN_AND_MEAN
-//#include <windows.h>
-//#include <SDKDDKVer.h>
-#include <time.h>
-
-//#include "Console.h"
-#include "Engine.h"
-#include "Hooks.h"
+#include "LFunctions.h"
 #include "detours.h"
-#include <string>
 #pragma comment(lib, "detours.lib")
 
+#include <string>
+#include <time.h>
+#include "Engine.h"
 #include "Menu.h"
 #include "WndProc.h"
 #include "RenderManager.h"
@@ -17,20 +12,19 @@
 #include "InputManager.h"
 #pragma once
 
-bool do_init = true;
+bool bUninitialized = true;
+LFunctions Functions;
+GameObjectManager* GObjectManager;
 
-void init(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
-	if(do_init) {
+int Main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
+	if(bUninitialized) {
 		oWndProc = (WNDPROC) SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR) WndProc);
 		MenuInit(hwnd, Device);
-		do_init = false;
+		bUninitialized = false;
 	}
-}
-
-int main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
-	init(hwnd, Device);
 	handleInput();
 	LastHitManager();
+	OrbWalkManager();
 	GetFriendlyMissiles();
 	GetEnemyMissiles();
 	RenderManager();
@@ -41,9 +35,6 @@ int main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 	return 0;
 }
 
-GameObjectManager* ObjManager;
-//CConsole Console;
-CFunctions Functions;
 
 typedef HRESULT(WINAPI* Prototype_Present)(LPDIRECT3DDEVICE9, CONST RECT*, CONST RECT*, HWND, CONST RGNDATA*);
 Prototype_Present Original_Present;
@@ -57,7 +48,7 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 }
 
 HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion) {
-	if(ME) { main(FindWindow(NULL, "League of Legends (TM) Client"), Device); }
+	if(ME) { Main(FindWindow(NULL, "League of Legends (TM) Client"), Device); }
 	if(GetAsyncKeyState(VK_END) & 1) {
 		ImGui_ImplDX9_Shutdown();
 		ImGui_ImplWin32_Shutdown();
@@ -99,7 +90,7 @@ void __stdcall Start() {
 		Sleep(1);
 	}
 
-	ObjManager = (GameObjectManager*) (baseAddr + DWORD_OBJECT_MANAGER);
+	GObjectManager = (GameObjectManager*) (baseAddr + DWORD_OBJECT_MANAGER);
 	Functions.PrintChat = (Typedefs::fnPrintChat)(baseAddr + FN_PRINT_CHAT);
 	Functions.IsTargetable = (Typedefs::fnIsTargetable)(baseAddr + FN_IS_TARGETABLE);
 	Functions.IsAlive = (Typedefs::fnIsAlive)(baseAddr + FN_IS_ALIVE);

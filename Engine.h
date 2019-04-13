@@ -2,7 +2,7 @@
 #include "Offsets.h"
 #include "Utils.h"
 #include "Vector.h"
-#include "Hooks.h"
+#include "LFunctions.h"
 #include "GameObjectManager.h"
 
 #define ME Engine::GetLocalObject()
@@ -49,8 +49,8 @@ public:
 	}
 
 	static GameObject * GetObjectByID(int ID) {
-		if(ObjManager != NULL && ID >= 0 && ID <= 25000) {
-			return ObjManager->objectArray[ID];
+		if(GObjectManager != NULL && ID >= 0 && ID <= 25000) {
+			return GObjectManager->objectArray[ID];
 		}
 		return NULL;
 	}

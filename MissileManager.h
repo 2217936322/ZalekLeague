@@ -7,7 +7,7 @@
 
 std::vector<GameObject*> GetMissiles() {
 	std::vector<GameObject*> Missiles;
-	if(ObjManager) {
+	if(GObjectManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj && obj->IsMissile() && obj->GetDistToMe() < 2500.0f) {
@@ -20,7 +20,7 @@ std::vector<GameObject*> GetMissiles() {
 
 std::vector<GameObject*> GetEnemyMissiles() {
 	std::vector<GameObject*> EMissiles;
-	if(ObjManager) {
+	if(GObjectManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj
@@ -65,7 +65,7 @@ std::vector<GameObject*> GetEnemyMissiles() {
 }
 std::vector<GameObject*> GetFriendlyMissiles() {
 	std::vector<GameObject*> EMissiles;
-	if(ObjManager) {
+	if(GObjectManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj

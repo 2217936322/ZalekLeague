@@ -7,7 +7,7 @@
 
 std::vector<GameObject*> GetMinions() {
 	std::vector<GameObject*> Minions;
-	if(ObjManager) {
+	if(GObjectManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj
@@ -25,7 +25,7 @@ std::vector<GameObject*> GetMinions() {
 
 std::vector<GameObject*> GetEnemyMinions() {
 	std::vector<GameObject*> EMinions;
-	if(ObjManager) {
+	if(GObjectManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj
@@ -46,7 +46,7 @@ std::vector<GameObject*> GetLastHitMinions() {
 	// TODO: Calculate Incoming Minion Damage
 	// TODO: Order Minions by Gold earned. (Cannon > Melee > Ranged);
 	std::vector<GameObject*> LHMinions;
-	if(ObjManager) {
+	if(GObjectManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj

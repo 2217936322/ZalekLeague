@@ -6,7 +6,7 @@
 
 std::vector<GameObject*> GetChampions() {
 	std::vector<GameObject*> Champions;
-	if(ObjManager) {
+	if(GObjectManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj && obj->IsHero()) {
@@ -19,7 +19,7 @@ std::vector<GameObject*> GetChampions() {
 
 std::vector<GameObject*> GetEnemyChampions() {
 	std::vector<GameObject*> EChampions;
-	if(ObjManager) {
+	if(GObjectManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj && obj->IsHero() && obj->IsEnemy()) {
@@ -30,9 +30,10 @@ std::vector<GameObject*> GetEnemyChampions() {
 	return EChampions;
 }
 
+
 std::vector<GameObject*> GetAttackableChampions() {
 	std::vector<GameObject*> AChampions;
-	if(ObjManager) {
+	if(GObjectManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj && obj->IsHero() && obj->IsAttackable()) {
@@ -45,7 +46,7 @@ std::vector<GameObject*> GetAttackableChampions() {
 
 std::vector<GameObject*> GetFriendlyChampions() {
 	std::vector<GameObject*> FChampions;
-	if(ObjManager) {
+	if(GObjectManager) {
 		for(int i = 0; i < TRYFOROBJMAX; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj && obj->IsHero() && !obj->IsEnemy()) {

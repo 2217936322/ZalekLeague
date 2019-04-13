@@ -1,5 +1,5 @@
 #include "GameObject.h"
-#include "Hooks.h"
+#include "LFunctions.h"
 #include "Engine.h"
 
 bool GameObject::IsAttackable() { return this->GetDistToMe() <= ME->GetAttackRange() + (this->GetBoundingRadius() * 2.0f) && this->IsTargetable(); }

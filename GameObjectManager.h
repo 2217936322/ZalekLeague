@@ -14,4 +14,4 @@ public:
 		DEFINE_MEMBER_N(int HighestObjectID, 0xC + 0x8);
 	};
 };
-extern GameObjectManager* ObjManager;
+extern GameObjectManager* GObjectManager;
