@@ -8,8 +8,9 @@ public:
 	typedef int* (__thiscall* fnIssueOrder)(void* thisPtr, int Order, Vector* Loc, GameObject* Target, bool IsAttackMove, bool IsMinion, DWORD Unknown);
 	typedef float(__cdecl* fnGetAttackCastDelay)(GameObject* pObj);
 	typedef float(__cdecl* fnGetAttackDelay)(GameObject* pObj);
+	//typedef float(__cdecl* fnGetBasicAttack)(GameObject* pObj);
 	typedef void(__cdecl* fnDrawCircle)(Vector* position, float range, int* color, int a4, float a5, int a6, float alpha);
-	//typedef int*(__thiscall *fnCastSpell)(DWORD spellbook_addr, SpellSlot* spellslot, int SlotID, Vector* targetpos, Vector* startpos, DWORD NetworkID);
+	typedef int* (__thiscall* fnCastSpell)(DWORD spellbook_addr, int* spellslot, int SlotID, Vector* targetpos, Vector* startpos, DWORD NetworkID);
 	typedef void(__thiscall* fnPrintChat)(DWORD ChatClient, const char* Message, int Color);
 
 	typedef bool(__cdecl* fnIsHero)(GameObject* pObj);
@@ -41,8 +42,9 @@ public:
 	Typedefs::fnIssueOrder IssueOrder;
 	Typedefs::fnGetAttackCastDelay GetAttackCastDelay;
 	Typedefs::fnGetAttackDelay GetAttackDelay;
+	//Typedefs::fnGetBasicAttack GetBasicAttack;
 	Typedefs::fnDrawCircle DrawCircle;
-	//Typedefs::fnCastSpell CastSpell;
+	Typedefs::fnCastSpell CastSpell;
 	Typedefs::fnPrintChat PrintChat;
 };
 

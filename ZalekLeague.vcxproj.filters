@@ -146,6 +146,9 @@
     <ClInclude Include="SpellManager.h">
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="MissileManager.h">
+      <Filter>Header Files\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="detours.pdb" />

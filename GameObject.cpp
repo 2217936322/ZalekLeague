@@ -38,3 +38,5 @@ short GameObject::GetSourceIndex() { return *(short*) ((DWORD) this + PTR_OBJECT
 short GameObject::GetTargetIndex() { return *(short*) ((DWORD) this + PTR_OBJECT_TARGET_ID); }
 
 Vector GameObject::GetPos() { return *(Vector*) ((DWORD) this + PTR_OBJECT_POS); }
+Vector GameObject::GetStartPos() { return *(Vector*) ((DWORD) this + PTR_OBJECT_SPELL_START_POS); }
+Vector GameObject::GetEndPos() { return *(Vector*) ((DWORD) this + PTR_OBJECT_SPELL_END_POS); }

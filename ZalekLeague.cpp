@@ -28,6 +28,8 @@ int main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 	init(hwnd, Device);
 	handleInput();
 	LastHitManager();
+	GetFriendlyMissles();
+	GetEnemyMissiles();
 	MenuRender();
 	RenderManager();
 	return 0;
@@ -92,26 +94,23 @@ void __stdcall Start() {
 	}
 
 	ObjManager = (GameObjectManager*) (baseAddr + DWORD_OBJECT_MANAGER);
-
 	Functions.PrintChat = (Typedefs::fnPrintChat)(baseAddr + FN_PRINT_CHAT);
-
 	Functions.IsTargetable = (Typedefs::fnIsTargetable)(baseAddr + FN_IS_TARGETABLE);
 	Functions.IsAlive = (Typedefs::fnIsAlive)(baseAddr + FN_IS_ALIVE);
-
 	Functions.IsMinion = (Typedefs::fnIsMinion)(baseAddr + FN_IS_MINION);
-	//Functions.IsTurret = (Typedefs::fnIsTurret)(baseAddr + oIsTurret);
+	Functions.IsTurret = (Typedefs::fnIsTurret)(baseAddr + FN_IS_TURRET);
 	Functions.IsHero = (Typedefs::fnIsHero)(baseAddr + FN_IS_HERO);
 	Functions.IsMissile = (Typedefs::fnIsMissile)(baseAddr + FN_IS_MISSILE);
-	//Functions.IsNexus = (Typedefs::fnIsNexus)(baseAddr + oIsNexus);
-	//Functions.IsInhibitor = (Typedefs::fnIsInhibitor)(baseAddr + oIsInhib);
-	//Functions.IsTroyEnt = (Typedefs::fnIsTroyEnt)(baseAddr + oIsTroy);
-
-	//Functions.CastSpell = (Typedefs::fnCastSpell)((DWORD)GetModuleHandle(NULL) + oCastSpell);
+	Functions.IsNexus = (Typedefs::fnIsNexus)(baseAddr + FN_IS_NEXUS);
+	Functions.IsInhibitor = (Typedefs::fnIsInhibitor)(baseAddr + FN_IS_INHIB);
+	Functions.IsTroyEnt = (Typedefs::fnIsTroyEnt)(baseAddr + FN_IS_TROY);
+	Functions.CastSpell = (Typedefs::fnCastSpell)((DWORD) GetModuleHandle(NULL) + FN_CAST_SPELL);
 	Functions.IssueOrder = (Typedefs::fnIssueOrder)((DWORD) GetModuleHandle(NULL) + FN_ISSUE_ORDER);
 	Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD) GetModuleHandle(NULL) + FN_DRAW_CIRCLE);
 
 	Functions.GetAttackCastDelay = (Typedefs::fnGetAttackCastDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_CAST_DELAY);
 	Functions.GetAttackDelay = (Typedefs::fnGetAttackDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_DELAY);
+	//Functions.GetBasicAttack = (Typedefs::fnGetBasicAttack)((DWORD) GetModuleHandle(NULL) + FN_GET_BASIC_ATTACK);
 	//DetourFunction((PBYTE) dwFunc, (PBYTE) orgFunc);
 
 	Original_Present = (Prototype_Present) DetourFunction((PBYTE) GetDeviceAddress(17), (PBYTE) Hooked_Present);

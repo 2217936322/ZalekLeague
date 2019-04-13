@@ -43,4 +43,6 @@ public:
 	short GetTargetIndex();
 
 	Vector GetPos();
+	Vector GetStartPos();
+	Vector GetEndPos();
 };
