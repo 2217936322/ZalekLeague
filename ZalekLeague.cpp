@@ -28,7 +28,7 @@ int main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 	init(hwnd, Device);
 	handleInput();
 	LastHitManager();
-	GetFriendlyMissles();
+	GetFriendlyMissiles();
 	GetEnemyMissiles();
 	MenuRender();
 	RenderManager();

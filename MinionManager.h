@@ -59,11 +59,11 @@ std::vector<GameObject*> GetLastHitMinions() {
 				// TODO: Populate a global vector to monitor current minion dps taken. Use Network ID to ensure it is the same minion.
 				if(obj->GetHealth() <= (ME->GetTotalAttackDamage() * 1.066)) {
 					auto color = createRGB(255, 233, 0);
-					Functions.DrawCircle(&obj->GetPos(), obj->GetBoundingRadius(), &color, 0, 0.0f, 0, 1.0f);
+					Functions.DrawCircle(&obj->GetPos(), obj->GetBoundingRadius(), &color, 0, 0.0f, 0, 255.0f);
 					LHMinions.push_back(obj);
 				} else {
 					auto color = createRGB(255, 255, 255);
-					Functions.DrawCircle(&obj->GetPos(), obj->GetBoundingRadius(), &color, 0, 0.0f, 0, 1.0f);
+					Functions.DrawCircle(&obj->GetPos(), obj->GetBoundingRadius(), &color, 0, 0.0f, 0, 255.0f);
 				}
 
 

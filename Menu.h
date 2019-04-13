@@ -23,13 +23,13 @@ static void MenuInit(HWND Chwnd, IDirect3DDevice9* CDevice) {
 
 }
 
-bool endsWith(const std::string& mainStr, const std::string& toMatch) {
-	if(mainStr.size() >= toMatch.size() &&
-		mainStr.compare(mainStr.size() - toMatch.size(), toMatch.size(), toMatch) == 0)
-		return true;
-	else
-		return false;
-}
+//bool endsWith(const std::string& mainStr, const std::string& toMatch) {
+//	if(mainStr.size() >= toMatch.size() &&
+//		mainStr.compare(mainStr.size() - toMatch.size(), toMatch.size(), toMatch) == 0)
+//		return true;
+//	else
+//		return false;
+//}
 
 void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 	int i = 0;
@@ -41,9 +41,9 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 			ImGui::BulletText("IsEnemy() => %d", (*obj)->IsEnemy());
 			ImGui::BulletText("IsTargetable() => %d", (*obj)->IsTargetable());
 			//TODO: Implement Minion Type in GameObject.cpp and h
-			ImGui::BulletText("IsCannon() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Siege"));
-			ImGui::BulletText("IsMelee() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Melee"));
-			ImGui::BulletText("IsRanged() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Ranged"));
+			//ImGui::BulletText("IsCannon() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Siege"));
+			//ImGui::BulletText("IsMelee() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Melee"));
+			//ImGui::BulletText("IsRanged() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Ranged"));
 
 			ImGui::Text("char*");
 			ImGui::BulletText("GetChampionName() => %s", (*obj)->GetChampionName());
@@ -152,40 +152,40 @@ void MenuRender() {
 			DrawGameObjectTree("All Minions", GetMinions());
 			DrawGameObjectTree("Enemy Minions", GetEnemyMinions());
 			DrawGameObjectTree("Enemy Minions (Last Hit)", GetLastHitMinions());
-			//DrawGameObjectTree("Missiles", GetMissiles());
-			//if(ImGui::TreeNode("Missles")) {
-			//	int i = 0;
-			//	std::vector<GameObject*> Missles = GetEnemyMisslesTowardsPos(ME->GetPos(), ME->GetBoundingRadius());
-			//	for(std::vector<GameObject*>::iterator obj = Missles.begin(); obj != Missles.end(); obj++) {
-			//		if(ImGui::TreeNode((void*) (intptr_t) i, "%s : %d | Dist = %f", (*obj)->GetName(), i, (*obj)->GetDistToMe())) {
+			DrawGameObjectTree("Missiles", GetMissiles());
+			if(ImGui::TreeNode("Friendly Missles")) {
+				int i = 0;
+				std::vector<GameObject*> Missles = GetFriendlyMissiles();
+				for(std::vector<GameObject*>::iterator obj = Missles.begin(); obj != Missles.end(); obj++) {
+					if(ImGui::TreeNode((void*) (intptr_t) i, "%s : %d | Dist = %f", (*obj)->GetName(), i, (*obj)->GetDistToMe())) {
 
-			//			ImGui::Text("char*");
-			//			//ImGui::BulletText("GetChampionName() => %s", (*obj)->GetChampionName());
-			//			ImGui::BulletText("GetName() => %s", (*obj)->GetName());
+						ImGui::Text("char*");
+						//ImGui::BulletText("GetChampionName() => %s", (*obj)->GetChampionName());
+						ImGui::BulletText("GetName() => %s", (*obj)->GetName());
 
-			//			ImGui::Text("DWORD");
-			//			ImGui::BulletText("GetNetworkID() => %lu", (*obj)->GetNetworkID());
+						ImGui::Text("DWORD");
+						ImGui::BulletText("GetNetworkID() => %lu", (*obj)->GetNetworkID());
 
-			//			ImGui::Text("float");
-			//			ImGui::BulletText("GetDistToMe() => %f", (*obj)->GetDistToMe());
-			//			ImGui::BulletText("GetBoundingRadius() => %f", (*obj)->GetBoundingRadius());
+						ImGui::Text("float");
+						ImGui::BulletText("GetDistToMe() => %f", (*obj)->GetDistToMe());
+						ImGui::BulletText("GetBoundingRadius() => %f", (*obj)->GetBoundingRadius());
 
-			//			ImGui::Text("short");
-			//			ImGui::BulletText("GetIndex() => %hu", (*obj)->GetIndex());
-			//			ImGui::BulletText("GetSourceIndex() => %hu", (*obj)->GetSourceIndex());
-			//			ImGui::BulletText("GetTargetIndex() => %hu", (*obj)->GetTargetIndex());
+						ImGui::Text("short");
+						ImGui::BulletText("GetIndex() => %hu", (*obj)->GetIndex());
+						ImGui::BulletText("GetSourceIndex() => %hu", (*obj)->GetSourceIndex());
+						ImGui::BulletText("GetTargetIndex() => %hu", (*obj)->GetTargetIndex());
 
-			//			ImGui::Text("Vector");
-			//			ImGui::BulletText("GetPos() => (%f, %f, %f)", (*obj)->GetPos().X, (*obj)->GetPos().Y, (*obj)->GetPos().Z);
-			//			ImGui::BulletText("GetStartPos() => (%f, %f, %f)", (*obj)->GetStartPos().X, (*obj)->GetStartPos().Y, (*obj)->GetStartPos().Z);
-			//			ImGui::BulletText("GetEndPos() => (%f, %f, %f)", (*obj)->GetEndPos().X, (*obj)->GetEndPos().Y, (*obj)->GetEndPos().Z);
-			//			// TODO: Prediction position.
-			//			ImGui::TreePop();
-			//		}
-			//		i++;
-			//	}
-			//	ImGui::TreePop();
-			//}
+						ImGui::Text("Vector");
+						ImGui::BulletText("GetPos() => (%f, %f, %f)", (*obj)->GetPos().X, (*obj)->GetPos().Y, (*obj)->GetPos().Z);
+						ImGui::BulletText("GetStartPos() => (%f, %f, %f)", (*obj)->GetStartPos().X, (*obj)->GetStartPos().Y, (*obj)->GetStartPos().Z);
+						ImGui::BulletText("GetEndPos() => (%f, %f, %f)", (*obj)->GetEndPos().X, (*obj)->GetEndPos().Y, (*obj)->GetEndPos().Z);
+						// TODO: Prediction position.
+						ImGui::TreePop();
+					}
+					i++;
+				}
+				ImGui::TreePop();
+			}
 			//DrawObjectVectorTree("Friendly Minions", gMinions);
 			ImGui::TreePop();
 		}
