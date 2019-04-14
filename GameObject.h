@@ -15,12 +15,14 @@ public:
 	bool IsAlive();
 	bool IsDashing();
 	bool IsEnemy();
+	bool IsFriendly();
 	bool IsHero();
 	bool IsInhibitor();
 	bool IsMinion();
 	bool IsMissile();
 	bool IsMoving();
 	bool IsNexus();
+	bool IsNeutral();
 	bool IsTargetable();
 	bool IsTroyEnt();
 	bool IsTurret();

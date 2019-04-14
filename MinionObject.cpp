@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include "LFunctions.h"
 #include "MinionObject.h"
+#include "Enums/ETeam.h"
 #pragma once
 
 bool MinionObject::IsAlive() {
@@ -8,49 +9,53 @@ bool MinionObject::IsAlive() {
 };
 
 bool MinionObject::IsEnemy() {
-	return (ME->GetTeam() == 100 && this->GetTeam() == 200 || ME->GetTeam() == 200 && this->GetTeam() == 100);
+	return (ME->GetTeam() == ETeam::ORDER && this->GetTeam() == ETeam::CHAOS || ME->GetTeam() == ETeam::CHAOS && this->GetTeam() == ETeam::ORDER);
 }
 
 bool MinionObject::IsFriendly() {
-	return (ME->GetTeam() == 100 && this->GetTeam() == 100 || ME->GetTeam() == 200 && this->GetTeam() == 200);
+	return (ME->GetTeam() == ETeam::ORDER && this->GetTeam() == ETeam::ORDER || ME->GetTeam() == ETeam::CHAOS && this->GetTeam() == ETeam::CHAOS);
 }
 
 bool MinionObject::IsTargetable() {
-	return false;
+	return Functions.IsTargetable(this);
 }
 
 bool MinionObject::IsVisible() {
-	return false;
+	return *(bool*) ((DWORD) this + PTR_OBJECT_IS_VISIBLE);
 }
 
 char* MinionObject::GetName() {
-	return nullptr;
+	return GetStr((DWORD) this + PTR_OBJECT_NAME_STRING);
 }
 
 char* MinionObject::GetNameWithGUID() {
-	return nullptr;
+	return GetStr((DWORD) this + PTR_OBJECT_IDENTIFIER_NAME);
 }
 
 DWORD MinionObject::GetNetworkID() {
-	return 0;
+	return *(DWORD*) ((DWORD) this + PTR_OBJECT_NETWORK_ID);
 }
 
 float MinionObject::GetAttackDamage() {
-	return 0.0f;
+	return (
+		*(float*) ((DWORD) this + PTR_OBJECT_BASE_ATTACK)
+		+ *(float*) ((DWORD) this + PTR_OBJECT_BONUS_ATTACK)
+		);
 }
 
 float MinionObject::GetHitboxRadius() {
-	return 0.0f;
+	typedef float(__thiscall * OriginalFn)(PVOID);
+	return CallVirtual<OriginalFn>(this, 36)(this);
 }
 
 float MinionObject::GetDistToMe() {
-	return 0.0f;
+	return this->GetPos().DistTo(ME->GetPos());
 }
 
 float MinionObject::GetHealth() {
-	return 0.0f;
+	return *(float*) ((DWORD) this + PTR_OBJECT_CURRENT_HEALTH);
 }
 
 Vector MinionObject::GetPos() {
-	return Vector();
+	return *(Vector*) ((DWORD) this + PTR_OBJECT_POS);
 }

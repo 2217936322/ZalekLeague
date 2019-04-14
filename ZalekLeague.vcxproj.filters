@@ -95,9 +95,6 @@
     <ClInclude Include="ImGui\imconfig.h">
       <Filter>Dependencies\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Engine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Offsets.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -146,98 +143,101 @@
     <ClInclude Include="MinionObject.h">
       <Filter>Objects\Declarations</Filter>
     </ClInclude>
-    <ClInclude Include="EScope.h">
+    <ClInclude Include="Enums\ECharacterRecordParameter.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="ETeam.h">
+    <ClInclude Include="Enums\EClassID.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EUnitType.h">
+    <ClInclude Include="Enums\ECreatureType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EVariableType.h">
+    <ClInclude Include="Enums\EDamageType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EUIElement.h">
+    <ClInclude Include="Enums\EFloatTextType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EUnitTeam.h">
+    <ClInclude Include="Enums\EGameDifficultyType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="ETooltipVariable.h">
+    <ClInclude Include="Enums\EInputLockType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="ESpellParameter.h">
+    <ClInclude Include="Enums\ELogicResultType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="ESpellbookType.h">
+    <ClInclude Include="Enums\EMinionRoamState.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EStatEvent.h">
+    <ClInclude Include="Enums\EPrimaryAbilityResourceType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="ESpawnLocationType.h">
+    <ClInclude Include="Enums\EQuestType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EScoreEvent.h">
+    <ClInclude Include="Enums\ERoundingStrategy.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="ECharacterRecordParameter.h">
+    <ClInclude Include="Enums\EScope.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EInputLockType.h">
+    <ClInclude Include="Enums\EScoreEvent.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EPrimaryAbilityResourceType.h">
+    <ClInclude Include="Enums\ESpawnLocationType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="ERoundingStrategy.h">
+    <ClInclude Include="Enums\ESpellbookType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EQuestType.h">
+    <ClInclude Include="Enums\ESpellParameter.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="ELogicResultType.h">
+    <ClInclude Include="Enums\EStatEvent.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EMinionRoamState.h">
+    <ClInclude Include="Enums\ETeam.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="ECreatureType.h">
+    <ClInclude Include="Enums\ETooltipVariable.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EFloatTextType.h">
+    <ClInclude Include="Enums\EUIElement.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EGameDifficultyType.h">
+    <ClInclude Include="Enums\EUnitTeam.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EDamageType.h">
+    <ClInclude Include="Enums\EUnitType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EAITaskTopicType.h">
+    <ClInclude Include="Enums\EVariableType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EBehaviorResult.h">
+    <ClInclude Include="Enums\EAIDifficultyType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EBuffType.h">
+    <ClInclude Include="Enums\EAIMissionTopicType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EBuffInstanceType.h">
+    <ClInclude Include="Enums\EAITaskTopicType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EAnnouncementEvent.h">
+    <ClInclude Include="Enums\EAnnouncementEvent.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EAIMissionTopicType.h">
+    <ClInclude Include="Enums\EBehaviorResult.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EClassID.h">
+    <ClInclude Include="Enums\EBuffInstanceType.h">
       <Filter>Enums</Filter>
     </ClInclude>
-    <ClInclude Include="EAIDifficultyType.h">
+    <ClInclude Include="Enums\EBuffType.h">
       <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

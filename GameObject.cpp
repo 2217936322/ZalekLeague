@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "LFunctions.h"
 #include "Engine.h"
+#include "Enums/ETeam.h"
 #pragma once
 
 AIManager* GameObject::GetAIManager() {
@@ -26,7 +27,11 @@ bool GameObject::IsDashing() {
 }
 
 bool GameObject::IsEnemy() {
-	return (ME->GetTeam() == 100 && this->GetTeam() == 200 || ME->GetTeam() == 200 && this->GetTeam() == 100);
+	return (ME->GetTeam() == ETeam::ORDER && this->GetTeam() == ETeam::CHAOS || ME->GetTeam() == ETeam::CHAOS && this->GetTeam() == ETeam::ORDER);
+}
+
+bool GameObject::IsFriendly() {
+	return (ME->GetTeam() == ETeam::ORDER && this->GetTeam() == ETeam::ORDER || ME->GetTeam() == ETeam::CHAOS && this->GetTeam() == ETeam::CHAOS);
 }
 
 bool GameObject::IsHero() {
@@ -53,6 +58,10 @@ bool GameObject::IsNexus() {
 	return Functions.IsNexus(this);
 }
 
+bool GameObject::IsNeutral() {
+	return this->GetTeam() == ETeam::NEUTRAL;
+}
+
 bool GameObject::IsTargetable() {
 	return Functions.IsTargetable(this);
 }
@@ -74,7 +83,7 @@ char* GameObject::GetChampionName() {
 }
 
 char* GameObject::GetName() {
-	return GetStr((DWORD) this + PTR_OBJECT_NAME);
+	return GetStr((DWORD) this + PTR_OBJECT_IDENTIFIER_NAME);
 };
 
 DWORD GameObject::GetNetworkID() {
@@ -98,7 +107,8 @@ float GameObject::GetBonusAttackDamage() {
 }
 
 float GameObject::GetBoundingRadius() {
-	typedef float(__thiscall * OriginalFn)(PVOID); return CallVirtual<OriginalFn>(this, 36)(this);
+	typedef float(__thiscall * OriginalFn)(PVOID);
+	return CallVirtual<OriginalFn>(this, 36)(this);
 }
 
 float GameObject::GetDistToMe() {
