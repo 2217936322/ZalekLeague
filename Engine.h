@@ -3,7 +3,6 @@
 #include "Utils.h"
 #include "Vector.h"
 #include "LFunctions.h"
-#include "GameObjectManager.h"
 
 #define ME Engine::GetLocalObject()
 constexpr auto HOLDPOSITION = 1;

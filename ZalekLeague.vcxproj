@@ -112,7 +112,6 @@
     <ClInclude Include="BehaviorManager.h" />
     <ClInclude Include="ChampionManager.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameObjectManager.h" />
     <ClInclude Include="detours.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="LFunctions.h" />

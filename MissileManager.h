@@ -8,7 +8,7 @@
 std::vector<GameObject*> GetMissiles() {
 	std::vector<GameObject*> Missiles;
 	if(GObjectManager) {
-		for(int i = 0; i < TRYFOROBJMAX; i++) {
+		for(int i = 0; i < 10000; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj && obj->IsMissile() && obj->GetDistToMe() < 2500.0f) {
 				Missiles.push_back(obj);
@@ -21,7 +21,7 @@ std::vector<GameObject*> GetMissiles() {
 std::vector<GameObject*> GetEnemyMissiles() {
 	std::vector<GameObject*> EMissiles;
 	if(GObjectManager) {
-		for(int i = 0; i < TRYFOROBJMAX; i++) {
+		for(int i = 0; i < 10000; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj
 				&& obj->IsMissile()
@@ -66,7 +66,7 @@ std::vector<GameObject*> GetEnemyMissiles() {
 std::vector<GameObject*> GetFriendlyMissiles() {
 	std::vector<GameObject*> EMissiles;
 	if(GObjectManager) {
-		for(int i = 0; i < TRYFOROBJMAX; i++) {
+		for(int i = 0; i < 10000; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj
 				&& obj->IsMissile()
@@ -172,7 +172,7 @@ std::vector<GameObject*> GetFriendlyMissiles() {
 //std::vector<GameObject*> GetEnemyMisslesTowardsPos(Vector pos, float hitbox_radius) {
 //	std::vector<GameObject*> EMissiles;
 //	if(ObjManager) {
-//		for(int i = 0; i < TRYFOROBJMAX; i++) {
+//		for(int i = 0; i < 10000; i++) {
 //			GameObject* obj = Engine::GetObjectByID(i);
 //			if(obj && obj->IsMissile() && obj->GetDistToMe() < 1500.0f && obj->IsEnemy()) {
 //				if(obj->GetEndPos().DistTo(pos) <= hitbox_radius)

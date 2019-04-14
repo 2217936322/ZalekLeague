@@ -1,75 +1,81 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="Dependencies">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="Resource Files\ImGui">
+    <Filter Include="Dependencies\ImGui">
       <UniqueIdentifier>{98816ad0-758a-4e01-ac5c-72e304c67572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{4ab836f7-29b0-4357-bcdb-0af8f6100972}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Declarations">
+      <UniqueIdentifier>{f26c1eb9-8da1-4439-9861-0bb865241595}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Implementations">
+      <UniqueIdentifier>{53784fe0-f42f-4158-aa51-8c18ed54ab3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{482e7f59-f7e1-4612-9ebf-5499fa23d342}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Declarations">
+      <UniqueIdentifier>{25ce8e27-9131-4807-8916-b9bba7fa16a2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ImGui\imgui_widgets.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_demo.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_draw.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_impl_dx9.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_impl_win32.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imgui.h">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imgui_impl_dx9.h">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imgui_impl_win32.h">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imgui_internal.h">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imstb_rectpack.h">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imstb_textedit.h">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imstb_truetype.h">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">
-      <Filter>Resource Files\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="detours.h">
-      <Filter>Header Files</Filter>
+      <Filter>Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
       <Filter>Header Files</Filter>
@@ -86,48 +92,48 @@
     <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameObjectManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WndProc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BehaviorManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ChampionManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MinionManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MissileManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RenderManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpellManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="LFunctions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="detours.h">
+      <Filter>Dependencies</Filter>
+    </ClInclude>
+    <ClInclude Include="BehaviorManager.h">
+      <Filter>Managers\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="ChampionManager.h">
+      <Filter>Managers\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Managers\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="MinionManager.h">
+      <Filter>Managers\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="MissileManager.h">
+      <Filter>Managers\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>Managers\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellManager.h">
+      <Filter>Managers\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>GUI\Declarations</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="detours.lib">
-      <Filter>Resource Files</Filter>
+      <Filter>Dependencies</Filter>
     </Library>
   </ItemGroup>
   <ItemGroup>
     <None Include="detours.pdb">
-      <Filter>Resource Files</Filter>
+      <Filter>Dependencies</Filter>
     </None>
   </ItemGroup>
 </Project>
