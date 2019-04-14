@@ -4,28 +4,22 @@
 #include "Vector.h"
 #include "Utils.h"
 
+
+class AIManager {};
 class GameObject
 {
 public:
-	class CAIManager
-	{
-	public:
-		Vector GetTargetPos() {
-			return *(Vector*) ((DWORD) this + O_AIMGR_TARGETPOS);
-		}
-	};
-	CAIManager* GetAIManager() {
-		typedef CAIManager* (__thiscall * OriginalFn)(PVOID);
-		return CallVirtual<OriginalFn>(this, 147)(this);
-	};
+	AIManager* GetAIManager();
 
 	bool IsAttackable();
 	bool IsAlive();
+	bool IsDashing();
 	bool IsEnemy();
 	bool IsHero();
 	bool IsInhibitor();
 	bool IsMinion();
 	bool IsMissile();
+	bool IsMoving();
 	bool IsNexus();
 	bool IsTargetable();
 	bool IsTroyEnt();
@@ -55,6 +49,7 @@ public:
 	short GetTargetIndex();
 
 	Vector GetPos();
+	Vector GetTargetPos();
 	Vector GetStartPos();
 	Vector GetEndPos();
 };

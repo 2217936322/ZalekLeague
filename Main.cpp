@@ -25,8 +25,13 @@ int Main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 	handleInput();
 
 	// Waypoint test.
-	auto color = createRGB(255, 128, 0);
-	Functions.DrawCircle(&ME->GetAIManager()->GetTargetPos(), ME->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
+	if(ME->IsDashing()) {
+		auto color = createRGB(255, 0, 0);
+		Functions.DrawCircle(&ME->GetTargetPos(), ME->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
+	}
+
+	auto color = createRGB(0, 0, 255);
+	Functions.DrawCircle(&ME->GetTargetPos(), ME->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
 
 	//LastHitManager();
 	//OrbWalkManager();

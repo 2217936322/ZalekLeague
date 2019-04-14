@@ -6,11 +6,6 @@
 // If you are getting the wrong value then try checking Find all occurences. 
 // Most if not all should be accurate though.
 
-//AI Manager offsets
-#define O_AIMGR_TARGETPOS 0x10
-#define O_AIMGR_ISMOVING 0x198
-#define O_AIMGR_ISDASHING 0x1E8
-
 #define FN_GET_BASIC_ATTACK		   0x1B39C0 // 9.7 || E8 ? ? ? ? 8B 8B ? ? ? ? 8B E8 8B 
 #define FN_ISSUE_ORDER			   0x1BE660 // 9.7 || E8 ? ? ? ? 8B 84 24 ? ? ? ? 8B CF F3 
 #define FN_IS_ALIVE				   0x1E2C30 // 9.7 || E8 ? ? ? ? 84 C0 74 3B 8B 
@@ -55,6 +50,10 @@
 // Find a Related String like "ArmorTotal" (Do not have it prefixed with m)
 // GoTo the first LocalPlayer above your string.
 // Look underneath that LocalPlayer for a dword ptr [eax+1288h] 1288 = ptr of ArmorTotal.
+//AI Manager offsets
+#define PTR_OBJECT_AI_TARGETPOS    0x10
+#define PTR_OBJECT_AI_IS_MOVING    0x198
+#define PTR_OBJECT_AI_IS_DASHING   0x1E8
 #define PTR_OBJECT_INDEX		   0x24
 #define PTR_OBJECT_NETWORK_ID	   0x110
 #define PTR_OBJECT_SOURCE_INDEX    0x24C
