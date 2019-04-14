@@ -1,0 +1,9 @@
+#pragma once
+enum EStatEvent
+{
+	NODE_CAPTURE = 0,
+	NODE_CAPTURE_ASSIST = 1,
+	NODE_NEUTRALIZE = 2,
+	NODE_NEUTRALIZE_ASSIST = 3,
+	TEAM_OBJECTIVE = 4,
+};

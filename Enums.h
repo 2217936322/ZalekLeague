@@ -1,0 +1,359 @@
+#pragma once
+
+enum ScoreEvent
+{
+	NO_EVENT = 0,
+	CHAMP_KILL = 1,
+	CHAMP_ASSIST = 2,
+	NODE_CAPTURE = 3,
+	NODE_NEUTRALIZE = 4,
+	NODE_KILL_OFFENSE = 5,
+	TEAM_OBJECTIVE = 6,
+	DEFEND_POINT_NEUTRALIZE = 7,
+	NODE_KILL_DEFENSE = 8,
+	NODE_TIME_DEFENSE = 9,
+	LAST_STAND = 10,
+	DEFENSIVE_ASSIST = 11,
+	DEFENSIVE_KILL = 12,
+	OFFENSIVE_ASSIST = 13,
+	OFFENSIVE_KILL = 14,
+	CHAMPION_KILL = 15,
+	CHAMPION_ASSIST = 16,
+	ACE = 17,
+	QUEST_COMPLETE = 18,
+	SENTINEL = 19,
+	DUELIST = 20,
+	GUARDIAN = 21,
+	DOUBLE_KILL = 22,
+	TRIPLE_KILL = 23,
+	QUADRA_KILL = 24,
+	PENTA_KILL = 25,
+	KILLING_SPREE = 26,
+	RAMPAGE = 27,
+	UNSTOPPABLE = 28,
+	DOMINATING = 29,
+	GOD_LIKE = 30,
+	LEGENDARY = 31,
+	MINION_KILL = 32,
+	SUPER_MINION_KILL = 33,
+	AVENGER = 34,
+	BOUNTY_HUNTER_2 = 35,
+	BOUNTY_HUNTER_3 = 36,
+	BOUNTY_HUNTER_4 = 37,
+	BOUNTY_HUNTER_5 = 38,
+	BOUNTY_HUNTER_6 = 39,
+	BOUNTY_HUNTER_7 = 40,
+	BOUNTY_HUNTER_8 = 41,
+	PAYBACK = 42,
+	ANGEL = 43,
+	ARCH_ANGEL = 44,
+	SCAVENGER_HUNT = 45,
+	ZONE_CAPTURE = 46,
+	ZONE_NEUTRALIZE = 47,
+	SURVIVOR = 48,
+	DEFENDER = 49,
+	COUNTER = 50,
+	OPPORTUNIST = 51,
+	STRATEGIST = 52,
+	FIRST_BLOOD = 53,
+	VANGUARD = 54,
+	MAJOR_RELIC_PICKUP = 55,
+	NODE_CAPTURE_ASSIST = 56,
+	NODE_NEUTRALIZE_ASSIST = 57,
+};
+
+enum CharacterRecordParameterFloat
+{
+	CHARACTER_RECORD_PARAM_ATTACK_DELAY_CASTOFFSETPRECENT = 0,
+	CHARACTER_RECORD_PARAM_BASE_PHYSICAL_DAMAGE = 1,
+	CHARACTER_RECORD_PARAM_DAMAGE_PER_LEVEL = 2,
+};
+
+enum InputLockType
+{
+	CAMERLOCKING = 1,
+	MOVEMENT = 2,
+	ABILTIES = 4,
+	SUMMONERSPELLS = 8,
+	SHOP = 16,
+	CHAT = 32,
+	MINIMAPMOVEMENT = 64,
+	CAMERAMOVEMENT = 128,
+};
+
+enum PrimaryAbilityResourceType
+{
+	PAR_MANA = 0,
+	PAR_ENERGY = 1,
+	PAR_NONE = 2,
+	PAR_SHIELD = 3,
+	PAR_BATTLEFURY = 4,
+	PAR_DRAGONFURY = 5,
+	PAR_RAGE = 6,
+	PAR_HEAT = 7,
+	PAR_GNARFURY = 8,
+	PAR_FEROCITY = 9,
+	PAR_BLOODWELL = 10,
+	PAR_WIND = 11,
+	PAR_OTHER = 13,
+};
+
+enum RoundingStrategy
+{
+	NEAREST = 0,
+	FLOOR = 1,
+	CEIL = 2,
+};
+
+enum QuestType
+{
+	PRIMARY_QUEST = 0,
+	SECONDARY_QUEST = 1,
+	OBJECTIVE = 2,
+	CHARACTER_QUEST_CORKI = 3,
+	NEW_CONTENT_NOTIFICATION = 4,
+	SCORE_QUEST_DISPLAY = 5,
+};
+
+enum LogicResultType
+{
+	COMPLETE = 0,
+	FAILURE = 1,
+	INVALID = 2,
+	RUNNING = 3,
+};
+
+enum MinionRoamState
+{
+	INACTIVE = 0,
+	HOSTILE = 1,
+	RUN_IN_FEAR = 2,
+};
+
+enum CreatureType
+{
+	HEALER_CREATURE = 0,
+	BRAWLER_CREATURE = 1,
+	UNKNOWN_CREATURE = 2,
+};
+
+enum FloatTextTypeEnum
+{
+	FLOATTEXT_Invulnerable = 0,
+	FLOATTEXT_Special = 1,
+	FLOATTEXT_Heal = 2,
+	FLOATTEXT_ManaHeal = 3,
+	FLOATTEXT_ManaDamage = 4,
+	FLOATTEXT_Dodge = 5,
+	FLOATTEXT_PhysicalDamageCritical = 6,
+	FLOATTEXT_MagicalDamageCritical = 7,
+	FLOATTEXT_TrueDamageCritical = 8,
+	FLOATTEXT_Experience = 9,
+	FLOATTEXT_Gold = 10,
+	FLOATTEXT_Level = 11,
+	FLOATTEXT_Disable = 12,
+	FLOATTEXT_QuestReceived = 13,
+	FLOATTEXT_QuestComplete = 14,
+	FLOATTEXT_Score = 15,
+	FLOATTEXT_PhysicalDamage = 16,
+	FLOATTEXT_MagicalDamage = 17,
+	FLOATTEXT_TrueDamage = 18,
+	FLOATTEXT_EnemyPhysicalDamage = 19,
+	FLOATTEXT_EnemyMagicalDamage = 20,
+	FLOATTEXT_EnemyTrueDamage = 21,
+	FLOATTEXT_EnemyPhysicalDamageCritical = 22,
+	FLOATTEXT_EnemyMagicalDamageCritical = 23,
+	FLOATTEXT_EnemyTrueDamageCritical = 24,
+	FLOATTEXT_Countdown = 25,
+	FLOATTEXT_OMW = 26,
+	FLOATTEXT_Absorbed = 27,
+	FLOATTEXT_Debug = 28,
+	FLOATTEXT_PracticeToolTotal = 29,
+	FLOATTEXT_PracticeToolLastHit = 30,
+	FLOATTEXT_PracticeToolDPS = 31,
+	FLOATTEXT_ScoreDarkStar = 32,
+	FLOATTEXT_ScoreProject0 = 33,
+	FLOATTEXT_ScoreProject1 = 34,
+	FLOATTEXT_ShieldBonusDamage = 35,
+};
+
+enum GameDifficultyType
+{
+	GAME_DIFFICULTY_NEWBIE = 0,
+	GAME_DIFFICULTY_INTERMEDIATE = 1,
+	GAME_DIFFICULTY_ADVANCED = 2,
+	GAME_DIFFICULTY_UBER = 3,
+	GAME_DIFFICULTY_TUTORIAL = 4,
+	GAME_DIFFICULTY_INTRO = 5,
+};
+
+enum DamageType
+{
+	PHYSICAL_DAMAGE = 0,
+	MAGIC_DAMAGE = 1,
+	TRUE_DAMAGE = 2,
+	MIXED_DAMAGE = 3,
+};
+
+enum CharacterRecordParameterInt
+{
+	CHARACTER_RECORD_PARAM_ABILITY_SLOT_0_CC = 3,
+	CHARACTER_RECORD_PARAM_ABILITY_SLOT_1_CC = 4,
+	CHARACTER_RECORD_PARAM_ABILITY_SLOT_2_CC = 5,
+	CHARACTER_RECORD_PARAM_ABILITY_SLOT_3_CC = 6,
+	CHARACTER_RECORD_PARAM_SKILL_ORDER = 7,
+	CHARACTER_RECORD_PARAM_FIRST_ITEM = 8,
+};
+
+enum CharacterRecordParameterString
+{
+	CHARACTER_RECORD_PARAM_FIRST_ITEM = 8,
+};
+
+enum AITaskTopicType
+{
+	PUSHLANE = 0,
+	GOTO = 1,
+	DEFEND = 2,
+	SUPPORT = 3,
+	KILL = 4,
+	WAIT = 5,
+	UNKNOWN_TASK = 6,
+};
+
+enum BehaveResult
+{
+	SUCCESS = 0,
+	FAILURE = 1,
+	RUNNING = 2,
+};
+
+enum BuffType
+{
+	BUFF_Internal = 0,
+	BUFF_Aura = 1,
+	BUFF_CombatEnchancer = 2,
+	BUFF_CombatDehancer = 3,
+	BUFF_SpellShield = 4,
+	BUFF_Stun = 5,
+	BUFF_Invisibility = 6,
+	BUFF_Silence = 7,
+	BUFF_Taunt = 8,
+	BUFF_Polymorph = 9,
+	BUFF_Slow = 10,
+	BUFF_Snare = 11,
+	BUFF_Damage = 12,
+	BUFF_Heal = 13,
+	BUFF_Haste = 14,
+	BUFF_SpellImmunity = 15,
+	BUFF_PhysicalImmunity = 16,
+	BUFF_Invulnerability = 17,
+	BUFF_AttackSpeedSlow = 18,
+	BUFF_NearSight = 19,
+	BUFF_Currency = 20,
+	BUFF_Fear = 21,
+	BUFF_Charm = 22,
+	BUFF_Poison = 23,
+	BUFF_Suppression = 24,
+	BUFF_Blind = 25,
+	BUFF_Counter = 26,
+	BUFF_Shred = 27,
+	BUFF_Flee = 28,
+	BUFF_Knockup = 29,
+	BUFF_Knockback = 30,
+	BUFF_Disarm = 31,
+	BUFF_Grounded = 32,
+	BUFF_Drowsy = 33,
+	BUFF_Asleep = 34,
+};
+
+enum BTInstanceType
+{
+	DELETE_SELF = 0,
+	DISABLE_SELF = 1,
+	ALWAYS_RUN = 2,
+};
+
+enum AnnouncementEvent
+{
+	START_GAME_MESSAGE1 = 131,
+	START_GAME_MESSAGE2 = 132,
+	START_GAME_MESSAGE3 = 133,
+	START_GAME_MESSAGE4 = 134,
+	START_GAME_MESSAGE5 = 135,
+	VICTORY_POINT_THRESHOLD1 = 151,
+	VICTORY_POINT_THRESHOLD2 = 152,
+	VICTORY_POINT_THRESHOLD3 = 153,
+	VICTORY_POINT_THRESHOLD4 = 154,
+	GAME_MODE_ANNOUNCEMENT1 = 155,
+	GAME_MODE_ANNOUNCEMENT2 = 156,
+	GAME_MODE_ANNOUNCEMENT3 = 157,
+	GAME_MODE_ANNOUNCEMENT4 = 158,
+	GAME_MODE_ANNOUNCEMENT5 = 159,
+	GAME_MODE_ANNOUNCEMENT6 = 160,
+	GAME_MODE_ANNOUNCEMENT7 = 161,
+	GAME_MODE_ANNOUNCEMENT8 = 162,
+	GAME_MODE_ANNOUNCEMENT9 = 163,
+	GAME_MODE_ANNOUNCEMENT10 = 164,
+	GAME_MODE_ANNOUNCEMENT11 = 165,
+	GAME_MODE_ANNOUNCEMENT12 = 166,
+	GAME_MODE_ANNOUNCEMENT13 = 167,
+	GAME_MODE_ANNOUNCEMENT14 = 168,
+	GAME_MODE_ANNOUNCEMENT15 = 169,
+	GAME_MODE_ANNOUNCEMENT16 = 170,
+};
+
+enum AIMissionTopicType
+{
+	BARON = 0,
+	BOSS = 1,
+	DEFEND = 2,
+	SUPPORT = 3,
+	KILL = 4,
+	PUSH = 5,
+	UNKNOWN_MISSION = 6,
+};
+
+enum AIDifficultyType
+{
+	DIFFICULTY_NEWBIE = 0,
+	DIFFICULTY_INTERMEDIATE = 1,
+	DIFFICULTY_ADVANCED = 2,
+	DIFFICULTY_UBER = 3,
+	DIFFICULTY_TUTORIAL = 4,
+	DIFFICULTY_INTRO = 5,
+};
+
+enum ClassID
+{
+	NeutralMinionCamp = 0,
+	FollowerObject = 1,
+	FollowerObjectWithLerpMovement = 2,
+	AIHeroClient = 3,
+	AIMarker = 4,
+	AIMinionClient = 5,
+	LevelPropAIClient = 6,
+	AITurretClient = 7,
+	AITurretCommon = 8,
+	obj_GeneralParticleEmitter = 9,
+	GameObject = 10,
+	MissileClient = 11,
+	DrawFX = 12,
+	UnrevealedTarget = 13,
+	BarracksDampener = 14,
+	Barracks = 15,
+	AnimatedBuilding = 16,
+	BuildingClient = 17,
+	obj_Lake = 18,
+	obj_Levelsizer = 19,
+	obj_NavPoint = 20,
+	obj_SpawnPoint = 21,
+	obj_LampBulb = 22,
+	GrassObject = 23,
+	HQ = 24,
+	obj_InfoPoint = 25,
+	LevelPropGameObject = 26,
+	LevelPropSpawnerPoint = 27,
+	Shop = 28,
+	obj_Turret = 29,
+};

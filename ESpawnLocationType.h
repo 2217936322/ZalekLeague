@@ -1,0 +1,13 @@
+#pragma once
+enum ESpawnLocationType
+{
+	HQ = 0,
+	LOCATION = 1,
+	BARRACKS_LANE_R = 2,
+	BARRACKS_LANE_C = 3,
+	BARRACKS_LANE_L = 4,
+	DAMPENER_LANE_R = 5,
+	DAMPENER_LANE_C = 6,
+	DAMPENER_LANE_L = 7,
+	SHOP = 8,
+};

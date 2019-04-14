@@ -23,10 +23,10 @@ int Main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 		bUninitialized = false;
 	}
 	handleInput();
-	LastHitManager();
-	OrbWalkManager();
-	GetFriendlyMissiles();
-	GetEnemyMissiles();
+	//LastHitManager();
+	//OrbWalkManager();
+	//GetFriendlyMissiles();
+	//GetEnemyMissiles();
 	RenderManager();
 
 	MenuRender();

@@ -27,6 +27,18 @@
     <Filter Include="GUI\Declarations">
       <UniqueIdentifier>{25ce8e27-9131-4807-8916-b9bba7fa16a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{9c88bfe5-ec15-44cf-aee0-fe13c61f5d90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Declarations">
+      <UniqueIdentifier>{304cb978-feb8-4f9c-b34f-b20c23de87de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Implementations">
+      <UniqueIdentifier>{d1b77332-966b-4fc4-bd7f-0d280ca24de4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enums">
+      <UniqueIdentifier>{f68a16a3-1910-44f2-865e-0b295e2d36d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImGui\imgui_widgets.cpp">
@@ -47,10 +59,16 @@
     <ClCompile Include="ImGui\imgui_impl_win32.cpp">
       <Filter>Dependencies\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Minions.cpp">
+      <Filter>Managers\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Objects\Implementations</Filter>
+    </ClCompile>
+    <ClCompile Include="MinionObject.cpp">
+      <Filter>Objects\Implementations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imgui.h">
@@ -89,9 +107,6 @@
     <ClInclude Include="Vector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WndProc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -110,9 +125,6 @@
     <ClInclude Include="InputManager.h">
       <Filter>Managers\Declarations</Filter>
     </ClInclude>
-    <ClInclude Include="MinionManager.h">
-      <Filter>Managers\Declarations</Filter>
-    </ClInclude>
     <ClInclude Include="MissileManager.h">
       <Filter>Managers\Declarations</Filter>
     </ClInclude>
@@ -124,6 +136,51 @@
     </ClInclude>
     <ClInclude Include="Menu.h">
       <Filter>GUI\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="Minions.h">
+      <Filter>Managers\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Objects\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="MinionObject.h">
+      <Filter>Objects\Declarations</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EScope.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="ETeam.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="EUnitType.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="EVariableType.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="EUIElement.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="EUnitTeam.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="ETooltipVariable.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="ESpellParameter.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="ESpellbookType.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="EStatEvent.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="ESpawnLocationType.h">
+      <Filter>Enums</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 #include "LFunctions.h"
 
 #define ME Engine::GetLocalObject()
+
 constexpr auto HOLDPOSITION = 1;
 constexpr auto MOVE = 2;
 constexpr auto ATTACK_UNIT = 3;
