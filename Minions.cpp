@@ -5,7 +5,7 @@
 
 std::vector<GameObject*> GetMinions() {
 	std::vector<GameObject*> Minions;
-	if(GObjectManager) {
+	/*if(GObjectManager) {
 		for(int i = 0; i < 10000; i++) {
 			GameObject* obj = Engine::GetObjectByID(i);
 			if(obj
@@ -14,7 +14,7 @@ std::vector<GameObject*> GetMinions() {
 				Minions.push_back(obj);
 			}
 		}
-	}
+	}*/
 	return Minions;
 }
 

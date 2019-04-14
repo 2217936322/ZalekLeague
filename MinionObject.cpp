@@ -1,6 +1,7 @@
 #include "Engine.h"
 #include "LFunctions.h"
 #include "MinionObject.h"
+#pragma once
 
 bool MinionObject::IsAlive() {
 	return Functions.IsAlive(this) && this->GetHealth() > 0.0f;

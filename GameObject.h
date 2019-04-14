@@ -7,6 +7,18 @@
 class GameObject
 {
 public:
+	class CAIManager
+	{
+	public:
+		Vector GetTargetPos() {
+			return *(Vector*) ((DWORD) this + O_AIMGR_TARGETPOS);
+		}
+	};
+	CAIManager* GetAIManager() {
+		typedef CAIManager* (__thiscall * OriginalFn)(PVOID);
+		return CallVirtual<OriginalFn>(this, 147)(this);
+	};
+
 	bool IsAttackable();
 	bool IsAlive();
 	bool IsEnemy();
@@ -59,4 +71,5 @@ public:
 		DEFINE_MEMBER_N(int HighestObjectID, 0xC + 0x8);
 	};
 };
+
 extern GameObjectManager* GObjectManager;

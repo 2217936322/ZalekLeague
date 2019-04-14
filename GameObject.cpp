@@ -1,6 +1,7 @@
 #include "GameObject.h"
 #include "LFunctions.h"
 #include "Engine.h"
+#pragma once
 
 bool GameObject::IsAttackable() { return this->GetDistToMe() <= ME->GetAttackRange() + (this->GetBoundingRadius() * 2.0f) && this->IsTargetable(); }
 bool GameObject::IsAlive() { return Functions.IsAlive(this) && this->GetHealth() > 0.0f; }

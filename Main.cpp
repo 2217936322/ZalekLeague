@@ -23,6 +23,11 @@ int Main(HWND hwnd, LPDIRECT3DDEVICE9 Device) {
 		bUninitialized = false;
 	}
 	handleInput();
+
+	// Waypoint test.
+	auto color = createRGB(255, 128, 0);
+	Functions.DrawCircle(&ME->GetAIManager()->GetTargetPos(), ME->GetBoundingRadius(), &color, 0, 0.0f, 0, 0.5f);
+
 	//LastHitManager();
 	//OrbWalkManager();
 	//GetFriendlyMissiles();

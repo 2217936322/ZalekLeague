@@ -6,6 +6,10 @@
 // If you are getting the wrong value then try checking Find all occurences. 
 // Most if not all should be accurate though.
 
+//AI Manager offsets
+#define O_AIMGR_TARGETPOS 0x10
+#define O_AIMGR_ISMOVING 0x198
+#define O_AIMGR_ISDASHING 0x1E8
 
 #define FN_GET_BASIC_ATTACK		   0x1B39C0 // 9.7 || E8 ? ? ? ? 8B 8B ? ? ? ? 8B E8 8B 
 #define FN_ISSUE_ORDER			   0x1BE660 // 9.7 || E8 ? ? ? ? 8B 84 24 ? ? ? ? 8B CF F3 

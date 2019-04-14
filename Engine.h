@@ -3,6 +3,7 @@
 #include "Utils.h"
 #include "Vector.h"
 #include "LFunctions.h"
+#include "GameObject.h"
 
 #define ME Engine::GetLocalObject()
 
