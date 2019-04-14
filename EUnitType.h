@@ -1,4 +1,3 @@
-#pragma once
 enum EUnitType
 {
 	MINION = 0,

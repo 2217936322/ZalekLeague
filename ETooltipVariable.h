@@ -1,4 +1,3 @@
-#pragma once
 enum ETooltipVariable
 {
 	F1 = 0,

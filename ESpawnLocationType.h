@@ -1,4 +1,3 @@
-#pragma once
 enum ESpawnLocationType
 {
 	HQ = 0,

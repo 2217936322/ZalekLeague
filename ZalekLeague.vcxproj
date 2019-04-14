@@ -113,7 +113,26 @@
   <ItemGroup>
     <ClInclude Include="BehaviorManager.h" />
     <ClInclude Include="ChampionManager.h" />
-    <ClInclude Include="Enums.h" />
+    <ClInclude Include="EAIDifficultyType.h" />
+    <ClInclude Include="EAIMissionTopicType.h" />
+    <ClInclude Include="EAITaskTopicType.h" />
+    <ClInclude Include="EAnnouncementEvent.h" />
+    <ClInclude Include="EBehaviorResult.h" />
+    <ClInclude Include="EBuffInstanceType.h" />
+    <ClInclude Include="EBuffType.h" />
+    <ClInclude Include="ECharacterRecordParameter.h" />
+    <ClInclude Include="EClassID.h" />
+    <ClInclude Include="ECreatureType.h" />
+    <ClInclude Include="EDamageType.h" />
+    <ClInclude Include="EFloatTextType.h" />
+    <ClInclude Include="EGameDifficultyType.h" />
+    <ClInclude Include="EInputLockType.h" />
+    <ClInclude Include="ELogicResultType.h" />
+    <ClInclude Include="EMinionRoamState.h" />
+    <ClInclude Include="EPrimaryAbilityResourceType.h" />
+    <ClInclude Include="EQuestType.h" />
+    <ClInclude Include="ERoundingStrategy.h" />
+    <ClInclude Include="EScoreEvent.h" />
     <ClInclude Include="ESpawnLocationType.h" />
     <ClInclude Include="ESpellbookType.h" />
     <ClInclude Include="ESpellParameter.h" />

@@ -1,4 +1,3 @@
-#pragma once
 enum ESpellParameter
 {
 	EFFECT1AMOUNT = 3,

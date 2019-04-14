@@ -1,4 +1,3 @@
-#pragma once
 enum EUnitTeam
 {
 	ALLY = 0,

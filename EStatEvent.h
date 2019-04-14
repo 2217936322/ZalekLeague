@@ -1,4 +1,3 @@
-#pragma once
 enum EStatEvent
 {
 	NODE_CAPTURE = 0,

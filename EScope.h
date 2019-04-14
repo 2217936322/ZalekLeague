@@ -1,4 +1,3 @@
-#pragma once
 enum EScope
 {
 	Local = 0,

@@ -1,4 +1,3 @@
-#pragma once
 enum ETeam
 {
 	UNKNOWN = 0,

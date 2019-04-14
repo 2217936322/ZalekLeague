@@ -1,0 +1,16 @@
+enum EPrimaryAbilityResourceType
+{
+	PAR_MANA = 0,
+	PAR_ENERGY = 1,
+	PAR_NONE = 2,
+	PAR_SHIELD = 3,
+	PAR_BATTLEFURY = 4,
+	PAR_DRAGONFURY = 5,
+	PAR_RAGE = 6,
+	PAR_HEAT = 7,
+	PAR_GNARFURY = 8,
+	PAR_FEROCITY = 9,
+	PAR_BLOODWELL = 10,
+	PAR_WIND = 11,
+	PAR_OTHER = 13,
+};

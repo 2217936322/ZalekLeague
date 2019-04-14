@@ -1,4 +1,3 @@
-#pragma once
 enum EUIElement
 {
 	MINIMAP = 0,

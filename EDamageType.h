@@ -1,0 +1,7 @@
+enum EDamageType
+{
+	PHYSICAL_DAMAGE = 0,
+	MAGIC_DAMAGE = 1,
+	TRUE_DAMAGE = 2,
+	MIXED_DAMAGE = 3,
+};
