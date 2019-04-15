@@ -222,6 +222,8 @@ void DevelopmentGUI() {
 
 		ImGui::Text("ZalekLeague Compiled at %s %s\n", __DATE__, __TIME__);
 
+		ImGui::Text("Q Time %f", ME->GetSpellBook()->GetSpellSlotByID(0)->GetSpellInfo()->GetSpellData()->GetCooldownTime());
+
 		std::vector<GameObject*> Me;
 		Me.push_back(ME);
 
@@ -236,6 +238,8 @@ void DevelopmentGUI() {
 		DrawGameObjectTree("Friendly Minions", GetFriendlyMinions());
 
 		DrawGameObjectTree("Monsters", GetMonsters());
+
+
 
 		ImGui::End();
 	} else {
