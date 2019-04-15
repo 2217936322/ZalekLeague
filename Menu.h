@@ -94,6 +94,8 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 				(*obj)->GetEndPos().X, (*obj)->GetEndPos().Y, (*obj)->GetEndPos().Z);
 			ImGui::BulletText("GetVelocity() => (%f, %f, %f)",
 				(*obj)->GetVelocity().X, (*obj)->GetVelocity().Y, (*obj)->GetVelocity().Z);
+			ImGui::BulletText("GetVelocity().Normalize() => (%f, %f, %f)",
+				(*obj)->GetVelocity().Normalize().X, (*obj)->GetVelocity().Normalize().Y, (*obj)->GetVelocity().Normalize().Z);
 			ImGui::TreePop();
 		}
 		i++;
@@ -224,13 +226,17 @@ void DevelopmentGUI() {
 		Me.push_back(ME);
 
 		DrawGameObjectTree("My Champion", Me);
+
 		DrawGameObjectTree("All Champions", GetChampions());
 		DrawGameObjectTree("Enemy Champions", GetEnemyChampions());
 		DrawGameObjectTree("Friendly Champions", GetFriendlyChampions());
-		//	DrawGameObjectTree("All Minions", GetMinions());
-		//	DrawGameObjectTree("Enemy Minions", GetEnemyMinions());
-		//	DrawGameObjectTree("Enemy Minions (Last Hit)", GetLastHitMinions());
-		//	DrawGameObjectTree("Missiles", GetMissiles());
+
+		DrawGameObjectTree("All Minions", GetMinions());
+		DrawGameObjectTree("Enemy Minions", GetEnemyMinions());
+		DrawGameObjectTree("Friendly Minions", GetFriendlyMinions());
+
+		DrawGameObjectTree("Monsters", GetMonsters());
+
 		ImGui::End();
 	} else {
 		ClassicOverlay(

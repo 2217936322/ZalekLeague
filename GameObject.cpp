@@ -7,7 +7,7 @@
 AIManager* GameObject::GetAIManager() {
 	{
 		typedef AIManager* (__thiscall * OriginalFn)(PVOID);
-		return CallVirtual<OriginalFn>(this, 148)(this); // 147?
+		return CallVirtual<OriginalFn>(this, 147)(this); // 147?
 	};
 }
 
@@ -120,7 +120,7 @@ float GameObject::GetBonusAttackDamage() {
 
 float GameObject::GetBoundingRadius() {
 	typedef float(__thiscall * OriginalFn)(PVOID);
-	return CallVirtual<OriginalFn>(this, 37)(this); //36?
+	return CallVirtual<OriginalFn>(this, 36)(this); //36?
 }
 
 float GameObject::GetDistToMe() {

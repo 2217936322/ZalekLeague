@@ -143,14 +143,15 @@ std::vector<GameObject*> GetFriendlyMinions() {
 	return Objects;
 }
 
-std::vector<GameObject*> GetMonster() {
+std::vector<GameObject*> GetMonsters() {
 	GameObjectManager* GObjects = GObjectManager;
 	std::vector<GameObject*> Objects;
 
 	for(int i = 0; i < GObjects->HighestObjectID; i++) {
 		GameObject* Object = GObjects->objectArray[i];
-		if(Object != NULL && Object->IsNeutral())
-			Objects.push_back(Object);
+		if(Object != NULL && Object->IsMinion() && Object->IsNeutral())
+			if(Object->IsAlive())
+				Objects.push_back(Object);
 	}
 
 	return Objects;

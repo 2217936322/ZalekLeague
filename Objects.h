@@ -11,14 +11,14 @@ std::vector<GameObject*> GetChampions();
 std::vector<GameObject*> GetEnemyChampions();
 std::vector<GameObject*> GetFriendlyChampions();
 
-std::vector<GameObject*> GetBaron();
-std::vector<GameObject*> GetDragon();
+//std::vector<GameObject*> GetBaron();
+//std::vector<GameObject*> GetDragon();
 
 std::vector<GameObject*> GetMinions();
 std::vector<GameObject*> GetEnemyMinions();
 std::vector<GameObject*> GetFriendlyMinions();
 
-std::vector<GameObject*> GetMonster();
+std::vector<GameObject*> GetMonsters();
 
 std::vector<GameObject*> GetMissiles();
 std::vector<GameObject*> GetEnemyMissiles();
