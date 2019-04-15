@@ -192,6 +192,10 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="Spells.h" />
+    <ClInclude Include="ESpellSlot.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="detours.lib">

@@ -177,3 +177,32 @@ Vector GameObject::GetEndPos() {
 Vector GameObject::GetVelocity() {
 	return *(Vector*) ((DWORD) this->GetAIManager() + PTR_OBJECT_AI_VELOCITY);
 }
+
+float SpellSlot::GetTime() {
+	return *(float*) ((DWORD) this + 0x28);
+}
+
+int SpellSlot::GetLevel() {
+	return *(int*) ((DWORD) this + 0x20);
+}
+
+char* CSpellEntry::GetSpellName() {
+	auto aux3 = *(DWORD*) ((DWORD) this + 0x4);
+	if(aux3) {
+		auto aux4 = *(DWORD*) (aux3 + 0xC);
+		if(aux4) {
+			if(*(DWORD*) (aux4 + 0x8)) {
+				return (char*) (aux4 + 0x8);
+			}
+		}
+	}
+	return NULL;
+}
+
+CSpellEntry* CSpellBook::GetActiveSpellEntry() {
+	return *(CSpellEntry * *) ((DWORD) this + 0x20);
+}
+
+SpellSlot* CSpellBook::GetSpellSlotByID(int ID) {
+	return *(SpellSlot * *) ((DWORD) this + 0x530 + (0x4 * ID));
+}

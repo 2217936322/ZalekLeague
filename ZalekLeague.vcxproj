@@ -142,6 +142,7 @@
     <ClInclude Include="Enums\EUnitTeam.h" />
     <ClInclude Include="Enums\EUnitType.h" />
     <ClInclude Include="Enums\EVariableType.h" />
+    <ClInclude Include="ESpellSlot.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="detours.h" />
     <ClInclude Include="LFunctions.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Objects.h" />
     <ClInclude Include="Offsets.h" />
+    <ClInclude Include="Spells.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="WndProc.h" />
