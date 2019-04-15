@@ -50,7 +50,7 @@ public:
 	}
 
 	static GameObject * GetObjectByID(int ID) {
-		if(GObjectManager != NULL && ID >= 0 && ID <= 25000) {
+		if(GObjectManager != NULL && ID >= 0 && ID <= 10000) {
 			return GObjectManager->objectArray[ID];
 		}
 		return NULL;

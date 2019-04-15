@@ -221,9 +221,11 @@ void DevelopmentGUI() {
 		ImGui::Begin("Zalek League", false, ImGuiWindowFlags_AlwaysAutoResize);
 
 		ImGui::Text("ZalekLeague Compiled at %s %s\n", __DATE__, __TIME__);
-
-		ImGui::Text("Q Time %f", ME->GetSpellBook()->GetSpellSlotByID(0)->GetSpellInfo()->GetSpellData()->GetCooldownTime());
-
+		auto Q = ME->GetSpellBook()->GetSpellSlotByID(0);
+		ImGui::Text("Q->IsReady() => %d", Q->IsReady());
+		ImGui::Text("Q->GetLevel() => %d", Q->GetLevel());
+		ImGui::Text("Q->GetCooldown() => %f", Q->GetCooldown());
+		ImGui::Text("Q->GetTimeUsed() => %f", Q->GetTimeUsed());
 		std::vector<GameObject*> Me;
 		Me.push_back(ME);
 
