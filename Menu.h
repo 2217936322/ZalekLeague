@@ -242,6 +242,16 @@ void DevelopmentGUI() {
 		ImGui::Begin("Zalek League", false, ImGuiWindowFlags_AlwaysAutoResize);
 
 		ImGui::Text("ZalekLeague Compiled at %s %s\n", __DATE__, __TIME__);
+
+		ImGui::Text("Base Address: %X", baseAddr);
+		ImGui::Text("ME Address: %X", baseAddr + DWORD_LOCAL_PLAYER);
+		ImGui::Text("ObjectManager Address: %X", baseAddr + DWORD_OBJECT_MANAGER);
+
+		//GameObject * Test = GObjectManager->objectArray[1];
+		//ImGui::Text("Test Name %s", Test->GetName());
+
+
+
 		std::vector<GameObject*> Me;
 		Me.push_back(ME);
 
@@ -256,7 +266,6 @@ void DevelopmentGUI() {
 		DrawGameObjectTree("Friendly Minions", GetFriendlyMinions());
 
 		DrawGameObjectTree("Monsters", GetMonsters());
-
 
 
 		ImGui::End();
