@@ -221,7 +221,9 @@ void DevelopmentGUI() {
 		ImGui::Begin("Zalek League", false, ImGuiWindowFlags_AlwaysAutoResize);
 
 		ImGui::Text("ZalekLeague Compiled at %s %s\n", __DATE__, __TIME__);
-		auto Q = ME->GetSpellBook()->GetSpellSlotByID(0);
+		auto Q = ME->GetSpellBook()->GetQ();
+
+
 		ImGui::Text("Q->IsReady() => %d", Q->IsReady());
 		ImGui::Text("Q->GetLevel() => %d", Q->GetLevel());
 		ImGui::Text("Q->GetCooldown() => %f", Q->GetCooldown());
@@ -254,3 +256,60 @@ void DevelopmentGUI() {
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 }
+
+/*
+enum class SpellDataInst
+{
+	//
+	fEffect1 = 0x80,
+	fEffect2 = fEffect1 + 0x4,
+	fEffect3 = fEffect2 + 0x4,
+	fEffect4 = fEffect3 + 0x4,
+	fEffect5 = fEffect4 + 0x4,
+	fEffect6 = fEffect5 + 0x4,
+	fEffect7 = fEffect6 + 0x4,
+	fEffect8 = fEffect7 + 0x4,
+	fEffect9 = fEffect8 + 0x4,
+	fEffect10 = fEffect9 + 0x4,
+	fEffect11 = fEffect10 + 0x4,
+	SpellData = 0x124,
+};
+
+enum class SpellData
+{
+	//
+	Resource = 0x38,
+};
+
+enum class SpellDataResource
+{
+	//
+	eEffect1 = 0xD0,
+	eEffect2 = eEffect1 + 0x1C,
+	eEffect3 = eEffect2 + 0x1C,
+	eEffect4 = eEffect3 + 0x1C,
+	eEffect5 = eEffect4 + 0x1C,
+	eEffect6 = eEffect5 + 0x1C,
+	eEffect7 = eEffect6 + 0x1C,
+	eEffect8 = eEffect7 + 0x1C,
+	eEffect9 = eEffect8 + 0x1C,
+	eEffect10 = eEffect9 + 0x1C,
+	eEffect11 = eEffect10 + 0x1C,
+	//
+};
+
+
+DEFINE_MEMBER_N(float eEffect1[7], Offsets::SpellDataResource::eEffect1);
+DEFINE_MEMBER_N(float eEffect2[7], Offsets::SpellDataResource::eEffect2);
+DEFINE_MEMBER_N(float eEffect3[7], Offsets::SpellDataResource::eEffect3);
+DEFINE_MEMBER_N(float eEffect4[7], Offsets::SpellDataResource::eEffect4);
+DEFINE_MEMBER_N(float eEffect5[7], Offsets::SpellDataResource::eEffect5);
+DEFINE_MEMBER_N(float eEffect6[7], Offsets::SpellDataResource::eEffect6);
+DEFINE_MEMBER_N(float eEffect7[7], Offsets::SpellDataResource::eEffect7);
+DEFINE_MEMBER_N(float eEffect8[7], Offsets::SpellDataResource::eEffect8);
+DEFINE_MEMBER_N(float eEffect9[7], Offsets::SpellDataResource::eEffect9);
+DEFINE_MEMBER_N(float eEffect10[7], Offsets::SpellDataResource::eEffect10);
+DEFINE_MEMBER_N(float eEffect11[7], Offsets::SpellDataResource::eEffect11);
+
+Annie grants herself and Tibbers {{ e1 }}% damage reduction for {{ e3 }} seconds.<br><br>While the shield is active, enemies who basic attack it take {{ e2 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage.
+*/

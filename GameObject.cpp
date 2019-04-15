@@ -158,8 +158,12 @@ short GameObject::GetTargetIndex() {
 	return *(short*) ((DWORD) this + PTR_OBJECT_TARGET_ID);
 }
 
-CSpellBook* GameObject::GetSpellBook() {
-	return (CSpellBook*) ((DWORD) this + PTR_OBJECT_SPELLBOOK);
+SpellBook* GameObject::GetSpellBook() {
+	return (SpellBook*) ((DWORD) this + PTR_OBJECT_SPELLBOOK);
+}
+
+SpellData* GameObject::GetSpellData() {
+	return nullptr;
 }
 
 Vector GameObject::GetPos() {

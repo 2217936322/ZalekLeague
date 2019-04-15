@@ -136,6 +136,7 @@
     <ClInclude Include="Enums\ESpawnLocationType.h" />
     <ClInclude Include="Enums\ESpellbookType.h" />
     <ClInclude Include="Enums\ESpellParameter.h" />
+    <ClInclude Include="Enums\ESpellSlot.h" />
     <ClInclude Include="Enums\EStatEvent.h" />
     <ClInclude Include="Enums\ETeam.h" />
     <ClInclude Include="Enums\ETooltipVariable.h" />
@@ -143,7 +144,6 @@
     <ClInclude Include="Enums\EUnitTeam.h" />
     <ClInclude Include="Enums\EUnitType.h" />
     <ClInclude Include="Enums\EVariableType.h" />
-    <ClInclude Include="ESpellSlot.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="detours.h" />
     <ClInclude Include="LFunctions.h" />

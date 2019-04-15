@@ -55,7 +55,8 @@ public:
 	short GetSourceIndex();
 	short GetTargetIndex();
 
-	CSpellBook* GetSpellBook();
+	SpellBook* GetSpellBook();
+	SpellData* GetSpellData();
 
 	Vector GetPos();
 	Vector GetTargetPos();

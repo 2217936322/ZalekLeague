@@ -397,7 +397,7 @@ public:
 	}
 };
 
-class CSpellBook
+class SpellBook
 {
 public:
 

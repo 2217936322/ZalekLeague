@@ -194,7 +194,7 @@
     </ClInclude>
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Spells.h" />
-    <ClInclude Include="ESpellSlot.h">
+    <ClInclude Include="Enums\ESpellSlot.h">
       <Filter>Enums</Filter>
     </ClInclude>
   </ItemGroup>
