@@ -32,7 +32,7 @@ public:
 	bool IsVisible();
 
 	char* GetName();
-	char* GetUniqueName();
+	char* GetActorName();
 
 	DWORD GetNetworkID();
 
@@ -56,7 +56,6 @@ public:
 	short GetTargetIndex();
 
 	SpellBook* GetSpellBook();
-	SpellData* GetSpellData();
 
 	Vector GetPos();
 	Vector GetTargetPos();

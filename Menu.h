@@ -21,23 +21,44 @@ static void InitializeImGuiContext(HWND Chwnd, IDirect3DDevice9* CDevice) {
 
 }
 
-//bool endsWith(const std::string& mainStr, const std::string& toMatch) {
-//	if(mainStr.size() >= toMatch.size() &&
-//		mainStr.compare(mainStr.size() - toMatch.size(), toMatch.size(), toMatch) == 0)
-//		return true;
-//	else
-//		return false;
-//}
-
-			//TODO: Implement Minion Type in GameObject.cpp and h
-			//ImGui::BulletText("IsCannon() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Siege"));
-			//ImGui::BulletText("IsMelee() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Melee"));
-			//ImGui::BulletText("IsRanged() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Ranged"));
-
 void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 	int i = 0;
 	for(std::vector<GameObject*>::iterator obj = obj_vector.begin(); obj != obj_vector.end(); obj++) {
-		if(ImGui::TreeNode((void*) (intptr_t) i, "%s : %d | Dist = %f", (*obj)->GetUniqueName(), i, (*obj)->GetDistToMe())) {
+		if(ImGui::TreeNode((void*) (intptr_t) i, "%s : %d | Dist = %f", (*obj)->GetActorName(), i, (*obj)->GetDistToMe())) {
+
+			if((*obj)->IsHero()) {
+				if(ImGui::TreeNode("SpellBook")) {
+					SpellSlot* Q = (*obj)->GetSpellBook()->GetQ();
+					ImGui::Separator();
+					ImGui::Text("Q->IsReady() => %d", Q->IsReady());
+					ImGui::Text("Q->GetLevel() => %d", Q->GetLevel());
+					ImGui::Text("Q->GetCooldown() => %f", Q->GetCooldown());
+					ImGui::Text("Q->GetTimeUsed() => %f", Q->GetTimeUsed());
+
+					SpellSlot* W = (*obj)->GetSpellBook()->GetW();
+					ImGui::Separator();
+					ImGui::Text("W->IsReady() => %d", W->IsReady());
+					ImGui::Text("W->GetLevel() => %d", W->GetLevel());
+					ImGui::Text("W->GetCooldown() => %f", W->GetCooldown());
+					ImGui::Text("W->GetTimeUsed() => %f", W->GetTimeUsed());
+
+					SpellSlot* E = (*obj)->GetSpellBook()->GetE();
+					ImGui::Separator();
+					ImGui::Text("E->IsReady() => %d", E->IsReady());
+					ImGui::Text("E->GetLevel() => %d", E->GetLevel());
+					ImGui::Text("E->GetCooldown() => %f", E->GetCooldown());
+					ImGui::Text("E->GetTimeUsed() => %f", E->GetTimeUsed());
+
+					SpellSlot* R = (*obj)->GetSpellBook()->GetR();
+					ImGui::Separator();
+					ImGui::Text("R->IsReady() => %d", R->IsReady());
+					ImGui::Text("R->GetLevel() => %d", R->GetLevel());
+					ImGui::Text("R->GetCooldown() => %f", R->GetCooldown());
+					ImGui::Text("R->GetTimeUsed() => %f", R->GetTimeUsed());
+					ImGui::TreePop();
+				}
+			}
+
 			ImGui::Text("bool");
 			ImGui::BulletText("IsAttackable() => %d", (*obj)->IsAttackable());
 			ImGui::BulletText("IsAlive() => %d", (*obj)->IsAlive());
@@ -58,7 +79,7 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 
 			ImGui::Text("char*");
 			ImGui::BulletText("GetName() => %s", (*obj)->GetName());
-			ImGui::BulletText("GetUniqueName() => %s", (*obj)->GetUniqueName());
+			ImGui::BulletText("GetUniqueName() => %s", (*obj)->GetActorName());
 
 			ImGui::Text("DWORD");
 			ImGui::BulletText("GetNetworkID() => %lu", (*obj)->GetNetworkID());
@@ -221,13 +242,6 @@ void DevelopmentGUI() {
 		ImGui::Begin("Zalek League", false, ImGuiWindowFlags_AlwaysAutoResize);
 
 		ImGui::Text("ZalekLeague Compiled at %s %s\n", __DATE__, __TIME__);
-		auto Q = ME->GetSpellBook()->GetQ();
-
-
-		ImGui::Text("Q->IsReady() => %d", Q->IsReady());
-		ImGui::Text("Q->GetLevel() => %d", Q->GetLevel());
-		ImGui::Text("Q->GetCooldown() => %f", Q->GetCooldown());
-		ImGui::Text("Q->GetTimeUsed() => %f", Q->GetTimeUsed());
 		std::vector<GameObject*> Me;
 		Me.push_back(ME);
 
@@ -312,4 +326,201 @@ DEFINE_MEMBER_N(float eEffect10[7], Offsets::SpellDataResource::eEffect10);
 DEFINE_MEMBER_N(float eEffect11[7], Offsets::SpellDataResource::eEffect11);
 
 Annie grants herself and Tibbers {{ e1 }}% damage reduction for {{ e3 }} seconds.<br><br>While the shield is active, enemies who basic attack it take {{ e2 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage.
+*/
+
+/*
+
+
+//
+//class SpellData
+//{
+//	char* GetMissileName() {
+//		return GetStr((DWORD) this + 0x0058);
+//	}
+//};
+//
+//class SpellInfo
+//{
+//public:
+//	SpellData* GetSpellData() {
+//		return (SpellData*) ((DWORD) this + 0x34);
+//	}
+//};
+
+
+//class SpellData
+//{
+//public:
+//	char* GetMissileName() {
+//		return GetStr((DWORD) this + 0x0058);
+//	}
+//
+//	char* GetSpellName() {
+//		auto aux3 = *(DWORD*) ((DWORD) this + 0x4);
+//		if(aux3) {
+//			auto aux4 = *(DWORD*) (aux3 + 0xC);
+//			if(aux4) {
+//				if(*(DWORD*) (aux4 + 0x8)) {
+//					return (char*) (aux4 + 0x8);
+//				}
+//			}
+//		}
+//		return NULL;
+//	}
+//
+//	//char* GetSpellName2() {
+//	//	return GetStr((DWORD) this + 0x007C);
+//	//}
+//
+//	char* GetDescription() {
+//		return GetStr((DWORD) this + 0x0088);
+//	}
+//
+//	float GetEffectAmount() {
+//		return *(float*) ((DWORD) this + 0xD0);
+//	}
+//
+//	float GetIncreaseDamage() {
+//		return *(float*) ((DWORD) this + 0xEC);
+//	}
+//
+//	float GetSpellDuration() {
+//		return *(float*) ((DWORD) this + 0x108);
+//	}
+//
+//	float GetRootDuration() {
+//		return *(float*) ((DWORD) this + 0x15C);
+//	}
+//
+//	float GetIncreaseDamageBonus() {
+//		return *(float*) ((DWORD) this + 0x178);
+//	}
+//
+//	float GetCoefficient() {
+//		return *(float*) ((DWORD) this + 0x200);
+//	}
+//
+//	float GetCoefficient2() {
+//		return *(float*) ((DWORD) this + 0x204);
+//	}
+//
+//	int GetMaxHighlightTargets() {
+//		return *(int*) ((DWORD) this + 0x208);
+//	}
+//
+//	float GetCooldownTime() {
+//		return *(float*) ((DWORD) this + 0x280);
+//	}
+//
+//	float GetDelayCastOffsetPercent() {
+//		return *(float*) ((DWORD) this + 0x29C);
+//	}
+//
+//	float GetDelayTotalTimePercent() {
+//		return *(float*) ((DWORD) this + 0x2A0);
+//	}
+//
+//	int GetMaxAmmo() {
+//		return *(int*) ((DWORD) this + 0x31C);
+//	}
+//
+//	int GetAmmoUsed() {
+//		return *(int*) ((DWORD) this + 0x338);
+//	}
+//
+//	float GetAmmoRechargeTime() {
+//		return *(float*) ((DWORD) this + 0x354);
+//	}
+//
+//	float GetMissileSpeed() {
+//		return *(float*) ((DWORD) this + 0x450);
+//	}
+//};
+
+//class SpellData
+//{
+//public:
+//	char* GetMissileName() {
+//		return GetStr((DWORD) this + 0x0058);
+//	}
+//
+//	char* GetSpellName() {
+//		return GetStr((DWORD) this + 0x007C);
+//	}
+//
+//	char* GetDescription() {
+//		return GetStr((DWORD) this + 0x0088);
+//	}
+//
+//	float GetEffectAmount() {
+//		return *(float*) ((DWORD) this + 0xD0);
+//	}
+//
+//	float GetIncreaseDamage() {
+//		return *(float*) ((DWORD) this + 0xEC);
+//	}
+//
+//	float GetSpellDuration() {
+//		return *(float*) ((DWORD) this + 0x108);
+//	}
+//
+//	float GetRootDuration() {
+//		return *(float*) ((DWORD) this + 0x15C);
+//	}
+//
+//	float GetIncreaseDamageBonus() {
+//		return *(float*) ((DWORD) this + 0x178);
+//	}
+//
+//	float GetCoefficient() {
+//		return *(float*) ((DWORD) this + 0x200);
+//	}
+//
+//	float GetCoefficient2() {
+//		return *(float*) ((DWORD) this + 0x204);
+//	}
+//
+//	int GetMaxHighlightTargets() {
+//		return *(int*) ((DWORD) this + 0x208);
+//	}
+//
+//	float GetCooldownTime() {
+//		return *(float*) ((DWORD) this + 0x280);
+//	}
+//
+//	float GetDelayCastOffsetPercent() {
+//		return *(float*) ((DWORD) this + 0x29C);
+//	}
+//
+//	float GetDelayTotalTimePercent() {
+//		return *(float*) ((DWORD) this + 0x2A0);
+//	}
+//
+//	int GetMaxAmmo() {
+//		return *(int*) ((DWORD) this + 0x31C);
+//	}
+//	int GetAmmoUsed() {
+//		return *(int*) ((DWORD) this + 0x338);
+//	}
+//	float GetAmmoRechargeTime() {
+//		return *(float*) ((DWORD) this + 0x354);
+//	}
+//
+//	float GetMissileSpeed() {
+//		return *(float*) ((DWORD) this + 0x450);
+//	}
+//};
+
+//TODO: Implement Minion Type in GameObject.cpp and h
+//ImGui::BulletText("IsCannon() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Siege"));
+//ImGui::BulletText("IsMelee() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Melee"));
+//ImGui::BulletText("IsRanged() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Ranged"));
+
+//bool endsWith(const std::string& mainStr, const std::string& toMatch) {
+//	if(mainStr.size() >= toMatch.size() &&
+//		mainStr.compare(mainStr.size() - toMatch.size(), toMatch.size(), toMatch) == 0)
+//		return true;
+//	else
+//		return false;
+//}
 */

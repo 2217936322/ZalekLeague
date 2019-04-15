@@ -90,8 +90,8 @@ char* GameObject::GetName() {
 	return GetStr((DWORD) this + PTR_OBJECT_NAME);
 };
 
-char* GameObject::GetUniqueName() {
-	return GetStr((DWORD) this + PTR_OBJECT_UNIQUE_NAME);
+char* GameObject::GetActorName() {
+	return GetStr((DWORD) this + PTR_OBJECT_ACTOR_NAME);
 }
 
 DWORD GameObject::GetNetworkID() {
@@ -160,10 +160,6 @@ short GameObject::GetTargetIndex() {
 
 SpellBook* GameObject::GetSpellBook() {
 	return (SpellBook*) ((DWORD) this + PTR_OBJECT_SPELLBOOK);
-}
-
-SpellData* GameObject::GetSpellData() {
-	return nullptr;
 }
 
 Vector GameObject::GetPos() {
