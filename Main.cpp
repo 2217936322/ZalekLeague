@@ -24,7 +24,7 @@ int Main() {
 		}
 		return 1;
 	} else {
-		DarkOverlay(ImGui::GetMousePos(), "Waiting for League to load");
+		DarkOverlay(ImGui::GetMousePos(), "ZalekLeague is up to date for 9.7.269.6900[PUBLIC]");
 		return 0;
 	}
 }
