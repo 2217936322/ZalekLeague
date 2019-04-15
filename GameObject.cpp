@@ -22,9 +22,17 @@ bool GameObject::IsAlive() {
 		&& this->GetHealth() > 0.0f;
 }
 
+//bool GameObject::IsBaron() {
+//	return Functions.IsBaron(this);
+//}
+
 bool GameObject::IsDashing() {
 	return *(bool*) ((DWORD) this->GetAIManager() + PTR_OBJECT_AI_IS_MOVING);
 }
+
+//bool GameObject::IsDragon() {
+//	return Functions.IsDragon(this);
+//}
 
 bool GameObject::IsEnemy() {
 	return (ME->GetTeam() == ETeam::ORDER && this->GetTeam() == ETeam::CHAOS || ME->GetTeam() == ETeam::CHAOS && this->GetTeam() == ETeam::ORDER);
@@ -78,13 +86,13 @@ bool GameObject::IsVisible() {
 	return *(bool*) ((DWORD) this + PTR_OBJECT_IS_VISIBLE);
 }
 
-char* GameObject::GetChampionName() {
-	return GetStr((DWORD) this + PTR_OBJECT_NAME_STRING);
-}
-
 char* GameObject::GetName() {
-	return GetStr((DWORD) this + PTR_OBJECT_IDENTIFIER_NAME);
+	return GetStr((DWORD) this + PTR_OBJECT_NAME);
 };
+
+char* GameObject::GetUniqueName() {
+	return GetStr((DWORD) this + PTR_OBJECT_UNIQUE_NAME);
+}
 
 DWORD GameObject::GetNetworkID() {
 	return *(DWORD*) ((DWORD) this + PTR_OBJECT_NETWORK_ID);

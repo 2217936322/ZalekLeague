@@ -13,7 +13,9 @@ public:
 
 	bool IsAttackable();
 	bool IsAlive();
+	//bool IsBaron();
 	bool IsDashing();
+	//bool IsDragon();
 	bool IsEnemy();
 	bool IsFriendly();
 	bool IsHero();
@@ -28,8 +30,8 @@ public:
 	bool IsTurret();
 	bool IsVisible();
 
-	char* GetChampionName();
 	char* GetName();
+	char* GetUniqueName();
 
 	DWORD GetNetworkID();
 

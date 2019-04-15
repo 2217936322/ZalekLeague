@@ -2,14 +2,11 @@
 #include "ImGui/imgui_impl_dx9.h"
 #include "ImGui/imgui_impl_win32.h"
 #include "d3d9helper.h"
-//#include "BehaviorManager.h"
-//#include "MissileManager.h"
-//#include "ChampionManager.h"
-//#include "MinionManager.h"
-#include "RenderManager.h"
+#include "WndProc.h"
+
 #pragma once
 static bool draw_menu = true;
-static void MenuInit(HWND Chwnd, IDirect3DDevice9* CDevice) {
+static void InitializeImGuiContext(HWND Chwnd, IDirect3DDevice9* CDevice) {
 	HWND hwnd = Chwnd;
 	IDirect3DDevice9* Device = CDevice;
 	//IMGUI_CHECKVERSION();
@@ -17,7 +14,6 @@ static void MenuInit(HWND Chwnd, IDirect3DDevice9* CDevice) {
 	ImGuiIO& io = ImGui::GetIO();
 	(void) io;
 	ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_NoMouseCursorChange;
-	ImGui::StyleColorsDark();
 	ImGui_ImplWin32_Init(hwnd);
 	ImGui_ImplDX9_Init(Device);
 
@@ -205,11 +201,94 @@ void MenuRender() {
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 }
 
-void OverlayTest(ImVec2 screen_pos, char* text) {
+void Overlay(ImVec2 screen_pos, char* text) {
 	ImGui_ImplDX9_NewFrame();
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
-	ImGui::Begin("Overlay Test", false, ImGuiWindowFlags_NoTitleBar + ImGuiWindowFlags_NoResize + ImGuiWindowFlags_NoMove + ImGuiWindowFlags_NoScrollbar);
+	ImGui::Begin("Overlay",
+		false,
+		ImGuiWindowFlags_NoTitleBar
+		+ ImGuiWindowFlags_NoResize
+		+ ImGuiWindowFlags_NoMove
+		+ ImGuiWindowFlags_NoScrollbar
+		+ ImGuiWindowFlags_NoBackground);
+	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
+	ImGui::SetWindowPos(
+		ImVec2(
+		(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
+			(screen_pos.y - ImGui::GetWindowSize().y / -.5))
+
+	);
+	ImGui::Text(text);
+	ImGui::End();
+	ImGui::EndFrame();
+	ImGui::Render();
+	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+
+}
+
+void ClassicOverlay(ImVec2 screen_pos, char* text) {
+	ImGui_ImplDX9_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+	ImGui::StyleColorsClassic();
+	ImGui::Begin("Overlay",
+		false,
+		ImGuiWindowFlags_NoTitleBar
+		+ ImGuiWindowFlags_NoResize
+		+ ImGuiWindowFlags_NoMove
+		+ ImGuiWindowFlags_NoScrollbar);
+	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
+	ImGui::SetWindowPos(
+		ImVec2(
+		(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
+			(screen_pos.y - ImGui::GetWindowSize().y / -.5))
+
+	);
+	ImGui::Text(text);
+	ImGui::End();
+	ImGui::EndFrame();
+	ImGui::Render();
+	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+
+}
+
+void DarkOverlay(ImVec2 screen_pos, char* text) {
+	ImGui_ImplDX9_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+	ImGui::StyleColorsDark();
+	ImGui::Begin("Overlay",
+		false,
+		ImGuiWindowFlags_NoTitleBar
+		+ ImGuiWindowFlags_NoResize
+		+ ImGuiWindowFlags_NoMove
+		+ ImGuiWindowFlags_NoScrollbar);
+	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
+	ImGui::SetWindowPos(
+		ImVec2(
+		(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
+			(screen_pos.y - ImGui::GetWindowSize().y / -.5))
+
+	);
+	ImGui::Text(text);
+	ImGui::End();
+	ImGui::EndFrame();
+	ImGui::Render();
+	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+}
+
+void LightOverlay(ImVec2 screen_pos, char* text) {
+	ImGui_ImplDX9_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+	ImGui::StyleColorsLight();
+	ImGui::Begin("Overlay",
+		false,
+		ImGuiWindowFlags_NoTitleBar
+		+ ImGuiWindowFlags_NoResize
+		+ ImGuiWindowFlags_NoMove
+		+ ImGuiWindowFlags_NoScrollbar);
 	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
 	ImGui::SetWindowPos(
 		ImVec2(

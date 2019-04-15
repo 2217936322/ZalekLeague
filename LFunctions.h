@@ -16,6 +16,8 @@ public:
 	typedef int* (__thiscall* fnCastSpell)(DWORD spellbook_addr, int* spellslot, int SlotID, Vector* targetpos, Vector* startpos, DWORD NetworkID);
 	typedef void(__thiscall* fnPrintChat)(DWORD ChatClient, const char* Message, int Color);
 
+	//typedef bool(__cdecl* fnIsBaron)(GameObject* pObj);
+	//typedef bool(__cdecl* fnIsDragon)(GameObject* pObj);
 	typedef bool(__cdecl* fnIsHero)(GameObject* pObj);
 	typedef bool(__cdecl* fnIsMissile)(GameObject* pObj);
 	typedef bool(__cdecl* fnIsMinion)(GameObject* pObj);
@@ -31,6 +33,8 @@ public:
 class LFunctions
 {
 public:
+	//Typedefs::fnIsBaron IsBaron;
+	//Typedefs::fnIsDragon IsDragon;
 	Typedefs::fnIsTurret IsTurret;
 	Typedefs::fnIsMinion IsMinion;
 	Typedefs::fnIsHero IsHero;

@@ -107,12 +107,9 @@
     <ClCompile Include="ImGui\imgui_impl_win32.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MinionObject.cpp" />
-    <ClCompile Include="Minions.cpp" />
+    <ClCompile Include="Objects.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BehaviorManager.h" />
-    <ClInclude Include="ChampionManager.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Enums\EAIDifficultyType.h" />
     <ClInclude Include="Enums\EAIMissionTopicType.h" />
@@ -157,16 +154,11 @@
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="MinionObject.h" />
-    <ClInclude Include="Minions.h" />
-    <ClInclude Include="MissileManager.h" />
+    <ClInclude Include="Objects.h" />
     <ClInclude Include="Offsets.h" />
-    <ClInclude Include="RenderManager.h" />
-    <ClInclude Include="SpellManager.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="WndProc.h" />
-    <ClInclude Include="InputManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="detours.lib" />
