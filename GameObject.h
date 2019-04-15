@@ -37,6 +37,7 @@ public:
 
 	float GetArmor();
 	float GetAttackRange();
+	float GetAttackSpeed();
 	float GetBaseAttackDamage();
 	float GetBonusAttackDamage();
 	float GetBoundingRadius();
@@ -44,6 +45,7 @@ public:
 	float GetHealth();
 	float GetMaxHealth();
 	float GetTotalAttackDamage();
+
 
 	int GetLevel();
 	int GetTeam();
@@ -56,6 +58,7 @@ public:
 	Vector GetTargetPos();
 	Vector GetStartPos();
 	Vector GetEndPos();
+	Vector GetVelocity();
 };
 
 class GameObjectManager

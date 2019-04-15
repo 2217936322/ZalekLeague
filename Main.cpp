@@ -16,11 +16,7 @@ GameObjectManager* GObjectManager;
 int Main() {
 	if(ME) {
 		if(DEVELOPMENT_MODE) {
-			//DevelopmentMenu();
-			ClassicOverlay(
-				ImGui::GetMousePos(),
-				"ZalekLeague is in Development Mode."
-			);
+			DevelopmentGUI();
 		}
 		return 1;
 	} else {

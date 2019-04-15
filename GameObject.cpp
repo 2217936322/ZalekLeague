@@ -7,7 +7,7 @@
 AIManager* GameObject::GetAIManager() {
 	{
 		typedef AIManager* (__thiscall * OriginalFn)(PVOID);
-		return CallVirtual<OriginalFn>(this, 147)(this);
+		return CallVirtual<OriginalFn>(this, 148)(this); // 147?
 	};
 }
 
@@ -106,6 +106,10 @@ float GameObject::GetAttackRange() {
 	return *(float*) ((DWORD) this + PTR_OBJECT_ATTACK_RANGE);
 }
 
+float GameObject::GetAttackSpeed() {
+	return 1 / Functions.GetAttackDelay(this);
+}
+
 float GameObject::GetBaseAttackDamage() {
 	return *(float*) ((DWORD) this + PTR_OBJECT_BASE_ATTACK);
 }
@@ -116,7 +120,7 @@ float GameObject::GetBonusAttackDamage() {
 
 float GameObject::GetBoundingRadius() {
 	typedef float(__thiscall * OriginalFn)(PVOID);
-	return CallVirtual<OriginalFn>(this, 36)(this);
+	return CallVirtual<OriginalFn>(this, 37)(this); //36?
 }
 
 float GameObject::GetDistToMe() {
@@ -168,4 +172,8 @@ Vector GameObject::GetStartPos() {
 
 Vector GameObject::GetEndPos() {
 	return *(Vector*) ((DWORD) this + PTR_OBJECT_SPELL_END_POS);
+}
+
+Vector GameObject::GetVelocity() {
+	return *(Vector*) ((DWORD) this->GetAIManager() + PTR_OBJECT_AI_VELOCITY);
 }
