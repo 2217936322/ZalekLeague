@@ -22,7 +22,7 @@ int Main() {
 		if(GetAsyncKeyState(VK_INSERT) & 1)
 			bDrawGUI = !bDrawGUI;
 
-		Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z); // &vecIn->SwitchYZ();
+		Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z);
 		Vector vecScreen = Vector();
 		bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
 		ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
@@ -30,12 +30,25 @@ int Main() {
 
 		return 1;
 	} else {
-		DarkOverlay(ImGui::GetMousePos(), "ZalekLeague is up to date for 9.7.269.6900[PUBLIC]");
-		return 0;
+		// Loading Screen
+		char* text = "ZalekLeague is up to date for 9.7.269.6900[PUBLIC]";
+		ImGui_ImplDX9_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+		ImGui::Begin("LoadingScreenOverlay##LoadingScreenOverlay_", false, ImGuiWindowFlags_NoTitleBar + ImGuiWindowFlags_AlwaysAutoResize + ImGuiWindowFlags_NoScrollbar);
+		ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
+		ImGui::SetWindowPos(ImVec2((ImGui::GetMousePos().x - (ImGui::GetWindowSize().x / 2.0f) - 1.0f), (ImGui::GetMousePos().y - ImGui::GetWindowSize().y / -0.5f)));
+		ImGui::Text(text);
+		ImGui::End();
+		ImGui::EndFrame();
+		ImGui::Render();
+		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+		return 2;
 	}
+	return 0;
 }
 
-typedef HRESULT(WINAPI* Prototype_Present)(LPDIRECT3DDEVICE9, CONST RECT*, CONST RECT*, HWND, CONST RGNDATA*);
+typedef HRESULT(WINAPI * Prototype_Present)(LPDIRECT3DDEVICE9, CONST RECT*, CONST RECT*, HWND, CONST RGNDATA*);
 Prototype_Present Original_Present;
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -46,7 +59,7 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	return CallWindowProc(gWNDPROC, hWnd, uMsg, wParam, lParam);
 }
 
-HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion) {
+HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT * pSrcRect, CONST RECT * pDestRect, HWND hDestWindow, CONST RGNDATA * pDirtyRegion) {
 	if(bUninitialized) {
 		HWND hwnd = FindWindow(NULL, "League of Legends (TM) Client");
 		gWNDPROC = (WNDPROC)

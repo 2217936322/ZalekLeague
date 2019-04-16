@@ -185,30 +185,33 @@ void ClassicOverlay(ImVec2 screen_pos, char* text) {
 }
 
 void DarkOverlay(ImVec2 screen_pos, char* text) {
-	if(!bDrawGUI) {
-		ImGui_ImplDX9_NewFrame();
-		ImGui_ImplWin32_NewFrame();
-		ImGui::NewFrame();
-		ImGui::StyleColorsDark();
-		ImGui::Begin("Overlay",
-			false,
-			ImGuiWindowFlags_NoTitleBar
-			+ ImGuiWindowFlags_NoResize
-			+ ImGuiWindowFlags_NoMove
-			+ ImGuiWindowFlags_NoScrollbar);
-		ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
-		ImGui::SetWindowPos(
-			ImVec2(
-			(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
-				(screen_pos.y - ImGui::GetWindowSize().y / -.5))
 
-		);
-		ImGui::Text(text);
-		ImGui::End();
-		ImGui::EndFrame();
-		ImGui::Render();
-		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-	}
+	ImGui_ImplDX9_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+	ImGui::StyleColorsDark();
+	ImGui::Begin("Overlay",
+		false,
+		ImGuiWindowFlags_NoTitleBar
+		+ ImGuiWindowFlags_AlwaysAutoResize
+		+ ImGuiWindowFlags_NoInputs
+		+ ImGuiWindowFlags_NoMouseInputs
+		+ ImGuiWindowFlags_NoMove
+		+ ImGuiWindowFlags_NoScrollbar
+	);
+	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
+	ImGui::SetWindowPos(
+		ImVec2(
+		(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
+			(screen_pos.y - ImGui::GetWindowSize().y / -.5))
+
+	);
+	ImGui::Text(text);
+	ImGui::End();
+	ImGui::EndFrame();
+	ImGui::Render();
+	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+
 }
 
 void DevelopmentGUI() {
