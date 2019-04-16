@@ -10,7 +10,10 @@ int SpellSlot::GetLevel() {
 }
 
 float SpellSlot::GetCooldown() {
-	return *(float*) ((DWORD) this + 0x28) - Engine::GetGameTime();
+	float cd = *(float*) ((DWORD) this + 0x28) - Engine::GetGameTime();
+	if(cd <= 0.0f)
+		cd = 0.0f;
+	return cd;
 }
 
 float SpellSlot::GetTimeUsed() {
