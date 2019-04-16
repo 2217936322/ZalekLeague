@@ -1,211 +1,216 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    <Filter Include="Core">
+      <UniqueIdentifier>{00a0508c-b8d3-4d08-8fed-85a7b8507a32}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dependencies">
+    <Filter Include="Core\Enums">
+      <UniqueIdentifier>{f68a16a3-1910-44f2-865e-0b295e2d36d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Dependencies">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="Dependencies\ImGui">
+    <Filter Include="Core\Dependencies\ImGui">
       <UniqueIdentifier>{98816ad0-758a-4e01-ac5c-72e304c67572}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Enums">
-      <UniqueIdentifier>{f68a16a3-1910-44f2-865e-0b295e2d36d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject">
+    <Filter Include="Core\Objects">
       <UniqueIdentifier>{9c88bfe5-ec15-44cf-aee0-fe13c61f5d90}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ImGui\imgui_widgets.cpp">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui.cpp">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_demo.cpp">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_draw.cpp">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_impl_dx9.cpp">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_impl_win32.cpp">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameObject.cpp">
-      <Filter>GameObject</Filter>
+      <Filter>Core\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Objects.cpp">
-      <Filter>GameObject</Filter>
+      <Filter>Core\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="Spells.cpp" />
+    <ClCompile Include="Spells.cpp">
+      <Filter>Core\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imgui.h">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imgui_impl_dx9.h">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imgui_impl_win32.h">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imgui_internal.h">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imstb_rectpack.h">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imstb_textedit.h">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imstb_truetype.h">
-      <Filter>Dependencies\ImGui</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">
-      <Filter>Dependencies\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="Offsets.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WndProc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LFunctions.h">
-      <Filter>Header Files</Filter>
+      <Filter>Core\Dependencies\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="detours.h">
-      <Filter>Dependencies</Filter>
+      <Filter>Core\Dependencies</Filter>
     </ClInclude>
     <ClInclude Include="Enums\ECharacterRecordParameter.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EClassID.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\ECreatureType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EDamageType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EFloatTextType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EGameDifficultyType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EInputLockType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\ELogicResultType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EMinionRoamState.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EPrimaryAbilityResourceType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EQuestType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\ERoundingStrategy.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EScope.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EScoreEvent.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\ESpawnLocationType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\ESpellbookType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\ESpellParameter.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EStatEvent.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\ETeam.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\ETooltipVariable.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EUIElement.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EUnitTeam.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EUnitType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EVariableType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EAIDifficultyType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EAIMissionTopicType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EAITaskTopicType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EAnnouncementEvent.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EBehaviorResult.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EBuffInstanceType.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="Enums\EBuffType.h">
-      <Filter>Enums</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine.h">
-      <Filter>Header Files</Filter>
+      <Filter>Core\Enums</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>GameObject</Filter>
+      <Filter>Core\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Objects.h">
-      <Filter>GameObject</Filter>
+      <Filter>Core\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="Spells.h" />
     <ClInclude Include="Enums\ESpellSlot.h">
-      <Filter>Enums</Filter>
+      <Filter>Core\Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="Spells.h">
+      <Filter>Core\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="LFunctions.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Offsets.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="WndProc.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="detours.lib">
-      <Filter>Dependencies</Filter>
+      <Filter>Core\Dependencies</Filter>
     </Library>
   </ItemGroup>
   <ItemGroup>
     <None Include="detours.pdb">
-      <Filter>Dependencies</Filter>
+      <Filter>Core\Dependencies</Filter>
     </None>
   </ItemGroup>
 </Project>

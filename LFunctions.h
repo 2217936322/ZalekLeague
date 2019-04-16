@@ -10,6 +10,8 @@ public:
 	typedef float(__cdecl* fnGetAttackDelay)(GameObject* pObj);
 	//typedef float(__cdecl* fnGetBasicAttack)(GameObject* pObj);
 
+	typedef bool(__cdecl* fnWorldToScreen)(Vector* vIn, Vector* vOut);
+
 	typedef void(__cdecl* fnDrawCircle)(Vector* position, float range, int* color, int a4, float a5, int a6, float alpha);
 	//typedef void(__cdecl* fnDrawFloatText)(GameObject* startpos, char* text);
 
@@ -51,6 +53,7 @@ public:
 	Typedefs::fnGetAttackDelay GetAttackDelay;
 	//Typedefs::fnGetBasicAttack GetBasicAttack;
 	Typedefs::fnDrawCircle DrawCircle;
+	Typedefs::fnWorldToScreen WorldToScreen;
 	//Typedefs::fnDrawFloatText DrawFloatText;
 	Typedefs::fnCastSpell CastSpell;
 	Typedefs::fnPrintChat PrintChat;

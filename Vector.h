@@ -6,7 +6,7 @@ struct Vector
 {
 	float X, Y, Z;
 
-	//inline Vector(void) {}
+	inline Vector(void) {}
 	inline Vector(const float x, const float y, const float z) {
 		X = x;
 		Y = y;

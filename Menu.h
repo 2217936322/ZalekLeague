@@ -1,13 +1,13 @@
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_dx9.h"
 #include "ImGui/imgui_impl_win32.h"
-#include "d3d9helper.h"
 #include "WndProc.h"
 #include <vector>
 #include "Objects.h"
-
 #pragma once
+
 bool bDrawGUI = true;
+
 static void InitializeImGuiContext(HWND Chwnd, IDirect3DDevice9* CDevice) {
 	HWND hwnd = Chwnd;
 	IDirect3DDevice9* Device = CDevice;
@@ -131,106 +131,84 @@ void DrawGameObjectTree(char* label, std::vector<GameObject*> obj_vector) {
 }
 
 void Overlay(ImVec2 screen_pos, char* text) {
-	ImGui_ImplDX9_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-	ImGui::Begin("Overlay",
-		false,
-		ImGuiWindowFlags_NoTitleBar
-		+ ImGuiWindowFlags_NoResize
-		+ ImGuiWindowFlags_NoMove
-		+ ImGuiWindowFlags_NoScrollbar
-		+ ImGuiWindowFlags_NoBackground);
-	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
-	ImGui::SetWindowPos(
-		ImVec2(
-		(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
-			(screen_pos.y - ImGui::GetWindowSize().y / -.5))
+	if(!bDrawGUI) {
+		ImGui_ImplDX9_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+		ImGui::Begin("Overlay",
+			false,
+			ImGuiWindowFlags_NoTitleBar
+			+ ImGuiWindowFlags_NoResize
+			+ ImGuiWindowFlags_NoMove
+			+ ImGuiWindowFlags_NoScrollbar
+			+ ImGuiWindowFlags_NoBackground);
+		ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
+		ImGui::SetWindowPos(
+			ImVec2(
+			(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
+				(screen_pos.y - ImGui::GetWindowSize().y / -.5))
 
-	);
-	ImGui::Text(text);
-	ImGui::End();
-	ImGui::EndFrame();
-	ImGui::Render();
-	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-
+		);
+		ImGui::Text(text);
+		ImGui::End();
+		ImGui::EndFrame();
+		ImGui::Render();
+		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+	}
 }
 
 void ClassicOverlay(ImVec2 screen_pos, char* text) {
-	ImGui_ImplDX9_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-	ImGui::StyleColorsClassic();
-	ImGui::Begin("Overlay",
-		false,
-		ImGuiWindowFlags_NoTitleBar
-		+ ImGuiWindowFlags_NoResize
-		+ ImGuiWindowFlags_NoMove
-		+ ImGuiWindowFlags_NoScrollbar);
-	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
-	ImGui::SetWindowPos(
-		ImVec2(
-		(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
-			(screen_pos.y - ImGui::GetWindowSize().y / -.5))
+	if(!bDrawGUI) {
+		ImGui_ImplDX9_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+		ImGui::StyleColorsClassic();
+		ImGui::Begin("Overlay",
+			false,
+			ImGuiWindowFlags_NoTitleBar
+			+ ImGuiWindowFlags_NoResize
+			+ ImGuiWindowFlags_NoMove
+			+ ImGuiWindowFlags_NoScrollbar);
+		ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
+		ImGui::SetWindowPos(
+			ImVec2(
+			(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
+				(screen_pos.y - ImGui::GetWindowSize().y / -.5))
 
-	);
-	ImGui::Text(text);
-	ImGui::End();
-	ImGui::EndFrame();
-	ImGui::Render();
-	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-
+		);
+		ImGui::Text(text);
+		ImGui::End();
+		ImGui::EndFrame();
+		ImGui::Render();
+		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+	}
 }
 
 void DarkOverlay(ImVec2 screen_pos, char* text) {
-	ImGui_ImplDX9_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-	ImGui::StyleColorsDark();
-	ImGui::Begin("Overlay",
-		false,
-		ImGuiWindowFlags_NoTitleBar
-		+ ImGuiWindowFlags_NoResize
-		+ ImGuiWindowFlags_NoMove
-		+ ImGuiWindowFlags_NoScrollbar);
-	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
-	ImGui::SetWindowPos(
-		ImVec2(
-		(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
-			(screen_pos.y - ImGui::GetWindowSize().y / -.5))
+	if(!bDrawGUI) {
+		ImGui_ImplDX9_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+		ImGui::StyleColorsDark();
+		ImGui::Begin("Overlay",
+			false,
+			ImGuiWindowFlags_NoTitleBar
+			+ ImGuiWindowFlags_NoResize
+			+ ImGuiWindowFlags_NoMove
+			+ ImGuiWindowFlags_NoScrollbar);
+		ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
+		ImGui::SetWindowPos(
+			ImVec2(
+			(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
+				(screen_pos.y - ImGui::GetWindowSize().y / -.5))
 
-	);
-	ImGui::Text(text);
-	ImGui::End();
-	ImGui::EndFrame();
-	ImGui::Render();
-	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-}
-
-void LightOverlay(ImVec2 screen_pos, char* text) {
-	ImGui_ImplDX9_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-	ImGui::StyleColorsLight();
-	ImGui::Begin("Overlay",
-		false,
-		ImGuiWindowFlags_NoTitleBar
-		+ ImGuiWindowFlags_NoResize
-		+ ImGuiWindowFlags_NoMove
-		+ ImGuiWindowFlags_NoScrollbar);
-	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
-	ImGui::SetWindowPos(
-		ImVec2(
-		(screen_pos.x - (ImGui::GetWindowSize().x / 2) - 1),
-			(screen_pos.y - ImGui::GetWindowSize().y / -.5))
-
-	);
-	ImGui::Text(text);
-	ImGui::End();
-	ImGui::EndFrame();
-	ImGui::Render();
-	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-
+		);
+		ImGui::Text(text);
+		ImGui::End();
+		ImGui::EndFrame();
+		ImGui::Render();
+		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+	}
 }
 
 void DevelopmentGUI() {
@@ -238,19 +216,34 @@ void DevelopmentGUI() {
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 	if(bDrawGUI) {
-		//ImGui::SetNextWindowPos(ImGui::GetMousePos());
-		ImGui::Begin("Zalek League", false, ImGuiWindowFlags_AlwaysAutoResize);
+
+		ImGui::Begin("Zalek League", &bDrawGUI, ImGuiWindowFlags_AlwaysAutoResize);
 
 		ImGui::Text("ZalekLeague Compiled at %s %s\n", __DATE__, __TIME__);
+
+		RECT rect;
+		if(GetWindowRect(FindWindow(NULL, "League of Legends (TM) Client"), &rect)) {
+			int width = rect.right - rect.left;
+			int height = rect.bottom - rect.top;
+			ImGui::Text("Window Dimensions = (%d, %d)", width, height);
+		}
+
+		Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z);
+		Vector vecScreen = Vector();
+		bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
+		ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
+
+		ImGui::Text("World To Screen (%f, %f)",
+			vecScreen.X,
+			vecScreen.Y);
+
+		ImGui::Text("Mouse (%f, %f)",
+			ImGui::GetMousePos().x,
+			ImGui::GetMousePos().y);
 
 		ImGui::Text("Base Address: %X", baseAddr);
 		ImGui::Text("ME Address: %X", baseAddr + DWORD_LOCAL_PLAYER);
 		ImGui::Text("ObjectManager Address: %X", baseAddr + DWORD_OBJECT_MANAGER);
-
-		//GameObject * Test = GObjectManager->objectArray[1];
-		//ImGui::Text("Test Name %s", Test->GetName());
-
-
 
 		std::vector<GameObject*> Me;
 		Me.push_back(ME);
@@ -269,267 +262,8 @@ void DevelopmentGUI() {
 
 
 		ImGui::End();
-	} else {
-		ClassicOverlay(
-			ImGui::GetMousePos(),
-			"ZalekLeague is in Development Mode."
-		);
 	}
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 }
-
-/*
-enum class SpellDataInst
-{
-	//
-	fEffect1 = 0x80,
-	fEffect2 = fEffect1 + 0x4,
-	fEffect3 = fEffect2 + 0x4,
-	fEffect4 = fEffect3 + 0x4,
-	fEffect5 = fEffect4 + 0x4,
-	fEffect6 = fEffect5 + 0x4,
-	fEffect7 = fEffect6 + 0x4,
-	fEffect8 = fEffect7 + 0x4,
-	fEffect9 = fEffect8 + 0x4,
-	fEffect10 = fEffect9 + 0x4,
-	fEffect11 = fEffect10 + 0x4,
-	SpellData = 0x124,
-};
-
-enum class SpellData
-{
-	//
-	Resource = 0x38,
-};
-
-enum class SpellDataResource
-{
-	//
-	eEffect1 = 0xD0,
-	eEffect2 = eEffect1 + 0x1C,
-	eEffect3 = eEffect2 + 0x1C,
-	eEffect4 = eEffect3 + 0x1C,
-	eEffect5 = eEffect4 + 0x1C,
-	eEffect6 = eEffect5 + 0x1C,
-	eEffect7 = eEffect6 + 0x1C,
-	eEffect8 = eEffect7 + 0x1C,
-	eEffect9 = eEffect8 + 0x1C,
-	eEffect10 = eEffect9 + 0x1C,
-	eEffect11 = eEffect10 + 0x1C,
-	//
-};
-
-
-DEFINE_MEMBER_N(float eEffect1[7], Offsets::SpellDataResource::eEffect1);
-DEFINE_MEMBER_N(float eEffect2[7], Offsets::SpellDataResource::eEffect2);
-DEFINE_MEMBER_N(float eEffect3[7], Offsets::SpellDataResource::eEffect3);
-DEFINE_MEMBER_N(float eEffect4[7], Offsets::SpellDataResource::eEffect4);
-DEFINE_MEMBER_N(float eEffect5[7], Offsets::SpellDataResource::eEffect5);
-DEFINE_MEMBER_N(float eEffect6[7], Offsets::SpellDataResource::eEffect6);
-DEFINE_MEMBER_N(float eEffect7[7], Offsets::SpellDataResource::eEffect7);
-DEFINE_MEMBER_N(float eEffect8[7], Offsets::SpellDataResource::eEffect8);
-DEFINE_MEMBER_N(float eEffect9[7], Offsets::SpellDataResource::eEffect9);
-DEFINE_MEMBER_N(float eEffect10[7], Offsets::SpellDataResource::eEffect10);
-DEFINE_MEMBER_N(float eEffect11[7], Offsets::SpellDataResource::eEffect11);
-
-Annie grants herself and Tibbers {{ e1 }}% damage reduction for {{ e3 }} seconds.<br><br>While the shield is active, enemies who basic attack it take {{ e2 }} <span class=\"color99FF99\">(+{{ a1 }})</span> magic damage.
-*/
-
-/*
-
-
-//
-//class SpellData
-//{
-//	char* GetMissileName() {
-//		return GetStr((DWORD) this + 0x0058);
-//	}
-//};
-//
-//class SpellInfo
-//{
-//public:
-//	SpellData* GetSpellData() {
-//		return (SpellData*) ((DWORD) this + 0x34);
-//	}
-//};
-
-
-//class SpellData
-//{
-//public:
-//	char* GetMissileName() {
-//		return GetStr((DWORD) this + 0x0058);
-//	}
-//
-//	char* GetSpellName() {
-//		auto aux3 = *(DWORD*) ((DWORD) this + 0x4);
-//		if(aux3) {
-//			auto aux4 = *(DWORD*) (aux3 + 0xC);
-//			if(aux4) {
-//				if(*(DWORD*) (aux4 + 0x8)) {
-//					return (char*) (aux4 + 0x8);
-//				}
-//			}
-//		}
-//		return NULL;
-//	}
-//
-//	//char* GetSpellName2() {
-//	//	return GetStr((DWORD) this + 0x007C);
-//	//}
-//
-//	char* GetDescription() {
-//		return GetStr((DWORD) this + 0x0088);
-//	}
-//
-//	float GetEffectAmount() {
-//		return *(float*) ((DWORD) this + 0xD0);
-//	}
-//
-//	float GetIncreaseDamage() {
-//		return *(float*) ((DWORD) this + 0xEC);
-//	}
-//
-//	float GetSpellDuration() {
-//		return *(float*) ((DWORD) this + 0x108);
-//	}
-//
-//	float GetRootDuration() {
-//		return *(float*) ((DWORD) this + 0x15C);
-//	}
-//
-//	float GetIncreaseDamageBonus() {
-//		return *(float*) ((DWORD) this + 0x178);
-//	}
-//
-//	float GetCoefficient() {
-//		return *(float*) ((DWORD) this + 0x200);
-//	}
-//
-//	float GetCoefficient2() {
-//		return *(float*) ((DWORD) this + 0x204);
-//	}
-//
-//	int GetMaxHighlightTargets() {
-//		return *(int*) ((DWORD) this + 0x208);
-//	}
-//
-//	float GetCooldownTime() {
-//		return *(float*) ((DWORD) this + 0x280);
-//	}
-//
-//	float GetDelayCastOffsetPercent() {
-//		return *(float*) ((DWORD) this + 0x29C);
-//	}
-//
-//	float GetDelayTotalTimePercent() {
-//		return *(float*) ((DWORD) this + 0x2A0);
-//	}
-//
-//	int GetMaxAmmo() {
-//		return *(int*) ((DWORD) this + 0x31C);
-//	}
-//
-//	int GetAmmoUsed() {
-//		return *(int*) ((DWORD) this + 0x338);
-//	}
-//
-//	float GetAmmoRechargeTime() {
-//		return *(float*) ((DWORD) this + 0x354);
-//	}
-//
-//	float GetMissileSpeed() {
-//		return *(float*) ((DWORD) this + 0x450);
-//	}
-//};
-
-//class SpellData
-//{
-//public:
-//	char* GetMissileName() {
-//		return GetStr((DWORD) this + 0x0058);
-//	}
-//
-//	char* GetSpellName() {
-//		return GetStr((DWORD) this + 0x007C);
-//	}
-//
-//	char* GetDescription() {
-//		return GetStr((DWORD) this + 0x0088);
-//	}
-//
-//	float GetEffectAmount() {
-//		return *(float*) ((DWORD) this + 0xD0);
-//	}
-//
-//	float GetIncreaseDamage() {
-//		return *(float*) ((DWORD) this + 0xEC);
-//	}
-//
-//	float GetSpellDuration() {
-//		return *(float*) ((DWORD) this + 0x108);
-//	}
-//
-//	float GetRootDuration() {
-//		return *(float*) ((DWORD) this + 0x15C);
-//	}
-//
-//	float GetIncreaseDamageBonus() {
-//		return *(float*) ((DWORD) this + 0x178);
-//	}
-//
-//	float GetCoefficient() {
-//		return *(float*) ((DWORD) this + 0x200);
-//	}
-//
-//	float GetCoefficient2() {
-//		return *(float*) ((DWORD) this + 0x204);
-//	}
-//
-//	int GetMaxHighlightTargets() {
-//		return *(int*) ((DWORD) this + 0x208);
-//	}
-//
-//	float GetCooldownTime() {
-//		return *(float*) ((DWORD) this + 0x280);
-//	}
-//
-//	float GetDelayCastOffsetPercent() {
-//		return *(float*) ((DWORD) this + 0x29C);
-//	}
-//
-//	float GetDelayTotalTimePercent() {
-//		return *(float*) ((DWORD) this + 0x2A0);
-//	}
-//
-//	int GetMaxAmmo() {
-//		return *(int*) ((DWORD) this + 0x31C);
-//	}
-//	int GetAmmoUsed() {
-//		return *(int*) ((DWORD) this + 0x338);
-//	}
-//	float GetAmmoRechargeTime() {
-//		return *(float*) ((DWORD) this + 0x354);
-//	}
-//
-//	float GetMissileSpeed() {
-//		return *(float*) ((DWORD) this + 0x450);
-//	}
-//};
-
-//TODO: Implement Minion Type in GameObject.cpp and h
-//ImGui::BulletText("IsCannon() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Siege"));
-//ImGui::BulletText("IsMelee() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Melee"));
-//ImGui::BulletText("IsRanged() => %d", endsWith((std::string)(*obj)->GetChampionName(), "Ranged"));
-
-//bool endsWith(const std::string& mainStr, const std::string& toMatch) {
-//	if(mainStr.size() >= toMatch.size() &&
-//		mainStr.compare(mainStr.size() - toMatch.size(), toMatch.size(), toMatch) == 0)
-//		return true;
-//	else
-//		return false;
-//}
-*/

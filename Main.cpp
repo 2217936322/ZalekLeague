@@ -18,6 +18,16 @@ int Main() {
 		if(DEVELOPMENT_MODE) {
 			DevelopmentGUI();
 		}
+
+		if(GetAsyncKeyState(VK_INSERT) & 1)
+			bDrawGUI = !bDrawGUI;
+
+		Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z); // &vecIn->SwitchYZ();
+		Vector vecScreen = Vector();
+		bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
+		ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
+		Overlay(testVec, "Very Useful Overlay");
+
 		return 1;
 	} else {
 		DarkOverlay(ImGui::GetMousePos(), "ZalekLeague is up to date for 9.7.269.6900[PUBLIC]");
@@ -100,6 +110,9 @@ void __stdcall Start() {
 	Functions.IsTroyEnt = (Typedefs::fnIsTroyEnt)(baseAddr + FN_IS_TROY);
 	Functions.IsTurret = (Typedefs::fnIsTurret)(baseAddr + FN_IS_TURRET);
 	Functions.PrintChat = (Typedefs::fnPrintChat)(baseAddr + FN_PRINT_CHAT);
+
+	Functions.WorldToScreen = (Typedefs::fnWorldToScreen)(baseAddr + FN_WORLD_TO_SCREEN);
+
 	Original_Present = (Prototype_Present) DetourFunction((PBYTE) GetDeviceAddress(17), (PBYTE) Hooked_Present);
 }
 

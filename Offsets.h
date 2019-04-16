@@ -6,6 +6,9 @@
 // If you are getting the wrong value then try checking Find all occurences. 
 // Most if not all should be accurate though.
 
+#define VIEWMATRIX 0x10FFE88
+#define VIEWPROJMATRIX 0x10DCF30
+
 #define FN_GET_BASIC_ATTACK		   0x1B39C0 // 9.7 || E8 ? ? ? ? 8B 8B ? ? ? ? 8B E8 8B 
 #define FN_ISSUE_ORDER			   0x1BE660 // 9.7 || E8 ? ? ? ? 8B 84 24 ? ? ? ? 8B CF F3 
 #define FN_IS_ALIVE				   0x1E2C30 // 9.7 || E8 ? ? ? ? 84 C0 74 3B 8B 
