@@ -28,6 +28,7 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 
 			if((*obj)->IsHero()) {
 				if(ImGui::TreeNode("SpellBook")) {
+
 					SpellSlot* Q = (*obj)->GetSpellBook()->GetQ();
 					ImGui::Separator();
 					ImGui::Text("Q->IsReady() => %d", Q->IsReady());
@@ -247,6 +248,7 @@ void DevelopmentGUI() {
 		ImGui::Text("Base Address: %X", baseAddr);
 		ImGui::Text("ME Address: %X", baseAddr + DWORD_LOCAL_PLAYER);
 		ImGui::Text("ObjectManager Address: %X", baseAddr + DWORD_OBJECT_MANAGER);
+		ImGui::Text("SpellBook Address: %X", baseAddr + DWORD_LOCAL_PLAYER + PTR_OBJECT_SPELLBOOK);
 
 		std::vector<GameObject*> Me;
 		Me.push_back(ME);
@@ -285,12 +287,15 @@ void DevelopmentGUI() {
 			(testVec.y - ImGui::GetWindowSize().y / -0.75f))
 
 	);
+
 	ImGui::Text("%s : %s", ME->GetActorName(), ME->GetName());
 	SpellBook * sb = ME->GetSpellBook();
 	SpellSlot * Q = sb->GetQ();
 	SpellSlot * W = sb->GetW();
 	SpellSlot * E = sb->GetE();
 	SpellSlot * R = sb->GetR();
+	SpellSlot * D = sb->GetD();
+	SpellSlot * F = sb->GetF();
 
 	if(Q->GetLevel() != 0 && !Q->IsReady())
 		ImGui::Text("Q: %f", Q->GetCooldown());
@@ -304,6 +309,11 @@ void DevelopmentGUI() {
 	if(R->GetLevel() != 0 && !R->IsReady())
 		ImGui::Text("R: %f", R->GetCooldown());
 
+	if(D->GetLevel() != 0 && !D->IsReady())
+		ImGui::Text("D: %f", D->GetCooldown());
+
+	if(F->GetLevel() != 0 && !F->IsReady())
+		ImGui::Text("F: %f", F->GetCooldown());
 
 	ImGui::End();
 

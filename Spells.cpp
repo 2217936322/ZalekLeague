@@ -20,6 +20,10 @@ float SpellSlot::GetTimeUsed() {
 	return *(float*) ((DWORD) this + 0x28);
 }
 
+SpellSlot* SpellBook::Get(int slot) {
+	return *(SpellSlot * *) ((DWORD) this + 0x508 + (0x4 * slot));
+}
+
 SpellSlot* SpellBook::GetQ() {
 	return *(SpellSlot * *) ((DWORD) this + 0x508 + (0x4 * (int) ESpellSlot::Q));
 }
@@ -34,4 +38,12 @@ SpellSlot* SpellBook::GetE() {
 
 SpellSlot* SpellBook::GetR() {
 	return *(SpellSlot * *) ((DWORD) this + 0x508 + (0x4 * (int) ESpellSlot::R));
+}
+
+SpellSlot* SpellBook::GetD() {
+	return *(SpellSlot * *) ((DWORD) this + 0x508 + (0x4 * (int) ESpellSlot::D));
+}
+
+SpellSlot* SpellBook::GetF() {
+	return *(SpellSlot * *) ((DWORD) this + 0x508 + (0x4 * (int) ESpellSlot::F));
 }

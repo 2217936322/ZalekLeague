@@ -15,8 +15,11 @@ public:
 class SpellBook
 {
 public:
+	SpellSlot* Get(int slot);
 	SpellSlot* GetQ();
 	SpellSlot* GetW();
 	SpellSlot* GetE();
 	SpellSlot* GetR();
+	SpellSlot* GetD();
+	SpellSlot* GetF();
 };
