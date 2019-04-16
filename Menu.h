@@ -266,6 +266,47 @@ void DevelopmentGUI() {
 
 		ImGui::End();
 	}
+
+	Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z);
+	Vector vecScreen = Vector();
+	bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
+	ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
+
+	ImGui::Begin("TestCharacterOverlay",
+		false,
+		ImGuiWindowFlags_AlwaysAutoResize
+		+ ImGuiWindowFlags_NoInputs
+		+ ImGuiWindowFlags_NoMove
+		+ ImGuiWindowFlags_NoScrollbar
+		+ ImGuiWindowFlags_NoTitleBar);
+	ImGui::SetWindowPos(
+		ImVec2(
+		(testVec.x - (ImGui::GetWindowSize().x / 2.0f)),
+			(testVec.y - ImGui::GetWindowSize().y / -0.75f))
+
+	);
+	ImGui::Text("%s : %s", ME->GetActorName(), ME->GetName());
+	SpellBook * sb = ME->GetSpellBook();
+	SpellSlot * Q = sb->GetQ();
+	SpellSlot * W = sb->GetW();
+	SpellSlot * E = sb->GetE();
+	SpellSlot * R = sb->GetR();
+
+	if(Q->GetLevel() != 0 && !Q->IsReady())
+		ImGui::Text("Q: %f", Q->GetCooldown());
+
+	if(W->GetLevel() != 0 && !W->IsReady())
+		ImGui::Text("W: %f", W->GetCooldown());
+
+	if(E->GetLevel() != 0 && !E->IsReady())
+		ImGui::Text("E: %f", E->GetCooldown());
+
+	if(R->GetLevel() != 0 && !R->IsReady())
+		ImGui::Text("R: %f", R->GetCooldown());
+
+
+	ImGui::End();
+
 	ImGui::EndFrame();
 	ImGui::Render();
 	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());

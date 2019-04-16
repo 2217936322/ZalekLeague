@@ -22,11 +22,11 @@ int Main() {
 		if(GetAsyncKeyState(VK_INSERT) & 1)
 			bDrawGUI = !bDrawGUI;
 
-		Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z);
-		Vector vecScreen = Vector();
-		bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
-		ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
-		Overlay(testVec, "Very Useful Overlay");
+		//Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z);
+		//Vector vecScreen = Vector();
+		//bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
+		//ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
+		//Overlay(testVec, "Very Useful Overlay");
 
 		return 1;
 	} else {
