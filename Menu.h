@@ -339,6 +339,7 @@ void DevelopmentGUI() {
 			false,
 			ImGuiWindowFlags_AlwaysAutoResize
 			+ ImGuiWindowFlags_NoInputs
+			+ ImGuiWindowFlags_NoBackground
 			+ ImGuiWindowFlags_NoMove
 			+ ImGuiWindowFlags_NoScrollbar
 			+ ImGuiWindowFlags_NoTitleBar);
@@ -359,82 +360,28 @@ void DevelopmentGUI() {
 		SpellSlot * F = sb->GetF();
 
 		ImGui::Text("%s : %s", obj->GetActorName(), obj->GetName());
-		//ImGui::Text("Test() => %s", Q->GetSpellInfo()->GetSpellData()->GetMissileName());
-
 
 		if(Q->GetLevel() != 0 && !Q->IsReady())
-			ImGui::Text("Q: %f", Q->GetCooldown());
+			ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "Q: %f", Q->GetCooldown());
 
 		if(W->GetLevel() != 0 && !W->IsReady())
-			ImGui::Text("W: %f", W->GetCooldown());
+			ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "W: %f", W->GetCooldown());
 
 		if(E->GetLevel() != 0 && !E->IsReady())
-			ImGui::Text("E: %f", E->GetCooldown());
+			ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "E: %f", E->GetCooldown());
 
 		if(R->GetLevel() != 0 && !R->IsReady())
-			ImGui::Text("R: %f", R->GetCooldown());
+			ImGui::TextColored(ImVec4(1.0f, 0.25f, 0.0f, 1.0f), "R: %f", R->GetCooldown());
 
 		if(D->GetLevel() != 0 && !D->IsReady())
-			ImGui::Text("%s: %f", D->GetActorName(), D->GetCooldown());
+			ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s: %f", D->GetActorName(), D->GetCooldown());
 
 		if(F->GetLevel() != 0 && !F->IsReady())
-			ImGui::Text("%s: %f", F->GetActorName(), F->GetCooldown());
+			ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s: %f", F->GetActorName(), F->GetCooldown());
 
 		ImGui::End();
 
 	}
-
-
-	//Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z);
-	//Vector vecScreen = Vector();
-	//bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
-	//ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
-
-	//ImGui::Begin("TestCharacterOverlay",
-	//	false,
-	//	ImGuiWindowFlags_AlwaysAutoResize
-	//	+ ImGuiWindowFlags_NoInputs
-	//	+ ImGuiWindowFlags_NoMove
-	//	+ ImGuiWindowFlags_NoScrollbar
-	//	+ ImGuiWindowFlags_NoTitleBar);
-	//ImGui::SetWindowPos(
-	//	ImVec2(
-	//	(testVec.x - (ImGui::GetWindowSize().x / 2.0f)),
-	//		(testVec.y - ImGui::GetWindowSize().y / -0.75f))
-
-	//);
-
-	//SpellBook * sb = ME->GetSpellBook();
-	//SpellSlot * Q = sb->GetQ();
-	//SpellSlot * W = sb->GetW();
-	//SpellSlot * E = sb->GetE();
-	//SpellSlot * R = sb->GetR();
-	//SpellSlot * D = sb->GetD();
-	//SpellSlot * F = sb->GetF();
-
-	//ImGui::Text("%s : %s", ME->GetActorName(), ME->GetName());
-	////ImGui::Text("Test() => %s", Q->GetSpellInfo()->GetSpellData()->GetMissileName());
-
-
-	//if(Q->GetLevel() != 0 && !Q->IsReady())
-	//	ImGui::Text("Q: %f", Q->GetCooldown());
-
-	//if(W->GetLevel() != 0 && !W->IsReady())
-	//	ImGui::Text("W: %f", W->GetCooldown());
-
-	//if(E->GetLevel() != 0 && !E->IsReady())
-	//	ImGui::Text("E: %f", E->GetCooldown());
-
-	//if(R->GetLevel() != 0 && !R->IsReady())
-	//	ImGui::Text("R: %f", R->GetCooldown());
-
-	//if(D->GetLevel() != 0 && !D->IsReady())
-	//	ImGui::Text("%s: %f", D->GetActorName(), D->GetCooldown());
-
-	//if(F->GetLevel() != 0 && !F->IsReady())
-	//	ImGui::Text("%s: %f", F->GetActorName(), F->GetCooldown());
-
-	//ImGui::End();
 
 	ImGui::EndFrame();
 	ImGui::Render();
