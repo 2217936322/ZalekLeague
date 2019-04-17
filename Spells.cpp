@@ -5,6 +5,27 @@ bool SpellSlot::IsReady() {
 	return this->GetCooldown() <= 0.0f && this->GetLevel() > 0;
 }
 
+bool SpellSlot::HasCharges() {
+	return this->GetNextCharge() != -1;
+}
+
+char* SpellSlot::GetActorName() {
+	return GetStr(this->GetSpellInfoAddress() + 0x18);
+}
+
+
+int SpellSlot::GetCharge() {
+	return *(int*) ((DWORD) this + 0x50);
+}
+
+int SpellSlot::GetNextCharge() {
+	return *(int*) ((DWORD) this + 0x58);
+}
+
+int SpellSlot::GetSpellInfoAddress() {
+	return *(int*) ((DWORD) this + 0x12C);
+}
+
 int SpellSlot::GetLevel() {
 	return *(int*) ((DWORD) this + 0x20);
 }

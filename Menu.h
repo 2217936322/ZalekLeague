@@ -29,33 +29,90 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 			if((*obj)->IsHero()) {
 				if(ImGui::TreeNode("SpellBook")) {
 
-					SpellSlot* Q = (*obj)->GetSpellBook()->GetQ();
+					SpellSlot* Spell = (*obj)->GetSpellBook()->GetQ();
 					ImGui::Separator();
-					ImGui::Text("Q->IsReady() => %d", Q->IsReady());
-					ImGui::Text("Q->GetLevel() => %d", Q->GetLevel());
-					ImGui::Text("Q->GetCooldown() => %f", Q->GetCooldown());
-					ImGui::Text("Q->GetTimeUsed() => %f", Q->GetTimeUsed());
 
-					SpellSlot* W = (*obj)->GetSpellBook()->GetW();
-					ImGui::Separator();
-					ImGui::Text("W->IsReady() => %d", W->IsReady());
-					ImGui::Text("W->GetLevel() => %d", W->GetLevel());
-					ImGui::Text("W->GetCooldown() => %f", W->GetCooldown());
-					ImGui::Text("W->GetTimeUsed() => %f", W->GetTimeUsed());
+					ImGui::Text("Q->GetActorName() => %s", Spell->GetActorName());
+					ImGui::Text("Q->HasCharges() => %d", Spell->HasCharges());
+					if(Spell->HasCharges()) {
+						ImGui::Text("Q->GetCharge() => %d", Spell->GetCharge());
+						ImGui::Text("Q->GetNextCharge() => %d", Spell->GetNextCharge());
+					}
+					ImGui::Text("Q->IsReady() => %d", Spell->IsReady());
+					ImGui::Text("Q->GetLevel() => %d", Spell->GetLevel());
+					ImGui::Text("Q->GetCooldown() => %f", Spell->GetCooldown());
+					ImGui::Text("Q->GetTimeUsed() => %f", Spell->GetTimeUsed());
 
-					SpellSlot* E = (*obj)->GetSpellBook()->GetE();
+					Spell = (*obj)->GetSpellBook()->GetW();
 					ImGui::Separator();
-					ImGui::Text("E->IsReady() => %d", E->IsReady());
-					ImGui::Text("E->GetLevel() => %d", E->GetLevel());
-					ImGui::Text("E->GetCooldown() => %f", E->GetCooldown());
-					ImGui::Text("E->GetTimeUsed() => %f", E->GetTimeUsed());
 
-					SpellSlot* R = (*obj)->GetSpellBook()->GetR();
+					ImGui::Text("W->GetActorName() => %s", Spell->GetActorName());
+					ImGui::Text("W->HasCharges() => %d", Spell->HasCharges());
+					if(Spell->HasCharges()) {
+						ImGui::Text("W->GetCharge() => %d", Spell->GetCharge());
+						ImGui::Text("W->GetNextCharge() => %d", Spell->GetNextCharge());
+					}
+					ImGui::Text("W->IsReady() => %d", Spell->IsReady());
+					ImGui::Text("W->GetLevel() => %d", Spell->GetLevel());
+					ImGui::Text("W->GetCooldown() => %f", Spell->GetCooldown());
+					ImGui::Text("W->GetTimeUsed() => %f", Spell->GetTimeUsed());
+
+					Spell = (*obj)->GetSpellBook()->GetE();
 					ImGui::Separator();
-					ImGui::Text("R->IsReady() => %d", R->IsReady());
-					ImGui::Text("R->GetLevel() => %d", R->GetLevel());
-					ImGui::Text("R->GetCooldown() => %f", R->GetCooldown());
-					ImGui::Text("R->GetTimeUsed() => %f", R->GetTimeUsed());
+
+					ImGui::Text("E->GetActorName() => %s", Spell->GetActorName());
+					ImGui::Text("E->HasCharges() => %d", Spell->HasCharges());
+					if(Spell->HasCharges()) {
+						ImGui::Text("E->GetCharge() => %d", Spell->GetCharge());
+						ImGui::Text("E->GetNextCharge() => %d", Spell->GetNextCharge());
+					}
+					ImGui::Text("E->IsReady() => %d", Spell->IsReady());
+					ImGui::Text("E->GetLevel() => %d", Spell->GetLevel());
+					ImGui::Text("E->GetCooldown() => %f", Spell->GetCooldown());
+					ImGui::Text("E->GetTimeUsed() => %f", Spell->GetTimeUsed());
+
+					Spell = (*obj)->GetSpellBook()->GetR();
+					ImGui::Separator();
+
+					ImGui::Text("R->GetActorName() => %s", Spell->GetActorName());
+					ImGui::Text("R->HasCharges() => %d", Spell->HasCharges());
+					if(Spell->HasCharges()) {
+						ImGui::Text("R->GetCharge() => %d", Spell->GetCharge());
+						ImGui::Text("R->GetNextCharge() => %d", Spell->GetNextCharge());
+					}
+					ImGui::Text("R->IsReady() => %d", Spell->IsReady());
+					ImGui::Text("R->GetLevel() => %d", Spell->GetLevel());
+					ImGui::Text("R->GetCooldown() => %f", Spell->GetCooldown());
+					ImGui::Text("R->GetTimeUsed() => %f", Spell->GetTimeUsed());
+
+					Spell = (*obj)->GetSpellBook()->GetD();
+					ImGui::Separator();
+
+					ImGui::Text("D->GetActorName() => %s", Spell->GetActorName());
+					ImGui::Text("D->HasCharges() => %d", Spell->HasCharges());
+					if(Spell->HasCharges()) {
+						ImGui::Text("D->GetCharge() => %d", Spell->GetCharge());
+						ImGui::Text("D->GetNextCharge() => %d", Spell->GetNextCharge());
+					}
+					ImGui::Text("D->IsReady() => %d", Spell->IsReady());
+					ImGui::Text("D->GetLevel() => %d", Spell->GetLevel());
+					ImGui::Text("D->GetCooldown() => %f", Spell->GetCooldown());
+					ImGui::Text("D->GetTimeUsed() => %f", Spell->GetTimeUsed());
+
+					Spell = (*obj)->GetSpellBook()->GetF();
+					ImGui::Separator();
+
+					ImGui::Text("F->GetActorName() => %s", Spell->GetActorName());
+					ImGui::Text("F->HasCharges() => %d", Spell->HasCharges());
+					if(Spell->HasCharges()) {
+						ImGui::Text("F->GetCharge() => %d", Spell->GetCharge());
+						ImGui::Text("F->GetNextCharge() => %d", Spell->GetNextCharge());
+					}
+					ImGui::Text("F->IsReady() => %d", Spell->IsReady());
+					ImGui::Text("F->GetLevel() => %d", Spell->GetLevel());
+					ImGui::Text("F->GetCooldown() => %f", Spell->GetCooldown());
+					ImGui::Text("F->GetTimeUsed() => %f", Spell->GetTimeUsed());
+
 					ImGui::TreePop();
 				}
 			}
@@ -246,9 +303,8 @@ void DevelopmentGUI() {
 			ImGui::GetMousePos().y);
 
 		ImGui::Text("Base Address: %X", baseAddr);
-		ImGui::Text("ME Address: %X", baseAddr + DWORD_LOCAL_PLAYER);
 		ImGui::Text("ObjectManager Address: %X", baseAddr + DWORD_OBJECT_MANAGER);
-		ImGui::Text("SpellBook Address: %X", baseAddr + DWORD_LOCAL_PLAYER + PTR_OBJECT_SPELLBOOK);
+		ImGui::Text("ME Address: %X", baseAddr + DWORD_LOCAL_PLAYER);
 
 		std::vector<GameObject*> Me;
 		Me.push_back(ME);
@@ -269,53 +325,116 @@ void DevelopmentGUI() {
 		ImGui::End();
 	}
 
-	Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z);
-	Vector vecScreen = Vector();
-	bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
-	ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
 
-	ImGui::Begin("TestCharacterOverlay",
-		false,
-		ImGuiWindowFlags_AlwaysAutoResize
-		+ ImGuiWindowFlags_NoInputs
-		+ ImGuiWindowFlags_NoMove
-		+ ImGuiWindowFlags_NoScrollbar
-		+ ImGuiWindowFlags_NoTitleBar);
-	ImGui::SetWindowPos(
-		ImVec2(
-		(testVec.x - (ImGui::GetWindowSize().x / 2.0f)),
-			(testVec.y - ImGui::GetWindowSize().y / -0.75f))
+	std::vector<GameObject*> Champions = GetChampions();
 
-	);
+	for(std::vector<GameObject*>::iterator Champion = Champions.begin(); Champion != Champions.end(); Champion++) {
+		GameObject* obj = (*Champion);
+		Vector vecWorld = Vector(obj->GetPos().X, obj->GetPos().Y, obj->GetPos().Z);
+		Vector vecScreen = Vector();
+		bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
+		ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
 
-	ImGui::Text("%s : %s", ME->GetActorName(), ME->GetName());
-	SpellBook * sb = ME->GetSpellBook();
-	SpellSlot * Q = sb->GetQ();
-	SpellSlot * W = sb->GetW();
-	SpellSlot * E = sb->GetE();
-	SpellSlot * R = sb->GetR();
-	SpellSlot * D = sb->GetD();
-	SpellSlot * F = sb->GetF();
+		ImGui::Begin(obj->GetName(),
+			false,
+			ImGuiWindowFlags_AlwaysAutoResize
+			+ ImGuiWindowFlags_NoInputs
+			+ ImGuiWindowFlags_NoMove
+			+ ImGuiWindowFlags_NoScrollbar
+			+ ImGuiWindowFlags_NoTitleBar);
 
-	if(Q->GetLevel() != 0 && !Q->IsReady())
-		ImGui::Text("Q: %f", Q->GetCooldown());
+		ImGui::SetWindowPos(
+			ImVec2(
+			(testVec.x - (ImGui::GetWindowSize().x / 2.0f)),
+				(testVec.y - ImGui::GetWindowSize().y / -0.75f))
 
-	if(W->GetLevel() != 0 && !W->IsReady())
-		ImGui::Text("W: %f", W->GetCooldown());
+		);
 
-	if(E->GetLevel() != 0 && !E->IsReady())
-		ImGui::Text("E: %f", E->GetCooldown());
+		SpellBook * sb = obj->GetSpellBook();
+		SpellSlot * Q = sb->GetQ();
+		SpellSlot * W = sb->GetW();
+		SpellSlot * E = sb->GetE();
+		SpellSlot * R = sb->GetR();
+		SpellSlot * D = sb->GetD();
+		SpellSlot * F = sb->GetF();
 
-	if(R->GetLevel() != 0 && !R->IsReady())
-		ImGui::Text("R: %f", R->GetCooldown());
+		ImGui::Text("%s : %s", obj->GetActorName(), obj->GetName());
+		//ImGui::Text("Test() => %s", Q->GetSpellInfo()->GetSpellData()->GetMissileName());
 
-	if(D->GetLevel() != 0 && !D->IsReady())
-		ImGui::Text("D: %f", D->GetCooldown());
 
-	if(F->GetLevel() != 0 && !F->IsReady())
-		ImGui::Text("F: %f", F->GetCooldown());
+		if(Q->GetLevel() != 0 && !Q->IsReady())
+			ImGui::Text("Q: %f", Q->GetCooldown());
 
-	ImGui::End();
+		if(W->GetLevel() != 0 && !W->IsReady())
+			ImGui::Text("W: %f", W->GetCooldown());
+
+		if(E->GetLevel() != 0 && !E->IsReady())
+			ImGui::Text("E: %f", E->GetCooldown());
+
+		if(R->GetLevel() != 0 && !R->IsReady())
+			ImGui::Text("R: %f", R->GetCooldown());
+
+		if(D->GetLevel() != 0 && !D->IsReady())
+			ImGui::Text("%s: %f", D->GetActorName(), D->GetCooldown());
+
+		if(F->GetLevel() != 0 && !F->IsReady())
+			ImGui::Text("%s: %f", F->GetActorName(), F->GetCooldown());
+
+		ImGui::End();
+
+	}
+
+
+	//Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z);
+	//Vector vecScreen = Vector();
+	//bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
+	//ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
+
+	//ImGui::Begin("TestCharacterOverlay",
+	//	false,
+	//	ImGuiWindowFlags_AlwaysAutoResize
+	//	+ ImGuiWindowFlags_NoInputs
+	//	+ ImGuiWindowFlags_NoMove
+	//	+ ImGuiWindowFlags_NoScrollbar
+	//	+ ImGuiWindowFlags_NoTitleBar);
+	//ImGui::SetWindowPos(
+	//	ImVec2(
+	//	(testVec.x - (ImGui::GetWindowSize().x / 2.0f)),
+	//		(testVec.y - ImGui::GetWindowSize().y / -0.75f))
+
+	//);
+
+	//SpellBook * sb = ME->GetSpellBook();
+	//SpellSlot * Q = sb->GetQ();
+	//SpellSlot * W = sb->GetW();
+	//SpellSlot * E = sb->GetE();
+	//SpellSlot * R = sb->GetR();
+	//SpellSlot * D = sb->GetD();
+	//SpellSlot * F = sb->GetF();
+
+	//ImGui::Text("%s : %s", ME->GetActorName(), ME->GetName());
+	////ImGui::Text("Test() => %s", Q->GetSpellInfo()->GetSpellData()->GetMissileName());
+
+
+	//if(Q->GetLevel() != 0 && !Q->IsReady())
+	//	ImGui::Text("Q: %f", Q->GetCooldown());
+
+	//if(W->GetLevel() != 0 && !W->IsReady())
+	//	ImGui::Text("W: %f", W->GetCooldown());
+
+	//if(E->GetLevel() != 0 && !E->IsReady())
+	//	ImGui::Text("E: %f", E->GetCooldown());
+
+	//if(R->GetLevel() != 0 && !R->IsReady())
+	//	ImGui::Text("R: %f", R->GetCooldown());
+
+	//if(D->GetLevel() != 0 && !D->IsReady())
+	//	ImGui::Text("%s: %f", D->GetActorName(), D->GetCooldown());
+
+	//if(F->GetLevel() != 0 && !F->IsReady())
+	//	ImGui::Text("%s: %f", F->GetActorName(), F->GetCooldown());
+
+	//ImGui::End();
 
 	ImGui::EndFrame();
 	ImGui::Render();
