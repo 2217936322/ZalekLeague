@@ -20,14 +20,14 @@ public:
 	bool IsEnemy();
 	bool IsFriendly();
 	bool IsHero();
-	bool IsInhibitor();
+	//bool IsInhibitor();
 	bool IsMinion();
 	bool IsMissile();
 	bool IsMoving();
-	bool IsNexus();
+	//bool IsNexus();
 	bool IsNeutral();
 	bool IsTargetable();
-	bool IsTroyEnt();
+	//bool IsTroyEnt();
 	bool IsTurret();
 	bool IsVisible();
 

@@ -45,10 +45,10 @@ bool GameObject::IsFriendly() {
 bool GameObject::IsHero() {
 	return Functions.IsHero(this);
 }
-
-bool GameObject::IsInhibitor() {
-	return Functions.IsInhibitor(this);
-}
+//
+//bool GameObject::IsInhibitor() {
+//	return Functions.IsInhibitor(this);
+//}
 
 bool GameObject::IsMinion() {
 	return Functions.IsMinion(this);
@@ -62,9 +62,9 @@ bool GameObject::IsMoving() {
 	return *(bool*) ((DWORD) this->GetAIManager() + PTR_OBJECT_AI_IS_MOVING);
 }
 
-bool GameObject::IsNexus() {
-	return Functions.IsNexus(this);
-}
+//bool GameObject::IsNexus() {
+//	return Functions.IsNexus(this);
+//}
 
 bool GameObject::IsNeutral() {
 	return this->GetTeam() == ETeam::NEUTRAL;
@@ -74,9 +74,9 @@ bool GameObject::IsTargetable() {
 	return Functions.IsTargetable(this);
 }
 
-bool GameObject::IsTroyEnt() {
-	return Functions.IsTroyEnt(this);
-}
+//bool GameObject::IsTroyEnt() {
+//	return Functions.IsTroyEnt(this);
+//}
 
 bool GameObject::IsTurret() {
 	return Functions.IsTurret(this);

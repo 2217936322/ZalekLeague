@@ -124,14 +124,14 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 			ImGui::BulletText("IsEnemy() => %d", (*obj)->IsEnemy());
 			ImGui::BulletText("IsFriendly() => %d", (*obj)->IsFriendly());
 			ImGui::BulletText("IsHero() => %d", (*obj)->IsHero());
-			ImGui::BulletText("IsInhibitor() => %d", (*obj)->IsInhibitor());
+			//ImGui::BulletText("IsInhibitor() => %d", (*obj)->IsInhibitor());
 			ImGui::BulletText("IsMinion() => %d", (*obj)->IsMinion());
 			ImGui::BulletText("IsMissile() => %d", (*obj)->IsMissile());
 			ImGui::BulletText("IsMoving() => %d", (*obj)->IsMoving());
-			ImGui::BulletText("IsNexus() => %d", (*obj)->IsNexus());
+			//ImGui::BulletText("IsNexus() => %d", (*obj)->IsNexus());
 			ImGui::BulletText("IsNeutral() => %d", (*obj)->IsNeutral());
 			ImGui::BulletText("IsTargetable() => %d", (*obj)->IsTargetable());
-			ImGui::BulletText("IsTroyEnt() => %d", (*obj)->IsTroyEnt());
+			//ImGui::BulletText("IsTroyEnt() => %d", (*obj)->IsTroyEnt());
 			ImGui::BulletText("IsTurret() => %d", (*obj)->IsTurret());
 			ImGui::BulletText("IsVisible() => %d", (*obj)->IsVisible());
 

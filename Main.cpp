@@ -14,38 +14,38 @@ LFunctions Functions;
 GameObjectManager* GObjectManager;
 
 int Main() {
-	if(ME) {
-		if(DEVELOPMENT_MODE) {
-			DevelopmentGUI();
-		}
+	//if(ME) {
+	//	/*if(DEVELOPMENT_MODE) {
+	//		DevelopmentGUI();
+	//	}
 
-		if(GetAsyncKeyState(VK_INSERT) & 1)
-			bDrawGUI = !bDrawGUI;
+	//	if(GetAsyncKeyState(VK_INSERT) & 1)
+	//		bDrawGUI = !bDrawGUI;*/
 
-		//Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z);
-		//Vector vecScreen = Vector();
-		//bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
-		//ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
-		//Overlay(testVec, "Very Useful Overlay");
+	//		//Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z);
+	//		//Vector vecScreen = Vector();
+	//		//bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
+	//		//ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
+	//		//Overlay(testVec, "Very Useful Overlay");
 
-		return 1;
-	} else {
+	//	return 1;
+	//} else {
 		// Loading Screen
-		char* text = "ZalekLeague is up to date for 9.7.269.6900[PUBLIC]";
-		ImGui_ImplDX9_NewFrame();
-		ImGui_ImplWin32_NewFrame();
-		ImGui::NewFrame();
-		ImGui::Begin("LoadingScreenOverlay##LoadingScreenOverlay_", false, ImGuiWindowFlags_NoTitleBar + ImGuiWindowFlags_AlwaysAutoResize + ImGuiWindowFlags_NoScrollbar);
-		ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
-		ImGui::SetWindowPos(ImVec2((ImGui::GetMousePos().x - (ImGui::GetWindowSize().x / 2.0f) - 1.0f), (ImGui::GetMousePos().y - ImGui::GetWindowSize().y / -0.5f)));
-		ImGui::Text(text);
-		ImGui::End();
-		ImGui::EndFrame();
-		ImGui::Render();
-		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-		return 2;
-	}
-	return 0;
+	char* text = TARGET_GAMEVERSION;
+	ImGui_ImplDX9_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
+	ImGui::Begin("LoadingScreenOverlay##LoadingScreenOverlay_", false, ImGuiWindowFlags_NoTitleBar + ImGuiWindowFlags_AlwaysAutoResize + ImGuiWindowFlags_NoScrollbar);
+	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
+	ImGui::SetWindowPos(ImVec2((ImGui::GetMousePos().x - (ImGui::GetWindowSize().x / 2.0f) - 1.0f), (ImGui::GetMousePos().y - ImGui::GetWindowSize().y / -0.5f)));
+	ImGui::Text(text);
+	ImGui::End();
+	ImGui::EndFrame();
+	ImGui::Render();
+	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+	return 2;
+	//}
+	//return 0;
 }
 
 typedef HRESULT(WINAPI * Prototype_Present)(LPDIRECT3DDEVICE9, CONST RECT*, CONST RECT*, HWND, CONST RGNDATA*);
@@ -105,14 +105,14 @@ void __stdcall Start() {
 	//	Sleep(1);
 	//}
 
-	GObjectManager = (GameObjectManager*) (baseAddr + DWORD_OBJECT_MANAGER);
+	/*GObjectManager = (GameObjectManager*) (baseAddr + DWORD_OBJECT_MANAGER);
 	Functions.CastSpell = (Typedefs::fnCastSpell)((DWORD) GetModuleHandle(NULL) + FN_CAST_SPELL);
 	Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD) GetModuleHandle(NULL) + FNPTR_DRAW_CIRCLE);
 	Functions.GetAttackCastDelay = (Typedefs::fnGetAttackCastDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_CAST_DELAY);
 	Functions.GetAttackDelay = (Typedefs::fnGetAttackDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_DELAY);
 	Functions.IsAlive = (Typedefs::fnIsAlive)(baseAddr + FN_IS_ALIVE);
-	//Functions.IsBaron = (Typedefs::fnIsBaron)(baseAddr + FN_IS_BARON);
-	//Functions.IsDragon = (Typedefs::fnIsDragon)(baseAddr + FN_IS_DRAGON);
+	Functions.IsBaron = (Typedefs::fnIsBaron)(baseAddr + FN_IS_BARON);
+	Functions.IsDragon = (Typedefs::fnIsDragon)(baseAddr + FN_IS_DRAGON);
 	Functions.IsHero = (Typedefs::fnIsHero)(baseAddr + FN_IS_HERO);
 	Functions.IsInhibitor = (Typedefs::fnIsInhibitor)(baseAddr + FN_IS_INHIB);
 	Functions.IsMinion = (Typedefs::fnIsMinion)(baseAddr + FN_IS_MINION);
@@ -124,7 +124,7 @@ void __stdcall Start() {
 	Functions.IsTurret = (Typedefs::fnIsTurret)(baseAddr + FN_IS_TURRET);
 	Functions.PrintChat = (Typedefs::fnPrintChat)(baseAddr + FN_PRINT_CHAT);
 
-	Functions.WorldToScreen = (Typedefs::fnWorldToScreen)(baseAddr + FN_WORLD_TO_SCREEN);
+	Functions.WorldToScreen = (Typedefs::fnWorldToScreen)(baseAddr + FN_WORLD_TO_SCREEN);*/
 
 	Original_Present = (Prototype_Present) DetourFunction((PBYTE) GetDeviceAddress(17), (PBYTE) Hooked_Present);
 }

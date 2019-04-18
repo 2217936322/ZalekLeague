@@ -196,41 +196,41 @@ std::vector<GameObject*> GetFriendlyMissiles() {
 	return Objects;
 }
 
-std::vector<GameObject*> GetTroyEnts() {
-	GameObjectManager* GObjects = GObjectManager;
-	std::vector<GameObject*> Objects;
-
-	for(int i = 0; i < GObjects->HighestObjectID; i++) {
-		GameObject* Object = GObjects->objectArray[i];
-		if(Object != NULL && Object->IsTroyEnt())
-			Objects.push_back(Object);
-	}
-
-	return Objects;
-}
-
-std::vector<GameObject*> GetEnemyTroyEnts() {
-	GameObjectManager* GObjects = GObjectManager;
-	std::vector<GameObject*> Objects;
-
-	for(int i = 0; i < GObjects->HighestObjectID; i++) {
-		GameObject* Object = GObjects->objectArray[i];
-		if(Object != NULL && Object->IsTroyEnt() && Object->IsEnemy())
-			Objects.push_back(Object);
-	}
-
-	return Objects;
-}
-
-std::vector<GameObject*> GetFriendlyTroyEnts() {
-	GameObjectManager* GObjects = GObjectManager;
-	std::vector<GameObject*> Objects;
-
-	for(int i = 0; i < GObjects->HighestObjectID; i++) {
-		GameObject* Object = GObjects->objectArray[i];
-		if(Object != NULL && Object->IsTroyEnt() && Object->IsFriendly())
-			Objects.push_back(Object);
-	}
-
-	return Objects;
-}
+//std::vector<GameObject*> GetTroyEnts() {
+//	GameObjectManager* GObjects = GObjectManager;
+//	std::vector<GameObject*> Objects;
+//
+//	for(int i = 0; i < GObjects->HighestObjectID; i++) {
+//		GameObject* Object = GObjects->objectArray[i];
+//		if(Object != NULL && Object->IsTroyEnt())
+//			Objects.push_back(Object);
+//	}
+//
+//	return Objects;
+//}
+//
+//std::vector<GameObject*> GetEnemyTroyEnts() {
+//	GameObjectManager* GObjects = GObjectManager;
+//	std::vector<GameObject*> Objects;
+//
+//	for(int i = 0; i < GObjects->HighestObjectID; i++) {
+//		GameObject* Object = GObjects->objectArray[i];
+//		if(Object != NULL && Object->IsTroyEnt() && Object->IsEnemy())
+//			Objects.push_back(Object);
+//	}
+//
+//	return Objects;
+//}
+//
+//std::vector<GameObject*> GetFriendlyTroyEnts() {
+//	GameObjectManager* GObjects = GObjectManager;
+//	std::vector<GameObject*> Objects;
+//
+//	for(int i = 0; i < GObjects->HighestObjectID; i++) {
+//		GameObject* Object = GObjects->objectArray[i];
+//		if(Object != NULL && Object->IsTroyEnt() && Object->IsFriendly())
+//			Objects.push_back(Object);
+//	}
+//
+//	return Objects;
+//}
