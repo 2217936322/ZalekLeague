@@ -112,26 +112,26 @@ void __stdcall Start() {
 	//	Sleep(1);
 	//}
 
-	/*GObjectManager = (GameObjectManager*) (baseAddr + DWORD_OBJECT_MANAGER);
-	Functions.CastSpell = (Typedefs::fnCastSpell)((DWORD) GetModuleHandle(NULL) + FN_CAST_SPELL);
-	Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD) GetModuleHandle(NULL) + FNPTR_DRAW_CIRCLE);
-	Functions.GetAttackCastDelay = (Typedefs::fnGetAttackCastDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_CAST_DELAY);
-	Functions.GetAttackDelay = (Typedefs::fnGetAttackDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_DELAY);
-	Functions.IsAlive = (Typedefs::fnIsAlive)(baseAddr + FN_IS_ALIVE);
-	Functions.IsBaron = (Typedefs::fnIsBaron)(baseAddr + FN_IS_BARON);
-	Functions.IsDragon = (Typedefs::fnIsDragon)(baseAddr + FN_IS_DRAGON);
-	Functions.IsHero = (Typedefs::fnIsHero)(baseAddr + FN_IS_HERO);
-	Functions.IsInhibitor = (Typedefs::fnIsInhibitor)(baseAddr + FN_IS_INHIB);
-	Functions.IsMinion = (Typedefs::fnIsMinion)(baseAddr + FN_IS_MINION);
-	Functions.IsMissile = (Typedefs::fnIsMissile)(baseAddr + FN_IS_MISSILE);
-	Functions.IsNexus = (Typedefs::fnIsNexus)(baseAddr + FN_IS_NEXUS);
-	Functions.IssueOrder = (Typedefs::fnIssueOrder)((DWORD) GetModuleHandle(NULL) + FN_ISSUE_ORDER);
-	Functions.IsTargetable = (Typedefs::fnIsTargetable)(baseAddr + FN_IS_TARGETABLE);
-	Functions.IsTroyEnt = (Typedefs::fnIsTroyEnt)(baseAddr + FN_IS_TROY);
-	Functions.IsTurret = (Typedefs::fnIsTurret)(baseAddr + FN_IS_TURRET);
-	Functions.PrintChat = (Typedefs::fnPrintChat)(baseAddr + FN_PRINT_CHAT);
+	GObjectManager = (GameObjectManager*) (baseAddr + DWORD_OBJECT_MANAGER);
+	//Functions.CastSpell = (Typedefs::fnCastSpell)((DWORD) GetModuleHandle(NULL) + FN_CAST_SPELL);
+	//Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD) GetModuleHandle(NULL) + FNPTR_DRAW_CIRCLE);
+	//Functions.GetAttackCastDelay = (Typedefs::fnGetAttackCastDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_CAST_DELAY);
+	//Functions.GetAttackDelay = (Typedefs::fnGetAttackDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_DELAY);
+	//Functions.IsAlive = (Typedefs::fnIsAlive)(baseAddr + FN_IS_ALIVE);
+	//Functions.IsBaron = (Typedefs::fnIsBaron)(baseAddr + FN_IS_BARON);
+	//Functions.IsDragon = (Typedefs::fnIsDragon)(baseAddr + FN_IS_DRAGON);
+	//Functions.IsHero = (Typedefs::fnIsHero)(baseAddr + FN_IS_HERO);
+	//Functions.IsInhibitor = (Typedefs::fnIsInhibitor)(baseAddr + FN_IS_INHIB);
+	//Functions.IsMinion = (Typedefs::fnIsMinion)(baseAddr + FN_IS_MINION);
+	//Functions.IsMissile = (Typedefs::fnIsMissile)(baseAddr + FN_IS_MISSILE);
+	//Functions.IsNexus = (Typedefs::fnIsNexus)(baseAddr + FN_IS_NEXUS);
+	//Functions.IssueOrder = (Typedefs::fnIssueOrder)((DWORD) GetModuleHandle(NULL) + FN_ISSUE_ORDER);
+	//Functions.IsTargetable = (Typedefs::fnIsTargetable)(baseAddr + FN_IS_TARGETABLE);
+	//Functions.IsTroyEnt = (Typedefs::fnIsTroyEnt)(baseAddr + FN_IS_TROY);
+	//Functions.IsTurret = (Typedefs::fnIsTurret)(baseAddr + FN_IS_TURRET);
+	//Functions.PrintChat = (Typedefs::fnPrintChat)(baseAddr + FN_PRINT_CHAT);
 
-	Functions.WorldToScreen = (Typedefs::fnWorldToScreen)(baseAddr + FN_WORLD_TO_SCREEN);*/
+	//Functions.WorldToScreen = (Typedefs::fnWorldToScreen)(baseAddr + FN_WORLD_TO_SCREEN);
 
 	Original_Present = (Prototype_Present) DetourFunction((PBYTE) GetDeviceAddress(17), (PBYTE) Hooked_Present);
 }

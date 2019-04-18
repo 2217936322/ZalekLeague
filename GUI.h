@@ -26,7 +26,13 @@ private:
 		if(Me() && DEVELOPMENT_INTERFACES) {
 			ImGui::Begin("Zalek Devkit");
 			{
-				ImGui::Text("Hello World!");
+				if(ImGui::TreeNode("Object Manager")) {
+					ImGui::Text("GameObjectManager* GObjectManager");
+					ImGui::BulletText("GObjectManager->MaxObjects => %d", GObjectManager->MaxObjects);
+					ImGui::BulletText("GObjectManager->ObjectsUsed => %d", GObjectManager->ObjectsUsed);
+					ImGui::BulletText("GObjectManager->HighestObjectID => %d", GObjectManager->HighestObjectID);
+					ImGui::TreePop();
+				}
 			}
 			ImGui::End();
 		}
