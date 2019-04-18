@@ -150,6 +150,7 @@
     <ClInclude Include="Enums\EVariableType.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="detours.h" />
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="LFunctions.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />

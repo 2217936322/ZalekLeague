@@ -4,51 +4,55 @@
 
 #include <d3d9.h>
 #include "Engine.h"
-#include "Menu.h"
+//#include "Menu.h"
+#include "GUI.h"
 #pragma once
-
-#define DEVELOPMENT_MODE true
 
 bool bUninitialized = true;
 LFunctions Functions;
 GameObjectManager* GObjectManager;
+GUI Interface;
 
-int Main() {
-	//if(ME) {
-	//	/*if(DEVELOPMENT_MODE) {
-	//		DevelopmentGUI();
-	//	}
 
-	//	if(GetAsyncKeyState(VK_INSERT) & 1)
-	//		bDrawGUI = !bDrawGUI;*/
+//int Main() {
+//
+//
+//
+//	//if(ME) {
+//	//	//	/*if(DEVELOPMENT_MODE) {
+//	//	//		DevelopmentGUI();
+//	//	//	}
+//
+//	//	//	if(GetAsyncKeyState(VK_INSERT) & 1)
+//	//	//		bDrawGUI = !bDrawGUI;*/
+//
+//	//	//		//Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z);
+//	//	//		//Vector vecScreen = Vector();
+//	//	//		//bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
+//	//	//		//ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
+//	//	//		//Overlay(testVec, "Very Useful Overlay");
+//
+//	//	return 1;
+//	//} else {
+//	//	//Loading Screen
+//	//	char* text = TARGET_GAMEVERSION;
+//	//	ImGui_ImplDX9_NewFrame();
+//	//	ImGui_ImplWin32_NewFrame();
+//	//	ImGui::NewFrame();
+//	//	ImGui::Begin("LoadingScreenOverlay##LoadingScreenOverlay_", false, ImGuiWindowFlags_NoTitleBar + ImGuiWindowFlags_AlwaysAutoResize + ImGuiWindowFlags_NoScrollbar);
+//	//	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
+//	//	ImGui::SetWindowPos(ImVec2((ImGui::GetMousePos().x - (ImGui::GetWindowSize().x / 2.0f) - 1.0f), (ImGui::GetMousePos().y - ImGui::GetWindowSize().y / -0.5f)));
+//	//	ImGui::Text(text);
+//	//	ImGui::End();
+//	//	ImGui::EndFrame();
+//	//	ImGui::Render();
+//	//	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
+//	//	return 2;
+//	//}
+//	return 0;
+//}
 
-	//		//Vector vecWorld = Vector(ME->GetPos().X, ME->GetPos().Y, ME->GetPos().Z);
-	//		//Vector vecScreen = Vector();
-	//		//bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
-	//		//ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
-	//		//Overlay(testVec, "Very Useful Overlay");
-
-	//	return 1;
-	//} else {
-		// Loading Screen
-	char* text = TARGET_GAMEVERSION;
-	ImGui_ImplDX9_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-	ImGui::Begin("LoadingScreenOverlay##LoadingScreenOverlay_", false, ImGuiWindowFlags_NoTitleBar + ImGuiWindowFlags_AlwaysAutoResize + ImGuiWindowFlags_NoScrollbar);
-	ImGui::SetWindowSize(ImGui::CalcTextSize(text, "1"));
-	ImGui::SetWindowPos(ImVec2((ImGui::GetMousePos().x - (ImGui::GetWindowSize().x / 2.0f) - 1.0f), (ImGui::GetMousePos().y - ImGui::GetWindowSize().y / -0.5f)));
-	ImGui::Text(text);
-	ImGui::End();
-	ImGui::EndFrame();
-	ImGui::Render();
-	ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-	return 2;
-	//}
-	//return 0;
-}
-
-typedef HRESULT(WINAPI * Prototype_Present)(LPDIRECT3DDEVICE9, CONST RECT*, CONST RECT*, HWND, CONST RGNDATA*);
+typedef HRESULT(WINAPI* Prototype_Present)(LPDIRECT3DDEVICE9, CONST RECT*, CONST RECT*, HWND, CONST RGNDATA*);
 Prototype_Present Original_Present;
 
 LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
@@ -59,16 +63,19 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 	return CallWindowProc(gWNDPROC, hWnd, uMsg, wParam, lParam);
 }
 
-HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT * pSrcRect, CONST RECT * pDestRect, HWND hDestWindow, CONST RGNDATA * pDirtyRegion) {
+HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion) {
 	if(bUninitialized) {
 		HWND hwnd = FindWindow(NULL, "League of Legends (TM) Client");
 		gWNDPROC = (WNDPROC)
 			SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR) WndProc);
-		InitializeImGuiContext(hwnd, Device);
+		Interface.CreateContext(hwnd, Device);
+		//InitializeImGuiContext(hwnd, Device);
 		bUninitialized = false;
 	}
 
-	Main();
+	Interface.Draw();
+
+	//Main();
 
 	// Shutdown Scripts on end key press.
 	if(GetAsyncKeyState(VK_END) & 1) {
@@ -434,3 +441,8 @@ public:
 
 #define InventoryPtr 0x4BE0
 */
+
+// 9.8
+//#define oBuyItem 0x1ABDF0
+//DWORD* pPlayerShop = (DWORD*) ((DWORD) pLocalPlayer + 0x4998)
+//typedef char(__thiscall * _BuyItem)(DWORD * pPlayerShop, int ItemID, int minusone);

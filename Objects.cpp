@@ -1,5 +1,9 @@
 #include "Objects.h"
 
+GameObject* Me() {
+	return (GameObject*)* (DWORD*) (baseAddr + DWORD_LOCAL_PLAYER);
+}
+
 std::vector<GameObject*> GetObjects() {
 	GameObjectManager* GObjects = GObjectManager;
 	std::vector<GameObject*> Objects;

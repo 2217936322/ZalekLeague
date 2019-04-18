@@ -3,6 +3,9 @@
 #include "Engine.h"
 #pragma once
 
+GameObject* Me();
+
+
 std::vector<GameObject*> GetObjects();
 std::vector<GameObject*> GetFriendlyObjects();
 std::vector<GameObject*> GetEnemyObjects();

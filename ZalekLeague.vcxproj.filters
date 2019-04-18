@@ -202,6 +202,7 @@
     <ClInclude Include="Menu.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="GUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="detours.lib">
