@@ -13,7 +13,32 @@
 class GUI
 {
 private:
+	void SpellText(SpellSlot* spell_slot) {
+		ImGui::BulletText("GetRank() => %d", spell_slot->GetRank());
+	}
+
 	void ChampionText(Champion* champion) {
+		ImGui::Text("GetNetworkID() => %X", champion->GetNetworkID());
+		ImGui::Text("GetIndex() => %hu", champion->GetIndex());
+
+		ImGui::Indent();
+		if(ImGui::CollapsingHeader("SpellBook")) {
+			ImGui::BulletText("TODO: => %s SpellBook", champion->GetActorName());
+			SpellBook* sb = champion->GetSpellBook();
+			SpellSlot* ss = sb->Get((int) ESpellSlot::Q);
+			SpellText(ss);
+			// Finish SpellSlot
+		}
+		ImGui::Unindent();
+
+		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+		if(ImGui::TreeNode("Strings")) {
+			ImGui::BulletText("GetActorName() => %s", champion->GetActorName());
+			ImGui::BulletText("GetName() => %s", champion->GetName());
+			ImGui::BulletText("GetRecallName() => %s", champion->GetRecallName());
+			ImGui::TreePop();
+		}
+
 		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
 		if(ImGui::TreeNode("Booleans")) {
 			ImGui::BulletText("IsDashing() => %d", champion->IsDashing());
@@ -26,46 +51,57 @@ private:
 		}
 
 		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
-		if(ImGui::TreeNode("Strings")) {
-			ImGui::BulletText("GetActorName() => %s", champion->GetActorName());
-			ImGui::BulletText("GetName() => %s", champion->GetName());
+		if(ImGui::TreeNode("Ints")) {
+			ImGui::BulletText("GetLevel() => %d", champion->GetLevel());
+			ImGui::BulletText("GetTeam() => %d", champion->GetTeam());
+			ImGui::BulletText("GetRecallState() => %d", champion->GetRecallState());
 			ImGui::TreePop();
 		}
 
 		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
 		if(ImGui::TreeNode("Floats")) {
-			ImGui::BulletText("GetArmor() => %f", champion->GetArmor());
-			//ImGui::BulletText("GetAbilityPower() => %f", champion->GetAbilityPower());
-			ImGui::BulletText("GetAttackCastDelay() => %f", champion->GetAttackCastDelay());
-			ImGui::BulletText("GetAttackDamage() => %f", champion->GetAttackDamage());
-			ImGui::BulletText("GetAttackDelay() => %f", champion->GetAttackDelay());
-			ImGui::BulletText("GetAttackRange() => %f", champion->GetAttackRange());
-			ImGui::BulletText("GetAttackSpeed() => %f", champion->GetAttackSpeed());
-			ImGui::BulletText("GetBaseAttackDamage() => %f", champion->GetBaseAttackDamage());
-			ImGui::BulletText("GetBonusAttackDamage() => %f", champion->GetBonusAttackDamage());
+
+			ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+			if(ImGui::TreeNode(
+				(void*) (intptr_t) (champion->GetIndex() * champion->GetAttackDamage()),
+				"Attack Damage Stats %s : %d", champion->GetActorName(), champion->GetIndex())) {
+
+				ImGui::BulletText("GetAttackDamage() => %f", champion->GetAttackDamage());
+				ImGui::BulletText("GetBaseAttackDamage() => %f", champion->GetBaseAttackDamage());
+				ImGui::BulletText("GetBonusAttackDamage() => %f", champion->GetBonusAttackDamage());
+
+				ImGui::BulletText("GetAttackRange() => %f", champion->GetAttackRange());
+				ImGui::BulletText("GetAttackCastDelay() => %f", champion->GetAttackCastDelay());
+				ImGui::BulletText("GetAttackDelay() => %f", champion->GetAttackDelay());
+				ImGui::BulletText("GetAttackSpeed() => %f", champion->GetAttackSpeed());
+
+				ImGui::BulletText("GetCritChance() => %f", champion->GetCritChance());
+				ImGui::TreePop();
+			}
+
+			ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+			if(ImGui::TreeNode(
+				(void*) (intptr_t) (champion->GetIndex() * champion->GetHealth()),
+				"Tank Stats %s : %d", champion->GetActorName(), champion->GetIndex())) {
+				ImGui::BulletText("GetArmor() => %f", champion->GetArmor());
+				ImGui::BulletText("GetMagicResist() => %f", champion->GetMagicResist());
+
+				ImGui::BulletText("GetHealth() => %f", champion->GetHealth());
+				ImGui::BulletText("GetMaxHealth() => %f", champion->GetMaxHealth());
+				ImGui::BulletText("GetHealthPercent() => %f", champion->GetHealthPercent());
+
+				ImGui::BulletText("GetMana() => %f", champion->GetMana());
+				ImGui::BulletText("GetMaxMana() => %f", champion->GetMaxMana());
+				ImGui::BulletText("GetManaPercent() => %f", champion->GetManaPercent());
+
+				ImGui::TreePop();
+			}
+
+			ImGui::BulletText("GetAbilityPower() => %f", champion->GetAbilityPower());
 			ImGui::BulletText("GetCollisionRadius() => %f", champion->GetCollisionRadius());
 			ImGui::BulletText("GetDistToMe() => %f", champion->GetDistToMe());
-			ImGui::BulletText("GetHealth() => %f", champion->GetHealth());
-			ImGui::BulletText("GetMaxHealth() => %f", champion->GetMaxHealth());
-			ImGui::TreePop();
-		}
+			ImGui::BulletText("GetMoveSpeed() => %f", champion->GetMoveSpeed());
 
-		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
-		if(ImGui::TreeNode("Ints")) {
-			ImGui::BulletText("GetLevel() => %d", champion->GetLevel());
-			ImGui::BulletText("GetTeam() => %d", champion->GetTeam());
-			ImGui::TreePop();
-		}
-
-		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
-		if(ImGui::TreeNode("Shorts")) {
-			ImGui::BulletText("GetIndex() => %hu", champion->GetIndex());
-			ImGui::TreePop();
-		}
-
-		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
-		if(ImGui::TreeNode("SpellBook")) {
-			ImGui::BulletText("TODO: => %s SpellBook", champion->GetActorName());
 			ImGui::TreePop();
 		}
 
@@ -92,32 +128,52 @@ private:
 		}
 	}
 
+	void ClientInformationTree() {
+		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+		if(ImGui::CollapsingHeader("Client Information")) {
+			ImGui::Indent();
+			ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+			if(ImGui::CollapsingHeader("ReClass Addresses")) {
+				ImGui::PushItemWidth(64);
+
+				char _base[16]; sprintf_s(_base, "%X", baseAddr);
+				ImGui::InputText("Base", _base, 16, ImGuiInputTextFlags_ReadOnly);
+
+				char _om[16]; sprintf_s(_om, "%X", baseAddr + DWORD_OBJECT_MANAGER);
+				ImGui::InputText("Object Manager", _om, 16, ImGuiInputTextFlags_ReadOnly);
+
+				char _me[16]; sprintf_s(_me, "%X", baseAddr + DWORD_LOCAL_PLAYER);
+				ImGui::InputText("My Player", _me, 16, ImGuiInputTextFlags_ReadOnly);
+
+				char _me_sb[16]; sprintf_s(_me_sb, "%X", baseAddr + DWORD_LOCAL_PLAYER + O_SPELLBOOK);
+				ImGui::InputText("My SpellBook", _me_sb, 16, ImGuiInputTextFlags_ReadOnly);
+
+
+				ImGui::PopItemWidth();
+			}
+
+			if(ImGui::CollapsingHeader("Input")) {
+				ImGui::Text("InputHandler* Input = new InputHandler;");
+				Vector mw = Input->GetMouseWorld();
+				ImGui::BulletText("Input->GetMouseWorld() =>\n x = %f,\n y = %f,\n z = %f", mw.X, mw.Y, mw.Z);
+			}
+			ImGui::Unindent();
+		}
+	}
+
 	void Devkit() {
 		if(Me() && DEVELOPMENT_INTERFACES) {
 			if(bShowDevkit) {
 				DebugOverlay();
 				ImGui::Begin("Zalek Devkit", &bShowDevkit, ImGuiWindowFlags_AlwaysAutoResize);
 				{
-					if(ImGui::CollapsingHeader("Client Information")) {
-						ImGui::Indent();
-						if(ImGui::CollapsingHeader("ReClass Addresses")) {
-							ImGui::BulletText("Base: %X", baseAddr);
-							ImGui::BulletText("Object Manager: %X", baseAddr + DWORD_OBJECT_MANAGER);
-							ImGui::BulletText("Me: %X", baseAddr + DWORD_LOCAL_PLAYER);
-						}
+					ClientInformationTree();
 
-						if(ImGui::CollapsingHeader("Input")) {
-							ImGui::Text("InputHandler* Input = new InputHandler;");
-							Vector mw = Input->GetMouseWorld();
-							ImGui::BulletText("Input->GetMouseWorld() =>\n x = %f,\n y = %f,\n z = %f", mw.X, mw.Y, mw.Z);
-						}
-						ImGui::Unindent();
-					}
-
-					if(ImGui::CollapsingHeader("Game Object Manager")) {
-						ImGui::BulletText("GObjectManager->HighestObjectID => %d", GObjectManager->HighestObjectID);
-						ImGui::BulletText("GObjectManager->ObjectsUsed => %d", GObjectManager->ObjectsUsed);
-						ImGui::BulletText("GObjectManager->MaxObjects => %d", GObjectManager->MaxObjects);
+					if(ImGui::CollapsingHeader("Object Manager##ObjManagerTreeNode")) {
+						ImGui::Text("GameObjectManager* ObjectManager;");
+						ImGui::BulletText("ObjectManager->HighestIndex => %d", ObjectManager->HighestIndex);
+						ImGui::BulletText("ObjectManager->Size => %d", ObjectManager->Size);
+						ImGui::BulletText("ObjectManager->MaxSize => %d", ObjectManager->MaxSize);
 					}
 
 					ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);

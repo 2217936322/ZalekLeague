@@ -9,7 +9,7 @@
 bool __INIT__ = true;
 LFunctions Functions;
 InputHandler* Input;
-GameObjectManager* GObjectManager;
+GameObjectManager* ObjectManager;
 GUI Interface;
 
 
@@ -104,7 +104,7 @@ void __stdcall Start() {
 	//	Sleep(1);
 	//}
 
-	GObjectManager = (GameObjectManager*) (baseAddr + DWORD_OBJECT_MANAGER);
+	ObjectManager = (GameObjectManager*) (baseAddr + DWORD_OBJECT_MANAGER);
 	//Functions.CastSpell = (Typedefs::fnCastSpell)((DWORD) GetModuleHandle(NULL) + FN_CAST_SPELL);
 	//Functions.DrawCircle = (Typedefs::fnDrawCircle)((DWORD) GetModuleHandle(NULL) + FNPTR_DRAW_CIRCLE);
 	Functions.GetAttackCastDelay = (Typedefs::fnGetAttackCastDelay)((DWORD) GetModuleHandle(NULL) + FN_GET_ATTACK_CAST_DELAY);

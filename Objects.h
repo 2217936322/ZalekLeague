@@ -12,9 +12,21 @@ Champion* Me();
 class Champion : GameObject
 {
 public:
+
+#pragma region AIManager
+
 	AIManager* GetAIManager() {
 		typedef AIManager* (__thiscall * OriginalFn)(PVOID);
 		return CallVirtual<OriginalFn>((GameObject*) this, 147)((GameObject*) this);
+	}
+
+#pragma endregion
+
+
+#pragma region bool
+
+	bool IsChampion() {
+		return Functions.IsHero((GameObject*) this);
 	}
 
 	bool IsDashing() {
@@ -39,25 +51,39 @@ public:
 		return Functions.IsTargetable((GameObject*) this);
 	}
 
-	//bool IsVisible() {
-	//	return *(bool*) ((DWORD) this + PTR_OBJECT_IS_VISIBLE);
-	//}
+
+#pragma endregion
+
+
+#pragma region char*
 
 	char* GetActorName() {
-		return GetStr((DWORD) this + PTR_OBJECT_ACTOR_NAME);
+		return GetStr((DWORD) this + O_ACTOR_NAME);
 	}
 
 	char* GetName() {
-		return GetStr((DWORD) this + PTR_OBJECT_NAME);
+		return GetStr((DWORD) this + O_NAME);
 	}
 
-	//DWORD GetNetworkID();
+	char* GetRecallName() {
+		return GetStr((DWORD) this + O_RECALL_NAME);
+	}
 
-	//float GetAbilityPower();
+#pragma endregion
 
 
+#pragma region DWORD
+
+	DWORD GetNetworkID() {
+		return *(DWORD*) ((DWORD) this + O_NETWORK_ID);
+	}
+
+#pragma endregion
+
+
+#pragma region float
 	float GetArmor() {
-		return *(float*) ((DWORD) this + PTR_OBJECT_ARMOR);
+		return *(float*) ((DWORD) this + O_ARMOR);
 	}
 
 	float GetAttackCastDelay() {
@@ -68,12 +94,16 @@ public:
 		return this->GetBonusAttackDamage() + this->GetBaseAttackDamage();
 	}
 
+	float GetAbilityPower() {
+		return *(float*) ((DWORD) this + O_BONUS_AP);
+	}
+
 	float GetAttackDelay() {
 		return Functions.GetAttackDelay((GameObject*) this);
 	}
 
 	float GetAttackRange() {
-		return *(float*) ((DWORD) this + PTR_OBJECT_ATTACK_RANGE);
+		return *(float*) ((DWORD) this + O_ATTACK_RANGE);
 	}
 
 	float GetAttackSpeed() {
@@ -81,11 +111,11 @@ public:
 	}
 
 	float GetBaseAttackDamage() {
-		return *(float*) ((DWORD) this + PTR_OBJECT_BASE_ATTACK);
+		return *(float*) ((DWORD) this + O_BASE_AD);
 	}
 
 	float GetBonusAttackDamage() {
-		return *(float*) ((DWORD) this + PTR_OBJECT_BONUS_ATTACK);
+		return *(float*) ((DWORD) this + O_BONUS_AD);
 	}
 
 	float GetCollisionRadius() {
@@ -93,47 +123,99 @@ public:
 		return CallVirtual<OriginalFn>((GameObject*) this, 36)((GameObject*) this);
 	}
 
+	//float GetCooldownReduction() {
+	//	return *(float*) ((DWORD) this + O_CRIT_RATE) * 100;
+	//}
+
+	float GetCritChance() {
+		return *(float*) ((DWORD) this + O_CRIT_RATE) * 100;
+	}
+
 	float GetDistToMe() {
 		return this->GetPos().DistTo(Me()->GetPos());
 	}
 
 	float GetHealth() {
-		return *(float*) ((DWORD) this + PTR_OBJECT_CURRENT_HEALTH);
+		return *(float*) ((DWORD) this + O_HEALTH);
 	}
 
 	float GetMaxHealth() {
-		return *(float*) ((DWORD) this + PTR_OBJECT_CURRENT_HEALTH + 0x10);
+		return *(float*) ((DWORD) this + O_MAX_HEALTH);
 	}
 
+	float GetHealthPercent() {
+		return (this->GetHealth() / this->GetMaxHealth()) * 100;
+	}
+
+	float GetMagicResist() {
+		return *(float*) ((DWORD) this + O_MAGIC_RESIST);
+	}
+
+	float GetMana() {
+		return *(float*) ((DWORD) this + O_MANA);
+	}
+
+	float GetMaxMana() {
+		return *(float*) ((DWORD) this + O_MAX_MANA);
+	}
+
+	float GetManaPercent() {
+		return (this->GetMana() / this->GetMaxMana()) * 100;
+	}
+
+	float GetMoveSpeed() {
+		return *(float*) ((DWORD) this + O_MOVE_SPEED);
+	}
+
+#pragma endregion
+
+
+#pragma region int32
+
 	int GetLevel() {
-		return *(int*) ((DWORD) this + PTR_OBJECT_LEVEL);
+		return *(int*) ((DWORD) this + O_LEVEL);
 	}
 
 	int GetTeam() {
-		return *(int*) ((DWORD) this + PTR_OBJECT_TEAM);
+		return *(int*) ((DWORD) this + O_TEAM);
 	}
+
+	int GetRecallState() {
+		return *(int*) ((DWORD) this + O_RECALL_STATE);
+	}
+
+#pragma endregion
+
+
+#pragma region int16
 
 	short GetIndex() {
-		return *(short*) ((DWORD) this + PTR_OBJECT_INDEX);
+		return *(short*) ((DWORD) this + O_INDEX);
 	}
 
-	//short GetSourceIndex();
-	//short GetTargetIndex() {
-	//	return *(short*) ((DWORD) this + PTR_OBJECT_TARGET_INDEX);
-	//}
+#pragma endregion
 
-	//SpellBook* GetSpellBook();
+
+#pragma region SpellBook
+
+	SpellBook* GetSpellBook() {
+		return (SpellBook*) ((DWORD) this + O_SPELLBOOK);
+	}
+
+#pragma endregion
+
+
+#pragma region Vector
 
 	Vector GetPos() {
-		return *(Vector*) ((DWORD) this + PTR_OBJECT_POS);
+		return *(Vector*) ((DWORD) this + O_POS);
 	}
 
 	Vector GetWaypoint() {
 		return *(Vector*) ((DWORD) this->GetAIManager() + PTR_OBJECT_AI_WAYPOINT);
 	}
-	//Vector GetStartPos();
-	//Vector GetEndPos();
-	//Vector GetVelocity();
+
+#pragma endregion
 
 };
 
@@ -141,25 +223,3 @@ public:
 Champion* Me() {
 	return (Champion*)* (DWORD*) (baseAddr + DWORD_LOCAL_PLAYER);
 }
-
-//
-//std::vector<GameObject*> GetChampions();
-//std::vector<GameObject*> GetEnemyChampions();
-//std::vector<GameObject*> GetFriendlyChampions();
-//
-////std::vector<GameObject*> GetBaron();
-////std::vector<GameObject*> GetDragon();
-//
-//std::vector<GameObject*> GetMinions();
-//std::vector<GameObject*> GetEnemyMinions();
-//std::vector<GameObject*> GetFriendlyMinions();
-//
-//std::vector<GameObject*> GetMonsters();
-//
-//std::vector<GameObject*> GetMissiles();
-//std::vector<GameObject*> GetEnemyMissiles();
-//std::vector<GameObject*> GetFriendlyMissiles();
-//
-//std::vector<GameObject*> GetTroyEnts();
-//std::vector<GameObject*> GetEnemyTroyEnts();
-//std::vector<GameObject*> GetFriendlyTroyEnts();

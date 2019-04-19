@@ -24,30 +24,37 @@ class SpellSlot
 {
 public:
 
-	bool IsReady();
-	bool HasCharges();
+	//bool SpellSlot::IsReady() {
+	//	return this->GetCooldown() <= 0.0f && this->GetLevel() > 0;
+	//}
 
-	char* GetActorName();
+	//bool SpellSlot::HasCharges() {
+	//	return this->GetNextCharge() != -1;
+	//}
 
-	int GetCharge();
-	int GetNextCharge();
-	int GetSpellInfoAddress();
+	//char* SpellSlot::GetActorName() {
+	//	return GetStr(this->GetSpellInfoAddress() + 0x18);
+	//}
 
-	int GetLevel();
-	float GetCooldown();
-	float GetTimeUsed();
+	//int GetCharge();
+	//int GetNextCharge();
+	//int GetSpellInfoAddress();
+	int SpellSlot::GetRank() {
+		return *(int*) ((DWORD) this + O_SS_RANK);
+	}
+
+	//float GetCooldown();
+	//float GetTimeUsed() {
+	//	return *(float*) ((DWORD) this + 0x28);
+	//}
 };
 
 class SpellBook
 {
 public:
-	SpellSlot* Get(int slot);
-	SpellSlot* GetQ();
-	SpellSlot* GetW();
-	SpellSlot* GetE();
-	SpellSlot* GetR();
-	SpellSlot* GetD();
-	SpellSlot* GetF();
+	SpellSlot* Get(int slot) {
+		return *(SpellSlot * *) ((DWORD) this + 0x508 + (0x4 * slot));
+	}
 };
 
 
