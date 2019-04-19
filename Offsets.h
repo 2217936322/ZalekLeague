@@ -47,7 +47,7 @@
 
 #define FN_ISSUE_ORDER			   0x1BEE10 // 9.8 || E8 ? ? ? ? 8B 84 24 ? ? ? ? 8B CF F3 
 #define FN_IS_ALIVE				   0x1E3D80 // 9.8 || E8 ? ? ? ? 84 C0 74 3B 8B 
-//#define FN_IS_TARGETABLE		   0x220A80 // 9.8 || E8 ? ? ? ? 84 C0 74 2E 
+#define FN_IS_TARGETABLE		   0x220A80 // 9.8 || E8 ? ? ? ? 84 C0 74 2E 
 #define FN_IS_HERO				   0x2280E0 // 9.8 || E8 ? ? ? ? 84 C0 C7 44 24 ? ? ? ? ? 8D 44 24 30 
 #define FN_IS_MINION			   0x228120 // 9.8 || E8 ? ? ? ? 83 C4 04 84 C0 74 16 8B 0F 
 #define FN_IS_MISSILE			   0x228140 // 9.8 || E8 ? ? ? ? 83 C4 04 84 C0 74 1C FF
@@ -56,7 +56,7 @@
 #define FN_CAST_SPELL			   0x5B6AD0 // 9.8 || E8 ? ? ? ? 8B 7C 24 10 5D 
 #define FN_UPDATE_CHARGEABLE_SPELL 0x5B9280 // 9.8 || E8 ? ? ? ? 5E 5F B0 01 5B 83 C4 10  
 #define FN_GET_SPELL_STATE         0x5AC000 // 9.8 || 57 8B 7C 24 0C 83 7F 04
-//#define FN_GET_ATTACK_CAST_DELAY   0x5BD270 // 9.8 || 83 EC 0C 56 57 8B 7C 24 18 8B CF 
+#define FN_GET_ATTACK_CAST_DELAY   0x5BD270 // 9.8 || 83 EC 0C 56 57 8B 7C 24 18 8B CF 
 #define FN_GET_ATTACK_DELAY		   0x5BD350 // 9.8 || E8 ? ? ? ? D8 44 24 20 83 
 #define FN_WORLD_TO_SCREEN		   0x7F2EE0 // 9.8 || E8 ? ? ? ? F3 0F 10 44 24 ? 83 C4 10 F3 0F 5C
 #define FNPTR_DRAW_CIRCLE		   0x5AE700 // 9.8 || E8 ? ? ? ? 83 C4 1C 8B 44 24 18 
@@ -72,21 +72,21 @@
 #define DWORD_ZOOM_CLASS		 0x2F5E9A0 // 9.8 || B9 ? ? ? ? 89 84 24 ? ? ? ? 8D 44 
 
 //AI Manager offsets
-#define PTR_OBJECT_AI_TARGETPOS    0x10
+#define PTR_OBJECT_AI_WAYPOINT    0x10
 #define PTR_OBJECT_AI_IS_MOVING    0x198
-#define PTR_OBJECT_AI_IS_DASHING   0x1Ec
 #define PTR_OBJECT_AI_NAV_START	   0x1BC
 #define PTR_OBJECT_AI_NAV_END	   0x1C0
 #define PTR_OBJECT_AI_HAS_NAV_PATH 0x19C 
 #define PTR_OBJECT_AI_CURRENT_POS  0x2BC 
 #define PTR_OBJECT_AI_VELOCITY	   0x2C8
+#define PTR_OBJECT_AI_IS_DASHING   0x394
 
 #define PTR_OBJECT_INDEX		   0x1C
 #define PTR_OBJECT_NETWORK_ID	   0x110
 #define PTR_OBJECT_SOURCE_INDEX    0x24C
 #define PTR_OBJECT_SPELL_START_POS 0x264
 #define PTR_OBJECT_SPELL_END_POS   0x270
-#define PTR_OBJECT_TARGET_ID	   0x298
+#define PTR_OBJECT_TARGET_INDEX	   0x298
 #define PTR_OBJECT_IS_VISIBLE	   0x39C
 #define PTR_OBJECT_RECALL_STATE    0xDC8
 #define PTR_OBJECT_TEAM			   0x0044

@@ -13,9 +13,74 @@
 class GUI
 {
 private:
+	void ChampionText(Champion* champion) {
+		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+		if(ImGui::TreeNode("Booleans")) {
+			ImGui::BulletText("IsDashing() => %d", champion->IsDashing());
+			ImGui::BulletText("IsEnemy() => %d", champion->IsEnemy());
+			ImGui::BulletText("IsFriendly() => %d", champion->IsFriendly());
+			ImGui::BulletText("IsMoving() => %d", champion->IsMoving());
+			ImGui::BulletText("IsTargetable() => %d", champion->IsTargetable());
+			//ImGui::BulletText("IsVisible() => %d", champion->IsVisible());
+			ImGui::TreePop();
+		}
+
+		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+		if(ImGui::TreeNode("Strings")) {
+			ImGui::BulletText("GetActorName() => %s", champion->GetActorName());
+			ImGui::BulletText("GetName() => %s", champion->GetName());
+			ImGui::TreePop();
+		}
+
+		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+		if(ImGui::TreeNode("Floats")) {
+			ImGui::BulletText("GetArmor() => %f", champion->GetArmor());
+			//ImGui::BulletText("GetAbilityPower() => %f", champion->GetAbilityPower());
+			ImGui::BulletText("GetAttackCastDelay() => %f", champion->GetAttackCastDelay());
+			ImGui::BulletText("GetAttackDamage() => %f", champion->GetAttackDamage());
+			ImGui::BulletText("GetAttackDelay() => %f", champion->GetAttackDelay());
+			ImGui::BulletText("GetAttackRange() => %f", champion->GetAttackRange());
+			ImGui::BulletText("GetAttackSpeed() => %f", champion->GetAttackSpeed());
+			ImGui::BulletText("GetBaseAttackDamage() => %f", champion->GetBaseAttackDamage());
+			ImGui::BulletText("GetBonusAttackDamage() => %f", champion->GetBonusAttackDamage());
+			ImGui::BulletText("GetCollisionRadius() => %f", champion->GetCollisionRadius());
+			ImGui::BulletText("GetDistToMe() => %f", champion->GetDistToMe());
+			ImGui::BulletText("GetHealth() => %f", champion->GetHealth());
+			ImGui::BulletText("GetMaxHealth() => %f", champion->GetMaxHealth());
+			ImGui::TreePop();
+		}
+
+		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+		if(ImGui::TreeNode("Ints")) {
+			ImGui::BulletText("GetLevel() => %d", champion->GetLevel());
+			ImGui::BulletText("GetTeam() => %d", champion->GetTeam());
+			ImGui::TreePop();
+		}
+
+		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+		if(ImGui::TreeNode("Shorts")) {
+			ImGui::BulletText("GetIndex() => %hu", champion->GetIndex());
+			ImGui::TreePop();
+		}
+
+		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+		if(ImGui::TreeNode("SpellBook")) {
+			ImGui::BulletText("TODO: => %s SpellBook", champion->GetActorName());
+			ImGui::TreePop();
+		}
+
+		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+		if(ImGui::TreeNode("Vectors")) {
+			Vector Pos = champion->GetPos();
+			ImGui::BulletText("GetPos() => Vector\nx = %f\n y = %f\n z = %f", Pos.X, Pos.Y, Pos.Z);
+			Pos = champion->GetWaypoint();
+			ImGui::BulletText("GetWaypoint() => Vector\nx = %f\n y = %f\n z = %f", Pos.X, Pos.Y, Pos.Z);
+			ImGui::TreePop();
+		}
+	}
+
 	void DebugOverlay() {
 		if(ME && DEVELOPMENT_INTERFACES) {
-			ImGui::SetWindowPos(ImVec2((ImGui::GetMousePos().x - (ImGui::GetWindowSize().x / 2.0f) - 1.0f), (ImGui::GetMousePos().y - ImGui::GetWindowSize().y / -0.5f)));
 			ImGui::Begin("DebugOverlay##DebugOverlay_",
 				false,
 				ImGuiWindowFlags_NoTitleBar + ImGuiWindowFlags_AlwaysAutoResize + ImGuiWindowFlags_NoScrollbar);
@@ -33,19 +98,40 @@ private:
 				DebugOverlay();
 				ImGui::Begin("Zalek Devkit", &bShowDevkit, ImGuiWindowFlags_AlwaysAutoResize);
 				{
-					if(ImGui::TreeNode("Input")) {
-						ImGui::Text("InputHandler* Input = new InputHandler;");
-						Vector mw = Input->GetMouseWorld();
-						ImGui::BulletText("Input->GetMouseWorld() =>\n x = %f,\n y = %f,\n z = %f", mw.X, mw.Y, mw.Z);
-						ImGui::TreePop();
+					if(ImGui::CollapsingHeader("Client Information")) {
+						ImGui::Indent();
+						if(ImGui::CollapsingHeader("ReClass Addresses")) {
+							ImGui::BulletText("Base: %X", baseAddr);
+							ImGui::BulletText("Object Manager: %X", baseAddr + DWORD_OBJECT_MANAGER);
+							ImGui::BulletText("Me: %X", baseAddr + DWORD_LOCAL_PLAYER);
+						}
+
+						if(ImGui::CollapsingHeader("Input")) {
+							ImGui::Text("InputHandler* Input = new InputHandler;");
+							Vector mw = Input->GetMouseWorld();
+							ImGui::BulletText("Input->GetMouseWorld() =>\n x = %f,\n y = %f,\n z = %f", mw.X, mw.Y, mw.Z);
+						}
+						ImGui::Unindent();
 					}
 
-					if(ImGui::TreeNode("Game Object Manager")) {
+					if(ImGui::CollapsingHeader("Game Object Manager")) {
 						ImGui::BulletText("GObjectManager->HighestObjectID => %d", GObjectManager->HighestObjectID);
 						ImGui::BulletText("GObjectManager->ObjectsUsed => %d", GObjectManager->ObjectsUsed);
 						ImGui::BulletText("GObjectManager->MaxObjects => %d", GObjectManager->MaxObjects);
-						ImGui::TreePop();
 					}
+
+					ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+					if(ImGui::CollapsingHeader("Champions")) {
+						ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+						ImGui::Indent();
+						if(ImGui::CollapsingHeader("Me")) {
+							ChampionText(Me());
+						}
+						ImGui::Unindent();
+					}
+
+
+
 
 					// TODO: Champion Vector
 					// TODO: Minion Vector

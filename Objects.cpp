@@ -1,49 +1,9 @@
-#include "Objects.h"
+//#include "Objects.h"
 
-GameObject* Me() {
-	return (GameObject*)* (DWORD*) (baseAddr + DWORD_LOCAL_PLAYER);
-}
+//GameObject* Me() {
+//	return (GameObject*)* (DWORD*) (baseAddr + DWORD_LOCAL_PLAYER);
+//}
 
-//
-//std::vector<GameObject*> GetObjects() {
-//	GameObjectManager* GObjects = GObjectManager;
-//	std::vector<GameObject*> Objects;
-//
-//	for(int i = 0; i < GObjects->HighestObjectID; i++) {
-//		GameObject* Object = GObjects->objectArray[i];
-//		if(Object != NULL)
-//			Objects.push_back(Object);
-//	}
-//
-//	return Objects;
-//}
-//
-//std::vector<GameObject*> GetEnemyObjects() {
-//	GameObjectManager* GObjects = GObjectManager;
-//	std::vector<GameObject*> Objects;
-//
-//	for(int i = 0; i < GObjects->HighestObjectID; i++) {
-//		GameObject* Object = GObjects->objectArray[i];
-//		if(Object != NULL && Object->IsEnemy())
-//			Objects.push_back(Object);
-//	}
-//
-//	return Objects;
-//}
-//
-//std::vector<GameObject*> GetFriendlyObjects() {
-//	GameObjectManager* GObjects = GObjectManager;
-//	std::vector<GameObject*> Objects;
-//
-//	for(int i = 0; i < GObjects->HighestObjectID; i++) {
-//		GameObject* Object = GObjects->objectArray[i];
-//		if(Object != NULL && Object->IsFriendly())
-//			Objects.push_back(Object);
-//	}
-//
-//	return Objects;
-//}
-//
 //std::vector<GameObject*> GetChampions() {
 //	GameObjectManager* GObjects = GObjectManager;
 //	std::vector<GameObject*> Objects;

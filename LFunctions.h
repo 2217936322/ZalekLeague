@@ -6,7 +6,7 @@ class Typedefs
 public:
 	//typedef void(__thiscall* tPrintChat)(DWORD ChatClient, const char* Message, int Color);
 	typedef int* (__thiscall* fnIssueOrder)(void* thisPtr, int Order, Vector* Loc, GameObject* Target, bool IsAttackMove, bool IsMinion, DWORD Unknown);
-	//typedef float(__cdecl* fnGetAttackCastDelay)(GameObject* pObj);
+	typedef float(__cdecl* fnGetAttackCastDelay)(GameObject* pObj);
 	typedef float(__cdecl* fnGetAttackDelay)(GameObject* pObj);
 	//typedef float(__cdecl* fnGetBasicAttack)(GameObject* pObj);
 
@@ -49,7 +49,7 @@ public:
 	Typedefs::fnIsAlive IsAlive;
 
 	Typedefs::fnIssueOrder IssueOrder;
-	//Typedefs::fnGetAttackCastDelay GetAttackCastDelay;
+	Typedefs::fnGetAttackCastDelay GetAttackCastDelay;
 	Typedefs::fnGetAttackDelay GetAttackDelay;
 	//Typedefs::fnGetBasicAttack GetBasicAttack;
 	Typedefs::fnDrawCircle DrawCircle;
