@@ -27,7 +27,7 @@ bool GameObject::IsAlive() {
 //}
 
 bool GameObject::IsDashing() {
-	return *(bool*) ((DWORD) this->GetAIManager() + PTR_OBJECT_AI_IS_MOVING);
+	return *(bool*) ((DWORD) this->GetAIManager() + PTR_OBJECT_AI_IS_DASHING);
 }
 
 //bool GameObject::IsDragon() {
@@ -78,9 +78,9 @@ bool GameObject::IsTargetable() {
 //	return Functions.IsTroyEnt(this);
 //}
 
-bool GameObject::IsTurret() {
-	return Functions.IsTurret(this);
-}
+//bool GameObject::IsTurret() {
+//	return Functions.IsTurret(this);
+//}
 
 bool GameObject::IsVisible() {
 	return *(bool*) ((DWORD) this + PTR_OBJECT_IS_VISIBLE);
@@ -120,7 +120,7 @@ float GameObject::GetBonusAttackDamage() {
 
 float GameObject::GetBoundingRadius() {
 	typedef float(__thiscall * OriginalFn)(PVOID);
-	return CallVirtual<OriginalFn>(this, 36)(this); //36?
+	return CallVirtual<OriginalFn>(this, 36)(this);
 }
 
 float GameObject::GetDistToMe() {

@@ -63,7 +63,7 @@
 
 #define DWORD_OBJECT_MANAGER	 0x16656F8 // 9.8 || B9 ? ? ? ? E8 ? ? ? ? 8B C8 8B 10 8B 82 
 #define DWORD_CHAT_CLIENT		 0x16A42E0 // 9.8 || 8B 0D ? ? ? ? 6A 00 50 E8 ? ? ? ? 33 
-#define DWORD_HUD_INSTANCE		 0x2F70840 // 9.8 || 8B 0D ? ? ? ? FF 73 1C 8B ?
+#define DWORD_HUD_INSTANCE		 0x16A6AA4 // 9.8 || 8B 35 ? ? ? ? FF 70 1C 
 #define DWORD_OBJECT_UNDER_MOUSE 0x2D4725C // 9.8 || C7 05 ? ? ? ? ? ? ? ? E8 ? ? ? ? 83 C4 04 FF B4
 
 #define DWORD_GAME_TIME			 0x2F41498 // 9.8 || F3 0F 5C 0D ? ? ? ? 0F 2F C1 F3 

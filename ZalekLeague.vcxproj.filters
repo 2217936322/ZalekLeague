@@ -203,6 +203,9 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="GUI.h" />
+    <ClInclude Include="InputHandler.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="detours.lib">

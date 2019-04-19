@@ -33,10 +33,6 @@ public:
 		return Vector{X, Y, Z};
 	}
 
-	//static char* GetGameVersion() {
-	//	return (char*) (baseAddr + oGameVersion);
-	//}
-
 	static float GetGameTime() {
 		return *(float*) (baseAddr + DWORD_GAME_TIME);
 	}
@@ -49,12 +45,12 @@ public:
 		return (GameObject*) retaddr;
 	}
 
-	static GameObject * GetObjectByID(int ID) {
-		if(GObjectManager != NULL && ID >= 0 && ID <= 10000) {
-			return GObjectManager->objectArray[ID];
-		}
-		return NULL;
-	}
+	//static GameObject * GetObjectByID(int ID) {
+	//	if(GObjectManager != NULL && ID >= 0 && ID <= 10000) {
+	//		return GObjectManager->objectArray[ID];
+	//	}
+	//	return NULL;
+	//}
 
 	static void Attack(GameObject * obj) {
 		Functions.IssueOrder(ME, 3, &obj->GetPos(), obj, true, false, false);
@@ -66,16 +62,5 @@ public:
 
 	static void LastHit(GameObject * obj) {
 		Functions.IssueOrder(ME, 3, &obj->GetPos(), obj, true, true, false);
-	}
-
-	static void MoveClick() {
-		INPUT Input = {0};
-		Input.type = INPUT_MOUSE;
-		Input.mi.dwFlags = MOUSEEVENTF_RIGHTDOWN;
-		::SendInput(1, &Input, sizeof(INPUT));
-		::ZeroMemory(&Input, sizeof(INPUT));
-		Input.type = INPUT_MOUSE;
-		Input.mi.dwFlags = MOUSEEVENTF_RIGHTUP;
-		::SendInput(1, &Input, sizeof(INPUT));
 	}
 };

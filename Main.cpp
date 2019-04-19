@@ -2,14 +2,13 @@
 #include "detours.h"
 #pragma comment(lib, "detours.lib")
 
-#include <d3d9.h>
 #include "Engine.h"
-//#include "Menu.h"
 #include "GUI.h"
 #pragma once
 
-bool bUninitialized = true;
+bool __INIT__ = true;
 LFunctions Functions;
+InputHandler* Input;
 GameObjectManager* GObjectManager;
 GUI Interface;
 
@@ -64,26 +63,19 @@ LRESULT __stdcall WndProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lPar
 }
 
 HRESULT WINAPI Hooked_Present(LPDIRECT3DDEVICE9  Device, CONST RECT* pSrcRect, CONST RECT* pDestRect, HWND hDestWindow, CONST RGNDATA* pDirtyRegion) {
-	if(bUninitialized) {
+	if(__INIT__) {
 		HWND hwnd = FindWindow(NULL, "League of Legends (TM) Client");
 		gWNDPROC = (WNDPROC)
 			SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR) WndProc);
 		Interface.CreateContext(hwnd, Device);
-		//InitializeImGuiContext(hwnd, Device);
-		bUninitialized = false;
+		__INIT__ = false;
 	}
 
 	Interface.Draw();
 
-	//Main();
-
-	// Shutdown Scripts on end key press.
-	if(GetAsyncKeyState(VK_END) & 1) {
-		ImGui_ImplDX9_Shutdown();
-		ImGui_ImplWin32_Shutdown();
-		ImGui::DestroyContext();
+	if(Interface.ShutdownEventListener())
 		DetourRemove((PBYTE) Original_Present, (PBYTE) Hooked_Present);
-	}
+
 	return Original_Present(Device, pSrcRect, pDestRect, hDestWindow, pDirtyRegion);
 }
 

@@ -28,7 +28,7 @@ public:
 	bool IsNeutral();
 	bool IsTargetable();
 	//bool IsTroyEnt();
-	bool IsTurret();
+	//bool IsTurret();
 	bool IsVisible();
 
 	char* GetName();
