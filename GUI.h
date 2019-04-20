@@ -14,7 +14,19 @@ class GUI
 {
 private:
 	void SpellText(SpellSlot* spell_slot) {
-		ImGui::BulletText("GetRank() => %d", spell_slot->GetRank());
+		if(ImGui::TreeNode(
+			(void*) (intptr_t) (spell_slot->GetActorName()),
+			"%s", spell_slot->GetActorName())) {
+			ImGui::BulletText("IsMultiChargeSpell() => %d", spell_slot->IsMultiChargeSpell());
+			ImGui::BulletText("IsReady() => %d", spell_slot->IsReady());
+			ImGui::BulletText("GetActorName() => %d", spell_slot->GetActorName());
+			ImGui::BulletText("GetRank() => %d", spell_slot->GetRank());
+			ImGui::BulletText("GetCooldown() => %f", spell_slot->GetCooldown());
+			ImGui::BulletText("GetTimeUsed() => %f", spell_slot->GetTimeUsed());
+			ImGui::BulletText("GetCharge() => %d", spell_slot->GetCharge());
+			ImGui::BulletText("GetNextCharge() => %d", spell_slot->GetNextCharge());
+			ImGui::TreePop();
+		}
 	}
 
 	void ChampionText(Champion* champion) {
@@ -23,11 +35,19 @@ private:
 
 		ImGui::Indent();
 		if(ImGui::CollapsingHeader("SpellBook")) {
-			ImGui::BulletText("TODO: => %s SpellBook", champion->GetActorName());
-			SpellBook* sb = champion->GetSpellBook();
-			SpellSlot* ss = sb->Get((int) ESpellSlot::Q);
-			SpellText(ss);
-			// Finish SpellSlot
+			SpellBook* SpellBook = champion->GetSpellBook();
+			SpellText(SpellBook->Get((int) ESpellSlot::Q));
+			SpellText(SpellBook->Get((int) ESpellSlot::W));
+			SpellText(SpellBook->Get((int) ESpellSlot::E));
+			SpellText(SpellBook->Get((int) ESpellSlot::R));
+			SpellText(SpellBook->Get((int) ESpellSlot::D));
+			SpellText(SpellBook->Get((int) ESpellSlot::F));
+			//SpellText(SpellBook->Get((int) ESpellSlot::Recall));
+			//SpellText(SpellBook->Get((int) ESpellSlot::Item3));
+			//SpellText(SpellBook->Get((int) ESpellSlot::Item4));
+			//SpellText(SpellBook->Get((int) ESpellSlot::Item5));
+			//SpellText(SpellBook->Get((int) ESpellSlot::Item6));
+			//SpellText(SpellBook->Get((int) ESpellSlot::Trinket));
 		}
 		ImGui::Unindent();
 

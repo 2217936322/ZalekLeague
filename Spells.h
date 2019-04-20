@@ -1,8 +1,6 @@
-#include <Windows.h>
 #include "Enums/ESpellSlot.h"
 #include "Utils.h"
 #pragma once
-
 
 //class SpellData
 //{
@@ -22,31 +20,67 @@
 
 class SpellSlot
 {
+private:
+	int SpellInfoPointer() {
+		return *(int*) ((DWORD) this + O_SS_INFO);
+	}
+
 public:
 
-	//bool SpellSlot::IsReady() {
-	//	return this->GetCooldown() <= 0.0f && this->GetLevel() > 0;
-	//}
+#pragma region bool
 
-	//bool SpellSlot::HasCharges() {
-	//	return this->GetNextCharge() != -1;
-	//}
+	bool SpellSlot::IsReady() {
+		return this->GetCooldown() <= 0.0f && this->GetRank() > 0;
+	}
 
-	//char* SpellSlot::GetActorName() {
-	//	return GetStr(this->GetSpellInfoAddress() + 0x18);
-	//}
+	bool SpellSlot::IsMultiChargeSpell() {
+		return this->GetNextCharge() != -1;
+	}
 
-	//int GetCharge();
-	//int GetNextCharge();
-	//int GetSpellInfoAddress();
+#pragma endregion
+
+
+#pragma region char*
+
+	char* SpellSlot::GetActorName() {
+		return GetStr(this->SpellInfoPointer() + SI_NAME);
+	}
+
+#pragma endregion
+
+
+#pragma region int
+
 	int SpellSlot::GetRank() {
 		return *(int*) ((DWORD) this + O_SS_RANK);
 	}
 
-	//float GetCooldown();
-	//float GetTimeUsed() {
-	//	return *(float*) ((DWORD) this + 0x28);
-	//}
+	int SpellSlot::GetCharge() {
+		return *(int*) ((DWORD) this + O_SS_CHARGE);
+	}
+
+	int SpellSlot::GetNextCharge() {
+		return *(int*) ((DWORD) this + O_SS_NEXT_CHARGE);
+	}
+
+#pragma endregion
+
+
+#pragma region float
+
+	float SpellSlot::GetTimeUsed() {
+		return *(float*) ((DWORD) this + O_SS_TIME_USED);
+	}
+
+	float SpellSlot::GetCooldown() {
+		float cd = this->GetTimeUsed() - GetGameTime();
+		if(cd <= 0.0f)
+			cd = 0.0f;
+		return cd;
+	}
+
+#pragma endregion
+
 };
 
 class SpellBook

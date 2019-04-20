@@ -81,6 +81,7 @@
 #define PTR_OBJECT_AI_VELOCITY	   0x2C8
 #define PTR_OBJECT_AI_IS_DASHING   0x394
 
+// Game Object Offsets
 #define O_INDEX			0x1C	// 28
 #define O_TEAM			0x0044	// 68
 #define O_NAME			0x0060	// 96
@@ -104,7 +105,15 @@
 #define O_ACTOR_NAME	0x3158	// 12632
 #define O_LEVEL			0x4964	// 18788
 
-#define O_SS_RANK		0x20 // 32
+// SpellSlot Offsets
+#define O_SS_RANK		0x20	// 32
+#define O_SS_TIME_USED	0x28	// 40
+#define O_SS_CHARGE		0x58	// 88
+#define O_SS_NEXT_CHARGE 0x60	// 96
+#define O_SS_INFO		0x134	// 308
+
+// SpellInfo Offsets
+#define SI_NAME			0x18 // 24
 
 //#define PTR_OBJECT_INVENTORY	   0x4C08
 //#define PTR_OBJECT_AMMO			   0x0458

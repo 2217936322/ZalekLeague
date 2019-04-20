@@ -40,30 +40,3 @@
 //	return *(float*) ((DWORD) this + 0x28);
 //}
 //
-//SpellSlot* SpellBook::Get(int slot) { // 508?
-//	return *(SpellSlot * *) ((DWORD) this + 0x50C + (0x4 * slot));
-//}
-//
-//SpellSlot* SpellBook::GetQ() {
-//	return *(SpellSlot * *) ((DWORD) this + 0x50C + (0x4 * (int) ESpellSlot::Q));
-//}
-//
-//SpellSlot* SpellBook::GetW() {
-//	return *(SpellSlot * *) ((DWORD) this + 0x50C + (0x4 * (int) ESpellSlot::W));
-//}
-//
-//SpellSlot* SpellBook::GetE() {
-//	return *(SpellSlot * *) ((DWORD) this + 0x50C + (0x4 * (int) ESpellSlot::E));
-//}
-//
-//SpellSlot* SpellBook::GetR() {
-//	return *(SpellSlot * *) ((DWORD) this + 0x50C + (0x4 * (int) ESpellSlot::R));
-//}
-//
-//SpellSlot* SpellBook::GetD() {
-//	return *(SpellSlot * *) ((DWORD) this + 0x50C + (0x4 * (int) ESpellSlot::D));
-//}
-//
-//SpellSlot* SpellBook::GetF() {
-//	return *(SpellSlot * *) ((DWORD) this + 0x50C + (0x4 * (int) ESpellSlot::F));
-//}

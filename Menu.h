@@ -33,8 +33,8 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 					ImGui::Separator();
 
 					ImGui::Text("Q->GetActorName() => %s", Spell->GetActorName());
-					ImGui::Text("Q->HasCharges() => %d", Spell->HasCharges());
-					if(Spell->HasCharges()) {
+					ImGui::Text("Q->HasCharges() => %d", Spell->IsMultiChargeSpell());
+					if(Spell->IsMultiChargeSpell()) {
 						ImGui::Text("Q->GetCharge() => %d", Spell->GetCharge());
 						ImGui::Text("Q->GetNextCharge() => %d", Spell->GetNextCharge());
 					}
@@ -47,8 +47,8 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 					ImGui::Separator();
 
 					ImGui::Text("W->GetActorName() => %s", Spell->GetActorName());
-					ImGui::Text("W->HasCharges() => %d", Spell->HasCharges());
-					if(Spell->HasCharges()) {
+					ImGui::Text("W->HasCharges() => %d", Spell->IsMultiChargeSpell());
+					if(Spell->IsMultiChargeSpell()) {
 						ImGui::Text("W->GetCharge() => %d", Spell->GetCharge());
 						ImGui::Text("W->GetNextCharge() => %d", Spell->GetNextCharge());
 					}
@@ -61,8 +61,8 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 					ImGui::Separator();
 
 					ImGui::Text("E->GetActorName() => %s", Spell->GetActorName());
-					ImGui::Text("E->HasCharges() => %d", Spell->HasCharges());
-					if(Spell->HasCharges()) {
+					ImGui::Text("E->HasCharges() => %d", Spell->IsMultiChargeSpell());
+					if(Spell->IsMultiChargeSpell()) {
 						ImGui::Text("E->GetCharge() => %d", Spell->GetCharge());
 						ImGui::Text("E->GetNextCharge() => %d", Spell->GetNextCharge());
 					}
@@ -75,8 +75,8 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 					ImGui::Separator();
 
 					ImGui::Text("R->GetActorName() => %s", Spell->GetActorName());
-					ImGui::Text("R->HasCharges() => %d", Spell->HasCharges());
-					if(Spell->HasCharges()) {
+					ImGui::Text("R->HasCharges() => %d", Spell->IsMultiChargeSpell());
+					if(Spell->IsMultiChargeSpell()) {
 						ImGui::Text("R->GetCharge() => %d", Spell->GetCharge());
 						ImGui::Text("R->GetNextCharge() => %d", Spell->GetNextCharge());
 					}
@@ -89,8 +89,8 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 					ImGui::Separator();
 
 					ImGui::Text("D->GetActorName() => %s", Spell->GetActorName());
-					ImGui::Text("D->HasCharges() => %d", Spell->HasCharges());
-					if(Spell->HasCharges()) {
+					ImGui::Text("D->HasCharges() => %d", Spell->IsMultiChargeSpell());
+					if(Spell->IsMultiChargeSpell()) {
 						ImGui::Text("D->GetCharge() => %d", Spell->GetCharge());
 						ImGui::Text("D->GetNextCharge() => %d", Spell->GetNextCharge());
 					}
@@ -103,8 +103,8 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 					ImGui::Separator();
 
 					ImGui::Text("F->GetActorName() => %s", Spell->GetActorName());
-					ImGui::Text("F->HasCharges() => %d", Spell->HasCharges());
-					if(Spell->HasCharges()) {
+					ImGui::Text("F->HasCharges() => %d", Spell->IsMultiChargeSpell());
+					if(Spell->IsMultiChargeSpell()) {
 						ImGui::Text("F->GetCharge() => %d", Spell->GetCharge());
 						ImGui::Text("F->GetNextCharge() => %d", Spell->GetNextCharge());
 					}

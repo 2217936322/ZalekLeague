@@ -1,5 +1,6 @@
 #pragma once
 #include <Windows.h>
+#include "Offsets.h"
 
 #define baseAddr (DWORD) GetModuleHandle(NULL)
 
@@ -40,4 +41,8 @@ inline float GetEffectiveHP(float Armor, float HP) {
 
 inline int createRGB(int r, int g, int b) {
 	return ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+}
+
+inline float GetGameTime() {
+	return *(float*) (baseAddr + DWORD_GAME_TIME);
 }
