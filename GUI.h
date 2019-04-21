@@ -17,6 +17,7 @@ private:
 		if(ImGui::TreeNode(
 			(void*) (intptr_t) (spell_slot->GetActorName()),
 			"%s", spell_slot->GetActorName())) {
+
 			ImGui::BulletText("IsMultiChargeSpell() => %d", spell_slot->IsMultiChargeSpell());
 			ImGui::BulletText("IsReady() => %d", spell_slot->IsReady());
 			ImGui::BulletText("GetActorName() => %d", spell_slot->GetActorName());
@@ -32,6 +33,7 @@ private:
 	void ChampionText(Champion* champion) {
 		ImGui::Text("GetNetworkID() => %X", champion->GetNetworkID());
 		ImGui::Text("GetIndex() => %hu", champion->GetIndex());
+		//ImGui::Text("Test() => %d", champion->BuffManager()->getBuffSafe(1)->IsValid());
 
 		ImGui::Indent();
 		if(ImGui::CollapsingHeader("SpellBook")) {
@@ -162,11 +164,41 @@ private:
 				char _om[16]; sprintf_s(_om, "%X", baseAddr + DWORD_OBJECT_MANAGER);
 				ImGui::InputText("Object Manager", _om, 16, ImGuiInputTextFlags_ReadOnly);
 
-				char _me[16]; sprintf_s(_me, "%X", baseAddr + DWORD_LOCAL_PLAYER);
+				//unsigned long me = baseAddr + DWORD_LOCAL_PLAYER;
+
+				char _me[16]; sprintf_s(_me, "%X", Me()->GetAddress());
 				ImGui::InputText("My Player", _me, 16, ImGuiInputTextFlags_ReadOnly);
 
-				char _me_sb[16]; sprintf_s(_me_sb, "%X", baseAddr + DWORD_LOCAL_PLAYER + O_SPELLBOOK);
-				ImGui::InputText("My SpellBook", _me_sb, 16, ImGuiInputTextFlags_ReadOnly);
+				//char _me_bm[16]; sprintf_s(_me_bm, "%X", Me()->GetBuffManager());
+				//ImGui::InputText("Buff Manager", _me_bm, 16, ImGuiInputTextFlags_ReadOnly);
+
+				char _me_basa[16]; sprintf_s(_me_basa, "%X", Me()->GetBuffArrayAddress());
+				ImGui::InputText("Buff Array Address", _me_basa, 16, ImGuiInputTextFlags_ReadOnly);
+
+				char _me_bas[16]; sprintf_s(_me_bas, "%X", Me()->GetBuffArrayStart());
+				ImGui::InputText("Buff Array Start", _me_bas, 16, ImGuiInputTextFlags_ReadOnly);
+
+				char _me_bls[16]; sprintf_s(_me_bls, "%X", Me()->GetBuffListStart());
+				ImGui::InputText("Buff List Start", _me_bls, 16, ImGuiInputTextFlags_ReadOnly);
+
+				char _me_ble[16]; sprintf_s(_me_ble, "%X", Me()->GetBuffListEnd());
+				ImGui::InputText("Buff List End", _me_ble, 16, ImGuiInputTextFlags_ReadOnly);
+
+				char _me_baea[16]; sprintf_s(_me_baea, "%X", Me()->GetBuffArrayEndAddress());
+				ImGui::InputText("Buff Array End Address", _me_baea, 16, ImGuiInputTextFlags_ReadOnly);
+
+				char _me_bae[16]; sprintf_s(_me_bae, "%X", Me()->GetBuffArrayEnd());
+				ImGui::InputText("Buff Array End", _me_bae, 16, ImGuiInputTextFlags_ReadOnly);
+
+				//char _me_baepp[16]; sprintf_s(_me_baepp, "%X", Me()->GetBuffArrayEndPtr());
+				//ImGui::InputText("Buff Array End Pointer Pointer", _me_baepp, 16, ImGuiInputTextFlags_ReadOnly);
+
+				//char _barr_s[16]; sprintf_s(_barr_s, "%X",
+				//	baseAddr + me + O_BUFF_MGR);
+				//ImGui::InputText("Buff Array Start", _barr_s, 16, ImGuiInputTextFlags_ReadOnly);
+
+				//char _me_sb[16]; sprintf_s(_me_sb, "%X", baseAddr + DWORD_LOCAL_PLAYER + O_SPELLBOOK);
+				//ImGui::InputText("My SpellBook", _me_sb, 16, ImGuiInputTextFlags_ReadOnly);
 
 
 				ImGui::PopItemWidth();

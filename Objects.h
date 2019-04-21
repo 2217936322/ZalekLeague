@@ -5,6 +5,7 @@
 #pragma once
 
 class AIManager;
+class BuffManager;
 class Champion;
 Champion* Me();
 
@@ -12,12 +13,52 @@ Champion* Me();
 class Champion : GameObject
 {
 public:
+	DWORD GetAddress() {
+		return (DWORD) this;
+	}
+
+	//int SpellSlot::GetSpellInfoAddress() {
+	//	return *(int*) ((DWORD) this + 0x12C);
+	//}
 
 #pragma region AIManager
 
 	AIManager* GetAIManager() {
 		typedef AIManager* (__thiscall * OriginalFn)(PVOID);
 		return CallVirtual<OriginalFn>((GameObject*) this, 147)((GameObject*) this);
+	}
+
+#pragma endregion
+
+
+#pragma region BuffManager
+	// 'ASSETS/Perks/Styles/Sorcery/ManaflowBand/PerkManaflowBandBuff.lu'
+	// 50 65 72 6b 4d 61 6e 61 66 6c 6f 77 42 61 6e 64 42 75 66 66
+	// veigarphenomenalevilpower 
+	// 76 65 69 67 61 72 70 68 65 6e 6f 6d 65 6e 61 6c 65 76 69 6c 70 6f 77 65 72
+
+	DWORD GetBuffArrayAddress() {
+		return (DWORD) this + O_BUFF_MGR + 0x10;
+	}
+
+	unsigned long GetBuffArrayStart() {
+		return *(unsigned long*) this->GetBuffArrayAddress();
+	}
+
+	unsigned long GetBuffListStart() {
+		return *(unsigned long*) this->GetBuffArrayStart();
+	}
+
+	unsigned long GetBuffListEnd() {
+		return this->GetBuffArrayEnd() - 0x04;
+	}
+
+	DWORD GetBuffArrayEndAddress() {
+		return (DWORD) this + O_BUFF_MGR + 0x14;
+	}
+
+	unsigned long GetBuffArrayEnd() {
+		return *(unsigned long*) this->GetBuffArrayEndAddress();
 	}
 
 #pragma endregion

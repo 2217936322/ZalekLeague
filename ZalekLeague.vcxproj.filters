@@ -38,15 +38,6 @@
       <Filter>Core\Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Core\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Objects.cpp">
-      <Filter>Core\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="Spells.cpp">
-      <Filter>Core\Objects</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imgui.h">
