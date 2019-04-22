@@ -3,12 +3,11 @@
 #include "Engine.h"
 #include "Enums/ETeam.h"
 #pragma once
+#include <typeinfo>
 
 class AIManager;
-class BuffManager;
 class Champion;
 Champion* Me();
-
 
 class Champion : GameObject
 {
@@ -32,6 +31,159 @@ public:
 
 
 #pragma region BuffManager
+	class Buff
+	{
+	public:
+		bool IsActive() {
+			auto time = Engine::GetGameTime();
+			return this->GetBuffStartTime() < time&& time < this->GetBuffEndTime();
+		}
+
+		//bool IsValid() {
+		//	if(this == NULL || (DWORD) this <= 0x1000)
+		//		return false;
+
+		//	return strcmp(GetBuffName(), "NULL");
+		//}
+
+		float GetBuffStartTime() {
+			return *(float*) ((DWORD) this + O_BUFFMGR_STARTTIME);
+		}
+
+		float GetBuffEndTime() {
+			return *(float*) ((DWORD) this + O_BUFFMGR_ENDTIME);
+		}
+
+		//int GetBuffCountAlt() {
+		//	return (*(int*) ((DWORD) this + 0x20) - *(int*) ((DWORD) this + 0x1c)) >> 3;
+		//}
+
+		//float GetBuffCountFloat() {
+		//	return *(float*) ((DWORD) this + O_BUFFMGR_flBUFFCOUNT);
+		//}
+
+		//int GetBuffCountInt() {
+		//	return *(int*) ((DWORD) this + O_BUFFMGR_iBUFFCOUNT);
+		//}
+
+		//char* GetBuffName() {
+		//	DWORD aux = *(DWORD*) ((DWORD) this + O_BUFFMGR_BUFFNAME);
+		//	if(aux == NULL)
+		//		return "NULL";
+
+		//	if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
+		//		return "NULL";
+
+		//	return (char*) (aux + O_BUFFMGR_BUFFNAME);
+		//}
+
+		//unsigned long GetAddress() {
+		//	return (DWORD) this;
+		//}
+		//char* GetBuffName() {
+		//	DWORD aux = *(DWORD*) ((DWORD) this + O_BUFFMGR_BUFFNAME);
+		//	if(aux == NULL)
+		//		return "NULL";
+
+		//	if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
+		//		return "NULL";
+
+		//	return (char*) (aux + O_BUFFMGR_BUFFNAME);
+		//}
+
+		//char* GetBuffName() {
+		//	return GetStr((DWORD) this + 0x08);
+		//}
+
+		//float GetBuffStartTime() {
+		//	return *(float*) ((DWORD) this + O_BUFFMGR_STARTTIME);
+		//}
+
+		//float GetBuffEndTime() {
+		//	return *(float*) ((DWORD) this + O_BUFFMGR_ENDTIME);
+		//}
+
+		//bool IsActive() {
+		//	auto time = Engine::GetGameTime();
+		//	return this->GetBuffStartTime() < time&& time < this->GetBuffEndTime();
+		//}
+
+		//bool IsValid() {
+		//	if(this == NULL || (DWORD) this <= 0x1000)
+		//		return false;
+
+		//	return true;
+		//	//return strcmp(this->GetName(), "NULL");
+		//}
+
+		//char* GetBuffName() {
+		//	DWORD aux = *(DWORD*) ((DWORD) this + O_BUFFMGR_BUFFNAME);
+		//	if(aux == NULL)
+		//		return "NULL";
+
+		//	//if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
+		//	//	return "NULL";
+
+
+		//	return GetStr((DWORD) this + 0x08);
+		//}
+
+		//char* Test() {
+		//	return (char*) typeid(this->GetBuffName()).name();
+		//}
+		//char* Test2() {
+		//	return (char*) typeid(this->GetBuffName()).raw_name();
+		//}
+
+		//#include <typeinfo>
+				//...
+					//cout << typeid(variable).name() << endl;
+	};
+
+
+	//Buff* GetActiveBuffTest() {
+	//	auto pStart = this->GetBuffListStart();
+	//	auto pEnd = this->GetBuffListEnd();
+	//	for(DWORD pBuffPtr = pStart;
+	//		pBuffPtr != pEnd;
+	//		pBuffPtr += 0x8) {
+	//		auto pBuff = *(Buff * *) pBuffPtr;
+
+	//		if(pBuff && pBuff->IsActive())
+	//			return pBuff;
+	//	}
+
+	//	return false;
+	//}
+
+	//bool HasBuff(char* BuffName) {
+	//	auto pStart = this->GetBuffListStart();
+	//	auto pEnd = this->GetBuffListEnd();
+	//	for(DWORD pBuffPtr = pStart;
+	//		pBuffPtr != pEnd;
+	//		pBuffPtr += 0x8) {
+	//		auto pBuff = *(Buff * *) pBuffPtr;
+	//		if(!pBuff->IsActive()) continue;
+
+	//		if(pBuff && pBuff->IsActive()) {
+	//			return true;
+	//		}
+	//	}
+	//	return false;
+	//}
+
+	//std::vector<Buff*> GetBuffs() {
+	//	std::vector<Buff*> Buffs;
+	//	auto pStart = this->GetBuffListStart();
+	//	auto pEnd = this->GetBuffListEnd();
+	//	for(DWORD pBuffPtr = pStart; pBuffPtr != pEnd; pBuffPtr += 0x08) {
+	//		auto pBuff = *(Buff * *) pBuffPtr;
+	//		if(pBuff && pBuff->IsActive())
+	//			Buffs.push_back(pBuff);
+	//	}
+	//	return Buffs;
+	//}
+
 	// 'ASSETS/Perks/Styles/Sorcery/ManaflowBand/PerkManaflowBandBuff.lu'
 	// 50 65 72 6b 4d 61 6e 61 66 6c 6f 77 42 61 6e 64 42 75 66 66
 	// veigarphenomenalevilpower 

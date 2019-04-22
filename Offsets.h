@@ -65,7 +65,7 @@
 #define O_LEVEL			0x4964	// 18788
 
 // Buff Offesets
-#define O_BUFFMGR_BUFFNAME 0x8
+#define O_BUFFMGR_BUFFNAME 0x08
 #define O_BUFFMGR_STARTTIME 0xC
 #define O_BUFFMGR_ENDTIME 0x10
 #define O_BUFFMGR_flBUFFCOUNT 0x2C

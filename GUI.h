@@ -1,4 +1,5 @@
 #include <d3d9.h>
+#include "Objects.h"
 #include "InputHandler.h"
 
 #include "Objects.h"
@@ -13,6 +14,16 @@
 class GUI
 {
 private:
+	void BuffText(Champion::Buff* buff) {
+		//if(ImGui::TreeNode(
+		//	(void*) (intptr_t) (spell_slot->GetActorName()),
+		//	"%s", spell_slot->GetActorName())) {
+
+		//ImGui::BulletText("GetName() => %s", buff->GetName());
+		//ImGui::TreePop();
+		/*	}*/
+	}
+
 	void SpellText(SpellSlot* spell_slot) {
 		if(ImGui::TreeNode(
 			(void*) (intptr_t) (spell_slot->GetActorName()),
@@ -36,6 +47,28 @@ private:
 		//ImGui::Text("Test() => %d", champion->BuffManager()->getBuffSafe(1)->IsValid());
 
 		ImGui::Indent();
+		if(ImGui::CollapsingHeader("Buffs")) {
+
+			//ImGui::BulletText("GetActiveBuffTest() != false => %d", champion->GetActiveBuffTest() != false);
+
+			//ImGui::BulletText("GetBuffEntryByName('disconnecttimer') %d", champion->GetBuffEntryByName("disconnecttimer"));
+
+
+			//auto Buffs = champion->GetBuffs();
+			//int iBuffCount = Buffs.size();
+			//if(iBuffCount && iBuffCount > 0)
+			//	ImGui::Text("%d Buffs", iBuffCount);
+			////	for(std::vector<Champion::Buff>::iterator Buff = Buffs.begin();
+			////		Buff != Buffs.end(); Buff++) {
+			////		ImGui::BulletText("GetBuffName() => %s", Buff->GetBuffName());
+			////		//ImGui::BulletText("Test() => %s", Buff->Test());
+			////		//ImGui::BulletText("Test2() => %s", Buff->Test2());
+			////		//ImGui::BulletText("Test3() => %s", Buff->Test3());
+			////	}
+			////} else
+			////	ImGui::Text("0 Buffs");
+		}
+
 		if(ImGui::CollapsingHeader("SpellBook")) {
 			SpellBook* SpellBook = champion->GetSpellBook();
 			SpellText(SpellBook->Get((int) ESpellSlot::Q));
