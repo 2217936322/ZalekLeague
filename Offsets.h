@@ -40,34 +40,36 @@
 #define PTR_OBJECT_AI_IS_DASHING   0x394
 
 // Game Object Offsets
-#define O_INDEX			0x1C	// 28
-#define O_TEAM			0x0044	// 68
-#define O_NAME			0x0060	// 96
-#define O_NETWORK_ID	0x110	// 272
-#define O_POS			0x019C	// 412
-#define O_RECALL_NAME	0xDB8	// 3512
-#define O_RECALL_STATE	0xDC8	// 3528
-#define O_MANA			0x03F8	// 1016
-#define O_MAX_MANA		0x0408	// 1032
-#define O_HEALTH		0x0DE8	// 3560
-#define O_MAX_HEALTH	0x0DF8	// 3576
-#define O_BONUS_AD		0x11E0	// 4576
-#define O_BONUS_AP		0x11F0	// 4592
-#define O_BASE_AD	    0x1260	// 4704
-#define O_CRIT_RATE		0x1284  // 4740
-#define O_ARMOR			0x1288	// 4744
-#define O_MAGIC_RESIST	0x1290	// 4752
-#define O_MOVE_SPEED	0x12A0	// 4768
-#define O_ATTACK_RANGE	0x12A8	// 4776
-#define O_BUFF_MGR		0x20F0	// 8432
-#define O_SPELLBOOK		0x28A8	// 10480
-#define O_ACTOR_NAME	0x3158	// 12632
-#define O_LEVEL			0x4964	// 18788
+#define O_INDEX				0x1C	// 28
+#define O_TEAM				0x0044	// 68
+#define O_CONTROLLER_NAME	0x0060	// 96
+#define O_NETWORK_ID		0x110	// 272
+#define O_POS				0x019C	// 412
+#define O_RECALL_NAME		0xDB8	// 3512
+#define O_RECALL_STATE		0xDC8	// 3528
+#define O_MANA				0x03F8	// 1016
+#define O_MAX_MANA			0x0408	// 1032
+#define O_HEALTH			0x0DE8	// 3560
+#define O_MAX_HEALTH		0x0DF8	// 3576
+#define O_BONUS_AD			0x11E0	// 4576
+#define O_BONUS_AP			0x11F0	// 4592
+#define O_BASE_AD			0x1260	// 4704
+#define O_CRIT_RATE			0x1284  // 4740
+#define O_ARMOR				0x1288	// 4744
+#define O_MAGIC_RESIST		0x1290	// 4752
+#define O_MOVE_SPEED		0x12A0	// 4768
+#define O_ATTACK_RANGE		0x12A8	// 4776
+#define O_BUFF_MGR			0x20F0	// 8432
+#define O_SPELLBOOK			0x28A8	// 10480
+#define O_ACTOR_NAME		0x3158	// 12632
+#define O_LEVEL				0x4964	// 18788
 
-// Buff Offesets
+// Buff Offsets
+#define O_BUFF_START_TIME	0x0C // 12
+#define O_BUFF_END_TIME		0x10 // 16
+#define O_BUFF_NAME			0x9C // 156
+
 #define O_BUFFMGR_BUFFNAME 0x08
-#define O_BUFFMGR_STARTTIME 0xC
-#define O_BUFFMGR_ENDTIME 0x10
 #define O_BUFFMGR_flBUFFCOUNT 0x2C
 #define O_BUFFMGR_iBUFFCOUNT 0x70
 

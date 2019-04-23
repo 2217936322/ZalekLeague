@@ -1,5 +1,5 @@
 #include <vector>
-#include "GameObject.h"
+#include "Actor.h"
 #include "Engine.h"
 #include "Enums/ETeam.h"
 #pragma once
@@ -9,7 +9,7 @@ class AIManager;
 class Champion;
 Champion* Me();
 
-class Champion : GameObject
+class Champion : Actor
 {
 public:
 	DWORD GetAddress() {
@@ -24,7 +24,7 @@ public:
 
 	AIManager* GetAIManager() {
 		typedef AIManager* (__thiscall * OriginalFn)(PVOID);
-		return CallVirtual<OriginalFn>((GameObject*) this, 147)((GameObject*) this);
+		return CallVirtual<OriginalFn>((Actor*) this, 147)((Actor*) this);
 	}
 
 #pragma endregion
@@ -34,73 +34,63 @@ public:
 	class Buff
 	{
 	public:
-		bool IsActive() {
-			auto time = Engine::GetGameTime();
-			return this->GetBuffStartTime() < time&& time < this->GetBuffEndTime();
+		bool IsValid() {
+			// TODO: Further validation required.
+			return this->GetBuffPointer() != NULL;
 		}
 
-		//bool IsValid() {
-		//	if(this == NULL || (DWORD) this <= 0x1000)
-		//		return false;
-
-		//	return strcmp(GetBuffName(), "NULL");
-		//}
-
-		float GetBuffStartTime() {
-			return *(float*) ((DWORD) this + O_BUFFMGR_STARTTIME);
+		const char* GetNameType() {
+			DWORD pName = *(DWORD*) this->GetBuffPointer() + O_BUFF_NAME;
+			return typeid(pName).name();
 		}
 
-		float GetBuffEndTime() {
-			return *(float*) ((DWORD) this + O_BUFFMGR_ENDTIME);
+		DWORD GetAddress() {
+			return (DWORD) this;
 		}
 
-		//int GetBuffCountAlt() {
-		//	return (*(int*) ((DWORD) this + 0x20) - *(int*) ((DWORD) this + 0x1c)) >> 3;
-		//}
+		DWORD GetBuffPointer() {
+			return *(DWORD*) this->GetAddress();
+		}
 
-		//float GetBuffCountFloat() {
-		//	return *(float*) ((DWORD) this + O_BUFFMGR_flBUFFCOUNT);
-		//}
-
-		//int GetBuffCountInt() {
-		//	return *(int*) ((DWORD) this + O_BUFFMGR_iBUFFCOUNT);
-		//}
-
-		//char* GetBuffName() {
+		//char* GetName() {
 		//	DWORD aux = *(DWORD*) ((DWORD) this + O_BUFFMGR_BUFFNAME);
 		//	if(aux == NULL)
 		//		return "NULL";
 
 		//	if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
-		//		return "NULL";
+		//		return "NULL2";
 
 		//	return (char*) (aux + O_BUFFMGR_BUFFNAME);
 		//}
 
-		//unsigned long GetAddress() {
-		//	return (DWORD) this;
+
+
+		//const char* GetNameType() {
+		//	return typeid((aux + 0x08)).name();
 		//}
-		//char* GetBuffName() {
+
+
+		//char* GetName() {
 		//	DWORD aux = *(DWORD*) ((DWORD) this + O_BUFFMGR_BUFFNAME);
 		//	if(aux == NULL)
 		//		return "NULL";
 
 		//	if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
-		//		return "NULL";
+		//		return "NULL2";
 
 		//	return (char*) (aux + O_BUFFMGR_BUFFNAME);
 		//}
 
-		//char* GetBuffName() {
-		//	return GetStr((DWORD) this + 0x08);
+		//char* GetName() {
+		//	return GetStr(this->GetBuffPointer() + O_BUFF_NAME);
 		//}
 
 		//float GetBuffStartTime() {
-		//	return *(float*) ((DWORD) this + O_BUFFMGR_STARTTIME);
+		//	return *(float*) ((DWORD) this + O_BUFF_START_TIME);
 		//}
 
 		//float GetBuffEndTime() {
-		//	return *(float*) ((DWORD) this + O_BUFFMGR_ENDTIME);
+		//	return *(float*) ((DWORD) this + O_BUFF_END_TIME);
 		//}
 
 		//bool IsActive() {
@@ -108,81 +98,81 @@ public:
 		//	return this->GetBuffStartTime() < time&& time < this->GetBuffEndTime();
 		//}
 
-		//bool IsValid() {
-		//	if(this == NULL || (DWORD) this <= 0x1000)
-		//		return false;
+#pragma region Tests
+		//bool IsActive() {
+//	auto time = Engine::GetGameTime();
+//	return this->GetBuffStartTime() < time&& time < this->GetBuffEndTime();
+//}
 
-		//	return true;
-		//	//return strcmp(this->GetName(), "NULL");
-		//}
+//bool IsValid() {
+//	if(this == NULL || (DWORD) this <= 0x1000)
+//		return false;
 
-		//char* GetBuffName() {
-		//	DWORD aux = *(DWORD*) ((DWORD) this + O_BUFFMGR_BUFFNAME);
-		//	if(aux == NULL)
-		//		return "NULL";
+//	return strcmp(GetBuffName(), "NULL");
+//}
 
-		//	//if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
-		//	//	return "NULL";
+//float GetBuffStartTime() {
+//	return *(float*) ((DWORD) this + O_BUFFMGR_STARTTIME);
+//}
+
+//float GetBuffEndTime() {
+//}
+
+//int GetBuffCountAlt() {
+//	return (*(int*) ((DWORD) this + 0x20) - *(int*) ((DWORD) this + 0x1c)) >> 3;
+//}
+
+//float GetBuffCountFloat() {
+//	return *(float*) ((DWORD) this + O_BUFFMGR_flBUFFCOUNT);
+//}
+
+//int GetBuffCountInt() {
+//	return *(int*) ((DWORD) this + O_BUFFMGR_iBUFFCOUNT);
+//}
+
+//char* GetBuffName() {
+//	DWORD aux = *(DWORD*) ((DWORD) this + O_BUFFMGR_BUFFNAME);
+//	if(aux == NULL)
+//		return "NULL";
+
+//	if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
+//		return "NULL";
+
+//	return (char*) (aux + O_BUFFMGR_BUFFNAME);
+//}
 
 
-		//	return GetStr((DWORD) this + 0x08);
-		//}
+#pragma endregion
 
-		//char* Test() {
-		//	return (char*) typeid(this->GetBuffName()).name();
-		//}
-		//char* Test2() {
-		//	return (char*) typeid(this->GetBuffName()).raw_name();
-		//}
-
-		//#include <typeinfo>
-				//...
-					//cout << typeid(variable).name() << endl;
 	};
 
+	std::vector<Buff*> GetBuffs() {
+		std::vector<Buff*> Buffs;
+		DWORD pBuffListStart = this->GetBuffListStart();
+		DWORD pBuffListEnd = this->GetBuffListEnd();
+		for(DWORD pBuff = pBuffListStart; pBuff != pBuffListEnd; pBuff += 0x04) {
+			//if((DWORD*) pBuff == NULL) continue;
+			//else {
+			Buff* buff = (Buff*) pBuff;
+			//Buff* buff = *(Buff * *) pBuff;
+			if(buff != NULL && buff->IsValid()) { // && buff->IsValid()
+				Buffs.push_back(buff); // Only one for testing purposes.
+				//return Buffs;
+			}
+			//}
+		}
+		return Buffs;
+	}
 
-	//Buff* GetActiveBuffTest() {
-	//	auto pStart = this->GetBuffListStart();
-	//	auto pEnd = this->GetBuffListEnd();
-	//	for(DWORD pBuffPtr = pStart;
-	//		pBuffPtr != pEnd;
-	//		pBuffPtr += 0x8) {
-	//		auto pBuff = *(Buff * *) pBuffPtr;
+	Buff* GetFirstBuff() {
+		return *(Buff * *) this->GetBuffListStart();
+	}
 
-	//		if(pBuff && pBuff->IsActive())
-	//			return pBuff;
-	//	}
+	Buff* GetLastBuff() {
+		return *(Buff * *) this->GetBuffListEnd();
+	}
 
-	//	return false;
-	//}
 
-	//bool HasBuff(char* BuffName) {
-	//	auto pStart = this->GetBuffListStart();
-	//	auto pEnd = this->GetBuffListEnd();
-	//	for(DWORD pBuffPtr = pStart;
-	//		pBuffPtr != pEnd;
-	//		pBuffPtr += 0x8) {
-	//		auto pBuff = *(Buff * *) pBuffPtr;
-	//		if(!pBuff->IsActive()) continue;
-
-	//		if(pBuff && pBuff->IsActive()) {
-	//			return true;
-	//		}
-	//	}
-	//	return false;
-	//}
-
-	//std::vector<Buff*> GetBuffs() {
-	//	std::vector<Buff*> Buffs;
-	//	auto pStart = this->GetBuffListStart();
-	//	auto pEnd = this->GetBuffListEnd();
-	//	for(DWORD pBuffPtr = pStart; pBuffPtr != pEnd; pBuffPtr += 0x08) {
-	//		auto pBuff = *(Buff * *) pBuffPtr;
-	//		if(pBuff && pBuff->IsActive())
-	//			Buffs.push_back(pBuff);
-	//	}
-	//	return Buffs;
-	//}
 
 	// 'ASSETS/Perks/Styles/Sorcery/ManaflowBand/PerkManaflowBandBuff.lu'
 	// 50 65 72 6b 4d 61 6e 61 66 6c 6f 77 42 61 6e 64 42 75 66 66
@@ -193,15 +183,15 @@ public:
 		return (DWORD) this + O_BUFF_MGR + 0x10;
 	}
 
-	unsigned long GetBuffArrayStart() {
+	DWORD GetBuffArrayStart() {
 		return *(unsigned long*) this->GetBuffArrayAddress();
 	}
 
-	unsigned long GetBuffListStart() {
+	DWORD GetBuffListStart() {
 		return *(unsigned long*) this->GetBuffArrayStart();
 	}
 
-	unsigned long GetBuffListEnd() {
+	DWORD GetBuffListEnd() {
 		return this->GetBuffArrayEnd() - 0x04;
 	}
 
@@ -209,7 +199,7 @@ public:
 		return (DWORD) this + O_BUFF_MGR + 0x14;
 	}
 
-	unsigned long GetBuffArrayEnd() {
+	DWORD GetBuffArrayEnd() {
 		return *(unsigned long*) this->GetBuffArrayEndAddress();
 	}
 
@@ -219,7 +209,7 @@ public:
 #pragma region bool
 
 	bool IsChampion() {
-		return Functions.IsHero((GameObject*) this);
+		return Functions.IsHero((Actor*) this);
 	}
 
 	bool IsDashing() {
@@ -241,7 +231,7 @@ public:
 	}
 
 	bool IsTargetable() {
-		return Functions.IsTargetable((GameObject*) this);
+		return Functions.IsTargetable((Actor*) this);
 	}
 
 
@@ -255,7 +245,7 @@ public:
 	}
 
 	char* GetName() {
-		return GetStr((DWORD) this + O_NAME);
+		return GetStr((DWORD) this + O_CONTROLLER_NAME);
 	}
 
 	char* GetRecallName() {
@@ -280,7 +270,7 @@ public:
 	}
 
 	float GetAttackCastDelay() {
-		return Functions.GetAttackCastDelay((GameObject*) this);
+		return Functions.GetAttackCastDelay((Actor*) this);
 	}
 
 	float GetAttackDamage() {
@@ -292,7 +282,7 @@ public:
 	}
 
 	float GetAttackDelay() {
-		return Functions.GetAttackDelay((GameObject*) this);
+		return Functions.GetAttackDelay((Actor*) this);
 	}
 
 	float GetAttackRange() {
@@ -300,7 +290,7 @@ public:
 	}
 
 	float GetAttackSpeed() {
-		return 1 / Functions.GetAttackDelay((GameObject*) this);
+		return 1 / Functions.GetAttackDelay((Actor*) this);
 	}
 
 	float GetBaseAttackDamage() {
@@ -313,7 +303,7 @@ public:
 
 	float GetCollisionRadius() {
 		typedef float(__thiscall * OriginalFn)(PVOID);
-		return CallVirtual<OriginalFn>((GameObject*) this, 36)((GameObject*) this);
+		return CallVirtual<OriginalFn>((Actor*) this, 36)((Actor*) this);
 	}
 
 	//float GetCooldownReduction() {

@@ -44,29 +44,33 @@ private:
 	void ChampionText(Champion* champion) {
 		ImGui::Text("GetNetworkID() => %X", champion->GetNetworkID());
 		ImGui::Text("GetIndex() => %hu", champion->GetIndex());
-		//ImGui::Text("Test() => %d", champion->BuffManager()->getBuffSafe(1)->IsValid());
 
 		ImGui::Indent();
 		if(ImGui::CollapsingHeader("Buffs")) {
+			std::vector<Champion::Buff*> Buffs = champion->GetBuffs();
+			int iBuffCount = Buffs.size();
+			if(!Buffs.empty())
+				ImGui::Text("Buff Count: %d", iBuffCount);
+			else
+				ImGui::Text("Buff Count: 0");
 
-			//ImGui::BulletText("GetActiveBuffTest() != false => %d", champion->GetActiveBuffTest() != false);
+			for(std::vector<Champion::Buff*>::iterator buff = Buffs.begin();
+				buff != Buffs.end(); buff++) {
+				Champion::Buff* _buff = (*buff);
 
-			//ImGui::BulletText("GetBuffEntryByName('disconnecttimer') %d", champion->GetBuffEntryByName("disconnecttimer"));
+				if(ImGui::TreeNode(
+					(void*) (intptr_t) _buff->GetAddress(),
+					"%X : %X", _buff->GetAddress(), _buff->GetBuffPointer())) {
+					ImGui::BulletText("IsValid() => %d", _buff->IsValid());
+					ImGui::BulletText("GetNameType() => %s", _buff->GetNameType());
+					//ImGui::BulletText("GetName() => %s", _buff->GetName());
+					ImGui::TreePop();
+				}
+			}
 
+			//ImGui::Text("First Buff %X", champion->GetFirstBuff()->GetAddress());
+			//ImGui::Text("Last Buff %X", champion->GetLastBuff()->GetAddress());
 
-			//auto Buffs = champion->GetBuffs();
-			//int iBuffCount = Buffs.size();
-			//if(iBuffCount && iBuffCount > 0)
-			//	ImGui::Text("%d Buffs", iBuffCount);
-			////	for(std::vector<Champion::Buff>::iterator Buff = Buffs.begin();
-			////		Buff != Buffs.end(); Buff++) {
-			////		ImGui::BulletText("GetBuffName() => %s", Buff->GetBuffName());
-			////		//ImGui::BulletText("Test() => %s", Buff->Test());
-			////		//ImGui::BulletText("Test2() => %s", Buff->Test2());
-			////		//ImGui::BulletText("Test3() => %s", Buff->Test3());
-			////	}
-			////} else
-			////	ImGui::Text("0 Buffs");
 		}
 
 		if(ImGui::CollapsingHeader("SpellBook")) {
@@ -77,12 +81,6 @@ private:
 			SpellText(SpellBook->Get((int) ESpellSlot::R));
 			SpellText(SpellBook->Get((int) ESpellSlot::D));
 			SpellText(SpellBook->Get((int) ESpellSlot::F));
-			//SpellText(SpellBook->Get((int) ESpellSlot::Recall));
-			//SpellText(SpellBook->Get((int) ESpellSlot::Item3));
-			//SpellText(SpellBook->Get((int) ESpellSlot::Item4));
-			//SpellText(SpellBook->Get((int) ESpellSlot::Item5));
-			//SpellText(SpellBook->Get((int) ESpellSlot::Item6));
-			//SpellText(SpellBook->Get((int) ESpellSlot::Trinket));
 		}
 		ImGui::Unindent();
 
@@ -247,7 +245,7 @@ private:
 	}
 
 	void Devkit() {
-		if(Me() && DEVELOPMENT_INTERFACES) {
+		if(Me() && Engine::GetGameTime() > 1.0f && DEVELOPMENT_INTERFACES) {
 			if(bShowDevkit) {
 				DebugOverlay();
 				ImGui::Begin("Zalek Devkit", &bShowDevkit, ImGuiWindowFlags_AlwaysAutoResize);

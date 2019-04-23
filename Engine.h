@@ -2,7 +2,7 @@
 #include "Utils.h"
 #include "Vector.h"
 #include "LFunctions.h"
-#include "GameObject.h"
+#include "Actor.h"
 
 #define ME Engine::GetLocalObject()
 
@@ -36,12 +36,12 @@ public:
 		return *(float*) (baseAddr + DWORD_GAME_TIME);
 	}
 
-	static GameObject* GetLocalObject() {
+	static Actor* GetLocalObject() {
 		auto retaddr = *(DWORD*) (baseAddr + DWORD_LOCAL_PLAYER);
 		if(retaddr == NULL)
 			return NULL;
 
-		return (GameObject*) retaddr;
+		return (Actor*) retaddr;
 	}
 
 	//static GameObject * GetObjectByID(int ID) {
@@ -51,7 +51,7 @@ public:
 	//	return NULL;
 	//}
 
-	static void Attack(GameObject * obj) {
+	static void Attack(Actor * obj) {
 		Functions.IssueOrder(ME, 3, &obj->GetPos(), obj, true, false, false);
 	}
 
@@ -59,7 +59,7 @@ public:
 		Functions.IssueOrder(ME, 2, pos, NULL, false, false, false);
 	}
 
-	static void LastHit(GameObject * obj) {
+	static void LastHit(Actor * obj) {
 		Functions.IssueOrder(ME, 3, &obj->GetPos(), obj, true, true, false);
 	}
 };

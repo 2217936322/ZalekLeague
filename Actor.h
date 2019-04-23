@@ -5,7 +5,7 @@
 
 class AIManager {};
 
-class GameObject
+class Actor
 {
 public:
 	AIManager* GetAIManager();
@@ -29,8 +29,8 @@ public:
 	//bool IsTurret();
 	bool IsVisible();
 
+	char* GetControllerName();
 	char* GetName();
-	char* GetActorName();
 
 	DWORD GetNetworkID();
 
@@ -68,7 +68,7 @@ public:
 	union
 	{
 		DEFINE_MEMBER_0(void* Base, 0x0);
-		DEFINE_MEMBER_N(GameObject** Objects, 0x4);
+		DEFINE_MEMBER_N(Actor** Objects, 0x4);
 		DEFINE_MEMBER_N(int MaxSize, 0x8);
 		DEFINE_MEMBER_N(int Size, 0xC);
 		DEFINE_MEMBER_N(int HighestIndex, 0x10);

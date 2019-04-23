@@ -145,7 +145,7 @@
     <ClInclude Include="Enums\EUnitTeam.h" />
     <ClInclude Include="Enums\EUnitType.h" />
     <ClInclude Include="Enums\EVariableType.h" />
-    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Actor.h" />
     <ClInclude Include="detours.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="InputHandler.h" />

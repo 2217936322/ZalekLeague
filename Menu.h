@@ -21,10 +21,10 @@ static void InitializeImGuiContext(HWND Chwnd, IDirect3DDevice9* CDevice) {
 
 }
 
-void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
+void DrawGameObjectText(std::vector<Actor*> obj_vector) {
 	int i = 0;
-	for(std::vector<GameObject*>::iterator obj = obj_vector.begin(); obj != obj_vector.end(); obj++) {
-		if(ImGui::TreeNode((void*) (intptr_t) i, "%s : %d | Dist = %f", (*obj)->GetActorName(), i, (*obj)->GetDistToMe())) {
+	for(std::vector<Actor*>::iterator obj = obj_vector.begin(); obj != obj_vector.end(); obj++) {
+		if(ImGui::TreeNode((void*) (intptr_t) i, "%s : %d | Dist = %f", (*obj)->GetName(), i, (*obj)->GetDistToMe())) {
 
 			if((*obj)->IsHero()) {
 				if(ImGui::TreeNode("SpellBook")) {
@@ -136,8 +136,8 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 			ImGui::BulletText("IsVisible() => %d", (*obj)->IsVisible());
 
 			ImGui::Text("char*");
-			ImGui::BulletText("GetName() => %s", (*obj)->GetName());
-			ImGui::BulletText("GetUniqueName() => %s", (*obj)->GetActorName());
+			ImGui::BulletText("GetName() => %s", (*obj)->GetControllerName());
+			ImGui::BulletText("GetUniqueName() => %s", (*obj)->GetName());
 
 			ImGui::Text("DWORD");
 			ImGui::BulletText("GetNetworkID() => %lu", (*obj)->GetNetworkID());
@@ -181,7 +181,7 @@ void DrawGameObjectText(std::vector<GameObject*> obj_vector) {
 	}
 }
 
-void DrawGameObjectTree(char* label, std::vector<GameObject*> obj_vector) {
+void DrawGameObjectTree(char* label, std::vector<Actor*> obj_vector) {
 	if(ImGui::TreeNode(label)) {
 		DrawGameObjectText(obj_vector);
 		ImGui::TreePop();
@@ -306,7 +306,7 @@ void DevelopmentGUI() {
 		ImGui::Text("ObjectManager Address: %X", baseAddr + DWORD_OBJECT_MANAGER);
 		ImGui::Text("ME Address: %X", baseAddr + DWORD_LOCAL_PLAYER);
 
-		std::vector<GameObject*> Me;
+		std::vector<Actor*> Me;
 		Me.push_back(ME);
 
 		DrawGameObjectTree("My Champion", Me);
@@ -326,16 +326,16 @@ void DevelopmentGUI() {
 	}
 
 
-	std::vector<GameObject*> Champions = GetChampions();
+	std::vector<Actor*> Champions = GetChampions();
 
-	for(std::vector<GameObject*>::iterator Champion = Champions.begin(); Champion != Champions.end(); Champion++) {
-		GameObject* obj = (*Champion);
+	for(std::vector<Actor*>::iterator Champion = Champions.begin(); Champion != Champions.end(); Champion++) {
+		Actor* obj = (*Champion);
 		Vector vecWorld = Vector(obj->GetPos().X, obj->GetPos().Y, obj->GetPos().Z);
 		Vector vecScreen = Vector();
 		bool w2sResult = Functions.WorldToScreen(&vecWorld, &vecScreen);
 		ImVec2 testVec = ImVec2(vecScreen.X, vecScreen.Y);
 
-		ImGui::Begin(obj->GetName(),
+		ImGui::Begin(obj->GetControllerName(),
 			false,
 			ImGuiWindowFlags_AlwaysAutoResize
 			+ ImGuiWindowFlags_NoInputs
@@ -359,7 +359,7 @@ void DevelopmentGUI() {
 		SpellSlot * D = sb->GetD();
 		SpellSlot * F = sb->GetF();
 
-		ImGui::Text("%s : %s", obj->GetActorName(), obj->GetName());
+		ImGui::Text("%s : %s", obj->GetName(), obj->GetControllerName());
 
 		if(Q->GetLevel() != 0 && !Q->IsReady())
 			ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "Q: %f", Q->GetCooldown());

@@ -160,9 +160,6 @@
     <ClInclude Include="Enums\EBuffType.h">
       <Filter>Core\Enums</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Core\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Objects.h">
       <Filter>Core\Objects</Filter>
     </ClInclude>
@@ -196,6 +193,9 @@
     <ClInclude Include="GUI.h" />
     <ClInclude Include="InputHandler.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Core\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
