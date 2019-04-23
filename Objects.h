@@ -35,8 +35,9 @@ public:
 	{
 	public:
 		bool IsValid() {
-			// TODO: Further validation required.
-			return this->GetBuffPointer() != NULL;
+			return this->GetBuffPointer() > 0x7FFFFFF
+				&& this->GetBuffPointer() < 0x70000000;
+			//&& this->GetName() != "NULL";
 		}
 
 		const char* GetNameType() {
@@ -48,21 +49,56 @@ public:
 			return (DWORD) this;
 		}
 
-		DWORD GetBuffPointer() {
-			return *(DWORD*) this->GetAddress();
+		bool IsAddressValid() {
+			return this->fAddressValidiation() > 65535.0f;
 		}
 
+		float fAddressValidiation() {
+			return *(float*) this->GetAddress();
+		}
+
+		DWORD GetBuffPointer() {
+			if(this->IsAddressValid())
+				return *(DWORD*) this->GetAddress();
+
+			return 0x00;
+		}
+
+		float fBuffPointerValid() {
+			return *(float*)* (DWORD*) this->GetAddress();
+		}
+
+		char* GetName() {
+			DWORD aux = this->GetBuffPointer() + 0x08;
+			if(aux == NULL)
+				return "NULL";
+
+			if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
+				return "NULL";
+			// TODO: more null checks to prevent crashing.
+			//return (char*) (aux + O_BUFFMGR_BUFFNAME);
+		}
+
+
 		//char* GetName() {
-		//	DWORD aux = *(DWORD*) ((DWORD) this + O_BUFFMGR_BUFFNAME);
+		//	if(this->IsValid()) {
+		//		DWORD pName = this->GetBuffPointer() + 0x08;
+		//		if(pName != NULL)
+		//			return GetStr(pName);
+		//	}
+		//	return "NULL";
+		//}
+
+		//char* GetName() {
+		//	DWORD aux = this->GetBuffPointer() + 0x9C;
 		//	if(aux == NULL)
 		//		return "NULL";
 
 		//	if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
 		//		return "NULL2";
 
-		//	return (char*) (aux + O_BUFFMGR_BUFFNAME);
+		//	return "PLACEHOLDER" /*(char*) (aux + O_BUFFMGR_BUFFNAME)*/;
 		//}
-
 
 
 		//const char* GetNameType() {
@@ -148,19 +184,15 @@ public:
 
 	std::vector<Buff*> GetBuffs() {
 		std::vector<Buff*> Buffs;
+		// TODO: Buff List validation.
 		DWORD pBuffListStart = this->GetBuffListStart();
 		DWORD pBuffListEnd = this->GetBuffListEnd();
 		for(DWORD pBuff = pBuffListStart; pBuff != pBuffListEnd; pBuff += 0x04) {
-			//if((DWORD*) pBuff == NULL) continue;
-			//else {
 			Buff* buff = (Buff*) pBuff;
-			//Buff* buff = *(Buff * *) pBuff;
-			if(buff != NULL && buff->IsValid()) { // && buff->IsValid()
-				Buffs.push_back(buff); // Only one for testing purposes.
-				//return Buffs;
-			}
-			//}
+			if(buff != NULL && buff->IsValid())
+				Buffs.push_back(buff);
 		}
+		Buffs.shrink_to_fit();
 		return Buffs;
 	}
 

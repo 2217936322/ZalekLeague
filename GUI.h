@@ -61,12 +61,18 @@ private:
 				if(ImGui::TreeNode(
 					(void*) (intptr_t) _buff->GetAddress(),
 					"%X : %X", _buff->GetAddress(), _buff->GetBuffPointer())) {
-					ImGui::BulletText("IsValid() => %d", _buff->IsValid());
-					ImGui::BulletText("GetNameType() => %s", _buff->GetNameType());
-					//ImGui::BulletText("GetName() => %s", _buff->GetName());
+					ImGui::BulletText("fAddressValid() => %f", _buff->fAddressValidiation());
+					//ImGui::BulletText("fBuffPointerValid() => %f", _buff->fBuffPointerValid());
+					//ImGui::BulletText("IsValid() => %d", _buff->IsValid());
+					//ImGui::BulletText("GetNameType() => %s", _buff->GetNameType());
+					ImGui::BulletText("GetName() => %s", _buff->GetName());
 					ImGui::TreePop();
 				}
 			}
+
+			if(iBuffCount > 500)
+				Buffs.clear();
+
 
 			//ImGui::Text("First Buff %X", champion->GetFirstBuff()->GetAddress());
 			//ImGui::Text("Last Buff %X", champion->GetLastBuff()->GetAddress());
