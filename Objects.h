@@ -12,13 +12,10 @@ Champion* Me();
 class Champion : Actor
 {
 public:
+
 	DWORD GetAddress() {
 		return (DWORD) this;
 	}
-
-	//int SpellSlot::GetSpellInfoAddress() {
-	//	return *(int*) ((DWORD) this + 0x12C);
-	//}
 
 #pragma region AIManager
 
@@ -35,181 +32,93 @@ public:
 	{
 	public:
 		bool IsValid() {
-			return this->GetBuffPointer() > 0x7FFFFFF
-				&& this->GetBuffPointer() < 0x70000000;
-			//&& this->GetName() != "NULL";
+			return this->IsAddressValid()
+				&& IsBuffPointerValid()
+				&& this->GetName() != "NULL";
 		}
 
-		const char* GetNameType() {
-			DWORD pName = *(DWORD*) this->GetBuffPointer() + O_BUFF_NAME;
-			return typeid(pName).name();
-		}
+#pragma region Address
 
 		DWORD GetAddress() {
 			return (DWORD) this;
 		}
 
 		bool IsAddressValid() {
-			return this->fAddressValidiation() > 65535.0f;
+			return this != NULL
+				&& this->fAddressValidation() > 65535.0f;
 		}
 
-		float fAddressValidiation() {
+		float fAddressValidation() {
 			return *(float*) this->GetAddress();
 		}
 
-		DWORD GetBuffPointer() {
-			if(this->IsAddressValid())
-				return *(DWORD*) this->GetAddress();
+#pragma endregion
 
+#pragma region BuffPointer
+
+		DWORD GetBuffPointer() {
+			if(this->IsAddressValid()) {
+				return *(DWORD*) this->GetAddress();
+			}
 			return 0x00;
 		}
 
-		float fBuffPointerValid() {
+		bool IsBuffPointerValid() {
+			return this != NULL
+				&& this->GetBuffPointer() > 0x7FFFFFF
+				&& this->GetBuffPointer() < 0x70000000;
+		}
+
+		float fBuffPointerValidation() {
 			return *(float*)* (DWORD*) this->GetAddress();
 		}
 
+#pragma endregion
+
 		char* GetName() {
-			DWORD aux = this->GetBuffPointer() + 0x08;
+			//! Will cause a crash in some cases. Do not use yet
+			DWORD aux = this->GetBuffPointer();
+
 			if(aux == NULL)
 				return "NULL";
 
 			if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
 				return "NULL";
-			// TODO: more null checks to prevent crashing.
-			//return (char*) (aux + O_BUFFMGR_BUFFNAME);
+
+			char* str = (char*) (aux + O_BUFFMGR_BUFFNAME);
+
+			if(strlen(str) <= 8 || strlen(str) > 128)
+				return "NULL";
+
+			// !!! HACK !!!
+			// May cause some extra buffs to get filtered out. Rework later.
+			if(strlen(str) == 16)
+				return "NULL";
+
+			return str;
 		}
-
-
-		//char* GetName() {
-		//	if(this->IsValid()) {
-		//		DWORD pName = this->GetBuffPointer() + 0x08;
-		//		if(pName != NULL)
-		//			return GetStr(pName);
-		//	}
-		//	return "NULL";
-		//}
-
-		//char* GetName() {
-		//	DWORD aux = this->GetBuffPointer() + 0x9C;
-		//	if(aux == NULL)
-		//		return "NULL";
-
-		//	if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
-		//		return "NULL2";
-
-		//	return "PLACEHOLDER" /*(char*) (aux + O_BUFFMGR_BUFFNAME)*/;
-		//}
-
-
-		//const char* GetNameType() {
-		//	return typeid((aux + 0x08)).name();
-		//}
-
-
-		//char* GetName() {
-		//	DWORD aux = *(DWORD*) ((DWORD) this + O_BUFFMGR_BUFFNAME);
-		//	if(aux == NULL)
-		//		return "NULL";
-
-		//	if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
-		//		return "NULL2";
-
-		//	return (char*) (aux + O_BUFFMGR_BUFFNAME);
-		//}
-
-		//char* GetName() {
-		//	return GetStr(this->GetBuffPointer() + O_BUFF_NAME);
-		//}
-
-		//float GetBuffStartTime() {
-		//	return *(float*) ((DWORD) this + O_BUFF_START_TIME);
-		//}
-
-		//float GetBuffEndTime() {
-		//	return *(float*) ((DWORD) this + O_BUFF_END_TIME);
-		//}
-
-		//bool IsActive() {
-		//	auto time = Engine::GetGameTime();
-		//	return this->GetBuffStartTime() < time&& time < this->GetBuffEndTime();
-		//}
-
-#pragma region Tests
-		//bool IsActive() {
-//	auto time = Engine::GetGameTime();
-//	return this->GetBuffStartTime() < time&& time < this->GetBuffEndTime();
-//}
-
-//bool IsValid() {
-//	if(this == NULL || (DWORD) this <= 0x1000)
-//		return false;
-
-//	return strcmp(GetBuffName(), "NULL");
-//}
-
-//float GetBuffStartTime() {
-//	return *(float*) ((DWORD) this + O_BUFFMGR_STARTTIME);
-//}
-
-//float GetBuffEndTime() {
-//}
-
-//int GetBuffCountAlt() {
-//	return (*(int*) ((DWORD) this + 0x20) - *(int*) ((DWORD) this + 0x1c)) >> 3;
-//}
-
-//float GetBuffCountFloat() {
-//	return *(float*) ((DWORD) this + O_BUFFMGR_flBUFFCOUNT);
-//}
-
-//int GetBuffCountInt() {
-//	return *(int*) ((DWORD) this + O_BUFFMGR_iBUFFCOUNT);
-//}
-
-//char* GetBuffName() {
-//	DWORD aux = *(DWORD*) ((DWORD) this + O_BUFFMGR_BUFFNAME);
-//	if(aux == NULL)
-//		return "NULL";
-
-//	if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
-//		return "NULL";
-
-//	return (char*) (aux + O_BUFFMGR_BUFFNAME);
-//}
-
-
-#pragma endregion
-
 	};
 
 	std::vector<Buff*> GetBuffs() {
 		std::vector<Buff*> Buffs;
-		// TODO: Buff List validation.
-		DWORD pBuffListStart = this->GetBuffListStart();
+		DWORD pBuffListStart = this->GetBuffListStart() + 0x04;
 		DWORD pBuffListEnd = this->GetBuffListEnd();
 		for(DWORD pBuff = pBuffListStart; pBuff != pBuffListEnd; pBuff += 0x04) {
 			Buff* buff = (Buff*) pBuff;
-			if(buff != NULL && buff->IsValid())
+			if(buff != NULL && buff->IsValid()) {
 				Buffs.push_back(buff);
+			}
 		}
-		Buffs.shrink_to_fit();
 		return Buffs;
 	}
 
-	Buff* GetFirstBuff() {
+	Buff* GetFirstBuffEntry() {
 		return *(Buff * *) this->GetBuffListStart();
 	}
 
-	Buff* GetLastBuff() {
+	Buff* GetLastBuffEntry() {
 		return *(Buff * *) this->GetBuffListEnd();
 	}
-
-
-
-	// 'ASSETS/Perks/Styles/Sorcery/ManaflowBand/PerkManaflowBandBuff.lu'
-	// 50 65 72 6b 4d 61 6e 61 66 6c 6f 77 42 61 6e 64 42 75 66 66
-	// veigarphenomenalevilpower 
-	// 76 65 69 67 61 72 70 68 65 6e 6f 6d 65 6e 61 6c 65 76 69 6c 70 6f 77 65 72
 
 	DWORD GetBuffArrayAddress() {
 		return (DWORD) this + O_BUFF_MGR + 0x10;

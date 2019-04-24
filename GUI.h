@@ -2,7 +2,6 @@
 #include "Objects.h"
 #include "InputHandler.h"
 
-#include "Objects.h"
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_win32.h"
 #include "ImGui/imgui_impl_dx9.h"
@@ -31,7 +30,7 @@ private:
 
 			ImGui::BulletText("IsMultiChargeSpell() => %d", spell_slot->IsMultiChargeSpell());
 			ImGui::BulletText("IsReady() => %d", spell_slot->IsReady());
-			ImGui::BulletText("GetActorName() => %d", spell_slot->GetActorName());
+			ImGui::BulletText("GetActorName() => %s", spell_slot->GetActorName());
 			ImGui::BulletText("GetRank() => %d", spell_slot->GetRank());
 			ImGui::BulletText("GetCooldown() => %f", spell_slot->GetCooldown());
 			ImGui::BulletText("GetTimeUsed() => %f", spell_slot->GetTimeUsed());
@@ -46,38 +45,39 @@ private:
 		ImGui::Text("GetIndex() => %hu", champion->GetIndex());
 
 		ImGui::Indent();
-		if(ImGui::CollapsingHeader("Buffs")) {
-			std::vector<Champion::Buff*> Buffs = champion->GetBuffs();
-			int iBuffCount = Buffs.size();
-			if(!Buffs.empty())
-				ImGui::Text("Buff Count: %d", iBuffCount);
-			else
-				ImGui::Text("Buff Count: 0");
+		//if(ImGui::CollapsingHeader("Buffs")) {
+		//	std::vector<Champion::Buff*> Buffs = champion->GetBuffs();
+		//	int iBuffCount = Buffs.size();
+		//	if(!Buffs.empty())
+		//		ImGui::Text("Buff Count: %d", iBuffCount);
+		//	else
+		//		ImGui::Text("Buff Count: 0");
 
-			for(std::vector<Champion::Buff*>::iterator buff = Buffs.begin();
-				buff != Buffs.end(); buff++) {
-				Champion::Buff* _buff = (*buff);
+		//	for(std::vector<Champion::Buff*>::iterator buff = Buffs.begin();
+		//		buff != Buffs.end(); buff++) {
+		//		Champion::Buff* _buff = (*buff);
 
-				if(ImGui::TreeNode(
-					(void*) (intptr_t) _buff->GetAddress(),
-					"%X : %X", _buff->GetAddress(), _buff->GetBuffPointer())) {
-					ImGui::BulletText("fAddressValid() => %f", _buff->fAddressValidiation());
-					//ImGui::BulletText("fBuffPointerValid() => %f", _buff->fBuffPointerValid());
-					//ImGui::BulletText("IsValid() => %d", _buff->IsValid());
-					//ImGui::BulletText("GetNameType() => %s", _buff->GetNameType());
-					ImGui::BulletText("GetName() => %s", _buff->GetName());
-					ImGui::TreePop();
-				}
-			}
+		//		if(ImGui::TreeNode(
+		//			(void*) (intptr_t) _buff->GetAddress(),
+		//			"%X : %X", _buff->GetAddress(), _buff->GetBuffPointer())) {
 
-			if(iBuffCount > 500)
-				Buffs.clear();
+		//			ImGui::BulletText("GetName() => %s", _buff->GetName());
+		//			ImGui::BulletText("GetNameLen() => %d", strlen(_buff->GetName()));
 
+		//			ImGui::BulletText("sAddressValidiation() => %s", _buff->sAddressValidation());
+		//			ImGui::BulletText("fNamePointerValidation() => %f", _buff->fNamePointerValidation());
+		//			ImGui::BulletText("iNamePointerValidation() => %d", _buff->iNamePointerValidation());
+
+		//			ImGui::BulletText("fBuffPointerValid() => %f", _buff->fBuffPointerValid());
+		//			ImGui::BulletText("IsValid() => %d", _buff->IsValid());
+		//			ImGui::BulletText("GetNameType() => %s", _buff->GetNameType());
+		//			ImGui::TreePop();
+		//		}
+		//	}
 
 			//ImGui::Text("First Buff %X", champion->GetFirstBuff()->GetAddress());
 			//ImGui::Text("Last Buff %X", champion->GetLastBuff()->GetAddress());
-
-		}
+		//}
 
 		if(ImGui::CollapsingHeader("SpellBook")) {
 			SpellBook* SpellBook = champion->GetSpellBook();
@@ -167,9 +167,9 @@ private:
 		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
 		if(ImGui::TreeNode("Vectors")) {
 			Vector Pos = champion->GetPos();
-			ImGui::BulletText("GetPos() => Vector\nx = %f\n y = %f\n z = %f", Pos.X, Pos.Y, Pos.Z);
+			ImGui::BulletText("GetPos() => Vector\n x = %f\n y = %f\n z = %f", Pos.X, Pos.Y, Pos.Z);
 			Pos = champion->GetWaypoint();
-			ImGui::BulletText("GetWaypoint() => Vector\nx = %f\n y = %f\n z = %f", Pos.X, Pos.Y, Pos.Z);
+			ImGui::BulletText("GetWaypoint() => Vector\n x = %f\n y = %f\n z = %f", Pos.X, Pos.Y, Pos.Z);
 			ImGui::TreePop();
 		}
 	}
