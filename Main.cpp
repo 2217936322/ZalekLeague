@@ -1,3 +1,9 @@
+/*
+	TODO: Optimize includes.
+		1.) Ensure all files outside of main have both a header and a cpp.
+		2.) Ensure the majority of includes are inside of the cpp file not the header file.
+*/
+
 #include "LFunctions.h"
 #include "detours.h"
 #pragma comment(lib, "detours.lib")
