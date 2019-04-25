@@ -36,12 +36,12 @@ public:
 		return *(float*) (baseAddr + DWORD_GAME_TIME);
 	}
 
-	static Actor* GetLocalObject() {
+	static LActor* GetLocalObject() {
 		auto retaddr = *(DWORD*) (baseAddr + DWORD_LOCAL_PLAYER);
 		if(retaddr == NULL)
 			return NULL;
 
-		return (Actor*) retaddr;
+		return (LActor*) retaddr;
 	}
 
 	//static GameObject * GetObjectByID(int ID) {
@@ -51,7 +51,7 @@ public:
 	//	return NULL;
 	//}
 
-	static void Attack(Actor * obj) {
+	static void Attack(LActor * obj) {
 		Functions.IssueOrder(ME, 3, &obj->GetPos(), obj, true, false, false);
 	}
 
@@ -59,7 +59,7 @@ public:
 		Functions.IssueOrder(ME, 2, pos, NULL, false, false, false);
 	}
 
-	static void LastHit(Actor * obj) {
+	static void LastHit(LActor * obj) {
 		Functions.IssueOrder(ME, 3, &obj->GetPos(), obj, true, true, false);
 	}
 };

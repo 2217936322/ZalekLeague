@@ -103,6 +103,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Device.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
@@ -112,6 +113,7 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Device.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="Enums\EAIDifficultyType.h" />
     <ClInclude Include="Enums\EAIMissionTopicType.h" />
@@ -171,6 +173,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="detours.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

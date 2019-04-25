@@ -13,7 +13,10 @@
 class GUI
 {
 private:
-	void BuffText(Champion::Buff* buff) {
+	/**
+	 *
+	 */
+	static void BuffText(Champion::Buff* buff) {
 		//if(ImGui::TreeNode(
 		//	(void*) (intptr_t) (spell_slot->GetActorName()),
 		//	"%s", spell_slot->GetActorName())) {
@@ -23,7 +26,11 @@ private:
 		/*	}*/
 	}
 
-	void SpellText(SpellSlot* spell_slot) {
+
+	/**
+	 *
+	 */
+	static void SpellText(SpellSlot* spell_slot) {
 		if(ImGui::TreeNode(
 			(void*) (intptr_t) (spell_slot->GetActorName()),
 			"%s", spell_slot->GetActorName())) {
@@ -40,44 +47,37 @@ private:
 		}
 	}
 
-	void ChampionText(Champion* champion) {
+
+	/**
+	 *
+	 */
+	static void ChampionText(Champion* champion) {
 		ImGui::Text("GetNetworkID() => %X", champion->GetNetworkID());
 		ImGui::Text("GetIndex() => %hu", champion->GetIndex());
 
 		ImGui::Indent();
-		//if(ImGui::CollapsingHeader("Buffs")) {
-		//	std::vector<Champion::Buff*> Buffs = champion->GetBuffs();
-		//	int iBuffCount = Buffs.size();
-		//	if(!Buffs.empty())
-		//		ImGui::Text("Buff Count: %d", iBuffCount);
-		//	else
-		//		ImGui::Text("Buff Count: 0");
+		if(ImGui::CollapsingHeader("Buffs")) {
+			std::vector<Champion::Buff*> Buffs = champion->GetBuffs();
+			int iBuffCount = Buffs.size();
+			if(!Buffs.empty())
+				ImGui::Text("Buff Count: %d", iBuffCount);
+			else
+				ImGui::Text("Buff Count: 0");
 
-		//	for(std::vector<Champion::Buff*>::iterator buff = Buffs.begin();
-		//		buff != Buffs.end(); buff++) {
-		//		Champion::Buff* _buff = (*buff);
+			for(std::vector<Champion::Buff*>::iterator buff = Buffs.begin();
+				buff != Buffs.end(); buff++) {
+				Champion::Buff* _buff = (*buff);
 
-		//		if(ImGui::TreeNode(
-		//			(void*) (intptr_t) _buff->GetAddress(),
-		//			"%X : %X", _buff->GetAddress(), _buff->GetBuffPointer())) {
+				if(ImGui::TreeNode(
+					(void*) (intptr_t) _buff->GetAddress(),
+					"%X : %X", _buff->GetAddress(), _buff->GetBuffPointer())) {
 
-		//			ImGui::BulletText("GetName() => %s", _buff->GetName());
-		//			ImGui::BulletText("GetNameLen() => %d", strlen(_buff->GetName()));
+					ImGui::BulletText("GetName() => %s", _buff->GetName());
+					ImGui::TreePop();
+				}
+			}
+		}
 
-		//			ImGui::BulletText("sAddressValidiation() => %s", _buff->sAddressValidation());
-		//			ImGui::BulletText("fNamePointerValidation() => %f", _buff->fNamePointerValidation());
-		//			ImGui::BulletText("iNamePointerValidation() => %d", _buff->iNamePointerValidation());
-
-		//			ImGui::BulletText("fBuffPointerValid() => %f", _buff->fBuffPointerValid());
-		//			ImGui::BulletText("IsValid() => %d", _buff->IsValid());
-		//			ImGui::BulletText("GetNameType() => %s", _buff->GetNameType());
-		//			ImGui::TreePop();
-		//		}
-		//	}
-
-			//ImGui::Text("First Buff %X", champion->GetFirstBuff()->GetAddress());
-			//ImGui::Text("Last Buff %X", champion->GetLastBuff()->GetAddress());
-		//}
 
 		if(ImGui::CollapsingHeader("SpellBook")) {
 			SpellBook* SpellBook = champion->GetSpellBook();
@@ -174,7 +174,11 @@ private:
 		}
 	}
 
-	void DebugOverlay() {
+
+	/**
+	 *
+	 */
+	static void DebugOverlay() {
 		if(ME && DEVELOPMENT_INTERFACES) {
 			ImGui::Begin("DebugOverlay##DebugOverlay_",
 				false,
@@ -187,7 +191,11 @@ private:
 		}
 	}
 
-	void ClientInformationTree() {
+
+	/**
+	 *
+	 */
+	static void ClientInformationTree() {
 		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
 		if(ImGui::CollapsingHeader("Client Information")) {
 			ImGui::Indent();
@@ -241,58 +249,61 @@ private:
 				ImGui::PopItemWidth();
 			}
 
-			if(ImGui::CollapsingHeader("Input")) {
-				ImGui::Text("InputHandler* Input = new InputHandler;");
-				Vector mw = Input->GetMouseWorld();
-				ImGui::BulletText("Input->GetMouseWorld() =>\n x = %f,\n y = %f,\n z = %f", mw.X, mw.Y, mw.Z);
-			}
+			//if(ImGui::CollapsingHeader("Input")) {
+			//	ImGui::Text("InputHandler* Input = new InputHandler;");
+			//	Vector mw = Input->GetMouseWorld();
+			//	ImGui::BulletText("Input->GetMouseWorld() =>\n x = %f,\n y = %f,\n z = %f", mw.X, mw.Y, mw.Z);
+			//}
 			ImGui::Unindent();
 		}
 	}
 
-	void Devkit() {
+
+	/**
+	 *
+	 */
+	static void Devkit() {
 		if(Me() && Engine::GetGameTime() > 1.0f && DEVELOPMENT_INTERFACES) {
-			if(bShowDevkit) {
-				DebugOverlay();
-				ImGui::Begin("Zalek Devkit", &bShowDevkit, ImGuiWindowFlags_AlwaysAutoResize);
-				{
-					ClientInformationTree();
+			DebugOverlay();
+			ImGui::Begin("Zalek Devkit", false, ImGuiWindowFlags_AlwaysAutoResize);
+			{
+				ClientInformationTree();
 
-					if(ImGui::CollapsingHeader("Object Manager##ObjManagerTreeNode")) {
-						ImGui::Text("GameObjectManager* ObjectManager;");
-						ImGui::BulletText("ObjectManager->HighestIndex => %d", ObjectManager->HighestIndex);
-						ImGui::BulletText("ObjectManager->Size => %d", ObjectManager->Size);
-						ImGui::BulletText("ObjectManager->MaxSize => %d", ObjectManager->MaxSize);
-					}
-
-					ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
-					if(ImGui::CollapsingHeader("Champions")) {
-						ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
-						ImGui::Indent();
-						if(ImGui::CollapsingHeader("Me")) {
-							ChampionText(Me());
-						}
-						ImGui::Unindent();
-					}
-
-
-
-
-					// TODO: Champion Vector
-					// TODO: Minion Vector
-					// TODO: Monster Vector
-					// TODO: Missile Vector
-					// TODO: Troy Ent Vector
+				if(ImGui::CollapsingHeader("Object Manager##ObjManagerTreeNode")) {
+					ImGui::Text("GameObjectManager* ObjectManager;");
+					ImGui::BulletText("ObjectManager->HighestIndex => %d", ActorManager->HighestIndex);
+					ImGui::BulletText("ObjectManager->Size => %d", ActorManager->Size);
+					ImGui::BulletText("ObjectManager->MaxSize => %d", ActorManager->MaxSize);
 				}
-				ImGui::End();
-			} else {
-				if(GetAsyncKeyState(VK_OEM_3) & 1) // Re-enable Devkit via ~ when it is not open.
-					bShowDevkit = true;
+
+				ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+				if(ImGui::CollapsingHeader("Champions")) {
+					ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
+					ImGui::Indent();
+					if(ImGui::CollapsingHeader("Me")) {
+						ChampionText(Me());
+					}
+					ImGui::Unindent();
+				}
+
+
+
+
+				// TODO: Champion Vector
+				// TODO: Minion Vector
+				// TODO: Monster Vector
+				// TODO: Missile Vector
+				// TODO: Troy Ent Vector
 			}
+			ImGui::End();
 		}
 	}
 
-	void LoadingScreen() {
+
+	/**
+	 *
+	 */
+	static void LoadingScreen() {
 		if(!ME) {
 			char* text = "ZalekLeague 9.8.270.9450 {Work in Progress}";
 			ImGui::Begin("LoadingScreenOverlay##LoadingScreenOverlay_", false, ImGuiWindowFlags_NoTitleBar + ImGuiWindowFlags_AlwaysAutoResize + ImGuiWindowFlags_NoScrollbar);
@@ -303,12 +314,42 @@ private:
 		}
 	}
 
-protected:
-	bool bShowDevkit = DEVELOPMENT_INTERFACES;
 
-	//inline GUI(void) {};
+	/**
+	 *
+	 */
+	static void ShutDown(PBYTE Original_Present, PBYTE Hooked_Present) {
+		ImGui_ImplDX9_Shutdown();
+		ImGui_ImplWin32_Shutdown();
+		ImGui::DestroyContext();
+		DetourRemove(Original_Present, Hooked_Present);
+	}
+
+
+protected:
+
+	/**
+	* An application-defined function that processes messages sent to a window.
+	* The WNDPROC type defines a pointer to this callback function.
+	* https://msdn.microsoft.com/en-us/library/windows/desktop/ms633573(v=vs.85).aspx
+	*/
+	static LRESULT __stdcall WindowProc(const HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+
+		if(ImGui_ImplWin32_WndProcHandler(hWnd, uMsg, wParam, lParam))
+			return true;
+
+		return CallWindowProc(gWNDPROC, hWnd, uMsg, wParam, lParam);
+	}
+
+
 public:
-	void CreateContext(HWND hwnd, IDirect3DDevice9 * device) {
+
+	/**
+	 *
+	 */
+	static void CreateContext(IDirect3DDevice9 * device) {
+		HWND hwnd = FindWindow(NULL, "League of Legends (TM) Client");
+		gWNDPROC = (WNDPROC) SetWindowLongPtr(hwnd, GWL_WNDPROC, (LONG_PTR) WindowProc);
 		IDirect3DDevice9* Device = device;
 		//IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
@@ -319,7 +360,11 @@ public:
 		ImGui_ImplDX9_Init(Device);
 	}
 
-	void Draw() {
+
+	/**
+	 *
+	 */
+	static void Draw() {
 		ImGui_ImplDX9_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
@@ -332,13 +377,14 @@ public:
 		ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
 	}
 
-	bool ShutdownEventListener() {
-		if(GetAsyncKeyState(VK_END) & 1) {
-			ImGui_ImplDX9_Shutdown();
-			ImGui_ImplWin32_Shutdown();
-			ImGui::DestroyContext();
-			return true;
-		}
-		return false;
+
+	/**
+	 *
+	 */
+	static void Poll(PBYTE Original_Present, PBYTE Hooked_Present) {
+		if(GetAsyncKeyState(VK_END) & 1)
+			ShutDown(Original_Present, Hooked_Present);
 	}
+
+
 };

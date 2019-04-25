@@ -9,7 +9,7 @@ class AIManager;
 class Champion;
 Champion* Me();
 
-class Champion : Actor
+class Champion : LActor
 {
 public:
 
@@ -21,7 +21,7 @@ public:
 
 	AIManager* GetAIManager() {
 		typedef AIManager* (__thiscall * OriginalFn)(PVOID);
-		return CallVirtual<OriginalFn>((Actor*) this, 147)((Actor*) this);
+		return CallVirtual<OriginalFn>((LActor*) this, 147)((LActor*) this);
 	}
 
 #pragma endregion
@@ -37,7 +37,7 @@ public:
 				&& this->GetName() != "NULL";
 		}
 
-#pragma region Address
+#pragma region BuffManager Address
 
 		DWORD GetAddress() {
 			return (DWORD) this;
@@ -74,28 +74,32 @@ public:
 		}
 
 #pragma endregion
-
 		char* GetName() {
-			//! Will cause a crash in some cases. Do not use yet
-			DWORD aux = this->GetBuffPointer();
+			//! Will cause a crash in some cases. Do not use yet'
+			if(this->IsBuffPointerValid()) {
 
-			if(aux == NULL)
-				return "NULL";
+				DWORD aux = this->GetBuffPointer();
 
-			if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
-				return "NULL";
+				if(aux == NULL)
+					return "NULL";
 
-			char* str = (char*) (aux + O_BUFFMGR_BUFFNAME);
+				if(*(DWORD*) (aux + O_BUFFMGR_BUFFNAME) == NULL)
+					return "NULL";
 
-			if(strlen(str) <= 8 || strlen(str) > 128)
-				return "NULL";
+				char* str = (char*) (aux + O_BUFFMGR_BUFFNAME);
 
-			// !!! HACK !!!
-			// May cause some extra buffs to get filtered out. Rework later.
-			if(strlen(str) == 16)
-				return "NULL";
+				if(strlen(str) <= 8 || strlen(str) > 128)
+					return "NULL";
 
-			return str;
+				// !!! HACK !!!
+				// May cause some extra buffs to get filtered out. Rework later.
+				if(strlen(str) == 16)
+					return "NULL";
+
+				return str;
+			}
+
+			return "NULL";
 		}
 	};
 
@@ -150,7 +154,7 @@ public:
 #pragma region bool
 
 	bool IsChampion() {
-		return Functions.IsHero((Actor*) this);
+		return Functions.IsHero((LActor*) this);
 	}
 
 	bool IsDashing() {
@@ -172,7 +176,7 @@ public:
 	}
 
 	bool IsTargetable() {
-		return Functions.IsTargetable((Actor*) this);
+		return Functions.IsTargetable((LActor*) this);
 	}
 
 
@@ -211,7 +215,7 @@ public:
 	}
 
 	float GetAttackCastDelay() {
-		return Functions.GetAttackCastDelay((Actor*) this);
+		return Functions.GetAttackCastDelay((LActor*) this);
 	}
 
 	float GetAttackDamage() {
@@ -223,7 +227,7 @@ public:
 	}
 
 	float GetAttackDelay() {
-		return Functions.GetAttackDelay((Actor*) this);
+		return Functions.GetAttackDelay((LActor*) this);
 	}
 
 	float GetAttackRange() {
@@ -231,7 +235,7 @@ public:
 	}
 
 	float GetAttackSpeed() {
-		return 1 / Functions.GetAttackDelay((Actor*) this);
+		return 1 / Functions.GetAttackDelay((LActor*) this);
 	}
 
 	float GetBaseAttackDamage() {
@@ -244,7 +248,7 @@ public:
 
 	float GetCollisionRadius() {
 		typedef float(__thiscall * OriginalFn)(PVOID);
-		return CallVirtual<OriginalFn>((Actor*) this, 36)((Actor*) this);
+		return CallVirtual<OriginalFn>((LActor*) this, 36)((LActor*) this);
 	}
 
 	//float GetCooldownReduction() {
