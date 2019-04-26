@@ -102,7 +102,7 @@ private:
 		ImGui::SetNextTreeNodeOpen(true, ImGuiCond_Appearing);
 		if(ImGui::TreeNode("Ints")) {
 			ImGui::BulletText("GetLevel() => %d", champion->GetLevel());
-			ImGui::BulletText("GetTeam() => %d", champion->GetTeam());
+			ImGui::BulletText("GetTeamID() => %d", champion->GetTeamID());
 			ImGui::BulletText("GetRecallState() => %d", champion->GetRecallState());
 			ImGui::TreePop();
 		}

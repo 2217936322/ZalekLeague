@@ -3,11 +3,12 @@
 #include "Spells.h"
 #pragma once
 
-class AIManager {};
-
 class LActor
 {
 public:
+	class AIManager {};
+	class BuffManager {};
+
 	AIManager* GetAIManager();
 
 	bool IsAttackable();

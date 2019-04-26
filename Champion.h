@@ -1,177 +1,129 @@
-#include "Actor.h"
+/************************************************************************/
+/*					Champion Object Type : Declarations					*/
+/************************************************************************/
+
 #pragma once
+#include "Actor.h"
+
 class Champion : LActor
 {
 public:
 
+	/* Return the Base address of this Champion */
 	DWORD GetAddress();
 
-#pragma region AIManager
-
+	/* Return the Base address of this Champion's AI Manager */
 	AIManager* GetAIManager();
 
-#pragma endregion
+	/* Return the Base address of this Champion's Buff Manager */
+	BuffManager* GetBuffManager();
 
-
-#pragma region BuffManager
-	//class Buff
-	//{
-	//public:
-	//	bool IsValid();
-
-#pragma region BuffManager Address
-
-		//DWORD GetAddress();
-
-		//bool IsAddressValid();
-
-		//float fAddressValidation();
-
-#pragma endregion
-
-#pragma region BuffPointer
-
-		//DWORD GetBuffPointer();
-
-		//bool IsBuffPointerValid();
-
-		//float fBuffPointerValidation();
-
-#pragma endregion
-		//char* GetName();
-
-		//std::vector<Buff*> GetBuffs();
-
-		//Buff* GetFirstBuffEntry();
-
-		//Buff* GetLastBuffEntry();
-
-		//DWORD GetBuffArrayAddress();
-
-		//DWORD GetBuffArrayStart();
-
-		//DWORD GetBuffListStart();
-
-		//DWORD GetBuffListEnd();
-
-		//DWORD GetBuffArrayEndAddress();
-
-		//DWORD GetBuffArrayEnd();
-//};
-#pragma endregion
-
-
-#pragma region bool
-
-	bool IsChampion();
-
-	bool IsDashing();
-
-	bool IsEnemy();
-
-	bool IsFriendly();
-
-	bool IsMoving();
-
-	bool IsTargetable();
-
-
-#pragma endregion
-
-
-#pragma region char*
-
-	char* GetActorName();
-
-	char* GetName();
-
-	char* GetRecallName();
-
-#pragma endregion
-
-
-#pragma region DWORD
-
-	DWORD GetNetworkID();
-
-#pragma endregion
-
-
-#pragma region float
-	float GetArmor();
-
-	float GetAttackCastDelay();
-
-	float GetAttackDamage();
-
-	float GetAbilityPower();
-
-	float GetAttackDelay();
-
-	float GetAttackRange();
-
-	float GetAttackSpeed();
-
-	float GetBaseAttackDamage();
-
-	float GetBonusAttackDamage();
-
-	float GetCollisionRadius();
-
-	float GetCritChance();
-
-	float GetDistToMe();
-
-	float GetHealth();
-
-	float GetMaxHealth();
-
-	float GetHealthPercent();
-
-	float GetMagicResist();
-
-	float GetMana();
-
-	float GetMaxMana();
-
-	float GetManaPercent();
-
-	float GetMoveSpeed();
-
-#pragma endregion
-
-
-#pragma region int32
-
-	int GetLevel();
-
-	int GetTeam();
-
-	int GetRecallState();
-
-#pragma endregion
-
-
-#pragma region int16
-
-	short GetIndex();
-
-#pragma endregion
-
-
-#pragma region SpellBook
-
+	/* Return the Base address of this Champion's SpellBook */
 	SpellBook* GetSpellBook();
 
-#pragma endregion
+	/* Return the IsDashing state inside AIManager */
+	bool IsDashing();
 
+	/* Return the team is Order/Chaos and does not match your players team */
+	bool IsEnemy();
 
-#pragma region Vector
+	/* Return the team is Order/Chaos and does match your players team */
+	bool IsFriendly();
 
+	/* Return the IsMoving state inside AIManager */
+	bool IsMoving();
+
+	/* Return the IsTargetable state */
+	bool IsTargetable();
+
+	/* Return the Actor Name */
+	char* GetActorName();
+
+	/* Return the Summoner (Controller) Name */
+	char* GetName();
+
+	/* Return the Name of your currently channeled recall spell. Empty string if not channeling. */
+	char* GetRecallName();
+
+	/* Return the Network Identifier */
+	DWORD GetNetworkID();
+
+	/* Return the Armor amount */
+	float GetArmor();
+
+	/* Return the Amount of time it takes to wind up your Auto Attack */
+	float GetAttackCastDelay();
+
+	/* Return the Total Attack Damage amount */
+	float GetAttackDamage();
+
+	/* Return the Total Ability Power amount */
+	float GetAbilityPower();
+
+	/* Return the Amount of time it takes for you to be able to Auto Attack after your last Auto Attack */
+	float GetAttackDelay();
+
+	/* Return the Attack Range amount */
+	float GetAttackRange();
+
+	/* Return the Attack Speed amount */
+	float GetAttackSpeed();
+
+	/* Return the Base Attack Damage amount */
+	float GetBaseAttackDamage();
+
+	/* Return the Bonus Attack Damage amount */
+	float GetBonusAttackDamage();
+
+	/* Return the Collision Radius size */
+	float GetCollisionRadius();
+
+	/* Return the Critical Chance percent*/
+	float GetCritChance();
+
+	/* Return the Distance to your player */
+	float GetDistToMe();
+
+	/* Return the Current Health amount */
+	float GetHealth();
+
+	/* Return the Maximum Health amount */
+	float GetMaxHealth();
+
+	/* Return the Current Health percent */
+	float GetHealthPercent();
+
+	/* Return the Magic Resist amount */
+	float GetMagicResist();
+
+	/* Return the Current Mana amount */
+	float GetMana();
+
+	/* Return the Maximum Mana amount */
+	float GetMaxMana();
+
+	/* Return the Current Mana percent */
+	float GetManaPercent();
+
+	/* Return the Current Movement Speed amount */
+	float GetMoveSpeed();
+
+	/* Return the Current Level amount */
+	int GetLevel();
+
+	/* Return the Current Team ID */
+	int GetTeamID();
+
+	/* Return the Current Recall State */
+	int GetRecallState();
+
+	/* Return the Current Index of this actor inside of ActorManager */
+	short GetIndex();
+
+	/* Return the Position of this actor */
 	Vector GetPos();
 
+	/* Return the Waypoint Position of this actor inside of AIManager */
 	Vector GetWaypoint();
-
-#pragma endregion
 
 };
