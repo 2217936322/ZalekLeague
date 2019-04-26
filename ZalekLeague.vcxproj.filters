@@ -41,7 +41,15 @@
       <Filter>Core\Dependencies\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Device.cpp" />
+    <ClCompile Include="Device.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Champion.cpp">
+      <Filter>Core\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects.cpp">
+      <Filter>Core\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imgui.h">
@@ -195,14 +203,17 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="GUI.h" />
-    <ClInclude Include="InputHandler.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Actor.h">
       <Filter>Core\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Device.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorManager.h">
+      <Filter>Core\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Champion.h">
+      <Filter>Core\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

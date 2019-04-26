@@ -1,6 +1,8 @@
 #include <d3d9.h>
+#include <vector>
+
+#include "Engine.h"
 #include "Objects.h"
-#include "InputHandler.h"
 
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_win32.h"
@@ -13,18 +15,6 @@
 class GUI
 {
 private:
-	/**
-	 *
-	 */
-	static void BuffText(Champion::Buff* buff) {
-		//if(ImGui::TreeNode(
-		//	(void*) (intptr_t) (spell_slot->GetActorName()),
-		//	"%s", spell_slot->GetActorName())) {
-
-		//ImGui::BulletText("GetName() => %s", buff->GetName());
-		//ImGui::TreePop();
-		/*	}*/
-	}
 
 
 	/**
@@ -56,27 +46,27 @@ private:
 		ImGui::Text("GetIndex() => %hu", champion->GetIndex());
 
 		ImGui::Indent();
-		if(ImGui::CollapsingHeader("Buffs")) {
-			std::vector<Champion::Buff*> Buffs = champion->GetBuffs();
-			int iBuffCount = Buffs.size();
-			if(!Buffs.empty())
-				ImGui::Text("Buff Count: %d", iBuffCount);
-			else
-				ImGui::Text("Buff Count: 0");
+		//if(ImGui::CollapsingHeader("Buffs")) {
+		//	std::vector<Champion::Buff*> Buffs = champion->GetBuffs();
+		//	int iBuffCount = Buffs.size();
+		//	if(!Buffs.empty())
+		//		ImGui::Text("Buff Count: %d", iBuffCount);
+		//	else
+		//		ImGui::Text("Buff Count: 0");
 
-			for(std::vector<Champion::Buff*>::iterator buff = Buffs.begin();
-				buff != Buffs.end(); buff++) {
-				Champion::Buff* _buff = (*buff);
+		//	for(std::vector<Champion::Buff*>::iterator buff = Buffs.begin();
+		//		buff != Buffs.end(); buff++) {
+		//		Champion::Buff* _buff = (*buff);
 
-				if(ImGui::TreeNode(
-					(void*) (intptr_t) _buff->GetAddress(),
-					"%X : %X", _buff->GetAddress(), _buff->GetBuffPointer())) {
+		//		if(ImGui::TreeNode(
+		//			(void*) (intptr_t) _buff->GetAddress(),
+		//			"%X : %X", _buff->GetAddress(), _buff->GetBuffPointer())) {
 
-					ImGui::BulletText("GetName() => %s", _buff->GetName());
-					ImGui::TreePop();
-				}
-			}
-		}
+		//			ImGui::BulletText("GetName() => %s", _buff->GetName());
+		//			ImGui::TreePop();
+		//		}
+		//	}
+		//}
 
 
 		if(ImGui::CollapsingHeader("SpellBook")) {
@@ -217,23 +207,23 @@ private:
 				//char _me_bm[16]; sprintf_s(_me_bm, "%X", Me()->GetBuffManager());
 				//ImGui::InputText("Buff Manager", _me_bm, 16, ImGuiInputTextFlags_ReadOnly);
 
-				char _me_basa[16]; sprintf_s(_me_basa, "%X", Me()->GetBuffArrayAddress());
-				ImGui::InputText("Buff Array Address", _me_basa, 16, ImGuiInputTextFlags_ReadOnly);
+				//char _me_basa[16]; sprintf_s(_me_basa, "%X", Me()->GetBuffArrayAddress());
+				//ImGui::InputText("Buff Array Address", _me_basa, 16, ImGuiInputTextFlags_ReadOnly);
 
-				char _me_bas[16]; sprintf_s(_me_bas, "%X", Me()->GetBuffArrayStart());
-				ImGui::InputText("Buff Array Start", _me_bas, 16, ImGuiInputTextFlags_ReadOnly);
+				//char _me_bas[16]; sprintf_s(_me_bas, "%X", Me()->GetBuffArrayStart());
+				//ImGui::InputText("Buff Array Start", _me_bas, 16, ImGuiInputTextFlags_ReadOnly);
 
-				char _me_bls[16]; sprintf_s(_me_bls, "%X", Me()->GetBuffListStart());
-				ImGui::InputText("Buff List Start", _me_bls, 16, ImGuiInputTextFlags_ReadOnly);
+				//char _me_bls[16]; sprintf_s(_me_bls, "%X", Me()->GetBuffListStart());
+				//ImGui::InputText("Buff List Start", _me_bls, 16, ImGuiInputTextFlags_ReadOnly);
 
-				char _me_ble[16]; sprintf_s(_me_ble, "%X", Me()->GetBuffListEnd());
-				ImGui::InputText("Buff List End", _me_ble, 16, ImGuiInputTextFlags_ReadOnly);
+				//char _me_ble[16]; sprintf_s(_me_ble, "%X", Me()->GetBuffListEnd());
+				//ImGui::InputText("Buff List End", _me_ble, 16, ImGuiInputTextFlags_ReadOnly);
 
-				char _me_baea[16]; sprintf_s(_me_baea, "%X", Me()->GetBuffArrayEndAddress());
-				ImGui::InputText("Buff Array End Address", _me_baea, 16, ImGuiInputTextFlags_ReadOnly);
+				//char _me_baea[16]; sprintf_s(_me_baea, "%X", Me()->GetBuffArrayEndAddress());
+				//ImGui::InputText("Buff Array End Address", _me_baea, 16, ImGuiInputTextFlags_ReadOnly);
 
-				char _me_bae[16]; sprintf_s(_me_bae, "%X", Me()->GetBuffArrayEnd());
-				ImGui::InputText("Buff Array End", _me_bae, 16, ImGuiInputTextFlags_ReadOnly);
+				//char _me_bae[16]; sprintf_s(_me_bae, "%X", Me()->GetBuffArrayEnd());
+				//ImGui::InputText("Buff Array End", _me_bae, 16, ImGuiInputTextFlags_ReadOnly);
 
 				//char _me_baepp[16]; sprintf_s(_me_baepp, "%X", Me()->GetBuffArrayEndPtr());
 				//ImGui::InputText("Buff Array End Pointer Pointer", _me_baepp, 16, ImGuiInputTextFlags_ReadOnly);

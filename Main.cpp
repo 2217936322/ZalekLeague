@@ -6,6 +6,7 @@
 #include "detours.h"
 #pragma comment(lib, "detours.lib")
 
+#include "ActorManager.h"
 #include "Device.h"
 #include "GUI.h"
 #pragma once
