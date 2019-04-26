@@ -34,7 +34,7 @@ SpellBook* Champion::GetSpellBook() {
 }
 
 
-/* Return the IsDashing state inside AIManager */
+/* Return the IsDashing state inside AI Manager */
 bool Champion::IsDashing() {
 	return *(bool*) ((DWORD) this->GetAIManager() + PTR_OBJECT_AI_IS_DASHING);
 }
@@ -54,7 +54,7 @@ bool Champion::IsFriendly() {
 }
 
 
-/* Return the IsMoving state inside AIManager */
+/* Return the IsMoving state inside AI Manager */
 bool Champion::IsMoving() {
 	return *(bool*) ((DWORD) this->GetAIManager() + PTR_OBJECT_AI_IS_MOVING);
 }
@@ -151,7 +151,7 @@ float Champion::GetCollisionRadius() {
 }
 
 
-/* Return the Critical Chance percent*/
+/* Return the Critical Chance percent */
 float Champion::GetCritChance() {
 	return *(float*) ((DWORD) this + O_CRIT_RATE) * 100;
 }
@@ -242,7 +242,7 @@ Vector Champion::GetPos() {
 
 
 
-/* Return the Waypoint Position of this actor inside of AIManager */
+/* Return the Waypoint Position of this actor inside of AI Manager */
 Vector Champion::GetWaypoint() {
 	return *(Vector*) ((DWORD) this->GetAIManager() + PTR_OBJECT_AI_WAYPOINT);
 }

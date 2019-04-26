@@ -21,7 +21,7 @@ public:
 	/* Return the Base address of this Champion's SpellBook */
 	SpellBook* GetSpellBook();
 
-	/* Return the IsDashing state inside AIManager */
+	/* Return the IsDashing state inside AI Manager */
 	bool IsDashing();
 
 	/* Return the team is Order/Chaos and does not match your players team */
@@ -30,7 +30,7 @@ public:
 	/* Return the team is Order/Chaos and does match your players team */
 	bool IsFriendly();
 
-	/* Return the IsMoving state inside AIManager */
+	/* Return the IsMoving state inside AI Manager */
 	bool IsMoving();
 
 	/* Return the IsTargetable state */
@@ -78,7 +78,7 @@ public:
 	/* Return the Collision Radius size */
 	float GetCollisionRadius();
 
-	/* Return the Critical Chance percent*/
+	/* Return the Critical Chance percent */
 	float GetCritChance();
 
 	/* Return the Distance to your player */
@@ -123,7 +123,7 @@ public:
 	/* Return the Position of this actor */
 	Vector GetPos();
 
-	/* Return the Waypoint Position of this actor inside of AIManager */
+	/* Return the Waypoint Position of this actor inside of AI Manager */
 	Vector GetWaypoint();
 
 };
