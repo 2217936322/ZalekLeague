@@ -33,7 +33,7 @@ SpellBook* Champion::GetSpellBook() {
 	return (SpellBook*) ((DWORD) this + O_SPELLBOOK);
 }
 
-
+// Add this fix: the bool is set to true when a character is dashing e.g Graves E, Lucian E, Galio E (and will remain true until the character moves again so you have to fix that yourself by checking if the character is moving & dashing)
 /* Return the IsDashing state inside AI Manager */
 bool Champion::IsDashing() {
 	return *(bool*) ((DWORD) this->GetAIManager() + PTR_OBJECT_AI_IS_DASHING);
