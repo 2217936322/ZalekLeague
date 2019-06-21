@@ -8,7 +8,7 @@ Credits:
 
 3.) Me for being bored enough to do this for a month or two
 
-Bad league code that I never bothered fixing
+Bad league code that I never bothered fixing. I used this to learn some C++ during freetime
 
 Spellbook was broken because of nullpointer during iteration, Never bothered fixing. 
 
